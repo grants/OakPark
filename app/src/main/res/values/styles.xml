@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ValidateEdittext" parent="Base.Widget.AppCompat.EditText">
+
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_7</item>
+        <item name="android:singleLine">true</item>
+
+    </style>
+
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+
+        <item name="android:textColor">@drawable/bg_button_text_color</item>
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">0dp</item>
+
+    </style>
+
+</resources>
