@@ -5,13 +5,16 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/login_email"
         style="@style/ValidateEdittext"
         android:hint="邮箱"
         android:inputType="textEmailAddress"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/login_password"
         style="@style/ValidateEdittext"
         android:hint="密码"
         android:inputType="textPassword"
@@ -19,6 +22,7 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/login_login"
         style="@style/CustomButton"
         android:text="登录"
         android:layout_marginLeft="15dp"

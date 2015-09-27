@@ -1,14 +1,26 @@
 package me.laudoak.oakpark;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import me.laudoak.oakpark.activity.EnterActivity;
+import me.laudoak.oakpark.activity.XBaseActivity;
+
+public class MainActivity extends XBaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int callContentView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void buildView() {
+
+    }
+
+    public void onA(View view)
+    {
+        startActivity(new Intent(MainActivity.this, EnterActivity.class));
     }
 
 }
