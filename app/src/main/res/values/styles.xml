@@ -10,6 +10,7 @@
     </style>
 
     <style name="ValidateEdittext" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:typeface">monospace</item>
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:padding">9dp</item>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/edit_panel_add"
+        android:src="@mipmap/ic_add"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:padding="6dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bg_button"/>
+
+
+    <LinearLayout
+        android:id="@+id/edit_panel_content"
+        android:layout_toLeftOf="@+id/edit_panel_add"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button">
+
+        <ImageView
+            android:id="@+id/edit_panel_preview"
+            android:src="@mipmap/ic_preview"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:padding="7dp" />
+
+        <ImageView
+            android:id="@+id/edit_panel_camera"
+            android:src="@mipmap/ic_camera"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:padding="7dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

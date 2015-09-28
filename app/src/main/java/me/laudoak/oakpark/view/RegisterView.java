@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.widget.loading.LoadingDialog;
+import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-9-27.
@@ -86,5 +89,27 @@ public class RegisterView extends LinearLayout implements TextWatcher ,View.OnCl
     @Override
     public void onClick(View v) {
 
+        final LoadingDialog dialog = new LoadingDialog(getContext());
+        dialog.show();
+
+        UserProxy proxy = new UserProxy.Builder(getContext())
+                .email(email.getText().toString().trim())
+                .nick(nick.getText().toString().trim())
+                .password(password.getText().toString().trim())
+                .build();
+
+        proxy.doRegister(new UserProxy.CallBack() {
+            @Override
+            public void onSuccess() {
+                dialog.dismiss();
+                AppMsg.makeText(getContext(),"注册成功",AppMsg.STYLE_INFO).show();
+            }
+
+            @Override
+            public void onFailure(String reason) {
+                dialog.dismiss();
+                AppMsg.makeText(getContext(),reason,AppMsg.STYLE_ALERT).show();
+            }
+        });
     }
 }
