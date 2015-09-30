@@ -20,6 +20,7 @@ public class LoadingDialog extends ProgressDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setCanceledOnTouchOutside(false);
         setContentView(R.layout.view_dialog_loading);
         rotateLoading = (RotateLoading) findViewById(R.id.loading_dialog_rotateloading);
         setCancelable(false);

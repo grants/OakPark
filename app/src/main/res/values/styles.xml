@@ -32,6 +32,19 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:textColor">@color/gray_8</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TimeEditor" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">-4dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/green</item>
         <item name="android:textSize">22sp</item>
         <item name="android:singleLine">true</item>
     </style>
@@ -60,6 +73,19 @@
         <item name="android:textColor">@color/gray_7</item>
         <item name="android:textSize">18sp</item>
         <item name="android:maxLines">10</item>
+    </style>
+
+    <style name="WhisperEditor" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">5</item>
     </style>
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@android:color/white">
+
+    <Button
+        android:id="@+id/commit"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:src="@drawable/btn_back"
+        android:background="@drawable/bg_btn_back"
+        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
+        android:padding="3dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="39dp"
+        android:layout_height="39dp" />
+
+    <TextView
+        android:text="选择图片"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="#545454"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

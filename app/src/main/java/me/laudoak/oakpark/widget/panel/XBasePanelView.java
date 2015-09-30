@@ -16,13 +16,18 @@ import me.laudoak.oakpark.R;
 /**
  * Created by LaudOak on 2015-9-28.
  */
-public abstract class XBasePanelView extends RelativeLayout {
+public class XBasePanelView extends RelativeLayout {
+
+    private static final String TAG = "XBasePanelView";
 
     protected Context context;
-    protected OnClickListener listener;
+    protected OnPanelClickListener listener;
+
+
+    protected XBasePanelView panel;
 
     protected ImageView add;
-    protected ImageView camera,preview;
+    protected ImageView camera,preview,calendar;
     protected LinearLayout activeLinear;
 
     public XBasePanelView(Context context) {
@@ -45,12 +50,13 @@ public abstract class XBasePanelView extends RelativeLayout {
 
     private void init()
     {
-        View view = inflate(context, R.layout.view_edit_panel,this);
-        add = (ImageView) view.findViewById(R.id.edit_panel_add);
-        preview = (ImageView) view.findViewById(R.id.edit_panel_preview);
-        camera = (ImageView) view.findViewById(R.id.edit_panel_camera);
-        activeLinear = (LinearLayout) view.findViewById(R.id.edit_panel_content);
-        buildActiveView();
+        panel = (XBasePanelView) inflate(context, R.layout.view_edit_panel,this);
+
+        add = (ImageView) panel.findViewById(R.id.edit_panel_add);
+        preview = (ImageView) panel.findViewById(R.id.edit_panel_preview);
+        camera = (ImageView) panel.findViewById(R.id.edit_panel_camera);
+        calendar = (ImageView) panel.findViewById(R.id.edit_panel_calendar);
+        activeLinear = (LinearLayout) panel.findViewById(R.id.edit_panel_content);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,23 +70,60 @@ public abstract class XBasePanelView extends RelativeLayout {
                 }
             }
         });
+
+        preview.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null!=listener)
+                {
+                    listener.onClick(preview);
+                }
+            }
+        });
+        camera.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null!=listener)
+                {
+                    listener.onClick(camera);
+                }
+            }
+        });
+        calendar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null!=listener)
+                {
+                    listener.onClick(calendar);
+                }
+            }
+        });
+
+
+//        //#2015-9-30
+//        //bug here , repeat draw panel!!!
+//        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)panel.getLayoutParams();
+//        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//        /*left,top,right,bottom*/
+//        params.setMargins(MARGIN_PANEL, MARGIN_PANEL, 0, 0);
+//        panel.setLayoutParams(params); //causes layout update
+
+
     }
 
-    abstract void buildActiveView();
-    abstract int getActiveViewWidthDp();
-
-    public void setListener(OnClickListener listener)
+    public void setListener(OnPanelClickListener listener)
     {
         this.listener = listener;
     }
 
-    public interface OnClickListener
+    public interface OnPanelClickListener
     {
         void onClick(View view);
     }
 
     private void expand(final View view) {
-        view.measure(getActiveViewWidthDp(), ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.measure(129, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         final int targetWidth = view.getMeasuredWidth();
 
@@ -131,6 +174,18 @@ public abstract class XBasePanelView extends RelativeLayout {
         animation.setDuration((int) (initialWidth / view.getContext().getResources().getDisplayMetrics().density));
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         view.startAnimation(animation);
+    }
+
+    public ImageView getCalendar() {
+        return calendar;
+    }
+
+    public ImageView getPreview() {
+        return preview;
+    }
+
+    public ImageView getCamera() {
+        return camera;
     }
 
 }

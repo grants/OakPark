@@ -13,7 +13,6 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/bg_button"/>
 
-
     <LinearLayout
         android:id="@+id/edit_panel_content"
         android:layout_toLeftOf="@+id/edit_panel_add"
@@ -33,6 +32,13 @@
         <ImageView
             android:id="@+id/edit_panel_camera"
             android:src="@mipmap/ic_camera"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:padding="7dp"/>
+
+        <ImageView
+            android:id="@+id/edit_panel_calendar"
+            android:src="@mipmap/ic_calendar"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:padding="7dp"/>

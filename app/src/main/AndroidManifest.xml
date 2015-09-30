@@ -28,6 +28,15 @@
         <activity android:name=".activity.EnterActivity"
             android:label="">
         </activity>
+
+        <activity android:name=".activity.PoetActivity"
+            android:label="">
+        </activity>
+
+        <activity android:name=".activity.EditorActivity"
+            android:label="">
+        </activity>
+
     </application>
 
 </manifest>
