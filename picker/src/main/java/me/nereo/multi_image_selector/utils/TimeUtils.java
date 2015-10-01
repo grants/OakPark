@@ -1,9 +1,6 @@
 package me.nereo.multi_image_selector.utils;
 
-import android.media.ExifInterface;
-
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,4 +28,23 @@ public class TimeUtils {
         }
         return "1970-01-01";
     }
+
+    /***/
+    private static final String timePattern = "yyyyMMddHHmmss";
+
+    public static String getNowDateToString()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat(timePattern);
+
+        String dateStr = formatter.format(getNowDate());
+
+        return dateStr;
+    }
+
+    public static Date getNowDate()
+    {
+        Date date = new Date(System.currentTimeMillis());
+        return date;
+    }
+
 }

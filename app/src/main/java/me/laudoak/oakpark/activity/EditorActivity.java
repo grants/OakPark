@@ -35,6 +35,9 @@ public class EditorActivity extends XBaseActivity {
     @Override
     public void buildView() {
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         Intent intent = getIntent();
         if (null!=intent)
         {
@@ -46,7 +49,8 @@ public class EditorActivity extends XBaseActivity {
             {
                 case 0:
                 {
-                    this.pushCallback = (PushCallback) fragment;
+                    //#2015-10-1 holy bug
+                    fragment = new NormalEditorFragment();
                     break;
                 }
 
@@ -73,6 +77,7 @@ public class EditorActivity extends XBaseActivity {
         menuBuilder.inflate(R.menu.menu_editor,menu);
 
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
@@ -80,19 +85,26 @@ public class EditorActivity extends XBaseActivity {
 
         switch (item.getItemId())
         {
+            case android.R.id.home:
+            {
+                this.finish();
+                break;
+            }
             case R.id.editor_push:
             {
                 if(null!=fragment&&null!=pushCallback)
                 {
                     pushCallback.onPush();
                 }
-                return true;
+                break;
             }
             default:
             {
-                return super.onOptionsItemSelected(item);
+                break;
             }
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public interface PushCallback

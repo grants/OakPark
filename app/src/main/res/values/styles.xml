@@ -7,6 +7,12 @@
 
     <style name="CustomActionBar" parent="Base.Widget.AppCompat.ActionBar">
         <item name="background">@color/white</item>
+        <item name="titleTextStyle">@style/CustomActionBarTitle</item>
+    </style>
+
+    <style name="CustomActionBarTitle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:actionMenuTextColor">@color/gray_7</item>
     </style>
 
     <style name="ValidateEdittext" parent="Base.Widget.AppCompat.EditText">

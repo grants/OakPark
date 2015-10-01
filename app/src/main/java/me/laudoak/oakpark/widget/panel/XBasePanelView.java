@@ -23,7 +23,6 @@ public class XBasePanelView extends RelativeLayout {
     protected Context context;
     protected OnPanelClickListener listener;
 
-
     protected XBasePanelView panel;
 
     protected ImageView add;

@@ -6,6 +6,9 @@
         <activity android:name=".MultiImageSelectorActivity">
         </activity>
 
+        <activity android:name=".CropperActivity">
+        </activity>
+
     </application>
 
 </manifest>
