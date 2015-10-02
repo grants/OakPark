@@ -3,6 +3,7 @@ package me.nereo.multi_image_selector.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,6 +20,8 @@ import me.nereo.multi_image_selector.CropperActivity;
  * Created by Nereo on 2015/4/8.
  */
 public class FileUtils {
+
+    private static final String TAG = "Picker.FileUtils";
 
     public static File createTmpFile(Context context){
 
@@ -59,7 +62,9 @@ public class FileUtils {
 
             }
         }
+
         return appCacheDir;
+
     }
 
     public static String saveImageToCache(Context context,Bitmap bitmap,int cropMode) {
@@ -70,12 +75,12 @@ public class FileUtils {
         {
             case CropperActivity.CROP_MODE_AVATAR:
             {
-                imageName = "normal"+"_"+TimeUtils.getNowDateToString()+"_"+"avatar";
+                imageName = "avatar"+"_"+TimeUtils.getNowDateToString()+"_"+"avatar";
                 break;
             }
             case CropperActivity.CROP_MODE_NORMAL:
             {
-                imageName = "avatar"+"_"+TimeUtils.getNowDateToString();
+                imageName = "normal"+"_"+TimeUtils.getNowDateToString();
                 break;
             }
             default:
@@ -85,10 +90,12 @@ public class FileUtils {
         }
 
         String result = getExternalCacheDir(context, imageName)+".jpg";
+        Log.d(TAG,"image file path:"+result);
 
         try {
 
             FileOutputStream fos = new FileOutputStream(result);
+
             //public boolean compress (Bitmap.CompressFormat format, int quality, OutputStream stream)
             //format:JPEG|PNG|WEBP
             //quality:Hint to the compressor, 0-100. 0 meaning compress for small size, 100 meaning compress for max quality. Some formats, like PNG which is lossless, will ignore the quality setting

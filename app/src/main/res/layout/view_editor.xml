@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            android:text="光影魔术手"
             android:id="@+id/view_edit_title"
             style="@style/TitleEditor"
             android:hint="题目"
@@ -32,6 +33,7 @@
     </LinearLayout>
 
     <me.laudoak.oakpark.widget.fittext.AutofitTextView
+        android:text="0xFF"
         android:id="@+id/view_edit_author"
         style="@style/AuthorEditor"
         android:hint="作者/译者"
@@ -42,6 +44,7 @@
         autofit:sizeToFit="true"/>
 
     <me.laudoak.oakpark.widget.fittext.LinedEditor
+        android:text="光影的使者\n岁月的代言"
         android:id="@+id/view_edit_verse"
         style="@style/VerseEditor"
         android:layout_width="match_parent"
@@ -65,11 +68,12 @@
     <me.laudoak.oakpark.widget.portable.PortableImage
         android:id="@+id/view_edit_image"
         android:visibility="gone"
-        android:layout_width="140dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"/>
 
     <me.laudoak.oakpark.widget.panel.XBasePanelView
         android:id="@+id/view_edit_panel"

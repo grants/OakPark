@@ -14,8 +14,8 @@ import me.laudoak.oakpark.R;
  */
 public class PortableImage extends ImageView {
 
-    private static final int PADDING = 3;
-    private static final float STROKE_WIDTH = 4;
+    private static final int PADDING = 4;
+    private static final float STROKE_WIDTH = 6;
 
     private Paint paint;
 
@@ -51,7 +51,8 @@ public class PortableImage extends ImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Rect rect = new Rect(PADDING,PADDING,getWidth()-PADDING,getHeight()-PADDING);
+        /*left,top,right,bottom*/
+        Rect rect = new Rect(PADDING,0,getWidth()-PADDING,getHeight());
         canvas.drawRect(rect,paint);
 
     }

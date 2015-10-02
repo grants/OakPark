@@ -1,9 +1,11 @@
 package me.nereo.multi_image_selector;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +17,11 @@ import java.util.ArrayList;
  */
 public class MultiImageSelectorActivity extends FragmentActivity implements MultiImageSelectorFragment.Callback{
 
-    public static final String EXTRA_RESULT = "select_result";
+    private static final String TAG = "MultiImageSelectorActivity";
+
+    public static final String EXTRA_CROPPER_RESULT = "EXTRA_CROPPER_RESULT_RETURN_TO_REQUEST";
+
+    private static final int REQUEST_CROPPER = 10010;
 
     private int mCropMode;
 
@@ -75,9 +81,9 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
             intent.setClass(this,CropperActivity.class);
             intent.putExtra(CropperActivity.EXTRA_CROP_MODE,mCropMode);
             intent.putExtra(CropperActivity.FROM_BITMAP_PATH, path);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CROPPER);
         }
-        this.finish();
+        //this.finish();
 
     }
 
@@ -90,9 +96,9 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
             intent.setClass(this,CropperActivity.class);
             intent.putExtra(CropperActivity.EXTRA_CROP_MODE, mCropMode);
             intent.putExtra(CropperActivity.FROM_BITMAP_PATH, imageFile.getAbsolutePath());
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CROPPER);
         }
-        this.finish();
+        //this.finish();
 
     }
 
@@ -106,4 +112,30 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
         //nothing to do
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(null==data||resultCode!= Activity.RESULT_OK)
+        {
+            Log.d(TAG,"null==data||resultCode!= Activity.RESULT_OK");
+            return ;
+        }
+
+        if(requestCode == REQUEST_CROPPER)
+        {
+            String result = data.getStringExtra(CropperActivity.RETURN_BITMAP_PATH);
+            Log.d(TAG,"requestCode == REQUEST_CROPPER"+"result"+result);
+
+            if(null!=result)
+            {
+                Intent intent = new Intent();
+                intent.putExtra(EXTRA_CROPPER_RESULT,result);
+                setResult(RESULT_OK,intent);
+            }
+        }
+
+        finish();
+
+    }
 }

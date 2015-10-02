@@ -21,7 +21,7 @@ public abstract class XBaseEditorView extends RelativeLayout{
     protected Context context;
 
     protected AutofitTextView title;
-    protected AutofitTextView time;
+    protected AutofitTextView date;
     protected AutofitTextView author;
     protected LinedEditor verse;
     protected AutofitTextView whisper;
@@ -45,7 +45,7 @@ public abstract class XBaseEditorView extends RelativeLayout{
         View view = inflate(context,R.layout.view_editor,this);
 
         title = (AutofitTextView) view.findViewById(R.id.view_edit_title);
-        time = (AutofitTextView) view.findViewById(R.id.view_edit_time);
+        date = (AutofitTextView) view.findViewById(R.id.view_edit_time);
         author = (AutofitTextView) view.findViewById(R.id.view_edit_author);
         verse = (LinedEditor) view.findViewById(R.id.view_edit_verse);
         whisper = (AutofitTextView) view.findViewById(R.id.view_edit_whisper);

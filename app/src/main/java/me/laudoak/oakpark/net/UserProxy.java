@@ -117,4 +117,14 @@ public class UserProxy {
         void onFailure(String reason);
     }
 
+    public static Poet currentPoet(Context context)
+    {
+        Poet poet = BmobUser.getCurrentUser(context,Poet.class);
+        if (null!=poet&&poet.getEmailVerified())
+        {
+            return poet;
+        }
+        return null;
+    }
+
 }

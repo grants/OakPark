@@ -20,7 +20,7 @@ public abstract class XBaseDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = getActivity();
-        setStyle(R.style.CustomDialog,R.style.CustomDialog);
+        setStyle(DialogFragment.STYLE_NORMAL,R.style.CustomDialog);
         initData();
     }
 

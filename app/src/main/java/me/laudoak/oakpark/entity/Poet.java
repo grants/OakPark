@@ -7,6 +7,22 @@ import cn.bmob.v3.BmobUser;
  */
 public class Poet extends BmobUser {
 
+    private String avatarURL;
+    private boolean snib;
 
+    public String getAvatarURL() {
+        return avatarURL;
+    }
 
+    public void setAvatarURL(String avatarURL) {
+        this.avatarURL = avatarURL;
+    }
+
+    public boolean isSnib() {
+        return snib;
+    }
+
+    public void setSnib(boolean snib) {
+        this.snib = snib;
+    }
 }

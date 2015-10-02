@@ -16,6 +16,7 @@
         android:id="@+id/cropper_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_centerInParent="true"
         custom:guidelines="onTouch"
         custom:fixAspectRatio = "true"

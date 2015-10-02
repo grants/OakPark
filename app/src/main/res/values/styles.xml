@@ -11,8 +11,7 @@
     </style>
 
     <style name="CustomActionBarTitle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/green</item>
-        <item name="android:actionMenuTextColor">@color/gray_7</item>
+        <item name="android:textColor">@color/gray_7</item>
     </style>
 
     <style name="ValidateEdittext" parent="Base.Widget.AppCompat.EditText">
@@ -51,7 +50,7 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:textColor">@color/green</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:singleLine">true</item>
     </style>
 
