@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <View
+        android:background="@color/white"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"/>
 
     <ListView
         android:id="@+id/lv_poet"
@@ -13,4 +18,4 @@
         android:listSelector="@android:color/transparent"
         android:divider="@android:color/transparent"/>
 
-</LinearLayout>
+</RelativeLayout>

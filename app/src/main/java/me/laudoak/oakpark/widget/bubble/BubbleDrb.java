@@ -130,13 +130,13 @@ public class BubbleDrb extends Drawable {
 
     /*Builder pattern*/
     public static class Builder{
-        public static float DEFAULT_ARROW_WITH = 25;
-        public static float DEFAULT_ARROW_HEIGHT = 25;
+        public static float DEFAULT_ARROW_WIDTH = 25;
+        public static float DEFAULT_ARROW_HEIGHT = 30;
         public static float DEFAULT_ARROW_POSITION = 40;
         public static int DEFAULT_BUBBLE_COLOR = Color.WHITE;
 
         private RectF mRect;
-        private float mArrowWidth = DEFAULT_ARROW_WITH;
+        private float mArrowWidth = DEFAULT_ARROW_WIDTH;
         private float mArrowHeight = DEFAULT_ARROW_HEIGHT;
         private float mArrowPosition = DEFAULT_ARROW_POSITION;
         private int bubbleColor = DEFAULT_BUBBLE_COLOR;

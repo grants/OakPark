@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
-    
+    <TextView
+        android:text="Jul.5"
+        android:id="@+id/item_verse_date"
+        style="@style/ItemDateText"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_alignBottom="@+id/item_verse_dot"/>
 
-</LinearLayout>
+    <View
+        android:id="@+id/item_verse_dot"
+        android:background="@color/gray_7"
+        android:layout_marginTop="17dp"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_toRightOf="@+id/item_verse_date"/>
+
+    <!-- bubble arrow height:30-->
+    <!-- bubble arrow width:25-->
+    <!-- bubble arrow position:40-->
+    <me.laudoak.oakpark.widget.bubble.BubbleLinear
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/item_verse_dot"
+        android:paddingRight="10dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/item_verse_image"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <TextView
+                android:text="@string/test_verse_title"
+                android:id="@+id/item_verse_title"
+                style="@style/ItemTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="@string/test_verse_author"
+                android:id="@+id/item_verse_author"
+                style="@style/ItemAuthorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="@string/test_verse_verse"
+                android:id="@+id/item_verse_verse"
+                style="@style/ItemVerseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </me.laudoak.oakpark.widget.bubble.BubbleLinear>
+
+
+</RelativeLayout>

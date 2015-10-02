@@ -54,7 +54,7 @@ public class CropperActivity extends FragmentActivity {
         {
             case CROP_MODE_NORMAL:
             {
-                cropImageView.setAspectRatio(2,1);
+                cropImageView.setAspectRatio(5,3);
                 break;
             }
             case CROP_MODE_AVATAR:

@@ -44,7 +44,7 @@ public class BubbleLinear extends LinearLayout {
         {
             TypedArray array = context.obtainStyledAttributes(attributeSet,R.styleable.BubbleLinear);
             mArrowWidth = array.getDimension(R.styleable.BubbleLinear_arrowWidth,
-                    BubbleDrb.Builder.DEFAULT_ARROW_WITH);
+                    BubbleDrb.Builder.DEFAULT_ARROW_WIDTH);
             mArrowHeight = array.getDimension(R.styleable.BubbleLinear_arrowHeight,
                     BubbleDrb.Builder.DEFAULT_ARROW_HEIGHT);
             mArrowPosition = array.getDimension(R.styleable.BubbleLinear_arrowPosition,

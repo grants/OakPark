@@ -38,7 +38,7 @@
         <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:textColor">@color/gray_8</item>
         <item name="android:textSize">21sp</item>
-        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="TimeEditor" parent="Base.Widget.AppCompat.EditText">
@@ -92,6 +92,53 @@
         <item name="android:textSize">16sp</item>
         <item name="android:maxLines">5</item>
     </style>
+
+    <!-- -->
+    <style name="ItemDateText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="ItemTitleText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_8</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ItemAuthorText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="ItemVerseText" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_7</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">10</item>
+    </style>
+    <!-- -->
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">
         <item name="android:textColor">@drawable/bg_button_text_color</item>
