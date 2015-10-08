@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_dialog"
     android:layout_width="100dp"
     android:layout_height="100dp"
@@ -10,6 +10,8 @@
     <me.laudoak.oakpark.widget.loading.RotateLoading
         android:id="@+id/loading_dialog_rotateloading"
         android:layout_height="56dp"
-        android:layout_width="56dp" />
+        android:layout_width="56dp"
+        app:color="@color/gray_1"
+        app:loadingWidth="2dp"/>
 
 </LinearLayout>

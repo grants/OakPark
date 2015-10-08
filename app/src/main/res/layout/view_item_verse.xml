@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
-    <TextView
-        android:text="Jul.5"
-        android:id="@+id/item_verse_date"
-        style="@style/ItemDateText"
-        android:layout_width="40dp"
+    <LinearLayout
+        android:id="@+id/linear_verse_dot"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_alignBottom="@+id/item_verse_dot"/>
+        android:gravity="center"
+        android:layout_marginTop="15dp">
 
-    <View
-        android:id="@+id/item_verse_dot"
-        android:background="@color/gray_7"
-        android:layout_marginTop="17dp"
-        android:layout_width="4dp"
-        android:layout_height="4dp"
-        android:layout_toRightOf="@+id/item_verse_date"/>
+        <TextView
+            android:text="Jul.5"
+            android:id="@+id/item_verse_date"
+            style="@style/ItemDateText"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_alignBottom="@+id/item_verse_dot"/>
+
+        <View
+            android:id="@+id/item_verse_dot"
+            android:background="@color/gray_7"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_toRightOf="@+id/item_verse_date" />
+
+    </LinearLayout>
 
     <!-- bubble arrow height:30-->
     <!-- bubble arrow width:25-->
@@ -28,30 +37,41 @@
     <me.laudoak.oakpark.widget.bubble.BubbleLinear
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/item_verse_dot"
-        android:paddingRight="10dp"
-        android:paddingLeft="5dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
+        android:layout_toRightOf="@+id/linear_verse_dot"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
             android:orientation="vertical">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/item_verse_image"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                fresco:placeholderImage ="@color/gray_1" />
 
-            <TextView
-                android:text="@string/test_verse_title"
-                android:id="@+id/item_verse_title"
-                style="@style/ItemTitleText"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:background="@color/gray_7"
+                    android:layout_width="3dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:text="@string/test_verse_title"
+                    android:id="@+id/item_verse_title"
+                    style="@style/ItemTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <TextView
                 android:text="@string/test_verse_author"
@@ -60,15 +80,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:text="@string/test_verse_verse"
-                android:id="@+id/item_verse_verse"
-                style="@style/ItemVerseText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+            <include layout="@layout/view_item_verse_expand"/>
 
         </LinearLayout>
+
     </me.laudoak.oakpark.widget.bubble.BubbleLinear>
 
 

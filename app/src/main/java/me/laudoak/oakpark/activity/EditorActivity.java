@@ -2,10 +2,9 @@ package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.internal.view.menu.MenuBuilder;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
@@ -15,7 +14,7 @@ import me.laudoak.oakpark.fragment.XBaseFragment;
 /**
  * Created by LaudOak on 2015-9-29.
  */
-public class EditorActivity extends XBaseActivity {
+public class EditorActivity extends XBaseActivity{
 
     private static final String TAG = "EditorActivity";
 
@@ -23,21 +22,29 @@ public class EditorActivity extends XBaseActivity {
 
     private XBaseFragment fragment;
 
+    private TextView push;
+    private ImageView close;
+
     private int flag;
 
     private PushCallback pushCallback;
 
     @Override
-    public int callContentView() {
-        return R.layout.activity_editor;
+    protected void setView() {
+        setContentView(R.layout.activity_editor);
     }
 
     @Override
     public void buildView() {
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().hide();
 
+        buildBar();
+
+        handleIntent();
+    }
+
+    private void handleIntent() {
         Intent intent = getIntent();
         if (null!=intent)
         {
@@ -49,7 +56,7 @@ public class EditorActivity extends XBaseActivity {
             {
                 case 0:
                 {
-                    //#2015-10-1 holy bug
+                    //#2015-10-1 bug here
                     fragment = new NormalEditorFragment();
                     break;
                 }
@@ -70,41 +77,27 @@ public class EditorActivity extends XBaseActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuBuilder = getMenuInflater();
-        menuBuilder.inflate(R.menu.menu_editor,menu);
-
-        return super.onCreateOptionsMenu(menu);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId())
-        {
-            case android.R.id.home:
-            {
-                this.finish();
-                break;
+    private void buildBar() {
+        close = (ImageView) findViewById(R.id.ca_editor_back);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditorActivity.this.finish();
             }
-            case R.id.editor_push:
-            {
+        });
+
+        push = (TextView) findViewById(R.id.ca_editor_done);
+        push.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 if(null!=fragment&&null!=pushCallback)
                 {
                     pushCallback.onPush();
                 }
-                break;
             }
-            default:
-            {
-                break;
-            }
-        }
+        });
 
-        return super.onOptionsItemSelected(item);
     }
 
     public interface PushCallback

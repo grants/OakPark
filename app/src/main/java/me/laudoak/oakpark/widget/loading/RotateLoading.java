@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -62,8 +63,16 @@ public class RotateLoading extends View {
 
     private void initView(Context context, AttributeSet attrs) {
 
-        color = getResources().getColor(R.color.gray_7);
-        width = dpToPx(context,DEFAULT_WIDTH);
+        if (null!=attrs)
+        {
+            TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.RotateLoading);
+            color = array.getColor(R.styleable.RotateLoading_loadingColor, getResources().getColor(R.color.gray_5));
+            width = array.getDimensionPixelSize(R.styleable.RotateLoading_loadingWidth, DEFAULT_SHADOW_POSITION);
+        }else {
+            color = getResources().getColor(R.color.gray_5);
+            width = dpToPx(context,DEFAULT_WIDTH);
+        }
+
         shadowPosition = dpToPx(getContext(), DEFAULT_SHADOW_POSITION);
 
         mPaint = new Paint();
@@ -188,7 +197,7 @@ public class RotateLoading extends View {
     }
 
 
-    public int dpToPx(Context context, float dpVal) {
+    private int dpToPx(Context context, float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.getResources().getDisplayMetrics());
     }
 

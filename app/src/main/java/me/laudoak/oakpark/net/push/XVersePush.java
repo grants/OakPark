@@ -5,7 +5,6 @@ package me.laudoak.oakpark.net.push;
  */
 public class XVersePush extends XBasePush {
 
-
     @Override
     public void push(PushCallBack callBack) {
 

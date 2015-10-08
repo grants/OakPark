@@ -58,7 +58,7 @@ public class NormalEditorFragment extends XBaseFragment implements
     @Override
     public View callView(LayoutInflater inflater, ViewGroup container) {
         return normalEditorView;
-        //#2015-10-1 holy bug
+        //#2015-10-1 bug here
         //return inflater.inflate(R.layout.fragment_editor_normal,null);
     }
 

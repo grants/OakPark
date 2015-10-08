@@ -9,9 +9,10 @@ import me.laudoak.oakpark.activity.XBaseActivity;
 
 public class MainActivity extends XBaseActivity {
 
+
     @Override
-    public int callContentView() {
-        return R.layout.activity_main;
+    protected void setView() {
+        setContentView(R.layout.activity_main);
     }
 
     @Override

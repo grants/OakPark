@@ -3,7 +3,6 @@ package me.laudoak.oakpark.activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,21 +27,22 @@ public class EnterActivity extends XBaseActivity {
     private TextView loginText,registerText;
     private ImageView indicator;
 
+    private ImageView close;
+
     private List<Fragment> fragments;
 
     private int currPage;
     private int indicatorWidth;
 
     @Override
-    public int callContentView() {
-        return R.layout.activity_enter;
+    protected void setView() {
+        setContentView(R.layout.activity_enter);
     }
 
     @Override
     public void buildView() {
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        buildBar();
 
         viewPager = (ViewPager) findViewById(R.id.register_viewpager);
         loginText = (TextView) findViewById(R.id.enter_top_tv_login);
@@ -99,8 +99,15 @@ public class EnterActivity extends XBaseActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    private void buildBar() {
+        getSupportActionBar().hide();
+        close = (ImageView) findViewById(R.id.ca_enter_back);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnterActivity.this.finish();
+            }
+        });
     }
+
 }

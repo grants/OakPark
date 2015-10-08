@@ -36,7 +36,7 @@
 
         <ImageView
             android:id="@+id/enter_top_indicator"
-            android:src="@drawable/drawable_indicator"
+            android:src="@drawable/drb_indicator"
             android:layout_width="75dp"
             android:layout_height="5px" />
 

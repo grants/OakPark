@@ -89,6 +89,8 @@ public class BubbleLinear extends LinearLayout {
         setUp(getPaddingLeft(), +width - getPaddingRight(), getPaddingTop(), height - getPaddingBottom());
         //setBackgroundDrawable(bubbleDrb);
         setBackground(bubbleDrb);
+        //!!!why 2*...
+        setPadding((int) mArrowWidth,0,0,0);
     }
 
 }

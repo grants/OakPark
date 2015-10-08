@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="@dimen/height_ac"
+    android:layout_width="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/ca_editor_back"
+        android:src="@mipmap/ic_btn_close"
+        android:background="@drawable/bg_ac_btn"
+        android:padding="12dp"
+        android:layout_width="@dimen/height_ac"
+        android:layout_height="@dimen/height_ac" />
+
+    <TextView
+        android:id="@+id/ca_editor_done"
+        android:text="保存"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_ac"
+        android:background="@drawable/bg_ac_btn"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:padding="12dp"/>
+
+</RelativeLayout>

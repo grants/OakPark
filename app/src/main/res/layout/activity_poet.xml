@@ -2,6 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/activity_poet_container">
+
+    <me.laudoak.oakpark.widget.paging.PagingListView
+        android:id="@+id/poet_paging_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:scrollbars="none"/>
 
 </LinearLayout>

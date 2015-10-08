@@ -42,7 +42,6 @@ public class MessageDialog extends XBaseDialog {
                 .setPositiveButton("OK",null)
                 .setTitle(null);
 
-
         return builder.create();
     }
 

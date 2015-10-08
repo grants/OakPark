@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- RotateLoading-->
+
+    <declare-styleable name="RotateLoading">
+        <attr name="loadingColor" format="color"/>
+        <attr name="loadingWidth" format="dimension"/>
+    </declare-styleable>
+
     <!-- autoFitEdittext-->
     <declare-styleable name="AutofitTextView">
         <attr name="minTextSize" format="dimension" />
@@ -20,6 +27,15 @@
             <enum name="top" value="0x02"/>
             <enum name="bottom" value="0x03"/>
         </attr>
+    </declare-styleable>
+
+    <!-- ExpandableLinear-->
+    <declare-styleable name="ExpandableLinear">
+        <attr name="maxCollapsedLines" format="integer"/>
+        <attr name="animDuration" format="integer"/>
+        <attr name="animAlphaStart" format="float"/>
+        <attr name="expandDrawable" format="reference"/>
+        <attr name="collapseDrawable" format="reference"/>
     </declare-styleable>
 
 </resources>
