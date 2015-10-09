@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <me.laudoak.oakpark.widget.fittext.ExpandableLinear
         android:id="@+id/item_verse_linear_expand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        expandableTextView:maxCollapsedLines="5">
+        expandableTextView:maxCollapsedLines="4"
+        expandableTextView:animAlphaStart="1">
 
         <TextView
             android:id="@+id/expandable_text"
-            style="@style/ItemVerseText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            style="@style/ItemVerseText"/>
+
+        <ImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_gravity="right|bottom"
+            android:background="@android:color/transparent"/>
 
     </me.laudoak.oakpark.widget.fittext.ExpandableLinear>
 

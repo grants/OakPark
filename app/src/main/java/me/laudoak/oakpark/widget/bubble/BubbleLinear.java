@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import me.laudoak.oakpark.R;
 
@@ -56,18 +58,19 @@ public class BubbleLinear extends LinearLayout {
 
             array.recycle();
         }
+
+        setPadding((int) mArrowWidth, 0, 0, 0);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+
         super.onSizeChanged(w, h, oldw, oldh);
 
         if (w>0&&h>0)
         {
             setUp(w,h);
         }
-
-        setPadding((int) mArrowWidth,0,0,0);
     }
 
 
@@ -89,8 +92,8 @@ public class BubbleLinear extends LinearLayout {
 
     private void setUp(int width, int height) {
 
-        setUp(getPaddingLeft(), +width - getPaddingRight(), getPaddingTop(), height - getPaddingBottom());
-        //setBackgroundDrawable(bubbleDrb);
+        //!!! #2015-10-9 when left params using getPaddingLeft() the child view it will overflow
+        setUp(0, +width - getPaddingRight(), getPaddingTop(), height - getPaddingBottom());
         setBackground(bubbleDrb);
     }
 
