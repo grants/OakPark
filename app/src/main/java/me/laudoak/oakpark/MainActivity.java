@@ -5,6 +5,7 @@ import android.view.View;
 
 import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.EnterActivity;
+import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.XBaseActivity;
 
 public class MainActivity extends XBaseActivity {
@@ -31,6 +32,11 @@ public class MainActivity extends XBaseActivity {
         intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG,0);
         intent.setClass(this,EditorActivity.class);
         startActivity(intent);
+    }
+
+    public void onC(View view)
+    {
+        startActivity(new Intent(MainActivity.this, PoetActivity.class));
     }
 
 }

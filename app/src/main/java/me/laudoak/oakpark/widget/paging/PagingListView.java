@@ -20,7 +20,7 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
 
     private Context context;
 
-    private LoadMoreView footerView;
+    private View footerView;
 
     private int totalCount;
     private int lastItem;
@@ -52,7 +52,9 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
     private void init()
     {
         isLoading = false;
-        footerView = (LoadMoreView) inflate(context, R.layout.view_load_more,null);
+        hasMoreItems = true;
+
+        footerView = inflate(context, R.layout.view_load_more,null);
         footerView.setVisibility(View.GONE);
         addFooterView(footerView);
 
@@ -104,7 +106,7 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         this.lastItem = firstVisibleItem+visibleItemCount;
         this.totalCount = totalItemCount;
-        if (!isLoading&&hasMoreItems&&(this.totalCount==this.lastItem))
+        if (!isLoading&&hasMoreItems&&(this.totalCount==this.lastItem)&&null!=callback)
         {
             setIsLoading(true);
             callback.onLoadMore();

@@ -33,7 +33,7 @@ public class LoadMoreView extends LinearLayout {
     private void initLoadingView(Context context)
     {
         View loadingView = inflate(context, R.layout.view_load_more,this);
-        rotateLoading = (RotateLoading) loadingView.findViewById(R.id.load_more_rotate);
+        //rotateLoading = (RotateLoading) loadingView.findViewById(R.id.load_more_rotate);
         rotateLoading.start();
     }
 

@@ -3,13 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:background="@color/white"
-        android:layout_width="4dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"/>
 
-    <ListView
+    <me.laudoak.oakpark.widget.paging.PagingListView
         android:id="@+id/lv_poet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

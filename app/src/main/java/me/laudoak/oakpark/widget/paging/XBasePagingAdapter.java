@@ -17,6 +17,12 @@ public abstract class XBasePagingAdapter<T> extends BaseAdapter {
 
     protected List<T> datas;
 
+    public XBasePagingAdapter(Context context,List<T> datas)
+    {
+        this.context = context;
+        this.datas = datas;
+    }
+
     public XBasePagingAdapter(Context context)
     {
         this.context = context;

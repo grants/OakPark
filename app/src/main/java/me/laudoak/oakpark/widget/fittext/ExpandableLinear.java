@@ -35,7 +35,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,7 +48,7 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
     private static final String TAG = ExpandableLinear.class.getSimpleName();
 
     /* The default number of lines */
-    private static final int MAX_COLLAPSED_LINES = 8;
+    private static final int MAX_COLLAPSED_LINES = 5;
 
     /* The default animation duration */
     private static final int DEFAULT_ANIM_DURATION = 300;
@@ -58,8 +57,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
     private static final float DEFAULT_ANIM_ALPHA_START = 0.7f;
 
     protected TextView mTv;
-
-    protected ImageButton mButton; // Button to expand/collapse
 
     private boolean mRelayout;
 
@@ -72,10 +69,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
     private int mMaxCollapsedLines;
 
     private int mMarginBetweenTxtAndBottom;
-
-    private Drawable mExpandDrawable;
-
-    private Drawable mCollapseDrawable;
 
     private int mAnimationDuration;
 
@@ -115,12 +108,8 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (mButton.getVisibility() != View.VISIBLE) {
-            return;
-        }
 
         mCollapsed = !mCollapsed;
-        mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
 
         if (mCollapsedStatus != null) {
             mCollapsedStatus.put(mPosition, mCollapsed);
@@ -186,7 +175,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
 
         // Setup with optimistic case
         // i.e. Everything fits. No button needed
-        mButton.setVisibility(View.GONE);
         mTv.setMaxLines(Integer.MAX_VALUE);
 
         // Measure
@@ -205,7 +193,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
         if (mCollapsed) {
             mTv.setMaxLines(mMaxCollapsedLines);
         }
-        mButton.setVisibility(View.VISIBLE);
 
         // Re-measure with new setup
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -239,7 +226,7 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
         boolean isCollapsed = collapsedStatus.get(position, true);
         clearAnimation();
         mCollapsed = isCollapsed;
-        mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
+        //mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
         setText(text);
         getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
         requestLayout();
@@ -258,15 +245,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
         mMaxCollapsedLines = typedArray.getInt(R.styleable.ExpandableLinear_maxCollapsedLines, MAX_COLLAPSED_LINES);
         mAnimationDuration = typedArray.getInt(R.styleable.ExpandableLinear_animDuration, DEFAULT_ANIM_DURATION);
         mAnimAlphaStart = typedArray.getFloat(R.styleable.ExpandableLinear_animAlphaStart, DEFAULT_ANIM_ALPHA_START);
-        mExpandDrawable = typedArray.getDrawable(R.styleable.ExpandableLinear_expandDrawable);
-        mCollapseDrawable = typedArray.getDrawable(R.styleable.ExpandableLinear_collapseDrawable);
-
-        if (mExpandDrawable == null) {
-            mExpandDrawable = getDrawable(getContext(), R.mipmap.ic_expand_small_holo_light);
-        }
-        if (mCollapseDrawable == null) {
-            mCollapseDrawable = getDrawable(getContext(), R.mipmap.ic_collapse_small_holo_light);
-        }
 
         typedArray.recycle();
 
@@ -280,9 +258,6 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
     private void findViews() {
         mTv = (TextView) findViewById(R.id.expandable_text);
         mTv.setOnClickListener(this);
-        mButton = (ImageButton) findViewById(R.id.expand_collapse);
-        mButton.setImageDrawable(mCollapsed ? mExpandDrawable : mCollapseDrawable);
-        mButton.setOnClickListener(this);
     }
 
     private static boolean isPostHoneycomb() {
@@ -354,7 +329,7 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
         public boolean willChangeBounds( ) {
             return true;
         }
-    };
+    }
 
     public interface OnExpandStateChangeListener {
         /**

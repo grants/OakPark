@@ -66,6 +66,8 @@ public class BubbleLinear extends LinearLayout {
         {
             setUp(w,h);
         }
+
+        setPadding((int) mArrowWidth,0,0,0);
     }
 
 
@@ -82,15 +84,14 @@ public class BubbleLinear extends LinearLayout {
                 .arrowPosition(mArrowPosition)
                 .bubbleColor(bubbleColor)
                 .build();
+
     }
 
-    private void setUp(int width, int height){
+    private void setUp(int width, int height) {
 
         setUp(getPaddingLeft(), +width - getPaddingRight(), getPaddingTop(), height - getPaddingBottom());
         //setBackgroundDrawable(bubbleDrb);
         setBackground(bubbleDrb);
-        //!!!why 2*...
-        setPadding((int) mArrowWidth,0,0,0);
     }
 
 }
