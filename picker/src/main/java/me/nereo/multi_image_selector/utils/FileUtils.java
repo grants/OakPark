@@ -2,6 +2,7 @@ package me.nereo.multi_image_selector.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -99,7 +100,7 @@ public class FileUtils {
             //public boolean compress (Bitmap.CompressFormat format, int quality, OutputStream stream)
             //format:JPEG|PNG|WEBP
             //quality:Hint to the compressor, 0-100. 0 meaning compress for small size, 100 meaning compress for max quality. Some formats, like PNG which is lossless, will ignore the quality setting
-            if(bitmap.compress(Bitmap.CompressFormat.JPEG,60,fos))
+            if(bitmap.compress(Bitmap.CompressFormat.JPEG,55,fos))
             {
                 try {
                     fos.flush();
@@ -117,5 +118,6 @@ public class FileUtils {
 
         return result;
     }
+
 
 }

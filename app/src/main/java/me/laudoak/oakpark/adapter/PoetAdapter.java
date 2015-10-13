@@ -11,6 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Verse;
+import me.laudoak.oakpark.widget.clocktext.ClockText;
 import me.laudoak.oakpark.widget.fittext.ExpandableLinear;
 import me.laudoak.oakpark.widget.paging.XBasePagingAdapter;
 
@@ -65,7 +66,7 @@ public class PoetAdapter extends XBasePagingAdapter<Verse> {
 
     private class ViewHolder
     {
-        TextView date;
+        ClockText date;
         SimpleDraweeView draweeView;
         TextView title;
         TextView author;
@@ -73,7 +74,7 @@ public class PoetAdapter extends XBasePagingAdapter<Verse> {
 
         public ViewHolder(View view)
         {
-            date = (TextView) view.findViewById(R.id.item_verse_date);
+            date = (ClockText) view.findViewById(R.id.item_verse_date);
             draweeView = (SimpleDraweeView) view.findViewById(R.id.item_verse_image);
             title = (TextView) view.findViewById(R.id.item_verse_title);
             author = (TextView) view.findViewById(R.id.item_verse_author);
@@ -85,7 +86,7 @@ public class PoetAdapter extends XBasePagingAdapter<Verse> {
         void bindData(Verse verse)
         {
             //
-            date.setText("0000");
+            date.setPushTime(verse.getPushTime());
 
             if (null!=verse.getImageURL())
             {

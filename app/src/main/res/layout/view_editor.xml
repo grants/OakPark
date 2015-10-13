@@ -66,7 +66,7 @@
         android:id="@+id/view_edit_image"
         android:visibility="gone"
         android:layout_width="150dp"
-        android:layout_height="75dp"
+        android:layout_height="90dp"
         android:adjustViewBounds="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

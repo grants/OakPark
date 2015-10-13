@@ -18,7 +18,8 @@
         android:layout_centerVertical="true"
         android:padding="12dp"
         android:layout_width="@dimen/ach"
-        android:layout_height="@dimen/ach" />
+        android:layout_height="@dimen/ach"
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/custom_actionbar_title"
@@ -39,7 +40,7 @@
         android:padding="12dp"
         android:background="@drawable/bg_btn_back"
         android:textColor="#696969"
-        android:text="OK"/>
+        android:text="确定"/>
 
 
 </RelativeLayout>

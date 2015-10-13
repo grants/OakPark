@@ -3,11 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="37dp"
-        android:background="@color/white"/>
+    <RelativeLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"/>
+
+    </RelativeLayout>
 
     <me.laudoak.oakpark.widget.paging.PagingListView
         android:id="@+id/lv_poet"

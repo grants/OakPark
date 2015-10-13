@@ -20,4 +20,7 @@
     <color name="gray_10">#151515</color>
     <color name="gray_11">#000000</color>
 
+    <color name="window_background">#EFEFEF</color>
+    <color name="darkergreen">#062925</color>
+
 </resources>
