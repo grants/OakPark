@@ -37,7 +37,6 @@ public class EntireEditorView extends XBaseEditorView {
         holder = new Holder();
         holder.panel = panel;
         holder.title = title;
-        holder.date = date;
         holder.author = author;
         holder.verse = verse;
         holder.whisper = whisper;
@@ -48,7 +47,6 @@ public class EntireEditorView extends XBaseEditorView {
     {
         public XBasePanelView panel;
         public AutofitTextView title;
-        public AutofitTextView date;
         public AutofitTextView author;
         public LinedEditor verse;
         public AutofitTextView whisper;

@@ -31,7 +31,6 @@ public class NormalEditorView extends XBaseEditorView{
 
     @Override
     void buildActiveEditorView() {
-        date.setVisibility(View.GONE);
         whisper.setVisibility(View.GONE);
     }
 

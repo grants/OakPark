@@ -58,7 +58,7 @@ public class PoetActivity extends XBaseActivity {
                 /*LongClick begin Entire Editor*/
                 AlertDialog.Builder builder = new AlertDialog.Builder(PoetActivity.this,R.style.CustomDialog)
                         .setMessage("进入完全编辑模式?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -69,7 +69,7 @@ public class PoetActivity extends XBaseActivity {
 
                             }
                         })
-                        .setNegativeButton("NO", null);
+                        .setNegativeButton("否", null);
 
                 builder.create().show();
 

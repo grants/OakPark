@@ -41,7 +41,7 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="TimeEditor" parent="Base.Widget.AppCompat.EditText">
+    <style name="TimeText" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:background">@color/white</item>
         <item name="android:padding">5dp</item>
@@ -90,7 +90,17 @@
         <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:textColor">@color/gray_6</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:maxLines">5</item>
+        <item name="android:maxLines">8</item>
+    </style>
+
+    <style name="WhisperActivityEditor" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:maxLines">15</item>
     </style>
 
     <!-- -->

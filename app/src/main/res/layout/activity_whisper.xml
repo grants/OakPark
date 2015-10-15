@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/view_actionbar_normal"/>
+
+    <me.laudoak.oakpark.widget.fittext.AutofitTextView
+        android:id="@+id/activity_whisper_whisper"
+        style="@style/WhisperActivityEditor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="写下诗语..."
+        autofit:minTextSize="18sp"
+        autofit:sizeToFit="true"/>
+
+</LinearLayout>

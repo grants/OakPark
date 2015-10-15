@@ -14,7 +14,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorBG() {
-        return 0xFFFFFFFF;
+        return 0xFFEFEF;
     }
 
 
@@ -40,7 +40,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorTitleBG() {
-        return 0xEEFFFFFF;
+        return 0xFFEFEF ;
     }
 
 
@@ -53,7 +53,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorTitle() {
-        return 0x88F37B7A;
+        return 0xFF000000;
     }
 
 
@@ -66,7 +66,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorToday() {
-        return 0x88F37B7A;
+        return 0xB4FF8800;
     }
 
     /**
@@ -91,7 +91,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorF() {
-        return 0xEEC08AA4;
+        return 0xFF068B78;
     }
 
     /**
@@ -103,12 +103,12 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorWeekend() {
-        return 0xEEF78082;
+        return 0xFFFF4081;
     }
 
 
     /**
-     * 假期文本颜色
+     * 假期文本背景颜色
      *
      * Color of Holiday text
      *
@@ -116,6 +116,6 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorHoliday() {
-        return 0x80FED6D6;
+        return 0xFFFDFDFD;
     }
 }

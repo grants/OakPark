@@ -38,6 +38,10 @@
             android:label="">
         </activity>
 
+        <activity android:name=".activity.WhisperActivity">
+
+        </activity>
+
     </application>
 
 </manifest>
