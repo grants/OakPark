@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.WhisperActivity;
-import me.laudoak.oakpark.net.push.VersePush;
 import me.laudoak.oakpark.net.push.XVersePush;
+import me.laudoak.oakpark.view.CalPicker;
 import me.laudoak.oakpark.view.EntireEditorView;
 import me.laudoak.oakpark.widget.dialog.MessageDialog;
 import me.laudoak.oakpark.widget.loading.LoadingDialog;
@@ -30,7 +30,8 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class EntireEditorFragment extends XBaseFragment implements
         EditorActivity.PushCallback,
         XBasePanelView.OnPanelClickListener,
-        XVersePush.PushCallBack {
+        XVersePush.PushCallBack,
+        CalPicker.Callback{
 
     private static final String TAG = "EntireEditorFragment";
     private static final String TAG_DIALOG_NOTICE = "TAG_DIALOG_NOTICE";
@@ -38,7 +39,7 @@ public class EntireEditorFragment extends XBaseFragment implements
     public static final String EXTRA_WHISPER = "EXTRA_WHISPER";
     private static final int REQUEST_WHISPER = 1114;
 
-    //request code < 16bit;
+    //request code should < 16bit;
     private static final int REQUEST_PICKER = 10010;
 
     private Context context;
@@ -47,6 +48,7 @@ public class EntireEditorFragment extends XBaseFragment implements
     private EntireEditorView.Holder holder;
 
     private String imagePath;
+    private int dateCode;
 
     private LoadingDialog loadingDialog;
 
@@ -58,6 +60,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         entireEditorView = new EntireEditorView(context);
         this.holder = entireEditorView.getHolder();
         imagePath = null;
+        dateCode = holder.dateCodeText.getDateCode();
     }
 
     /*XBaseFragment callback*/
@@ -75,6 +78,7 @@ public class EntireEditorFragment extends XBaseFragment implements
 
     private void buildEditorView() {
 
+        holder.dateCodeText.setVisibility(View.VISIBLE);
         holder.whisper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +123,7 @@ public class EntireEditorFragment extends XBaseFragment implements
 
             case R.id.edit_panel_calendar:
             {
+                new CalPicker(context,this);
                 break;
             }
         }
@@ -163,8 +168,11 @@ public class EntireEditorFragment extends XBaseFragment implements
                 .author(holder.author.getText().toString().trim())
                 .verse(holder.verse.getText().toString())
                 .whisper(holder.whisper.getText().toString())
+                .dateCode(dateCode)
                 .imagePath(imagePath);
+
         builder.build().push(this);
+
     }
 
     /*push callback*/
@@ -194,18 +202,8 @@ public class EntireEditorFragment extends XBaseFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*handle crop result*/
-        if(null==data||resultCode!= Activity.RESULT_OK)
-        {
-            //!!!
-            Log.d(TAG, "onActivityResult:null==data||resultCode!= Activity.RESULT_OK");
-            holder.image.setVisibility(View.GONE);
-            imagePath = null;
-            return ;
-        }
-
         /*handle pick image & crop image result;*/
-        if(requestCode==REQUEST_PICKER)
+        if(requestCode==REQUEST_PICKER&&resultCode==Activity.RESULT_OK&&null!=data)
         {
             this.imagePath = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);
             Log.d(TAG,"requestCode==REQUEST_CROPPER"+"imagePath"+imagePath);
@@ -215,7 +213,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         }
 
         /*handle whisper editor result;*/
-        if (requestCode==REQUEST_WHISPER)
+        if (requestCode==REQUEST_WHISPER&&resultCode==Activity.RESULT_OK&&null!=data)
         {
             String whisper = data.getStringExtra(WhisperActivity.RESULT_WHISPER);
             if (null != whisper)
@@ -227,4 +225,10 @@ public class EntireEditorFragment extends XBaseFragment implements
     }
 
 
+    /*CalPicker callback*/
+    @Override
+    public void onPick(int dc) {
+        dateCode = dc;
+        holder.dateCodeText.setDateCode(dc);
+    }
 }

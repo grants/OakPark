@@ -11,13 +11,16 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.entity.Poet;
-import me.laudoak.oakpark.entity.Verse;
+import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.UserProxy;
 
 /**
  * Created by LaudOak on 2015-10-2.
  */
 public class XVersePush extends XBasePush {
+
+    private int dateCode;
+    private String whisper;
 
     private static final String TAG = "XVersePush";
 
@@ -28,7 +31,8 @@ public class XVersePush extends XBasePush {
         this.author = builder.author;
         this.verse = builder.verse;
         this.imagePath = builder.imagePath;
-        this.pushTime = builder.pushTime;
+        this.whisper = builder.whisper;
+        this.dateCode = builder.dateCode;
     }
 
     @Override
@@ -42,14 +46,14 @@ public class XVersePush extends XBasePush {
             return ;
         }
 
-
-        final Verse v = new Verse();
+        final XVerse v = new XVerse();
 
         v.setPoet(poet);
         v.setTitle(this.title);
         v.setAuthor(this.author);
         v.setVerse(this.verse);
-        v.setPushTime(this.pushTime);
+        v.setWhisper(this.whisper);
+        v.setDateCode(this.dateCode);
 
         if (null!=this.imagePath)
         {
@@ -128,18 +132,17 @@ public class XVersePush extends XBasePush {
         String imagePath;
         String whisper;
         int dateCode;
-        long pushTime;
+
+        public Builder(Context c)
+        {
+            this.context = c;
+        }
 
         public XVersePush build()
         {
             return new XVersePush(this);
         }
 
-        public Builder(Context c)
-        {
-            this.pushTime = System.currentTimeMillis();
-            this.context = c;
-        }
 
         public Builder title(String t)
         {
@@ -166,7 +169,7 @@ public class XVersePush extends XBasePush {
             this.whisper = w;
             return this;
         }
-        public Builder DateCode(int dc)
+        public Builder dateCode(int dc)
         {
             this.dateCode = dc;
             return this;

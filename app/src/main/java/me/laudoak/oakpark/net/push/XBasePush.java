@@ -11,9 +11,7 @@ public abstract class XBasePush {
     String title;
     String author;
     String verse;
-    String whisper;
     String imagePath;
-    int dateCode;
     long pushTime;
 
     public abstract void push(PushCallBack callBack);

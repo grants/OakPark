@@ -68,7 +68,8 @@ public class NormalEditorFragment extends XBaseFragment implements
         buildActivePanelView();
     }
 
-    private void buildActivePanelView() {
+    private void buildActivePanelView()
+    {
         holder.panel.setListener(this);
         holder.panel.getCalendar().setVisibility(View.GONE);
     }

@@ -23,7 +23,9 @@ public class RegisterView extends LinearLayout implements TextWatcher ,View.OnCl
 
     private EditText email,nick,password,confirmpassword;
     private Button register;
+    {
 
+    }
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
     );

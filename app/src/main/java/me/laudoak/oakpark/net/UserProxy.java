@@ -59,6 +59,7 @@ public class UserProxy {
         poet.setUsername(this.nick);
         poet.setEmail(this.email);
         poet.setPassword(this.password);
+        poet.setSnib(false);
 
         poet.signUp(this.context, new SaveListener() {
             @Override

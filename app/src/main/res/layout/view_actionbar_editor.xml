@@ -13,7 +13,6 @@
         android:layout_width="@dimen/height_ac"
         android:layout_height="@dimen/height_ac" />
 
-      
 
     <TextView
         android:id="@+id/ca_editor_done"

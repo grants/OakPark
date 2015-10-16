@@ -15,7 +15,7 @@ public final class DPTManager {
     private DPTheme theme;// 主题对象
 
     private DPTManager() {
-        initCalendar(new DPCNTheme());
+        initCalendar(new OakParkTheme());
     }
 
     /**
