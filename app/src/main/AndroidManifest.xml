@@ -46,6 +46,10 @@
             android:label="">
         </activity>
 
+        <activity android:name=".activity.BulbulActivity"
+            android:label="">
+        </activity>
+
     </application>
 
 </manifest>

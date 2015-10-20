@@ -1,17 +1,21 @@
 package me.laudoak.oakpark.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
+import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.cciv.CircleImageView;
 
 /**
  * Created by LaudOak on 2015-10-16 at 22:03.
@@ -20,12 +24,14 @@ public class DrawerFragment extends XBaseFragment {
 
     private static final String TAG = "DrawerFragment";
 
-    private CircleImageView avatar;
+    private Poet poet;
     private LinearLayout setting;
+    private SimpleDraweeView avatar;
+    private TextView nick,num;
 
     @Override
     public void initData() {
-
+        poet = UserProxy.currentPoet(context);
     }
 
     @Override
@@ -35,7 +41,7 @@ public class DrawerFragment extends XBaseFragment {
 
     @Override
     public void buildViews(View view) {
-        avatar = (CircleImageView) view.findViewById(R.id.drawer_cciv);
+        avatar = (SimpleDraweeView) view.findViewById(R.id.drawer_avatar);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +61,9 @@ public class DrawerFragment extends XBaseFragment {
             }
         });
 
+        nick = (TextView) view.findViewById(R.id.drawer_nick);
+        num = (TextView) view.findViewById(R.id.drawer_num);
+
         setting = (LinearLayout) view.findViewById(R.id.drawer_ll_setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,5 +71,21 @@ public class DrawerFragment extends XBaseFragment {
                 startActivity(new Intent(context, SettingActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        nick.setText(poet.getUsername());
+
+        if (null!=poet&&null!=poet.getAvatarURL())
+        {
+            Uri uri = Uri.parse(poet.getAvatarURL());
+            avatar.setImageURI(uri);
+        }
+
+
+
     }
 }

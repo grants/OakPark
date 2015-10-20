@@ -2,10 +2,18 @@ package me.laudoak.oakpark.net;
 
 import android.content.Context;
 
+import com.bmob.BTPFileResponse;
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadListener;
+
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
+import me.laudoak.oakpark.OP;
+import me.laudoak.oakpark.activity.BulbulActivity;
 import me.laudoak.oakpark.entity.Poet;
 
 /**
@@ -63,8 +71,7 @@ public class UserProxy {
 
         poet.signUp(this.context, new SaveListener() {
             @Override
-            public void onSuccess()
-            {
+            public void onSuccess() {
                 callBack.onSuccess();
             }
 
@@ -73,6 +80,60 @@ public class UserProxy {
                 callBack.onFailure(s);
             }
         });
+    }
+
+    public static void doUpdate(final Context context,String newNick,String newAvatarPath, final CallBack callBack)
+    {
+        final Poet poet = currentPoet(context);
+        final Poet curPoet = new Poet();
+        curPoet.setObjectId(poet.getObjectId());
+        curPoet.setUsername(newNick);
+
+        if (null!=newAvatarPath)
+        {
+            curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
+                @Override
+                public void onSuccess() {
+                    callBack.onSuccess();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    callBack.onFailure(s);
+                }
+            });
+        }else {
+            BTPFileResponse response = BmobProFile.getInstance(context).upload(newAvatarPath, new UploadListener() {
+
+                @Override
+                public void onSuccess(String s, String s1, BmobFile bmobFile) {
+                    String url = BmobProFile.getInstance(context).signURL(s,s1, OP.ACCESS_KEY,0,null);
+                    curPoet.setAvatarURL(url);
+                    curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
+                        @Override
+                        public void onSuccess() {
+                            callBack.onSuccess();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            callBack.onFailure(s);
+                        }
+                    });
+                }
+
+                @Override
+                public void onProgress(int i) {
+
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    callBack.onFailure(s);
+                }
+            });
+        }
+
     }
 
     public static class Builder

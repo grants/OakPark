@@ -177,6 +177,61 @@
     </style>
     <!-- end of XVerse-->
 
+    <!-- Drawer Text-->
+    <style name="DrawerNick" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/gray_7</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="DrawerNumber" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/gray_4</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+
+    <!-- Bulbul Text-->
+    <style name="BulbulNick" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_8</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="BulbulOther" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColorHint">@color/gray_2</item>
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:editable">false</item>
+    </style>
+
+    <style name="SettingText" parent="TextAppearance.AppCompat">
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/gray_6</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
     <!-- -->
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">
