@@ -182,7 +182,7 @@
         <item name="android:background">@null</item>
         <item name="android:padding">5dp</item>
         <item name="android:textColor">@color/gray_7</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:singleLine">true</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
@@ -228,7 +228,7 @@
     <style name="SettingText" parent="TextAppearance.AppCompat">
         <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/gray_6</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:singleLine">true</item>
     </style>
 

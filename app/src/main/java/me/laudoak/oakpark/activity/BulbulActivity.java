@@ -14,6 +14,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
+import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -99,14 +100,24 @@ public class BulbulActivity extends XBaseActivity {
             @Override
             public void onClick(View v) {
                 if (nick.getText().toString().trim().length() >= 2) {
-                    UserProxy.doUpdate(BulbulActivity.this, nick.getText().toString().trim(), newPath, new UserProxy.CallBack() {
+
+                    final LoadingDialog dialog = new LoadingDialog(BulbulActivity.this);
+                    dialog.show();
+
+                    UserProxy.doUpdate(BulbulActivity.this,
+                            nick.getText().toString().trim(),
+                            newPath,
+                            new UserProxy.CallBack()
+                            {
                         @Override
                         public void onSuccess() {
+                            dialog.dismiss();
                             AppMsg.makeText(BulbulActivity.this,"已更新",AppMsg.STYLE_INFO).show();
                         }
 
                         @Override
                         public void onFailure(String reason) {
+                            dialog.dismiss();
                             AppMsg.makeText(BulbulActivity.this,reason,AppMsg.STYLE_ALERT).show();
                         }
                     });

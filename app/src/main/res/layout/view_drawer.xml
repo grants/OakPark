@@ -14,13 +14,13 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/drawer_avatar"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:padding="10dp"
-            fresco:placeholderImage ="@color/white"
+            fresco:placeholderImage ="@color/window_background"
             fresco:roundingBorderWidth="1dp"
             fresco:roundingBorderColor="@color/gray_7"
-            fresco:roundWithOverlayColor="@color/window_background"
+            fresco:roundWithOverlayColor="@color/white"
             fresco:roundAsCircle="true"/>
 
     </LinearLayout>
@@ -40,7 +40,6 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="001"
             android:id="@+id/drawer_num"
             style="@style/DrawerNumber"
             android:layout_width="match_parent"

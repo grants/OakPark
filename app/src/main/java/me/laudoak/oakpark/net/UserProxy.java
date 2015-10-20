@@ -91,18 +91,6 @@ public class UserProxy {
 
         if (null!=newAvatarPath)
         {
-            curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
-                @Override
-                public void onSuccess() {
-                    callBack.onSuccess();
-                }
-
-                @Override
-                public void onFailure(int i, String s) {
-                    callBack.onFailure(s);
-                }
-            });
-        }else {
             BTPFileResponse response = BmobProFile.getInstance(context).upload(newAvatarPath, new UploadListener() {
 
                 @Override
@@ -132,6 +120,22 @@ public class UserProxy {
                     callBack.onFailure(s);
                 }
             });
+
+        }else {
+
+            curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
+                @Override
+                public void onSuccess() {
+                    callBack.onSuccess();
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    callBack.onFailure(s);
+                }
+            });
+
+
         }
 
     }

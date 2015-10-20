@@ -23,10 +23,10 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:padding="10dp"
-            fresco:placeholderImage ="@color/white"
+            fresco:placeholderImage ="@color/window_background"
             fresco:roundingBorderWidth="1dp"
             fresco:roundingBorderColor="@color/gray_7"
-            fresco:roundWithOverlayColor="@color/window_background"
+            fresco:roundWithOverlayColor="@color/white"
             fresco:roundAsCircle="true"/>
 
         <me.laudoak.oakpark.widget.fittext.AutofitTextView

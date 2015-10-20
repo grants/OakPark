@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-10-20 at 17:42.
@@ -44,7 +46,12 @@ public class SettingActivity extends XBaseActivity {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this,BulbulActivity.class));
+                if (UserProxy.ifLogin(SettingActivity.this))
+                {
+                    startActivity(new Intent(SettingActivity.this,BulbulActivity.class));
+                }else {
+                    AppMsg.makeText(SettingActivity.this,"未登录",AppMsg.STYLE_CONFIRM).show();
+                }
             }
         });
     }
