@@ -2,7 +2,6 @@
 <resources>
 
     <!-- RotateLoading-->
-
     <declare-styleable name="RotateLoading">
         <attr name="loadingColor" format="color"/>
         <attr name="loadingWidth" format="dimension"/>
@@ -44,6 +43,13 @@
         <attr name="civ_border_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <!-- RecyclerViewpager-->
+    <declare-styleable name="RecyclerViewPager">
+        <attr name="triggerOffset" format="float" />
+        <attr name="flingFactor" format="float" />
+        <attr name="singlePageFling" format="boolean" />
     </declare-styleable>
 
 </resources>

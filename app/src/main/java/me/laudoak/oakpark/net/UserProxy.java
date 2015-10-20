@@ -128,4 +128,13 @@ public class UserProxy {
         return null;
     }
 
+    public static boolean ifLogin(Context contex)
+    {
+        if(null!=BmobUser.getCurrentUser(contex,Poet.class)&&BmobUser.getCurrentUser(contex,Poet.class).getEmailVerified())
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

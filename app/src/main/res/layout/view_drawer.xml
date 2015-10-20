@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <me.laudoak.oakpark.widget.cciv.CircleImageView
+            android:id="@+id/drawer_cciv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/gray_11" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/drawer_ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_ac_btn"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <View
+            android:background="@color/gray_4"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <ImageView
+            android:layout_margin="8dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_setting" />
+
+    </LinearLayout>
+
+</LinearLayout>

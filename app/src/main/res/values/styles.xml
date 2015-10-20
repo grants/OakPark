@@ -140,6 +140,43 @@
         <item name="android:textSize">15sp</item>
         <item name="android:lineSpacingExtra">2dp</item>
     </style>
+
+
+    <!-- XVerse-->
+    <style name="XVerseTitleText" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/gray_7</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:editable">false</item>
+    </style>
+
+    <style name="XVerseAuthorText" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/gray_4</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:editable">false</item>
+    </style>
+
+    <style name="XVerseVerseText" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textColor">@color/gray_5</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:editable">false</item>
+    </style>
+    <!-- end of XVerse-->
+
     <!-- -->
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">

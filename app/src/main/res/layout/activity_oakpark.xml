@@ -22,6 +22,12 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="150dp">
 
+        <fragment
+            android:id="@+id/fragment_drawer"
+            android:name="me.laudoak.oakpark.fragment.DrawerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
     </RelativeLayout>
 
 

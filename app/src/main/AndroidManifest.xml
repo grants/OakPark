@@ -38,8 +38,12 @@
             android:label="">
         </activity>
 
-        <activity android:name=".activity.WhisperActivity">
+        <activity android:name=".activity.WhisperActivity"
+            android:label="">
+        </activity>
 
+        <activity android:name=".activity.SettingActivity"
+            android:label="">
         </activity>
 
     </application>
