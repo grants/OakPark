@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +15,22 @@ import java.util.List;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.net.query.QueryXVerse;
+import me.laudoak.oakpark.widget.message.AppMsg;
 import me.laudoak.oakpark.widget.recy.RecyclerViewPager;
 
 /**
  * Created by LaudOak on 2015-10-20 at 17:51.
  */
-public class XVHFragment extends XBaseFragment {
+public class XVHFragment extends XBaseFragment{
 
     private static final String TAG = "XVHFragment";
 
     private View rootView;
     private RecyclerViewPager mRecyclerView;
-    private List<XVerse> xVerses;
 
     @Override
     public void initData() {
-        xVerses = new ArrayList<XVerse>();
-
     }
 
     @Override
@@ -46,7 +46,27 @@ public class XVHFragment extends XBaseFragment {
     }
 
     @Override
-    public void buildViews(View view) {
+    public void buildViews(View view)
+    {
+        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
+
+        LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(layout);
+
+
+        new QueryXVerse(context, new QueryXVerse.QueryCallback() {
+            @Override
+            public void onFailure(String why) {
+                Log.d(TAG,"onFailure"+why);
+            }
+
+            @Override
+            public void onSuccess(List<XVerse> results) {
+                mRecyclerView.setAdapter(new XVAdapter(context,results, mRecyclerView));
+                mRecyclerView.setHasFixedSize(true);
+                mRecyclerView.setLongClickable(true);
+            }
+        });
 
     }
 
@@ -55,15 +75,6 @@ public class XVHFragment extends XBaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         final Activity activity = getActivity();
-
-        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
-
-        LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(layout);
-        mRecyclerView.setAdapter(new XVAdapter(activity,xVerses, mRecyclerView));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLongClickable(true);
-
 
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -132,4 +143,5 @@ public class XVHFragment extends XBaseFragment {
         });
 
     }
+
 }
