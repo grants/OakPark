@@ -76,7 +76,7 @@ public class FileUtils {
         {
             case CropperActivity.CROP_MODE_AVATAR:
             {
-                imageName = "avatar"+"_"+TimeUtils.getNowDateToString()+"_"+"avatar";
+                imageName = "avatar"+"_"+TimeUtils.getNowDateToString();
                 break;
             }
             case CropperActivity.CROP_MODE_NORMAL:

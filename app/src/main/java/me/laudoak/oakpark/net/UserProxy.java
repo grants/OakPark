@@ -13,7 +13,6 @@ import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import me.laudoak.oakpark.OP;
-import me.laudoak.oakpark.activity.BulbulActivity;
 import me.laudoak.oakpark.entity.Poet;
 
 /**

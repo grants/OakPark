@@ -6,6 +6,6 @@
     <stroke android:color="@color/gray_2"
         android:width="4px"/>
 
-    <solid android:color="@android:color/transparent"/>
+    <solid android:color="@color/window_background"/>
 
 </shape>

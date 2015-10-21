@@ -8,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
+import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.widget.recy.RecyclerViewPager;
 
 /**
@@ -21,9 +25,11 @@ public class XVHFragment extends XBaseFragment {
 
     private View rootView;
     private RecyclerViewPager mRecyclerView;
+    private List<XVerse> xVerses;
 
     @Override
     public void initData() {
+        xVerses = new ArrayList<XVerse>();
 
     }
 
@@ -31,7 +37,7 @@ public class XVHFragment extends XBaseFragment {
     public View callView(LayoutInflater inflater, ViewGroup container) {
         if (null == rootView)
         {
-            rootView = inflater.inflate(R.layout.view_item_xverse,container,false);
+            rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
         }else if (null!=(rootView.getParent())){
             ((ViewGroup)rootView.getParent()).removeView(rootView);
         }
@@ -52,9 +58,9 @@ public class XVHFragment extends XBaseFragment {
 
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
 
-        LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
-        mRecyclerView.setAdapter(new XVAdapter(activity, mRecyclerView));
+        mRecyclerView.setAdapter(new XVAdapter(activity,xVerses, mRecyclerView));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
 
@@ -67,14 +73,12 @@ public class XVHFragment extends XBaseFragment {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int i, int i2) {
-//                mPositionText.setText("First: " + mRecyclerView.getFirstVisiblePosition());
                 int childCount = mRecyclerView.getChildCount();
                 int width = mRecyclerView.getChildAt(0).getWidth();
                 int padding = (mRecyclerView.getWidth() - width) / 2;
 
                 for (int j = 0; j < childCount; j++) {
                     View v = recyclerView.getChildAt(j);
-                    //往左 从 padding 到 -(v.getWidth()-padding) 的过程中，由大到小
                     float rate = 0;
                     if (v.getLeft() <= padding) {
                         if (v.getLeft() >= padding - v.getWidth()) {
@@ -86,7 +90,6 @@ public class XVHFragment extends XBaseFragment {
                         v.setScaleX(1 - rate * 0.1f);
 
                     } else {
-                        //往右 从 padding 到 recyclerView.getWidth()-padding 的过程中，由大到小
                         if (v.getLeft() <= recyclerView.getWidth() - padding) {
                             rate = (recyclerView.getWidth() - padding - v.getLeft()) * 1f / v.getWidth();
                         }

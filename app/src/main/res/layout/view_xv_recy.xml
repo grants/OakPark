@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
+    <me.laudoak.oakpark.widget.recy.RecyclerViewPager
         android:layout_marginTop="8dp"
         android:id="@+id/view_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         android:clipToPadding="false"
         app:triggerOffset="0.1"/>
 

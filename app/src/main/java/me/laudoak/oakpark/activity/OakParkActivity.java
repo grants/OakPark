@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.fragment.XVHFragment;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
@@ -51,7 +52,7 @@ public class OakParkActivity extends XBaseActivity {
 
     @Override
     public void buildView() {
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_oakpark_main_container,new XVHFragment()).commit();
     }
 
     @Override
