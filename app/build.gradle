@@ -26,4 +26,5 @@ dependencies {
     compile project(':picker')
     compile 'com.facebook.fresco:fresco:0.7.0+'
     compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile files('libs/nineoldandroids-2.4.0.jar')
 }
