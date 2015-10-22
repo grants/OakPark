@@ -39,7 +39,7 @@ public class MessageDialog extends XBaseDialog {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.CustomDialog);
         builder.setMessage(message)
-                .setPositiveButton("OK",null)
+                .setPositiveButton("确定",null)
                 .setTitle(null);
 
         return builder.create();

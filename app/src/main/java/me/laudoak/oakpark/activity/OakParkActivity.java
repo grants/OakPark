@@ -111,16 +111,18 @@ public class OakParkActivity extends XBaseActivity {
 
                 if (curPage == 0 && position == 0)
                 {
-                    layoutParams.rightMargin = (int) (indicatorWidth * positionOffset);
+                    layoutParams.rightMargin = (int) (2*indicatorWidth-positionOffset * indicatorWidth);
                 } else if (curPage == 1 && position == 0)
                 {
                     layoutParams.rightMargin = (int) (curPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
                 } else if (curPage == 1 && position == 1)
                 {
-                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + positionOffset * indicatorWidth);
-                }else if (curPage == 2 && position == 1)
+                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + positionOffset
+                            * indicatorWidth);
+                } else if (curPage == 2 && position == 1)
                 {
-                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
+                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + ( positionOffset-1)
+                            * indicatorWidth);
                 }
 
                 indicator.setLayoutParams(layoutParams);

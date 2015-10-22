@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="47dp">
 
             <ImageView
@@ -54,6 +54,7 @@
 
         <ImageView
             android:id="@+id/sup_head_indicator"
+            android:visibility="gone"
             android:background="@color/gray_7"
             android:layout_width="60dp"
             android:layout_height="3dp" />

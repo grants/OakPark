@@ -4,6 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/sup_comment_comment"
+        style="@style/WhisperEditor"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:editable="false"
+        android:hint="写评论"/>
+
     <me.laudoak.oakpark.widget.paging.PagingListView
         android:id="@+id/sup_comment_lv"
         android:layout_width="match_parent"
