@@ -52,7 +52,7 @@ public class OakParkActivity extends XBaseActivity {
 
     @Override
     public void buildView() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_oakpark_main_container,new XVHFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment,new XVHFragment()).commit();
     }
 
     @Override

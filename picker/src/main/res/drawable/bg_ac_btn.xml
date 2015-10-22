@@ -4,6 +4,6 @@
     <item android:state_enabled="true" android:state_pressed="false"
         android:drawable="@android:color/white"/>
     <item android:state_enabled="true" android:state_pressed="true"
-        android:drawable="@color/gray_1"/>
+        android:drawable="@drawable/bg_ac_btn_pressed"/>
 
 </selector>

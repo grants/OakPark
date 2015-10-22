@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">OakPark</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="test_verse_verse">这尊塑像，由我的\n独居生活浇铸而成\n已经在这间\n没有烟火的厨房里\n找到了自己的龛位\n在这里浴缸站立在\n猫的四足之上——\n我一直就没有前进\n我也无法后退一步。</string>
-    <string name="test_verse_author">作者 / [美国] 萨缪尔·马纳什\n翻译 / 光诸</string>
-    <string name="test_verse_title">停滞不前的日子</string>
     <string name="drawer_open">draweropen</string>
     <string name="drawer_close">drawerclose</string>
 </resources>
