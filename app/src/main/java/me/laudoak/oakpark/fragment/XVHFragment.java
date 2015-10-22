@@ -1,6 +1,5 @@
 package me.laudoak.oakpark.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,8 +75,6 @@ public class XVHFragment extends XBaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        final Activity activity = getActivity();
 
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

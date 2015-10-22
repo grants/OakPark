@@ -53,11 +53,17 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/enter_top_indicator"
+            android:id="@+id/sup_head_indicator"
             android:background="@color/gray_7"
             android:layout_width="60dp"
             android:layout_height="3dp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/window_background"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

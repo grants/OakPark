@@ -11,6 +11,14 @@ import me.laudoak.oakpark.R;
  */
 public class SUPCommentFragment extends XBaseFragment {
 
+
+    public static SUPCommentFragment newInstance()
+    {
+        SUPCommentFragment fragment = new SUPCommentFragment();
+
+        return fragment;
+    }
+
     @Override
     public void initData() {
 

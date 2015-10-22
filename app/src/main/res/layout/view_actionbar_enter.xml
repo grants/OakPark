@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/ca_enter_back"
         android:src="@mipmap/ic_close"
-        android:background="@drawable/bg_ac_btn"
+        android:background="@drawable/bg_btn_back"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:padding="12dp"/>

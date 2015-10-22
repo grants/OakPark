@@ -3,6 +3,9 @@ package me.laudoak.oakpark.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import me.laudoak.oakpark.R;
 
@@ -11,6 +14,16 @@ import me.laudoak.oakpark.R;
  */
 public class SUPWhisperFragment extends XBaseFragment {
 
+    private TextView whisper;
+    private SimpleDraweeView avatar;
+    private TextView nick;
+
+    public static SUPWhisperFragment newInstance()
+    {
+        SUPWhisperFragment fragment = new SUPWhisperFragment();
+
+        return fragment;
+    }
 
     @Override
     public void initData() {
@@ -24,6 +37,8 @@ public class SUPWhisperFragment extends XBaseFragment {
 
     @Override
     public void buildViews(View view) {
-
+        whisper = (TextView) view.findViewById(R.id.sup_whisper_whisper);
+        avatar = (SimpleDraweeView) view.findViewById(R.id.sup_whisper_avatar);
+        nick = (TextView) view.findViewById(R.id.sup_whisper_nick);
     }
 }

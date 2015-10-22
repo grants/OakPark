@@ -2,5 +2,5 @@
 <resources>
 
     <color name="gray_1">#d3d3d3</color>
-
+    <color name="window_background">#EFEFEF</color>
 </resources>

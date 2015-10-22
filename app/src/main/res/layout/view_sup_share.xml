@@ -9,22 +9,25 @@
     <ImageView
         android:id="@+id/sup_share_wechat"
         android:src="@mipmap/ic_share_wechat"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="10dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_ac_btn"/>
 
     <ImageView
         android:id="@+id/sup_share_weibo"
         android:src="@mipmap/ic_share_weibo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="10dp"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_ac_btn"/>
 
     <ImageView
         android:id="@+id/sup_share_qq"
         android:src="@mipmap/ic_share_qq"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="10dp"/>
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_ac_btn"/>
 
 </LinearLayout>
