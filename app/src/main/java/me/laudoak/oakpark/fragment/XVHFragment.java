@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.laudoak.oakpark.R;
@@ -30,7 +29,9 @@ public class XVHFragment extends XBaseFragment{
     private RecyclerViewPager mRecyclerView;
 
     @Override
-    public void initData() {
+    public void initData()
+    {
+
     }
 
     @Override
@@ -52,19 +53,21 @@ public class XVHFragment extends XBaseFragment{
 
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
-
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLongClickable(true);
 
         new QueryXVerse(context, new QueryXVerse.QueryCallback() {
             @Override
-            public void onFailure(String why) {
+            public void onFailure(String why)
+            {
                 Log.d(TAG,"onFailure"+why);
+
+                AppMsg.makeText(context,"Query failure",AppMsg.STYLE_CONFIRM).show();
             }
 
             @Override
             public void onSuccess(List<XVerse> results) {
                 mRecyclerView.setAdapter(new XVAdapter(context,results, mRecyclerView));
-                mRecyclerView.setHasFixedSize(true);
-                mRecyclerView.setLongClickable(true);
             }
         });
 

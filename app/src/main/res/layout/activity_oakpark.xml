@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Main Layout-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -23,7 +22,6 @@
             sothree:umanoOverlay="true"
             sothree:umanoScrollableView="@+id/list">
 
-            <!-- MAIN CONTENT -->
             <FrameLayout
                 android:id="@+id/containe_rxverse_fragment"
                 android:layout_width="match_parent"
@@ -32,7 +30,6 @@
 
             </FrameLayout>
 
-            <!-- SLIDING LAYOUT -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
@@ -55,7 +52,12 @@
                     android:id="@+id/sup_main_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <!-- Lay Viewpager here-->
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/sup_main_container_viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
                 </RelativeLayout>
 
             </LinearLayout>

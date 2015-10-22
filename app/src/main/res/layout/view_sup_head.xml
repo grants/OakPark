@@ -7,7 +7,6 @@
     <TextView
         android:id="@+id/sup_head_date"
         style="@style/SUPDateText"
-        android:text="2015-8-20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"/>

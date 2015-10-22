@@ -2,10 +2,16 @@ package me.laudoak.oakpark.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.fragment.XVHFragment;
@@ -15,15 +21,22 @@ import me.laudoak.oakpark.fragment.XVHFragment;
  */
 public class OakParkActivity extends XBaseActivity {
 
+    private static final String TAG = "OakParkActivity";
+
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private ViewPager supPager;
+    private SlidingUpPanelLayout supLayout;
+
+    private List<Fragment> supFragments;
+
+
 
     @Override
     protected void setView() {
         setContentView(R.layout.activity_oakpark);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
-        initDrawer();
     }
 
     /*build drawer layout & pager*/
@@ -51,8 +64,16 @@ public class OakParkActivity extends XBaseActivity {
 
 
     @Override
-    public void buildView() {
+    public void buildView()
+    {
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
+        initDrawer();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment,new XVHFragment()).commit();
+
+
+
     }
 
     @Override
