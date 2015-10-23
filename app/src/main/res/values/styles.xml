@@ -248,6 +248,12 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="CommentText" parent="TextAppearance.AppCompat">
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/gray_10</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <!-- -->
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">

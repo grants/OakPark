@@ -72,6 +72,8 @@ public class XVHFragment extends XBaseFragment{
             }
         });
 
+        mRecyclerView.setAdapter(new XVAdapter(context,xVerses, mRecyclerView));
+
     }
 
     @Override

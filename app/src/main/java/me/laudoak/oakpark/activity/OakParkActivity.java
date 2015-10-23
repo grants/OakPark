@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class OakParkActivity extends XBaseActivity {
     private int indicatorWidth;
     private int curPage;
     private ImageView whisper,comment,share;
+    private TextView dateCode;
+    private TextView whisperText;
 
     private List<Fragment> supFragments;
 
@@ -90,6 +93,8 @@ public class OakParkActivity extends XBaseActivity {
         whisper = (ImageView) findViewById(R.id.sup_head_whisper);
         comment = (ImageView) findViewById(R.id.sup_head_comment);
         share = (ImageView) findViewById(R.id.sup_head_share);
+
+        dateCode = (TextView) findViewById(R.id.sup_head_date);
 
         indicator = (ImageView) findViewById(R.id.sup_head_indicator);
         indicatorWidth = indicator.getLayoutParams().width;

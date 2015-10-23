@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/item_comment_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            fresco:placeholderImage ="@color/window_background"
+            fresco:roundingBorderWidth="0dp"
+            fresco:roundingBorderColor="@color/gray_7"
+            fresco:roundWithOverlayColor="@color/white"
+            fresco:roundAsCircle="true"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/item_comment_nick"
+            style="@style/SUPNickText"
+            android:text="LaudOak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_comment_avatar"
+            android:gravity="center_vertical"/>
+
+        <me.laudoak.oakpark.widget.clocktext.ClockText
+            android:id="@+id/item_comment_time"
+            android:text="2小时前"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:layout_below="@+id/item_comment_nick"
+            android:layout_alignLeft="@+id/item_comment_nick"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/item_comment_content"
+        style="@style/CommentText"
+        android:text="昨夜西风凋敝树"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"/>
+
+</LinearLayout>
