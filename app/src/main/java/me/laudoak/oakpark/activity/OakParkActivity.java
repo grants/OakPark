@@ -17,6 +17,7 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
+import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
@@ -40,12 +41,11 @@ public class OakParkActivity extends XBaseActivity {
 
     private List<Fragment> supFragments;
 
-
+    private List<XVerse> xVerses;
 
     @Override
     protected void setView() {
         setContentView(R.layout.activity_oakpark);
-
     }
 
     /*build drawer layout & pager*/
@@ -111,17 +111,17 @@ public class OakParkActivity extends XBaseActivity {
 
                 if (curPage == 0 && position == 0)
                 {
-                    layoutParams.rightMargin = (int) (2*indicatorWidth-positionOffset * indicatorWidth);
+                    layoutParams.leftMargin = (int) (positionOffset * indicatorWidth);
                 } else if (curPage == 1 && position == 0)
                 {
-                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
+                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
                 } else if (curPage == 1 && position == 1)
                 {
-                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + positionOffset
+                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + positionOffset
                             * indicatorWidth);
                 } else if (curPage == 2 && position == 1)
                 {
-                    layoutParams.rightMargin = (int) (curPage * indicatorWidth + ( positionOffset-1)
+                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + ( positionOffset-1)
                             * indicatorWidth);
                 }
 

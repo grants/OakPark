@@ -27,6 +27,8 @@ public class XVHFragment extends XBaseFragment{
     private View rootView;
     private RecyclerViewPager mRecyclerView;
 
+    private List<XVerse> xVerses;
+
     @Override
     public void initData()
     {

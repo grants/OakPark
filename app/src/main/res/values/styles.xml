@@ -100,7 +100,7 @@
         <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:textColor">@color/gray_6</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:maxLines">20</item>
+        <item name="android:maxLines">24</item>
     </style>
 
     <!-- -->
@@ -237,6 +237,14 @@
         <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/darkergreen</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <style name="SUPNickText" parent="TextAppearance.AppCompat">
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/gray_8</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:singleLine">true</item>
     </style>
 
