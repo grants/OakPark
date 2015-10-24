@@ -8,6 +8,7 @@ import android.widget.EditText;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.OakParkActivity;
 import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.widget.paging.PagingListView;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
@@ -17,7 +18,8 @@ public class SUPCommentFragment extends XBaseFragment implements OakParkActivity
     private static final String TAG = "SUPCommentFragment";
 
     private EditText writeComment;
-    
+    private PagingListView
+
 
     @Override
     public void initData() {
