@@ -19,6 +19,7 @@ public class DoComment {
     private Poet poet;
     private String content;
     private XVerse xVerse;
+    private long commentTime;
 
     private DoComment(Builder b)
     {
@@ -26,6 +27,7 @@ public class DoComment {
         this.poet = b.poet;
         this.xVerse = b.xVerse;
         this.content = b.content;
+        this.commentTime = b.commentTime;
     }
 
     public static class Builder
@@ -34,6 +36,7 @@ public class DoComment {
         private Poet poet;
         private XVerse xVerse;
         private String content;
+        private long commentTime;
 
         public Builder(Context c)
         {
@@ -58,6 +61,12 @@ public class DoComment {
             return this;
         }
 
+        public Builder commentTime(long ct)
+        {
+            this.commentTime = ct;
+            return this;
+        }
+
         public DoComment build()
         {
             return new DoComment(this);
@@ -70,6 +79,7 @@ public class DoComment {
         comment.setContent(content);
         comment.setPoet(poet);
         comment.setxVerse(xVerse);
+        comment.setCommentTime(commentTime);
 
         comment.save(context, new SaveListener() {
             @Override

@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
+    <Button
         android:id="@+id/sup_comment_comment"
-        style="@style/WhisperEditor"
+        style="@style/EditorButton"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:editable="false"
-        android:hint="写评论"/>
+        android:hint="写下评论..."/>
 
-    <me.laudoak.oakpark.widget.paging.PagingListView
-        android:id="@+id/sup_comment_lv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="0dp"
-        android:scrollbars="none"
-        android:listSelector="@android:color/transparent"
-        android:divider="@color/gray_4"/>
+
+        <me.laudoak.oakpark.widget.paging.PagingListView
+            android:id="@+id/sup_comment_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp"
+            android:scrollbars="none"
+            android:listSelector="@android:color/transparent"
+            android:divider="@color/gray_4"/>
 
 </LinearLayout>

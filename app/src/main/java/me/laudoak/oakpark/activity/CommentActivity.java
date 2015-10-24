@@ -12,6 +12,7 @@ import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.net.DoComment;
 import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
+import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
@@ -26,6 +27,8 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     private AutofitTextView comment;
 
     private XVerse xv;
+
+    private LoadingDialog dialog;
 
     @Override
     protected void setView()
@@ -63,10 +66,14 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
                     Poet poet = UserProxy.currentPoet(CommentActivity.this);
                     if (null != poet)
                     {
+                        dialog = new LoadingDialog(CommentActivity.this);
+                        dialog.show();
+
                         DoComment doComment = new DoComment.Builder(CommentActivity.this)
                                 .content(comment.getText().toString())
                                 .xVerse(xv)
                                 .poet(poet)
+                                .commentTime(System.currentTimeMillis())
                                 .build();
                         doComment.doComment(CommentActivity.this);
                     }else {
@@ -83,6 +90,12 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     /*Comment callback*/
     @Override
     public void onSuccess() {
+
+        if (null!=dialog&&dialog.isShowing())
+        {
+            dialog.dismiss();
+        }
+
         AppMsg.makeText(this,"评论成功",AppMsg.STYLE_INFO).show();
 
         Handler handler = new Handler();
@@ -95,12 +108,16 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
             }
         };
 
-        handler.postDelayed(runnable,2000);
+        handler.postDelayed(runnable,1600);
 
     }
 
     @Override
     public void onFailure(String why) {
+        if (null!=dialog&&dialog.isShowing())
+        {
+            dialog.dismiss();
+        }
         AppMsg.makeText(this,why,AppMsg.STYLE_ALERT).show();
     }
     /*Comment callback*/

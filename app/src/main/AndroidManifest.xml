@@ -50,6 +50,9 @@
             android:label="">
         </activity>
 
+        <activity android:name=".activity.CommentActivity">
+        </activity>
+
     </application>
 
 </manifest>

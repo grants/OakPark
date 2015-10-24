@@ -18,5 +18,4 @@
         android:hint="写下评论..."
         autofit:minTextSize="18sp"
         autofit:sizeToFit="true"/>
-
 </RelativeLayout>

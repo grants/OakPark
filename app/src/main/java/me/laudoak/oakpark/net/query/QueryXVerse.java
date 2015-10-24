@@ -17,6 +17,7 @@ public class QueryXVerse {
 
     private static final String TAG = "QueryXVerse";
 
+    private static final String QK_POET = "poet";
     private static final String QK_DATECODE = "DateCode";
 
     private Context context;
@@ -27,12 +28,12 @@ public class QueryXVerse {
 
         new AsyncTask<Void,Void,Void>()
         {
-            
             @Override
             protected Void doInBackground(Void... params) {
 
                 BmobQuery<XVerse> query = new BmobQuery<XVerse>();
                 query.order("-"+QK_DATECODE);
+                query.include(QK_POET);
                 query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
                 query.findObjects(context, new FindListener<XVerse>() {
