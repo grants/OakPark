@@ -23,7 +23,6 @@ public class PoetAdapter extends XBasePagingAdapter<Verse> {
 
     private LayoutInflater inflater;
 
-
     public PoetAdapter(Context context) {
         super(context);
         this.inflater = LayoutInflater.from(context);

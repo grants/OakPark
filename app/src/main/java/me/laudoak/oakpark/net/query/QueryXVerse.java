@@ -33,6 +33,7 @@ public class QueryXVerse {
 
                 BmobQuery<XVerse> query = new BmobQuery<XVerse>();
                 query.order("-"+QK_DATECODE);
+                query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
                 query.findObjects(context, new FindListener<XVerse>() {
                     @Override

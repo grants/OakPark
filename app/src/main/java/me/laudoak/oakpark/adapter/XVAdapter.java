@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.List;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-
 
 /**
  * Created by LaudOak on 2015-10-20 at 18:02.
@@ -28,8 +28,13 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
 
-    private List<XVerse> xVerseList;
+    protected List<XVerse> xVerseList;
 
+
+    public List<XVerse> getxVerseList()
+    {
+        return this.xVerseList;
+    }
 
     public XVAdapter(Context c, List<XVerse> list,RecyclerView recy) {
 
@@ -50,6 +55,11 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
         notifyItemRemoved(position);
     }
 
+
+    public XVerse getXVByPosition(int position)
+    {
+        return this.xVerseList.get(position);
+    }
 
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

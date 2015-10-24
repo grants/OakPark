@@ -27,9 +27,10 @@ import me.laudoak.oakpark.fragment.XVHFragment;
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
  */
-public class OakParkActivity extends XBaseActivity {
+public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpdateCallback{
 
     private static final String TAG = "OakParkActivity";
+
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -40,11 +41,12 @@ public class OakParkActivity extends XBaseActivity {
     private int curPage;
     private ImageView whisper,comment,share;
     private TextView dateCode;
-    private TextView whisperText;
+
+    private NXVUCallback whisperNotier;
+    private NXVUCallback commentNotier;
+    private NXVUCallback shareNotier;
 
     private List<Fragment> supFragments;
-
-    private List<XVerse> xVerses;
 
     @Override
     protected void setView() {
@@ -55,13 +57,15 @@ public class OakParkActivity extends XBaseActivity {
     private void initDrawer()
     {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            public void onDrawerOpened(View drawerView) {
+            public void onDrawerOpened(View drawerView)
+            {
                 super.onDrawerOpened(drawerView);
 
                 invalidateOptionsMenu();
             }
 
-            public void onDrawerClosed(View view) {
+            public void onDrawerClosed(View view)
+            {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu();
             }
@@ -78,7 +82,6 @@ public class OakParkActivity extends XBaseActivity {
     @Override
     public void buildView()
     {
-
         drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
         initDrawer();
 
@@ -90,22 +93,37 @@ public class OakParkActivity extends XBaseActivity {
 
     private void buildSUPFragment()
     {
+        /*three indicator button*/
         whisper = (ImageView) findViewById(R.id.sup_head_whisper);
         comment = (ImageView) findViewById(R.id.sup_head_comment);
         share = (ImageView) findViewById(R.id.sup_head_share);
 
+        /*dateCode*/
         dateCode = (TextView) findViewById(R.id.sup_head_date);
 
+        /*indicator attr*/
         indicator = (ImageView) findViewById(R.id.sup_head_indicator);
         indicatorWidth = indicator.getLayoutParams().width;
 
+        /*init viewpager*/
         supPager = (ViewPager) findViewById(R.id.sup_main_container_viewpager);
 
 
+        /*init viewpager fragments & update xverse callback*/
         supFragments = new ArrayList<Fragment>();
-        supFragments.add(SUPWhisperFragment.newInstance());
-        supFragments.add(SUPCommentFragment.newInstance());
-        supFragments.add(SUPShareFragment.newInstance());
+
+        SUPWhisperFragment whisperFragment = new SUPWhisperFragment();
+        whisperNotier = whisperFragment;
+        supFragments.add(whisperFragment);
+
+        SUPCommentFragment commentFragment = new SUPCommentFragment();
+        commentNotier = commentFragment;
+        supFragments.add(commentFragment);
+
+        SUPShareFragment shareFragment = new SUPShareFragment();
+        shareNotier = shareFragment;
+        supFragments.add(shareFragment);
+        /**/
 
         supPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), supFragments));
 
@@ -187,6 +205,18 @@ public class OakParkActivity extends XBaseActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onUpdateXV(XVerse xv) {
+        whisperNotier.onUpdateXV(xv);
+        commentNotier.onUpdateXV(xv);
+        shareNotier.onUpdateXV(xv);
+    }
+
+    public interface NXVUCallback
+    {
+        void onUpdateXV(XVerse xv);
     }
 
 }

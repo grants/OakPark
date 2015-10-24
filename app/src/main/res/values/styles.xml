@@ -8,6 +8,7 @@
     <style name="CustomActionBar" parent="Base.Widget.AppCompat.ActionBar">
         <item name="background">@color/white</item>
         <item name="titleTextStyle">@style/CustomActionBarTitle</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="CustomActionBarTitle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">

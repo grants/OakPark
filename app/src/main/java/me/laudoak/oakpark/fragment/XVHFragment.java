@@ -1,6 +1,9 @@
 package me.laudoak.oakpark.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,16 +28,22 @@ public class XVHFragment extends XBaseFragment{
     private static final String TAG = "XVHFragment";
 
     private View rootView;
-    private RecyclerViewPager mRecyclerView;
+    protected RecyclerViewPager mRecyclerView;
+    private XVUpdateCallback xvucall;
 
-    private List<XVerse> xVerses;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.xvucall = (XVUpdateCallback) context;
+    }
 
+    /*first abstract method*/
     @Override
     public void initData()
     {
-
     }
 
+    /*second abstract method*/
     @Override
     public View callView(LayoutInflater inflater, ViewGroup container) {
         if (null == rootView)
@@ -47,9 +56,11 @@ public class XVHFragment extends XBaseFragment{
         return rootView;
     }
 
+    /*third abstract method*/
     @Override
     public void buildViews(View view)
     {
+
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
 
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -62,20 +73,18 @@ public class XVHFragment extends XBaseFragment{
             public void onFailure(String why)
             {
                 Log.d(TAG,"onFailure"+why);
-
                 AppMsg.makeText(context,"Query failure",AppMsg.STYLE_CONFIRM).show();
             }
 
             @Override
             public void onSuccess(List<XVerse> results) {
-                mRecyclerView.setAdapter(new XVAdapter(context,results, mRecyclerView));
+                mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
             }
         });
 
-        mRecyclerView.setAdapter(new XVAdapter(context,xVerses, mRecyclerView));
-
     }
 
+    /*fourth abstract method*/
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -84,6 +93,15 @@ public class XVHFragment extends XBaseFragment{
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
 
+                int curPos = mRecyclerView.getCurrentPosition();
+
+                XVAdapter adapter = (XVAdapter) mRecyclerView.getAdapter();
+                if (null != adapter) {
+
+                    XVerse xv = adapter.getxVerseList().get(curPos);
+
+                    xvucall.onUpdateXV(xv);
+                }
             }
 
             @Override
@@ -120,7 +138,7 @@ public class XVHFragment extends XBaseFragment{
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (mRecyclerView.getChildCount() < 3) {
                     if (mRecyclerView.getChildAt(1) != null) {
-                        if(mRecyclerView.getCurrentPosition()==0) {
+                        if (mRecyclerView.getCurrentPosition() == 0) {
                             View v1 = mRecyclerView.getChildAt(1);
                             v1.setScaleY(0.9f);
                             v1.setScaleX(0.9f);
@@ -146,6 +164,11 @@ public class XVHFragment extends XBaseFragment{
             }
         });
 
+    }
+
+    public interface XVUpdateCallback
+    {
+        void onUpdateXV(XVerse xv);
     }
 
 }

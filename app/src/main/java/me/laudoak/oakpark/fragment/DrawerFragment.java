@@ -77,12 +77,14 @@ public class DrawerFragment extends XBaseFragment {
     public void onResume() {
         super.onResume();
 
-        nick.setText(poet.getUsername());
-
-        if (null!=poet&&null!=poet.getAvatarURL())
+        if (null!=poet)
         {
-            Uri uri = Uri.parse(poet.getAvatarURL());
-            avatar.setImageURI(uri);
+            nick.setText(poet.getUsername());
+            if (null!=poet.getAvatarURL())
+            {
+                Uri uri = Uri.parse(poet.getAvatarURL());
+                avatar.setImageURI(uri);
+            }
         }
 
 
