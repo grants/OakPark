@@ -1,11 +1,13 @@
 package me.laudoak.oakpark.entity;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by LaudOak on 2015-9-30.
  */
-public class XVerse extends BmobObject {
+public class XVerse extends BmobObject implements Serializable{
 
     private String whisper;
     private int DateCode;

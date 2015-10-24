@@ -82,7 +82,7 @@ public class SUPWhisperFragment extends XVHFragment implements OakParkActivity.N
     public void onUpdateXV(XVerse xv) {
         whisper.setText(xv.getWhisper());
         nick.setText(xv.getPoet().getUsername());
-        if (null!=xv.getImageURL())
+        if (null!=xv.getPoet().getAvatarURL())
         {
             Uri uri = Uri.parse(xv.getPoet().getAvatarURL());
             avatar.setImageURI(uri);
