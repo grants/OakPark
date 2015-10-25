@@ -3,13 +3,16 @@ package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
 
+import cn.bmob.v3.BmobUser;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
@@ -31,6 +34,8 @@ public class BulbulActivity extends XBaseActivity {
     private SimpleDraweeView avatar;
     private AutofitTextView nick,email,num;
     private Poet poet;
+
+    private Button loginOut;
 
     private String newPath = null;
 
@@ -56,9 +61,33 @@ public class BulbulActivity extends XBaseActivity {
                 Intent intent = new Intent();
                 intent.setClass(BulbulActivity.this, MultiImageSelectorActivity.class);
                 intent.putExtra(CropperActivity.EXTRA_CROP_MODE, CropperActivity.CROP_MODE_AVATAR);
-                startActivityForResult(intent,REQUEST_PICKER);
+                startActivityForResult(intent, REQUEST_PICKER);
             }
         });
+
+        loginOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BmobUser.logOut(BulbulActivity.this);
+                AppMsg.makeText(BulbulActivity.this, "已退出登陆", AppMsg.STYLE_INFO).show();
+
+                delayExit();
+
+            }
+        });
+    }
+
+    private void delayExit()
+    {
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                BulbulActivity.this.finish();
+            }
+        };
+
+        handler.postDelayed(runnable, 1000);
     }
 
     private void initViews()
@@ -81,6 +110,8 @@ public class BulbulActivity extends XBaseActivity {
         nick = (AutofitTextView) findViewById(R.id.bulbul_nick);
         email = (AutofitTextView) findViewById(R.id.bulbul_email);
         num = (AutofitTextView) findViewById(R.id.bulbul_num);
+
+        loginOut = (Button) findViewById(R.id.bulbul_logout);
     }
 
     private void buildBar()
@@ -113,6 +144,8 @@ public class BulbulActivity extends XBaseActivity {
                         public void onSuccess() {
                             dialog.dismiss();
                             AppMsg.makeText(BulbulActivity.this,"已更新",AppMsg.STYLE_INFO).show();
+                            delayExit();
+
                         }
 
                         @Override

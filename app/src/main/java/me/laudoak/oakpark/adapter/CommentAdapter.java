@@ -44,9 +44,24 @@ public class CommentAdapter extends XBasePagingAdapter<Comment> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
-    }
 
+        ViewHolder holder;
+        if (null==convertView)
+        {
+            convertView = inflater.inflate(R.layout.view_item_comment,parent,false);
+            holder = new ViewHolder(convertView);
+        }else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        if (null != holder)
+        {
+            holder.bindData(datas.get(position));
+        }
+
+        return convertView;
+
+    }
 
     public static class ViewHolder
     {
@@ -68,6 +83,7 @@ public class CommentAdapter extends XBasePagingAdapter<Comment> {
             commentTime.setPushTime(cm.getCommentTime());
             nick.setText(cm.getPoet().getUsername());
             commentTime.setText(cm.getContent());
+            commentContent.setText(cm.getContent());
 
             if (null!=cm.getPoet().getAvatarURL())
             {

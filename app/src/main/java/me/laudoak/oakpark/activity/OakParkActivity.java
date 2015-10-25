@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
+import me.laudoak.oakpark.utils.CalUtil;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
@@ -34,6 +37,8 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private SlidingUpPanelLayout slidingUpPanelLayout;
 
     private ViewPager supPager;
     private ImageView indicator;
@@ -88,7 +93,13 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         XVHFragment fragment = new XVHFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment, fragment).commit();
 
+        buildSUP();
+
         buildSUPFragment();
+    }
+
+    private void buildSUP() {
+        slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
     }
 
     private void buildSUPFragment()
@@ -166,22 +177,38 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         whisper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                judgeSUP();
                 supPager.setCurrentItem(0);
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        judgeSUP();
                         supPager.setCurrentItem(1);
                     }
                 });
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                judgeSUP();
                 supPager.setCurrentItem(2);
             }
         });
 
+    }
+
+    private void judgeSUP()
+    {
+        if (null!=slidingUpPanelLayout)
+        {
+            if (    slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN ||
+                    slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED ||
+                    slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.ANCHORED)
+            {
+                slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+            }
+        }
     }
 
     @Override
@@ -212,6 +239,7 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         whisperNotier.onUpdateXV(xv);
         commentNotier.onUpdateXV(xv);
         shareNotier.onUpdateXV(xv);
+        dateCode.setText(CalUtil.dateCodeToDateString(xv.getDateCode()));
     }
 
     public interface NXVUCallback

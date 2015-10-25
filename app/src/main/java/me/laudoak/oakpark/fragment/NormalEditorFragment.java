@@ -1,10 +1,12 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +44,7 @@ public class NormalEditorFragment extends XBaseFragment implements
     private NormalEditorView.Holder holder;
     private String imagePath;
 
-    private LoadingDialog loadingDialog;
+    private ProgressDialog ld;
 
     /*XBaseFragment callback*/
     @Override
@@ -151,8 +153,12 @@ public class NormalEditorFragment extends XBaseFragment implements
             return;
         }
 
-        loadingDialog = new LoadingDialog(context);
-        loadingDialog.show();
+        ld = new ProgressDialog(context);
+        ld.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ld.setMessage("正在保存...");
+        ld.setTitle(null);
+        ld.setCanceledOnTouchOutside(false);
+        ld.show();
 
         VersePush.Builder builder = new VersePush.Builder(context);
         builder.title(holder.title.getText().toString().trim())
@@ -167,20 +173,22 @@ public class NormalEditorFragment extends XBaseFragment implements
     @Override
     public void onSuccess() {
 
-        if(null!=loadingDialog)
+        if(null!=ld)
         {
-            loadingDialog.dismiss();
+            ld.dismiss();
         }
 
         AppMsg.makeText(context,"保存成功",AppMsg.STYLE_INFO).show();
+
+        delayExit();
     }
 
     @Override
     public void onFailure(String reason) {
 
-        if(null!=loadingDialog)
+        if(null!=ld)
         {
-            loadingDialog.dismiss();
+            ld.dismiss();
         }
 
         AppMsg.makeText(context,reason,AppMsg.STYLE_ALERT).show();

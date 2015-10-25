@@ -91,7 +91,7 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorF() {
-        return 0xFF068B78;
+        return 0xFF3F3F3F;
     }
 
     /**
@@ -116,6 +116,6 @@ public class OakParkTheme extends DPTheme{
      */
     @Override
     public int colorHoliday() {
-        return 0xFFFDFDFD;
+        return 0xFFD3D3D3;
     }
 }

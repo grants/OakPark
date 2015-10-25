@@ -2,23 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="440dp">
 
     <Button
         android:id="@+id/sup_comment_comment"
         style="@style/EditorButton"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:hint="写下评论..."/>
+        android:hint="写下你的评论..."/>
 
 
         <me.laudoak.oakpark.widget.paging.PagingListView
             android:id="@+id/sup_comment_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:dividerHeight="0dp"
+            android:dividerHeight="0.5dp"
             android:scrollbars="none"
             android:listSelector="@android:color/transparent"
-            android:divider="@color/gray_4"/>
+            android:divider="@null"/>
 
 </LinearLayout>

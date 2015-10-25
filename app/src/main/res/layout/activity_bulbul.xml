@@ -60,4 +60,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bulbul_logout"
+        style="@style/CustomButton"
+        android:text="退出登录"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

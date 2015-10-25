@@ -1,7 +1,9 @@
 package me.laudoak.oakpark.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +34,20 @@ public abstract class XBaseFragment extends Fragment {
         buildViews(view);
 
         return view;
+    }
+
+    public void delayExit()
+    {
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                getActivity().setResult(Activity.RESULT_OK,null);
+                getActivity().finish();
+            }
+        };
+
+        handler.postDelayed(runnable, 1200);
     }
 
     public abstract void initData();

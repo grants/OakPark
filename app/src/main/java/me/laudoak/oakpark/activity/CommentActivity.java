@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
@@ -28,7 +29,7 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
 
     private XVerse xv;
 
-    private LoadingDialog dialog;
+    private ProgressDialog ld;
 
     @Override
     protected void setView()
@@ -66,8 +67,12 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
                     Poet poet = UserProxy.currentPoet(CommentActivity.this);
                     if (null != poet)
                     {
-                        dialog = new LoadingDialog(CommentActivity.this);
-                        dialog.show();
+                        ld = new ProgressDialog(CommentActivity.this);
+                        ld.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        ld.setMessage("正在评论...");
+                        ld.setTitle(null);
+                        ld.setCanceledOnTouchOutside(false);
+                        ld.show();
 
                         DoComment doComment = new DoComment.Builder(CommentActivity.this)
                                 .content(comment.getText().toString())
@@ -91,9 +96,9 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     @Override
     public void onSuccess() {
 
-        if (null!=dialog&&dialog.isShowing())
+        if (null!=ld&&ld.isShowing())
         {
-            dialog.dismiss();
+            ld.dismiss();
         }
 
         AppMsg.makeText(this,"评论成功",AppMsg.STYLE_INFO).show();
@@ -108,15 +113,15 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
             }
         };
 
-        handler.postDelayed(runnable,1600);
+        handler.postDelayed(runnable, 1200);
 
     }
 
     @Override
     public void onFailure(String why) {
-        if (null!=dialog&&dialog.isShowing())
+        if (null!=ld&&ld.isShowing())
         {
-            dialog.dismiss();
+            ld.dismiss();
         }
         AppMsg.makeText(this,why,AppMsg.STYLE_ALERT).show();
     }

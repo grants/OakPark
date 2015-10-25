@@ -53,27 +53,25 @@ public class SUPCommentFragment extends XBaseFragment implements
 
     @Override
     public void buildViews(View view) {
+
+        listView = (PagingListView) view.findViewById(R.id.sup_comment_lv);
+        listView.setAdapter(commentAdapter);
+        listView.setLoadCallback(this);
+
         writeComment = (Button) view.findViewById(R.id.sup_comment_comment);
         writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != curXV)
-                {
+                if (null != curXV) {
                     Intent intent = new Intent();
                     intent.setClass(context, CommentActivity.class);
                     intent.putExtra(EXTRA_XVERSE, curXV);
-                    startActivityForResult(intent,REQUEST_COMMENT);
-                }else
-                {
-                    AppMsg.makeText(context,"评论异常",AppMsg.STYLE_CONFIRM).show();
+                    startActivityForResult(intent, REQUEST_COMMENT);
+                } else {
+                    AppMsg.makeText(context, "评论异常", AppMsg.STYLE_CONFIRM).show();
                 }
             }
         });
-
-        listView = (PagingListView) view.findViewById(R.id.sup_comment_lv);
-
-        listView.setLoadCallback(this);
-        listView.setAdapter(commentAdapter);
     }
 
     @Override
@@ -84,11 +82,12 @@ public class SUPCommentFragment extends XBaseFragment implements
 
     private void upDateComment() {
         currPage = 0;
+        commentAdapter.removeAllDatas();
         if (null != curXV)
         {
             new QueryComment(context, curXV, currPage,SUPCommentFragment.this);
         }else {
-            AppMsg.makeText(context,"查询评论异常",AppMsg.STYLE_CONFIRM).show();
+            AppMsg.makeText(context,"获取评论异常",AppMsg.STYLE_CONFIRM).show();
         }
     }
 
@@ -96,12 +95,7 @@ public class SUPCommentFragment extends XBaseFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode!= Activity.RESULT_OK)
-        {
-            return ;
-        }
-
-        if (requestCode == REQUEST_COMMENT)
+        if (requestCode == REQUEST_COMMENT && resultCode == Activity.RESULT_OK)
         {
             upDateComment();
         }
@@ -110,7 +104,6 @@ public class SUPCommentFragment extends XBaseFragment implements
     /*query comment callback*/
     @Override
     public void onFailure(String why) {
-
         AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
     }
 

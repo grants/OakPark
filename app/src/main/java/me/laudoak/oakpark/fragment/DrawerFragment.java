@@ -77,6 +77,8 @@ public class DrawerFragment extends XBaseFragment {
     public void onResume() {
         super.onResume();
 
+        poet = UserProxy.currentPoet(context);
+
         if (null!=poet)
         {
             nick.setText(poet.getUsername());

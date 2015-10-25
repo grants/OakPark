@@ -2,8 +2,6 @@ package me.laudoak.oakpark.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,7 @@ import me.laudoak.oakpark.entity.XVerse;
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public class SUPWhisperFragment extends XVHFragment implements OakParkActivity.NXVUCallback{
+public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity.NXVUCallback{
     private static final String TAG = "SUPWhisperFragment";
 
     private TextView whisper;
@@ -54,21 +52,6 @@ public class SUPWhisperFragment extends XVHFragment implements OakParkActivity.N
         whisper = (TextView) view.findViewById(R.id.sup_whisper_whisper);
         avatar = (SimpleDraweeView) view.findViewById(R.id.sup_whisper_avatar);
         nick = (TextView) view.findViewById(R.id.sup_whisper_nick);
-
-        if (null!=mRecyclerView)
-        {
-            Log.d(TAG,"null!=mRecyclerView");
-            mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-                }
-            });
-        }else
-        {
-            Log.d(TAG,"null==mRecyclerView");
-        }
-
     }
 
     /*fourth*/
@@ -82,7 +65,8 @@ public class SUPWhisperFragment extends XVHFragment implements OakParkActivity.N
     public void onUpdateXV(XVerse xv) {
         whisper.setText(xv.getWhisper());
         nick.setText(xv.getPoet().getUsername());
-        if (null!=xv.getPoet().getAvatarURL())
+
+        if (null != xv.getPoet().getAvatarURL())
         {
             Uri uri = Uri.parse(xv.getPoet().getAvatarURL());
             avatar.setImageURI(uri);

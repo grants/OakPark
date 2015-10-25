@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,16 +11,12 @@ import android.widget.LinearLayout;
 import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
-import me.laudoak.oakpark.widget.message.AppMsg;
-
-import static me.laudoak.oakpark.net.UserProxy.*;
 
 /**
  * Created by LaudOak on 2015-9-27.
  */
-public class LoginView extends LinearLayout implements TextWatcher , View.OnClickListener{
+public class LoginView extends LinearLayout implements
+        TextWatcher {
 
     private EditText email,password;
     private Button login;
@@ -55,8 +50,6 @@ public class LoginView extends LinearLayout implements TextWatcher , View.OnClic
         password = (EditText) findViewById(R.id.login_password);
         login = (Button) findViewById(R.id.login_login);
 
-        login.setOnClickListener(this);
-
         email.addTextChangedListener(this);
         password.addTextChangedListener(this);
 
@@ -87,30 +80,20 @@ public class LoginView extends LinearLayout implements TextWatcher , View.OnClic
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-        final LoadingDialog dialog = new LoadingDialog(getContext());
-        dialog.show();
-
-        UserProxy proxy = new UserProxy.Builder(getContext())
-                .email(email.getText().toString().trim())
-                .password(password.getText().toString().trim())
-                .build();
-
-        proxy.doLogin(new CallBack() {
-            @Override
-            public void onSuccess() {
-                dialog.dismiss();
-                AppMsg.makeText(getContext(),"欢迎",AppMsg.STYLE_INFO).show();
-            }
-
-            @Override
-            public void onFailure(String reason) {
-                dialog.dismiss();
-                AppMsg.makeText(getContext(),reason,AppMsg.STYLE_ALERT).show();
-            }
-        });
-
+    public Button getLoginButton()
+    {
+        return this.login;
     }
+
+    public EditText getEmail()
+    {
+        return this.email;
+    }
+
+    public EditText getPassword()
+    {
+        return this.password;
+    }
+
+
 }

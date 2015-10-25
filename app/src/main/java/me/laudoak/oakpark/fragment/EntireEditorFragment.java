@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -50,7 +51,7 @@ public class EntireEditorFragment extends XBaseFragment implements
     private String imagePath;
     private int dateCode;
 
-    private LoadingDialog loadingDialog;
+    private ProgressDialog ld;
 
     /*XBaseFragment callback*/
     @Override
@@ -160,8 +161,12 @@ public class EntireEditorFragment extends XBaseFragment implements
             return;
         }
 
-        loadingDialog = new LoadingDialog(context);
-        loadingDialog.show();
+        ld = new ProgressDialog(context);
+        ld.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ld.setMessage("正在保存...");
+        ld.setTitle(null);
+        ld.setCanceledOnTouchOutside(false);
+        ld.show();
 
         XVersePush.Builder builder = new XVersePush.Builder(context);
         builder.title(holder.title.getText().toString().trim())
@@ -178,20 +183,22 @@ public class EntireEditorFragment extends XBaseFragment implements
     /*push callback*/
     @Override
     public void onSuccess() {
-        if(null!=loadingDialog)
+        if(null!=ld)
         {
-            loadingDialog.dismiss();
+            ld.dismiss();
         }
 
-        AppMsg.makeText(context, "保存成功", AppMsg.STYLE_INFO).show();
+        AppMsg.makeText(context, "已保存", AppMsg.STYLE_INFO).show();
+
+        delayExit();
     }
 
     /*push callback*/
     @Override
     public void onFailure(String reason) {
-        if(null!=loadingDialog)
+        if(null!=ld)
         {
-            loadingDialog.dismiss();
+            ld.dismiss();
         }
 
         AppMsg.makeText(context,reason,AppMsg.STYLE_ALERT).show();

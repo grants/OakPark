@@ -17,7 +17,7 @@ public class QueryXVerse {
 
     private static final String TAG = "QueryXVerse";
 
-    private static final String QK_POET = "poet";
+    private static final String QK_POET = "bulbul";
     private static final String QK_DATECODE = "DateCode";
 
     private Context context;

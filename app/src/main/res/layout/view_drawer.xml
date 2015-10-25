@@ -33,7 +33,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="LaudOak"
             android:id="@+id/drawer_nick"
             style="@style/DrawerNick"
             android:layout_width="match_parent"
