@@ -58,9 +58,19 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         setContentView(R.layout.activity_oakpark);
     }
 
+    @Override
+    public void buildView()
+    {
+        initDrawer();
+
+        buildSUP();
+    }
+
     /*build drawer layout & pager*/
     private void initDrawer()
     {
+        drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerOpened(View drawerView)
             {
@@ -83,28 +93,14 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+    private void buildSUP() {
 
-    @Override
-    public void buildView()
-    {
-        drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
-        initDrawer();
-
-        XVHFragment fragment = new XVHFragment();
+        XVHFragment fragment = XVHFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment, fragment).commit();
 
-        buildSUP();
-
-        buildSUPFragment();
-    }
-
-    private void buildSUP() {
         slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-    }
 
-    private void buildSUPFragment()
-    {
-        /*three indicator button*/
+         /*three indicator button*/
         whisper = (ImageView) findViewById(R.id.sup_head_whisper);
         comment = (ImageView) findViewById(R.id.sup_head_comment);
         share = (ImageView) findViewById(R.id.sup_head_share);
@@ -123,15 +119,15 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         /*init viewpager fragments & update xverse callback*/
         supFragments = new ArrayList<Fragment>();
 
-        SUPWhisperFragment whisperFragment = new SUPWhisperFragment();
-        whisperNotier = whisperFragment;
+        SUPWhisperFragment whisperFragment = SUPWhisperFragment.newInstance();
+        whisperNotier =  whisperFragment;
         supFragments.add(whisperFragment);
 
-        SUPCommentFragment commentFragment = new SUPCommentFragment();
+        SUPCommentFragment commentFragment = SUPCommentFragment.newInstance();
         commentNotier = commentFragment;
         supFragments.add(commentFragment);
 
-        SUPShareFragment shareFragment = new SUPShareFragment();
+        SUPShareFragment shareFragment = SUPShareFragment.newInstance();
         shareNotier = shareFragment;
         supFragments.add(shareFragment);
         /**/
@@ -182,12 +178,12 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
             }
         });
         comment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        judgeSUP();
-                        supPager.setCurrentItem(1);
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                judgeSUP();
+                supPager.setCurrentItem(1);
+            }
+        });
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

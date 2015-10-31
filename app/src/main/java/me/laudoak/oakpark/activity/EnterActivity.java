@@ -15,7 +15,6 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.fragment.LoginFragment;
 import me.laudoak.oakpark.fragment.RegisterFragment;
-import me.laudoak.oakpark.view.LoginView;
 
 /**
  * Created by LaudOak on 2015-9-27.

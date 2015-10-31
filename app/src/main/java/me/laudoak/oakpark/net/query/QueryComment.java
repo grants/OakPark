@@ -2,7 +2,6 @@ package me.laudoak.oakpark.net.query;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.List;
 
@@ -24,55 +23,45 @@ public class QueryComment {
     private static final String QK_POET = "poet";
     private static final String QK_XVERSE = "xVerse";
     private static final String QK_ORDER = "-createdAt";
-    private static final int QK_LIMIT = 6;
 
-    public QueryComment(final Context context, final XVerse xVerse,int page, final QueryCallback callback)
+    public QueryComment(final Context ctxt, final XVerse xVerse, final QueryCallback callback)
     {
-        this.context = context;
+        this.context = ctxt;
 
-        new AsyncTask<Integer , Void, Void>()
+        new AsyncTask<Void , Void, Void>()
         {
-            @Override
-            protected Void doInBackground(Integer... params) {
 
-                int page = params[0];
+            @Override
+            protected Void doInBackground(Void... params) {
 
                 BmobQuery<Comment> query = new BmobQuery<Comment>();
-                query.addWhereEqualTo(QK_XVERSE,new BmobPointer(xVerse));
+                query.addWhereEqualTo(QK_XVERSE, new BmobPointer(xVerse));
                 query.include(QK_POET);
                 query.order(QK_ORDER);
                 query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
-                query.setLimit(QK_LIMIT);
-                query.setSkip(QK_LIMIT * page);
 
                 query.findObjects(context, new FindListener<Comment>() {
                     @Override
                     public void onSuccess(List<Comment> list) {
-                        if (list.size()==QK_LIMIT)
-                        {
-                            callback.onSuccess(true,list);
-                        }else if (list.size()==0||list.size()<QK_LIMIT){
-                            callback.onSuccess(false,list);
-                        }
+                        callback.onSuccess(list);
                     }
 
                     @Override
                     public void onError(int i, String s) {
-                        Log.d(TAG, "onError");
                         callback.onFailure(s);
                     }
                 });
 
                 return null;
             }
-        }.execute(page);
+        }.execute();
 
     }
 
     public interface QueryCallback
     {
         void onFailure(String why);
-        void onSuccess(boolean hasMore,List<Comment> results);
+        void onSuccess(List<Comment> results);
     }
 
 }

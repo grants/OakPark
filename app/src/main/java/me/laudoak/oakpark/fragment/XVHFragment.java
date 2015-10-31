@@ -2,12 +2,13 @@ package me.laudoak.oakpark.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.query.QueryXVerse;
+import me.laudoak.oakpark.widget.loani.ProgressWheel;
 import me.laudoak.oakpark.widget.message.AppMsg;
 import me.laudoak.oakpark.widget.recy.RecyclerViewPager;
 
@@ -29,36 +31,48 @@ public class XVHFragment extends XBaseFragment{
     protected RecyclerViewPager mRecyclerView;
     private XVUpdateCallback xvucall;
 
+    private ProgressWheel loani;
+    private TextView loadFailed;
+
+    private int currPage = 0;
+
+    public static XVHFragment newInstance()
+    {
+        return ClassHolder.fragment;
+    }
+
+    private static final class ClassHolder
+    {
+        private static XVHFragment fragment = new XVHFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.xvucall = (XVUpdateCallback) context;
     }
 
-    /*first abstract method*/
+    @Nullable
     @Override
-    public void initData()
-    {
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    /*second abstract method*/
-    @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
         if (null == rootView)
         {
             rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
-        }else if (null!=(rootView.getParent())){
+        }else if (null != (rootView.getParent())){
             ((ViewGroup)rootView.getParent()).removeView(rootView);
         }
 
+        buildViews(rootView);
+
         return rootView;
+
     }
 
-    /*third abstract method*/
-    @Override
-    public void buildViews(View view)
+    private void buildViews(View view)
     {
-
+        loani = (ProgressWheel) view.findViewById(R.id.view_recy_loading);
+        loadFailed = (TextView) view.findViewById(R.id.view_recy_load_failed);
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
 
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -70,19 +84,28 @@ public class XVHFragment extends XBaseFragment{
             @Override
             public void onFailure(String why)
             {
-                Log.d(TAG,"onFailure"+why);
-                AppMsg.makeText(context,"Query failure",AppMsg.STYLE_CONFIRM).show();
+                AppMsg.makeText(context,"获取数据出错了",AppMsg.STYLE_CONFIRM).show();
+                if (loadFailed.getVisibility() != View.VISIBLE)
+                {
+                    loadFailed.setVisibility(View.VISIBLE);
+                    loani.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onSuccess(List<XVerse> results) {
+
                 mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
+                mRecyclerView.setVisibility(View.VISIBLE);
+                xvucall.onUpdateXV(results.get(currPage));
+                loani.setVisibility(View.GONE);
+
             }
         });
 
     }
 
-    /*fourth abstract method*/
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -91,15 +114,16 @@ public class XVHFragment extends XBaseFragment{
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
 
-                int curPos = mRecyclerView.getCurrentPosition();
+                int tmp = mRecyclerView.getCurrentPosition();
 
                 XVAdapter adapter = (XVAdapter) mRecyclerView.getAdapter();
-                if (null != adapter) {
+                if (null != adapter && tmp != currPage) {
 
-                    XVerse xv = adapter.getxVerseList().get(curPos);
-
+                    currPage = tmp;
+                    XVerse xv = adapter.getxVerseList().get(currPage);
                     xvucall.onUpdateXV(xv);
                 }
+
             }
 
             @Override

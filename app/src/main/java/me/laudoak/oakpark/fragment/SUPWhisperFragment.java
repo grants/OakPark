@@ -2,6 +2,8 @@ package me.laudoak.oakpark.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,59 +19,77 @@ import me.laudoak.oakpark.entity.XVerse;
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
 public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity.NXVUCallback{
+
     private static final String TAG = "SUPWhisperFragment";
 
     private TextView whisper;
     private SimpleDraweeView avatar;
     private TextView nick;
+    private XVerse curXV;
 
     public static SUPWhisperFragment newInstance()
     {
-        SUPWhisperFragment fragment = new SUPWhisperFragment();
-
-        return fragment;
+        return HolderClass.fragment;
     }
 
-    /*first*/
-
-    @Override
-    public void initData()
+    private static class HolderClass
     {
+        private final static SUPWhisperFragment fragment = new SUPWhisperFragment();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.view_sup_whisper,null);
+
+        buildViews(view);
+
+        return view;
 
     }
 
-    /*second*/
-    @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.view_sup_whisper,null);
-    }
 
-    /*third*/
-
-    @Override
-    public void buildViews(View view) {
+    private void buildViews(View view) {
 
         whisper = (TextView) view.findViewById(R.id.sup_whisper_whisper);
         avatar = (SimpleDraweeView) view.findViewById(R.id.sup_whisper_avatar);
         nick = (TextView) view.findViewById(R.id.sup_whisper_nick);
     }
 
-    /*fourth*/
-
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        //super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        setCurr();
+    }
+
+    private void setCurr()
+    {
+        if (null != curXV)
+        {
+            whisper.setText(curXV.getWhisper());
+            nick.setText(curXV.getPoet().getUsername());
+
+            if (null != curXV.getPoet().getAvatarURL())
+            {
+                Uri uri = Uri.parse(curXV.getPoet().getAvatarURL());
+                avatar.setImageURI(uri);
+            }
+        }
     }
 
     @Override
     public void onUpdateXV(XVerse xv) {
-        whisper.setText(xv.getWhisper());
-        nick.setText(xv.getPoet().getUsername());
 
-        if (null != xv.getPoet().getAvatarURL())
+        if (xv != curXV)
         {
-            Uri uri = Uri.parse(xv.getPoet().getAvatarURL());
-            avatar.setImageURI(uri);
+            curXV = xv;
+
+            Log.d(TAG,"curXV getWhisper()" + curXV.getWhisper());
+
+            setCurr();
         }
     }
+
+
 }

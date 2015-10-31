@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="440dp">
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/sup_comment_comment"
         style="@style/EditorButton"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:hint="写下你的评论..."/>
+        android:text="写下你的评论..."/>
+
+    <ListView
+        android:id="@+id/sup_comment_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sup_comment_comment"
+        android:dividerHeight="0.5dp"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:divider="@null"/>
+
+    <me.laudoak.oakpark.widget.loani.ProgressWheel
+        android:id="@+id/sup_comment_loani"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/sup_comment_comment"
+        wheel:matProg_barColor="@color/gray_7" />
+
+    <TextView
+        android:id="@+id/sup_comment_load_failed"
+        android:text="获取评论失败"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/sup_comment_comment"
+        android:visibility="gone"/>
 
 
-        <me.laudoak.oakpark.widget.paging.PagingListView
-            android:id="@+id/sup_comment_lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:dividerHeight="0.5dp"
-            android:scrollbars="none"
-            android:listSelector="@android:color/transparent"
-            android:divider="@null"/>
-
-</LinearLayout>
+</RelativeLayout>

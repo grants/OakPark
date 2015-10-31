@@ -2,10 +2,15 @@ package me.laudoak.oakpark.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
 
 import java.util.List;
 
@@ -16,57 +21,80 @@ import me.laudoak.oakpark.adapter.CommentAdapter;
 import me.laudoak.oakpark.entity.Comment;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.query.QueryComment;
+import me.laudoak.oakpark.widget.loani.ProgressWheel;
 import me.laudoak.oakpark.widget.message.AppMsg;
-import me.laudoak.oakpark.widget.paging.PagingListView;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
 public class SUPCommentFragment extends XBaseFragment implements
-        OakParkActivity.NXVUCallback ,
-        QueryComment.QueryCallback ,
-        PagingListView.LoadCallback {
+        OakParkActivity.NXVUCallback{
 
     private static final String TAG = "SUPCommentFragment";
 
     public static final String EXTRA_XVERSE = "EXTRA_XVERSE";
     private static final int REQUEST_COMMENT = 121;
 
-    private Button writeComment;
+    private View rootView;
+    private ListView listView;
+    private ProgressWheel loani;
+    private TextView loadFailed;
 
-    private PagingListView listView;
-    private CommentAdapter commentAdapter;
-
-    private int currPage;
     private XVerse curXV;
 
+    public static SUPCommentFragment newInstance()
+    {
+        return ClassHolder.fragment;
+    }
+
+    private static class ClassHolder
+    {
+        private final static SUPCommentFragment fragment = new SUPCommentFragment();
+    }
+
+
+    @Nullable
     @Override
-    public void initData() {
-        currPage = 0;
-        commentAdapter = new CommentAdapter(context);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.view_sup_comment,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        buildViews(rootView);
+
+        return rootView;
     }
 
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.view_sup_comment,null);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getComments();
+
     }
 
-    @Override
-    public void buildViews(View view) {
+    private void buildViews(View view) {
 
-        listView = (PagingListView) view.findViewById(R.id.sup_comment_lv);
-        listView.setAdapter(commentAdapter);
-        listView.setLoadCallback(this);
+        loani = (ProgressWheel) view.findViewById(R.id.sup_comment_loani);
+        loadFailed = (TextView) view.findViewById(R.id.sup_comment_load_failed);
 
-        writeComment = (Button) view.findViewById(R.id.sup_comment_comment);
+        listView = (ListView) view.findViewById(R.id.sup_comment_lv);
+
+        Button writeComment = (Button) view.findViewById(R.id.sup_comment_comment);
         writeComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != curXV) {
+
                     Intent intent = new Intent();
                     intent.setClass(context, CommentActivity.class);
                     intent.putExtra(EXTRA_XVERSE, curXV);
                     startActivityForResult(intent, REQUEST_COMMENT);
+
                 } else {
                     AppMsg.makeText(context, "评论异常", AppMsg.STYLE_CONFIRM).show();
                 }
@@ -74,20 +102,33 @@ public class SUPCommentFragment extends XBaseFragment implements
         });
     }
 
-    @Override
-    public void onUpdateXV(XVerse xv) {
-        curXV = xv;
-        upDateComment();
+    private void getComments()
+    {
+        new QueryComment(context, curXV, new QueryComment.QueryCallback() {
+            @Override
+            public void onFailure(String why) {
+
+                loani.setVisibility(View.GONE);
+                if (loadFailed.getVisibility() != View.VISIBLE)
+                {
+                    loadFailed.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onSuccess(List<Comment> results) {
+                listView.setAdapter(new CommentAdapter(results,context));
+                loani.setVisibility(View.GONE);
+            }
+        });
     }
 
-    private void upDateComment() {
-        currPage = 0;
-        commentAdapter.removeAllDatas();
-        if (null != curXV)
+    @Override
+    public void onUpdateXV(XVerse xv) {
+        if (xv != curXV)
         {
-            new QueryComment(context, curXV, currPage,SUPCommentFragment.this);
-        }else {
-            AppMsg.makeText(context,"获取评论异常",AppMsg.STYLE_CONFIRM).show();
+            curXV = xv;
+            getComments();
         }
     }
 
@@ -97,29 +138,7 @@ public class SUPCommentFragment extends XBaseFragment implements
 
         if (requestCode == REQUEST_COMMENT && resultCode == Activity.RESULT_OK)
         {
-            upDateComment();
         }
     }
 
-    /*query comment callback*/
-    @Override
-    public void onFailure(String why) {
-        AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
-    }
-
-    @Override
-    public void onSuccess(boolean hasMore, List<Comment> results) {
-        listView.onLoadCompleted(hasMore, results);
-    }
-
-    /*query comment callback*/
-
-    /*loading callback*/
-    @Override
-    public void onLoadMore() {
-        if (null != curXV)
-        {
-            new QueryComment(context,curXV,currPage++,this);
-        }
-    }
 }

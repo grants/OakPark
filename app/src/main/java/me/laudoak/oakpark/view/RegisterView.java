@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +14,6 @@ import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
@@ -91,7 +91,8 @@ public class RegisterView extends LinearLayout implements TextWatcher ,View.OnCl
     @Override
     public void onClick(View v) {
 
-        final LoadingDialog dialog = new LoadingDialog(getContext());
+        final ProgressDialog dialog = new ProgressDialog(getContext());
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.show();
 
         UserProxy proxy = new UserProxy.Builder(getContext())

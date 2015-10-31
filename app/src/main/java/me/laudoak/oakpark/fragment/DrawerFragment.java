@@ -2,6 +2,8 @@ package me.laudoak.oakpark.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,23 +26,37 @@ public class DrawerFragment extends XBaseFragment {
 
     private static final String TAG = "DrawerFragment";
 
+    private View rootView;
+
     private Poet poet;
     private LinearLayout setting;
     private SimpleDraweeView avatar;
     private TextView nick,num;
 
+
     @Override
-    public void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         poet = UserProxy.currentPoet(context);
     }
 
+    @Nullable
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.view_drawer,null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.view_drawer,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        buildViews(rootView);
+
+        return rootView;
     }
 
-    @Override
-    public void buildViews(View view) {
+
+    private void buildViews(View view) {
         avatar = (SimpleDraweeView) view.findViewById(R.id.drawer_avatar);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override

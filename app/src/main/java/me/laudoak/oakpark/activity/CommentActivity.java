@@ -13,7 +13,6 @@ import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.net.DoComment;
 import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**

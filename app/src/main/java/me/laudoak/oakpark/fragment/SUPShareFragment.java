@@ -1,9 +1,10 @@
 package me.laudoak.oakpark.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.OakParkActivity;
@@ -16,52 +17,42 @@ public class SUPShareFragment extends XBaseFragment implements OakParkActivity.N
 
     private static final String TAG = "SUPShareFragment";
 
+    private View rootView;
 
-    private ImageView wechat,weibo,qq;
+    private XVerse currXV;
 
+    public static SUPShareFragment newInstance()
+    {
+        return HolderClass.fragment;
+    }
+
+    private static class HolderClass
+    {
+        private final static SUPShareFragment fragment = new SUPShareFragment();
+    }
+
+
+    @Nullable
     @Override
-    public void initData() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.view_sup_share,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        return rootView;
     }
 
-    @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.view_sup_share,null);
-    }
-
-    @Override
-    public void buildViews(View view) {
-        wechat = (ImageView) view.findViewById(R.id.sup_share_wechat);
-        weibo = (ImageView) view.findViewById(R.id.sup_share_weibo);
-        qq = (ImageView) view.findViewById(R.id.sup_share_qq);
-        buildListener();
-    }
-
-    private void buildListener() {
-        wechat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        weibo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        qq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
 
     @Override
     public void onUpdateXV(XVerse xv) {
-
+        if (currXV != xv)
+        {
+            currXV = xv;
+        }
     }
+
 }

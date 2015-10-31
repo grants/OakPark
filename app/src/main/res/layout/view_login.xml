@@ -31,4 +31,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:id="@+id/login_social_notice"
+            android:text="或使用以下账号登录:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/login_weixin"
+                android:src="@mipmap/ic_share_wechat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_ac_btn" />
+
+            <ImageView
+                android:id="@+id/login_weibo"
+                android:src="@mipmap/ic_share_weibo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_ac_btn" />
+
+            <ImageView
+                android:id="@+id/login_qq"
+                android:src="@mipmap/ic_share_qq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_ac_btn"
+                android:layout_toRightOf="@+id/login_weibo"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

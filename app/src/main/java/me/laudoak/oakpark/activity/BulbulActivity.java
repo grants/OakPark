@@ -1,11 +1,13 @@
 package me.laudoak.oakpark.activity;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -17,7 +19,6 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -132,7 +133,8 @@ public class BulbulActivity extends XBaseActivity {
             public void onClick(View v) {
                 if (nick.getText().toString().trim().length() >= 2) {
 
-                    final LoadingDialog dialog = new LoadingDialog(BulbulActivity.this);
+                    final ProgressDialog  dialog = new ProgressDialog(BulbulActivity.this);
+                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     dialog.show();
 
                     UserProxy.doUpdate(BulbulActivity.this,

@@ -1,5 +1,7 @@
 package me.laudoak.oakpark.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,8 @@ public class PoetFragment extends XBaseFragment implements
     private PagingListView pagingListView;
     private PoetAdapter adapter;
 
+    private View rootView;
+
     private int currPage;
 
     public static PoetFragment newIastance()
@@ -32,25 +36,35 @@ public class PoetFragment extends XBaseFragment implements
         return fragment;
     }
 
-    /*XBaseFragment abstract method*/
     @Override
-    public void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         currPage = 0;
         adapter = new PoetAdapter(context);
     }
 
+    @Nullable
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_poet,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.fragment_poet,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        buildViews(rootView);
+
+        return rootView;
     }
 
-    @Override
-    public void buildViews(View view) {
+
+    private void buildViews(View view) {
         pagingListView = (PagingListView) view.findViewById(R.id.lv_poet);
         pagingListView.setLoadCallback(this);
         pagingListView.setAdapter(adapter);
     }
-    /**/
 
     @Override
     public void onLoadMore() {

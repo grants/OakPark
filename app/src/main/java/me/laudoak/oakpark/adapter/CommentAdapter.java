@@ -2,48 +2,31 @@ package me.laudoak.oakpark.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.util.List;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Comment;
 import me.laudoak.oakpark.widget.clocktext.ClockText;
-import me.laudoak.oakpark.widget.paging.XBasePagingAdapter;
 
 /**
  * Created by LaudOak on 2015-10-23 at 10:52.
  */
-public class CommentAdapter extends XBasePagingAdapter<Comment> {
+public class CommentAdapter extends XBaseAdapter<Comment> {
 
 
-    private LayoutInflater inflater;
-
-    public CommentAdapter(Context context) {
-        super(context);
-        this.inflater = LayoutInflater.from(context);
+    public CommentAdapter(List dataList, Context context) {
+        super(dataList, context);
     }
 
-    @Override
-    public int getCount() {
-        return datas.size();
-    }
 
     @Override
-    public Object getItem(int position) {
-        return datas.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    View callView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
         if (null==convertView)

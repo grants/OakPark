@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +20,6 @@ import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.net.push.VersePush;
 import me.laudoak.oakpark.view.NormalEditorView;
 import me.laudoak.oakpark.widget.dialog.MessageDialog;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 import me.laudoak.oakpark.widget.panel.XBasePanelView;
 import me.nereo.multi_image_selector.CropperActivity;
@@ -46,9 +47,10 @@ public class NormalEditorFragment extends XBaseFragment implements
 
     private ProgressDialog ld;
 
-    /*XBaseFragment callback*/
+
     @Override
-    public void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         this.context = getActivity();
         fragmentManager = getFragmentManager();
         normalEditorView = new NormalEditorView(context);
@@ -56,19 +58,15 @@ public class NormalEditorFragment extends XBaseFragment implements
         imagePath = null;
     }
 
-    /*XBaseFragment callback*/
+    @Nullable
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        buildActivePanelView();
+
         return normalEditorView;
-        //#2015-10-1 bug here
-        //return inflater.inflate(R.layout.fragment_editor_normal,null);
     }
 
-    /*XBaseFragment callback*/
-    @Override
-    public void buildViews(View view) {
-        buildActivePanelView();
-    }
 
     private void buildActivePanelView()
     {

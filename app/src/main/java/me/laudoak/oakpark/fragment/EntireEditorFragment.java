@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +21,6 @@ import me.laudoak.oakpark.net.push.XVersePush;
 import me.laudoak.oakpark.view.CalPicker;
 import me.laudoak.oakpark.view.EntireEditorView;
 import me.laudoak.oakpark.widget.dialog.MessageDialog;
-import me.laudoak.oakpark.widget.loading.LoadingDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
 import me.laudoak.oakpark.widget.panel.XBasePanelView;
 import me.nereo.multi_image_selector.CropperActivity;
@@ -48,14 +49,17 @@ public class EntireEditorFragment extends XBaseFragment implements
     private EntireEditorView entireEditorView;
     private EntireEditorView.Holder holder;
 
+    private View rootView;
+
     private String imagePath;
     private int dateCode;
 
     private ProgressDialog ld;
 
-    /*XBaseFragment callback*/
     @Override
-    public void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         this.context = getActivity();
         fragmentManager = getFragmentManager();
         entireEditorView = new EntireEditorView(context);
@@ -64,15 +68,24 @@ public class EntireEditorFragment extends XBaseFragment implements
         dateCode = holder.dateCodeText.getDateCode();
     }
 
-    /*XBaseFragment callback*/
+
+    @Nullable
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-        return entireEditorView;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.view_editor,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        buildViews(rootView);
+
+        return rootView;
     }
 
-    /*XBaseFragment callback*/
-    @Override
-    public void buildViews(View view) {
+
+    private void buildViews(View view) {
         buildPanelView();
         buildEditorView();
     }

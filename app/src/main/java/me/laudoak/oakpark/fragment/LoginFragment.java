@@ -1,7 +1,9 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,20 +29,18 @@ public class LoginFragment extends XBaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         loginView = new LoginView(context);
     }
 
+    @Nullable
     @Override
-    public View callView(LayoutInflater inflater, ViewGroup container) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        loginView.getLoginButton().setOnClickListener(this);
         return loginView;
     }
 
-    @Override
-    public void buildViews(View view) {
-        loginView.getLoginButton().setOnClickListener(this);
-    }
 
     @Override
     public void onClick(View v) {
