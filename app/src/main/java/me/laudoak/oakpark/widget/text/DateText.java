@@ -20,9 +20,9 @@ public class DateText extends TextView {
     private static final String dateHead = "将在";
     private static final String dateTail = "日展示";
 
-    public DateText(Context context) {
-        super(context);
-        this.context = context;
+    public DateText(Context c) {
+        super(c);
+        this.context = c;
         init();
     }
 

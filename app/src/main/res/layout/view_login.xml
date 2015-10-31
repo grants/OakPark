@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -19,7 +19,8 @@
         android:hint="密码"
         android:inputType="textPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_email"/>
 
     <Button
         android:id="@+id/login_login"
@@ -29,30 +30,42 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_password"/>
 
     <LinearLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:padding="20dp"
         android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_margin="15dp">
+
 
         <TextView
             android:id="@+id/login_social_notice"
-            android:text="或使用以下账号登录:"
+            android:text="使用以下账号登录:"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
+
+            <ImageView
+                android:id="@+id/login_qq"
+                android:src="@mipmap/ic_share_qq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_ac_btn"
+                android:layout_toRightOf="@+id/login_weibo"/>
+
 
             <ImageView
                 android:id="@+id/login_weixin"
@@ -70,17 +83,9 @@
                 android:padding="8dp"
                 android:background="@drawable/bg_ac_btn" />
 
-            <ImageView
-                android:id="@+id/login_qq"
-                android:src="@mipmap/ic_share_qq"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="12dp"
-                android:background="@drawable/bg_ac_btn"
-                android:layout_toRightOf="@+id/login_weibo"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

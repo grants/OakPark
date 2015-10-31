@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -132,15 +131,15 @@ public class NormalEditorFragment extends XBaseFragment implements
 
         if (holder.title.getText().toString().trim().equals(""))
         {
-            noticeBuilder.append("完善题目").append(System.getProperty("line.separator"));
+            noticeBuilder.append("题目不能为空").append(System.getProperty("line.separator"));
         }
         if (holder.author.getText().toString().trim().equals(""))
         {
-            noticeBuilder.append("完善作者/译者").append(System.getProperty("line.separator"));
+            noticeBuilder.append("作者/译者不能为空").append(System.getProperty("line.separator"));
         }
         if (holder.verse.getText().toString().trim().length()<10)
         {
-            noticeBuilder.append("完善主体").append(System.getProperty("line.separator"));
+            noticeBuilder.append("主体过短").append(System.getProperty("line.separator"));
         }
 
         String notice = noticeBuilder.toString();

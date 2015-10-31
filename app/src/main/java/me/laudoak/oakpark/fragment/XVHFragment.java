@@ -27,9 +27,9 @@ public class XVHFragment extends XBaseFragment{
 
     private static final String TAG = "XVHFragment";
 
-    private View rootView;
+    private View mRootView;
     protected RecyclerViewPager mRecyclerView;
-    private XVUpdateCallback xvucall;
+    private XVUpdateCallback mXvucall;
 
     private ProgressWheel loani;
     private TextView loadFailed;
@@ -49,31 +49,34 @@ public class XVHFragment extends XBaseFragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.xvucall = (XVUpdateCallback) context;
+        this.mXvucall = (XVUpdateCallback) context;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if (null == rootView)
+        if (null == mRootView)
         {
-            rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
-        }else if (null != (rootView.getParent())){
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
+            mRootView = inflater.inflate(R.layout.view_xv_recy,container,false);
+        }else if (null != (mRootView.getParent())){
+            ((ViewGroup)mRootView.getParent()).removeView(mRootView);
         }
 
-        buildViews(rootView);
+        buildViews(mRootView);
 
-        return rootView;
+        return mRootView;
 
     }
 
     private void buildViews(View view)
     {
+
+        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
+        mRecyclerView.setVisibility(View.GONE);
+
         loani = (ProgressWheel) view.findViewById(R.id.view_recy_loading);
         loadFailed = (TextView) view.findViewById(R.id.view_recy_load_failed);
-        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
 
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
@@ -85,10 +88,10 @@ public class XVHFragment extends XBaseFragment{
             public void onFailure(String why)
             {
                 AppMsg.makeText(context,"获取数据出错了",AppMsg.STYLE_CONFIRM).show();
+                loani.setVisibility(View.GONE);
                 if (loadFailed.getVisibility() != View.VISIBLE)
                 {
                     loadFailed.setVisibility(View.VISIBLE);
-                    loani.setVisibility(View.GONE);
                 }
             }
 
@@ -96,15 +99,15 @@ public class XVHFragment extends XBaseFragment{
             public void onSuccess(List<XVerse> results) {
 
                 mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
+                mXvucall.onUpdateXV(results.get(currPage));
+
                 mRecyclerView.setVisibility(View.VISIBLE);
-                xvucall.onUpdateXV(results.get(currPage));
                 loani.setVisibility(View.GONE);
 
             }
         });
 
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -121,7 +124,7 @@ public class XVHFragment extends XBaseFragment{
 
                     currPage = tmp;
                     XVerse xv = adapter.getxVerseList().get(currPage);
-                    xvucall.onUpdateXV(xv);
+                    mXvucall.onUpdateXV(xv);
                 }
 
             }

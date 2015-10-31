@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="4dp"
     android:gravity="center">
 
-    <!--<me.laudoak.oakpark.widget.loading.RotateLoading-->
-        <!--android:id="@+id/load_more_rotate"-->
-        <!--android:layout_height="28dp"-->
-        <!--android:layout_width="28dp"-->
-        <!--app:color="@color/gray_1"-->
-        <!--app:loadingWidth="1dp"/>-->
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="25dp"
-        android:layout_height="25dp" />
+    <me.laudoak.oakpark.widget.loani.ProgressWheel
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        wheel:matProg_barColor="@color/gray_7"
+        wheel:matProg_progressIndeterminate="true"/>
 
 </LinearLayout>

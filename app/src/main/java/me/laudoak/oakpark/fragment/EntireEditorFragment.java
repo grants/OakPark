@@ -36,6 +36,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         CalPicker.Callback{
 
     private static final String TAG = "EntireEditorFragment";
+
     private static final String TAG_DIALOG_NOTICE = "TAG_DIALOG_NOTICE";
 
     public static final String EXTRA_WHISPER = "EXTRA_WHISPER";
@@ -72,20 +73,13 @@ public class EntireEditorFragment extends XBaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (null == rootView)
-        {
-            rootView = inflater.inflate(R.layout.view_editor,container,false);
-        }else if (null != (rootView.getParent())){
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
-        }
 
-        buildViews(rootView);
-
-        return rootView;
+        buildViews();
+        return entireEditorView;
     }
 
 
-    private void buildViews(View view) {
+    private void buildViews() {
         buildPanelView();
         buildEditorView();
     }
@@ -131,8 +125,8 @@ public class EntireEditorFragment extends XBaseFragment implements
                 intent.setClass(getActivity(), MultiImageSelectorActivity.class);
                 intent.putExtra(CropperActivity.EXTRA_CROP_MODE, CropperActivity.CROP_MODE_NORMAL);
                 startActivityForResult(intent,REQUEST_PICKER);
-
                 break;
+
             }
 
             case R.id.edit_panel_calendar:
@@ -151,19 +145,19 @@ public class EntireEditorFragment extends XBaseFragment implements
 
         if (holder.title.getText().toString().trim().equals(""))
         {
-            noticeBuilder.append("完善题目").append(System.getProperty("line.separator"));
+            noticeBuilder.append("题目不能为空").append(System.getProperty("line.separator"));
         }
         if (holder.author.getText().toString().trim().equals(""))
         {
-            noticeBuilder.append("完善作者/译者").append(System.getProperty("line.separator"));
+            noticeBuilder.append("作者/译者不能为空").append(System.getProperty("line.separator"));
         }
-        if (holder.verse.getText().toString().trim().length()<10)
+        if (holder.verse.getText().toString().trim().length()<6)
         {
-            noticeBuilder.append("完善主体").append(System.getProperty("line.separator"));
+            noticeBuilder.append("主体部分过短").append(System.getProperty("line.separator"));
         }
-        if (holder.whisper.getText().toString().trim().length()<10)
+        if (holder.whisper.getText().toString().trim().length()<6)
         {
-            noticeBuilder.append("完善诗语").append(System.getProperty("line.separator"));
+            noticeBuilder.append("耳语过短").append(System.getProperty("line.separator"));
         }
 
         String notice = noticeBuilder.toString();

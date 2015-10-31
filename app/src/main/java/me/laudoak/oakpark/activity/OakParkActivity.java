@@ -75,7 +75,6 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
             public void onDrawerOpened(View drawerView)
             {
                 super.onDrawerOpened(drawerView);
-
                 invalidateOptionsMenu();
             }
 

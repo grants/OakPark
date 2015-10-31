@@ -25,13 +25,16 @@ public class PoetActivity extends XBaseActivity {
 
     @Override
     public void buildView() {
-        getSupportActionBar().hide();
+
         buildBar();
         PoetFragment fragment = PoetFragment.newIastance();
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_poet_container,fragment).commit();
     }
 
     private void buildBar() {
+
+        getSupportActionBar().hide();
+
         close = (ImageView) findViewById(R.id.ca_poet_back);
         close.setOnClickListener(new View.OnClickListener() {
             @Override

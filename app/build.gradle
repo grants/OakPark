@@ -28,7 +28,7 @@ dependencies {
     compile project(':picker')
     compile 'com.facebook.fresco:fresco:0.7.0+'
     compile 'com.sothree.slidinguppanel:library:3.2.0'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile files('libs/gson-2.3.1.jar')
+    compile files('libs/open_sdk_r5509.jar')
 }
