@@ -8,22 +8,30 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.sina.weibo.sdk.auth.AuthInfo;
+
 import java.util.regex.Pattern;
 
+import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.sosh.tplogin.QQLogin;
+import me.laudoak.oakpark.sosh.tplogin.WBLogin;
+import me.laudoak.oakpark.sosh.tplogin.XBaseLogin;
+import me.laudoak.oakpark.sosh.tplogin.weibo.sdk.widget.LoginButton;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-9-27.
  */
 public class LoginFragment extends XBaseFragment implements
-        View.OnClickListener,
+        OnClickListener,
         TextWatcher {
 
     private static final String TAG = "LoginFragment";
@@ -31,7 +39,8 @@ public class LoginFragment extends XBaseFragment implements
 
     private EditText email,password;
     private Button login;
-    private ImageView login_qq,login_weibo,login_weixin;
+    private ImageView login_qq,login_weixin;
+    private LoginButton login_weibo;
 
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
@@ -53,7 +62,7 @@ public class LoginFragment extends XBaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View loginView = inflater.inflate(R.layout.view_login,container,false);
+        View loginView = inflater.inflate(R.layout.view_login, container, false);
         buildViews(loginView);
 
         return loginView;
@@ -71,8 +80,18 @@ public class LoginFragment extends XBaseFragment implements
 
         login.setEnabled(false);
 
+        /**/
         login_qq = (ImageView) v.findViewById(R.id.login_qq);
-        login_weibo = (ImageView) v.findViewById(R.id.login_weibo);
+        login_qq.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginWithQQ();
+            }
+        });
+
+        login_weibo = (LoginButton) v.findViewById(R.id.login_weibo);
+        loginWithWeibo();
+
         login_weixin = (ImageView) v.findViewById(R.id.login_weixin);
     }
 
@@ -115,6 +134,47 @@ public class LoginFragment extends XBaseFragment implements
                 AppMsg.makeText(getContext(),reason,AppMsg.STYLE_ALERT).show();
             }
         });
+    }
+
+    private void loginWithQQ()
+    {
+        new QQLogin(getActivity(), context, new XBaseLogin.TPLoginCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(String why) {
+
+            }
+
+            @Override
+            public void onCancel(String who) {
+
+            }
+        });
+    }
+
+    private void loginWithWeibo()
+    {
+        AuthInfo authInfo = new AuthInfo(context, OP.WEIBO_APP_KEY, OP.WEIBO_REDIRECT_URL, OP.WEIBO_SCOPE);
+        login_weibo.setWeiboAuthInfo(authInfo,new WBLogin(context, new XBaseLogin.TPLoginCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(String why) {
+
+            }
+
+            @Override
+            public void onCancel(String who) {
+
+            }
+        }));
     }
 
     /*TextWatcher*/

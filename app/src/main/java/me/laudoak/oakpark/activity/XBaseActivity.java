@@ -25,7 +25,7 @@ public abstract class XBaseActivity extends AppCompatActivity {
         setView();
         buildView();
 
-        Bmob.initialize(XBaseActivity.this, OP.APP_ID);
+        Bmob.initialize(XBaseActivity.this, OP.BMOB_APP_ID);
     }
 
     protected abstract void setView();

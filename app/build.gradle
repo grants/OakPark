@@ -31,4 +31,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/weibosdkcore.jar')
 }

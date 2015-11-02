@@ -94,7 +94,7 @@ public class UserProxy {
 
                 @Override
                 public void onSuccess(String s, String s1, BmobFile bmobFile) {
-                    String url = BmobProFile.getInstance(context).signURL(s,s1, OP.ACCESS_KEY,0,null);
+                    String url = BmobProFile.getInstance(context).signURL(s,s1, OP.BMOB_ACCESS_KEY,0,null);
                     curPoet.setAvatarURL(url);
                     curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
                         @Override

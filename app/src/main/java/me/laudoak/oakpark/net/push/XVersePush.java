@@ -67,7 +67,7 @@ public class XVersePush extends XBasePush {
 
                             Log.d(TAG,"upload success:"+"name:"+name+";url:"+url);
 
-                            String signedURL = BmobProFile.getInstance(context).signURL(name,url, OP.ACCESS_KEY,0,null);
+                            String signedURL = BmobProFile.getInstance(context).signURL(name,url, OP.BMOB_ACCESS_KEY,0,null);
 
                             Log.d(TAG, "signedURL:" + signedURL);
 
