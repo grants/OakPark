@@ -60,6 +60,62 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:layout_margin="15dp">
+
+
+        <TextView
+            android:id="@+id/bulbul_social_notice"
+            android:text="绑定账号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/bulbul_qq"
+                android:src="@mipmap/ic_share_qq"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="15dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/bg_btn_tpl" />
+
+
+            <ImageView
+                android:id="@+id/bulbul_weixin"
+                android:src="@mipmap/ic_share_wechat"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="11dp"
+                android:visibility="gone"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/bg_btn_tpl" />
+
+            <me.laudoak.oakpark.sosh.tplogin.weibo.LoginButton
+                android:id="@+id/bulbul_weibo"
+                android:src="@mipmap/ic_share_weibo"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_btn_tpl" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/bulbul_logout"
         style="@style/CustomButton"

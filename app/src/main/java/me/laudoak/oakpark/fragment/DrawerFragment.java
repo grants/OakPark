@@ -103,6 +103,9 @@ public class DrawerFragment extends XBaseFragment {
                 Uri uri = Uri.parse(poet.getAvatarURL());
                 avatar.setImageURI(uri);
             }
+        }else{
+            nick.setText("");
+            avatar.setImageURI(null);
         }
 
 

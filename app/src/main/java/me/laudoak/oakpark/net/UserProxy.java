@@ -40,19 +40,16 @@ public class UserProxy {
         BmobUser.loginByAccount(this.context, this.email, this.password, new LogInListener<Poet>() {
             @Override
             public void done(Poet poet, BmobException e) {
-                if(null!=poet&&null==e)
-                {
-                    if(poet.getEmailVerified())
-                    {
+                if (null != poet && null == e) {
+                    if (poet.getEmailVerified()) {
                         callBack.onSuccess(poet.getUsername());
-                    }else {
+                    } else {
                         callBack.onFailure("邮箱没有验证");
                     }
-                }else {
-                    if (null!=e)
-                    {
+                } else {
+                    if (null != e) {
                         callBack.onFailure(e.toString());
-                    }else {
+                    } else {
                         callBack.onFailure("登陆失败");
                     }
                 }
@@ -134,7 +131,6 @@ public class UserProxy {
                 }
             });
 
-
         }
 
     }
@@ -179,18 +175,37 @@ public class UserProxy {
     public static Poet currentPoet(Context context)
     {
         Poet poet = BmobUser.getCurrentUser(context,Poet.class);
-        if (null!=poet&&poet.getEmailVerified())
+        if (null != poet)
         {
-            return poet;
+            if (null == poet.getEmail())
+            {
+                return poet;
+            }else
+            {
+                if (poet.getEmailVerified())
+                {
+                    return poet;
+                }
+            }
         }
         return null;
     }
 
     public static boolean ifLogin(Context contex)
     {
-        if(null!=BmobUser.getCurrentUser(contex,Poet.class)&&BmobUser.getCurrentUser(contex,Poet.class).getEmailVerified())
+        Poet poet = BmobUser.getCurrentUser(contex, Poet.class);
+        if(null!=BmobUser.getCurrentUser(contex,Poet.class))
         {
-            return true;
+
+            if (null == poet.getEmail())
+            {
+                return true;
+            }else {
+                if (poet.getEmailVerified())
+                {
+                    return true;
+                }
+            }
         }
         return false;
     }

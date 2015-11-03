@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.laudoak.oakpark.sosh.tplogin.weibo.sdk.widget;
+package me.laudoak.oakpark.sosh.tplogin.weibo;
 
 import android.app.Activity;
 import android.content.Context;

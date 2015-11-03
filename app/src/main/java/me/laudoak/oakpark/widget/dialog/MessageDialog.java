@@ -28,12 +28,12 @@ public class MessageDialog extends XBaseDialog {
     }
 
     @Override
-    void initData() {
+    protected void initData() {
         this.message = getArguments().getString(BUNDLE_MESSAGE);
     }
 
     @Override
-    Dialog callDialog() {
+    public Dialog callDialog() {
 
         setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 

@@ -30,6 +30,6 @@ public abstract class XBaseDialog extends DialogFragment {
         return callDialog();
     }
 
-    abstract void initData();
-    abstract Dialog callDialog();
+    protected abstract void initData();
+    public abstract Dialog callDialog();
 }

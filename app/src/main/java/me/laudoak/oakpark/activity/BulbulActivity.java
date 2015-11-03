@@ -2,12 +2,14 @@ package me.laudoak.oakpark.activity;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -38,6 +40,8 @@ public class BulbulActivity extends XBaseActivity {
 
     private Button loginOut;
 
+    private ImageView associateQQ,associateWeibo;
+
     private String newPath = null;
 
     @Override
@@ -52,6 +56,66 @@ public class BulbulActivity extends XBaseActivity {
         buildBar();
         initViews();
         initlistener();
+    }
+
+    private void buildBar()
+    {
+        getSupportActionBar().hide();
+
+        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BulbulActivity.this.finish();
+            }
+        });
+
+        TextView done = (TextView) findViewById(R.id.ca_normal_done);
+        done.setText("保存");
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nick.getText().toString().trim().length() >= 2) {
+
+                    final ProgressDialog dialog = new ProgressDialog(BulbulActivity.this);
+                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    dialog.show();
+
+                    UserProxy.doUpdate(BulbulActivity.this,
+                            nick.getText().toString().trim(),
+                            newPath,
+                            new UserProxy.CallBack() {
+                                @Override
+                                public void onSuccess(String nick) {
+                                    dialog.dismiss();
+                                    AppMsg.makeText(BulbulActivity.this, "已更新", AppMsg.STYLE_INFO).show();
+                                    delayExit();
+
+                                }
+
+                                @Override
+                                public void onFailure(String reason) {
+                                    dialog.dismiss();
+                                    AppMsg.makeText(BulbulActivity.this, reason, AppMsg.STYLE_ALERT).show();
+                                }
+                            });
+                } else {
+                    AppMsg.makeText(BulbulActivity.this, "用户名不符", AppMsg.STYLE_CONFIRM).show();
+                }
+            }
+        });
+    }
+
+    private void finViews()
+    {
+        avatar = (SimpleDraweeView) findViewById(R.id.bulbul_avatar);
+        nick = (AutofitTextView) findViewById(R.id.bulbul_nick);
+        email = (AutofitTextView) findViewById(R.id.bulbul_email);
+        num = (AutofitTextView) findViewById(R.id.bulbul_num);
+
+        associateQQ = (ImageView) findViewById(R.id.bulbul_qq);
+        associateWeibo = (ImageView) findViewById(R.id.bulbul_weibo);
+
+        loginOut = (Button) findViewById(R.id.bulbul_logout);
     }
 
     private void initlistener()
@@ -69,11 +133,23 @@ public class BulbulActivity extends XBaseActivity {
         loginOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BmobUser.logOut(BulbulActivity.this);
-                AppMsg.makeText(BulbulActivity.this, "已退出登陆", AppMsg.STYLE_INFO).show();
 
-                delayExit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(BulbulActivity.this,R.style.CustomDialog)
+                        .setMessage("进入完全编辑模式?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                                BmobUser.logOut(BulbulActivity.this);
+                                AppMsg.makeText(BulbulActivity.this, "已退出登陆", AppMsg.STYLE_INFO).show();
+
+                                delayExit();
+
+                            }
+                        })
+                        .setNegativeButton("取消", null);
+
+                builder.create().show();
             }
         });
     }
@@ -105,63 +181,6 @@ public class BulbulActivity extends XBaseActivity {
         }
     }
 
-    private void finViews()
-    {
-        avatar = (SimpleDraweeView) findViewById(R.id.bulbul_avatar);
-        nick = (AutofitTextView) findViewById(R.id.bulbul_nick);
-        email = (AutofitTextView) findViewById(R.id.bulbul_email);
-        num = (AutofitTextView) findViewById(R.id.bulbul_num);
-
-        loginOut = (Button) findViewById(R.id.bulbul_logout);
-    }
-
-    private void buildBar()
-    {
-        getSupportActionBar().hide();
-
-        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BulbulActivity.this.finish();
-            }
-        });
-
-        TextView done = (TextView) findViewById(R.id.ca_normal_done);
-        done.setText("保存");
-        done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (nick.getText().toString().trim().length() >= 2) {
-
-                    final ProgressDialog  dialog = new ProgressDialog(BulbulActivity.this);
-                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    dialog.show();
-
-                    UserProxy.doUpdate(BulbulActivity.this,
-                            nick.getText().toString().trim(),
-                            newPath,
-                            new UserProxy.CallBack()
-                            {
-                        @Override
-                        public void onSuccess(String nick) {
-                            dialog.dismiss();
-                            AppMsg.makeText(BulbulActivity.this,"已更新",AppMsg.STYLE_INFO).show();
-                            delayExit();
-
-                        }
-
-                        @Override
-                        public void onFailure(String reason) {
-                            dialog.dismiss();
-                            AppMsg.makeText(BulbulActivity.this,reason,AppMsg.STYLE_ALERT).show();
-                        }
-                    });
-                } else {
-                    AppMsg.makeText(BulbulActivity.this,"用户名不符",AppMsg.STYLE_CONFIRM).show();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

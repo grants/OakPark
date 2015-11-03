@@ -33,7 +33,7 @@ public class XBaseAuth {
             @Override
             public void onSuccess(JSONObject userAuth) {
                 Log.d(TAG, authInfo.getSnsType() + "Third party loginsuccess:(UserAuth Info)" + userAuth);
-                callback.onSuccess("第三方登录成功");
+                callback.onSuccess("第三方登录成功",userAuth);
             }
 
             @Override
@@ -47,7 +47,7 @@ public class XBaseAuth {
 
     public interface AuthCallback
     {
-        void onSuccess(String desc);
+        void onSuccess(String desc,JSONObject userAuth);
         void onFailure(String why);
         void onCancel(String desc);
     }

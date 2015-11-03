@@ -1,4 +1,4 @@
-package me.laudoak.oakpark.sosh.tplogin;
+package me.laudoak.oakpark.sosh.tplogin.qq;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,13 +10,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.bmob.v3.BmobUser;
+import me.laudoak.oakpark.sosh.tplogin.XBaseAuth;
 
 /**
  * Created by LaudOak on 2015-11-3 at 19:43.
  */
-public class QQAuthListener extends XBaseAuth implements IUiListener{
+public class QQAuthListener extends XBaseAuth implements
+        IUiListener{
 
     private static final String TAG = "QQAuthListener";
+
+
 
     public QQAuthListener(Context ctxt, AuthCallback cb) {
         super(ctxt, cb);
@@ -54,6 +58,5 @@ public class QQAuthListener extends XBaseAuth implements IUiListener{
         Log.d(TAG, "QQ authorized is cancelled");
         callback.onCancel("QQ授权被取消");
     }
-
 
 }

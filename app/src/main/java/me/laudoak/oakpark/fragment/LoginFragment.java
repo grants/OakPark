@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,17 +16,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
+
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.sosh.tplogin.QQAuthListener;
+import me.laudoak.oakpark.sosh.tplogin.qq.QQAuthListener;
 import me.laudoak.oakpark.sosh.tplogin.XBaseAuth;
-import me.laudoak.oakpark.sosh.tplogin.weibo.sdk.widget.LoginButton;
+import me.laudoak.oakpark.sosh.tplogin.weibo.LoginButton;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
 /**
@@ -35,6 +37,9 @@ public class LoginFragment extends XBaseFragment implements
         TextWatcher {
 
     private static final String TAG = "LoginFragment";
+
+    private static final int REQUEST_INFO = 120;
+    private static final String DIALOG_INFO = "me.laudoak.oakpark,qqinfo";
 
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
@@ -131,17 +136,7 @@ public class LoginFragment extends XBaseFragment implements
             public void onSuccess(String nick) {
                 dialog.dismiss();
                 AppMsg.makeText(context, "欢迎" + nick, AppMsg.STYLE_INFO).show();
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().finish();
-                    }
-                };
-
-                handler.postDelayed(runnable, 1200);
-
+                loginSuccess();
             }
 
             @Override
@@ -163,8 +158,9 @@ public class LoginFragment extends XBaseFragment implements
 
         qqListener = new QQAuthListener(context, new XBaseAuth.AuthCallback() {
             @Override
-            public void onSuccess(String desc) {
-                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+            public void onSuccess(String desc,JSONObject authInfo) {
+                AppMsg.makeText(context,"欢迎"+UserProxy.currentPoet(context).getUsername(),AppMsg.STYLE_INFO).show();
+                loginSuccess();
             }
 
             @Override
@@ -186,12 +182,11 @@ public class LoginFragment extends XBaseFragment implements
     /*Login by Weibo*/
     private void loginWithWeibo()
     {
-
+        
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 
         /*!!!how terrible with Tencent SDK document*/
         Tencent.onActivityResultData(requestCode, resultCode, data, qqListener);
@@ -200,6 +195,21 @@ public class LoginFragment extends XBaseFragment implements
 //            Tencent.handleResultData(data, qqListener);
 //        }
     }
+
+    private Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            getActivity().finish();
+        }
+    };
+
+    private void loginSuccess()
+    {
+
+        handler.postDelayed(runnable, 1200);
+    }
+
 
     /*TextWatcher*/
     @Override
