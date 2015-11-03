@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <me.laudoak.oakpark.widget.loani.ProgressWheel
+        android:id="@+id/sup_comment_loani"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/sup_comment_comment"
+        wheel:matProg_barColor="@color/gray_7"
+        wheel:matProg_barWidth="3dp"/>
+
     <Button
         android:id="@+id/sup_comment_comment"
         style="@style/EditorButton"
@@ -22,14 +32,7 @@
         android:listSelector="@android:color/transparent"
         android:divider="@null"/>
 
-    <me.laudoak.oakpark.widget.loani.ProgressWheel
-        android:id="@+id/sup_comment_loani"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:padding="4dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/sup_comment_comment"
-        wheel:matProg_barColor="@color/gray_7" />
+
 
     <TextView
         android:id="@+id/sup_comment_load_failed"

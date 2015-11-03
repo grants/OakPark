@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class EnterActivity extends XBaseActivity{
     public void buildView() {
 
         buildBar();
+
 
         viewPager = (ViewPager) findViewById(R.id.register_viewpager);
         loginText = (TextView) findViewById(R.id.enter_top_tv_login);
@@ -98,6 +100,7 @@ public class EnterActivity extends XBaseActivity{
             }
         });
     }
+
 
     private void buildBar() {
         getSupportActionBar().hide();

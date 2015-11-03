@@ -143,7 +143,7 @@ public class BulbulActivity extends XBaseActivity {
                             new UserProxy.CallBack()
                             {
                         @Override
-                        public void onSuccess() {
+                        public void onSuccess(String nick) {
                             dialog.dismiss();
                             AppMsg.makeText(BulbulActivity.this,"已更新",AppMsg.STYLE_INFO).show();
                             delayExit();

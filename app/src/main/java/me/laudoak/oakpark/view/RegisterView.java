@@ -103,9 +103,9 @@ public class RegisterView extends LinearLayout implements TextWatcher ,View.OnCl
 
         proxy.doRegister(new UserProxy.CallBack() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(String nick) {
                 dialog.dismiss();
-                AppMsg.makeText(getContext(),"注册成功",AppMsg.STYLE_INFO).show();
+                AppMsg.makeText(getContext(),"注册成功"+nick,AppMsg.STYLE_INFO).show();
             }
 
             @Override

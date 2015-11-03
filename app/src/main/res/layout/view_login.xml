@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_password"/>
 
+
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -55,37 +56,41 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/login_qq"
                 android:src="@mipmap/ic_share_qq"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="16dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="15dp"
+                android:layout_marginRight="18dp"
                 android:background="@drawable/bg_btn_tpl" />
 
 
             <ImageView
                 android:id="@+id/login_weixin"
                 android:src="@mipmap/ic_share_wechat"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="10dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="11dp"
                 android:visibility="gone"
+                android:layout_marginRight="18dp"
                 android:background="@drawable/bg_btn_tpl" />
 
             <me.laudoak.oakpark.sosh.tplogin.weibo.sdk.widget.LoginButton
                 android:id="@+id/login_weibo"
                 android:src="@mipmap/ic_share_weibo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="10dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="12dp"
                 android:background="@drawable/bg_btn_tpl" />
 
 
         </LinearLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.sosh.tplogin;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -8,43 +9,47 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.OtherLoginListener;
 
 /**
- * Created by LaudOak on 2015-11-2 at 13:17.
+ * Created by LaudOak on 2015-11-3 at 19:45.
  */
-public class XBaseLogin {
+public class XBaseAuth {
 
-    private static final String TAG = "XBaseLogin";
+    private static final String TAG = "XBaseAuth";
 
-    private Context context;
+    protected Context context;
 
-    protected TPLoginCallback callback;
+    protected AuthCallback callback;
 
-    public XBaseLogin(Context ctxt , TPLoginCallback cb)
+    public XBaseAuth(Context ctxt,AuthCallback cb)
     {
         this.context = ctxt;
         this.callback = cb;
     }
 
+
     protected void loginWithAuth(final BmobUser.BmobThirdUserAuth authInfo){
+
         BmobUser.loginWithAuthData(context, authInfo, new OtherLoginListener() {
 
             @Override
             public void onSuccess(JSONObject userAuth) {
-                callback.onSuccess();
+                Log.d(TAG, authInfo.getSnsType() + "Third party loginsuccess:(UserAuth Info)" + userAuth);
+                callback.onSuccess("第三方登录成功");
             }
 
             @Override
             public void onFailure(int code, String msg) {
-               callback.onFailure(msg);
+                Log.d(TAG, "Third party login failure:"+msg);
+                callback.onFailure("第三方登录失败"+msg);
             }
 
         });
     }
 
-    public interface TPLoginCallback
+    public interface AuthCallback
     {
-        void onSuccess();
+        void onSuccess(String desc);
         void onFailure(String why);
-        void onCancel(String who);
+        void onCancel(String desc);
     }
 
 }

@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,16 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.sina.weibo.sdk.auth.AuthInfo;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.Tencent;
 
 import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.sosh.tplogin.QQLogin;
-import me.laudoak.oakpark.sosh.tplogin.WBLogin;
-import me.laudoak.oakpark.sosh.tplogin.XBaseLogin;
+import me.laudoak.oakpark.sosh.tplogin.QQAuthListener;
+import me.laudoak.oakpark.sosh.tplogin.XBaseAuth;
 import me.laudoak.oakpark.sosh.tplogin.weibo.sdk.widget.LoginButton;
 import me.laudoak.oakpark.widget.message.AppMsg;
 
@@ -31,20 +32,22 @@ import me.laudoak.oakpark.widget.message.AppMsg;
  * Created by LaudOak on 2015-9-27.
  */
 public class LoginFragment extends XBaseFragment implements
-        OnClickListener,
         TextWatcher {
 
     private static final String TAG = "LoginFragment";
 
-
-    private EditText email,password;
-    private Button login;
-    private ImageView login_qq,login_weixin;
-    private LoginButton login_weibo;
-
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
     );
+
+    private EditText email,password;
+    private Button login;
+
+    private ImageView login_qq,login_weixin;
+    private LoginButton login_weibo;
+
+    private static Tencent tencent;
+    private QQAuthListener qqListener;
 
 
     public static LoginFragment newInstance()
@@ -63,26 +66,37 @@ public class LoginFragment extends XBaseFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View loginView = inflater.inflate(R.layout.view_login, container, false);
-        buildViews(loginView);
 
         return loginView;
     }
 
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        buildViews(view);
+    }
+
     private void buildViews(View v)
     {
         email = (EditText) v.findViewById(R.id.login_email);
         password = (EditText) v.findViewById(R.id.login_password);
-        login = (Button) v.findViewById(R.id.login_login);
-
         email.addTextChangedListener(this);
         password.addTextChangedListener(this);
 
+        login = (Button) v.findViewById(R.id.login_login);
         login.setEnabled(false);
+        login.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginWithRaw();
+            }
+        });
+
 
         /**/
         login_qq = (ImageView) v.findViewById(R.id.login_qq);
-        login_qq.setOnClickListener(new OnClickListener() {
+        login_qq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginWithQQ();
@@ -93,28 +107,30 @@ public class LoginFragment extends XBaseFragment implements
         loginWithWeibo();
 
         login_weixin = (ImageView) v.findViewById(R.id.login_weixin);
+
     }
 
-    @Override
-    public void onClick(View v) {
 
-        final ProgressDialog dialog = new ProgressDialog(getContext());
+    /*login by Bmob count*/
+    private void loginWithRaw()
+    {
+        final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("正在登录...");
         dialog.setTitle(null);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
-        UserProxy proxy = new UserProxy.Builder(getContext())
+        UserProxy proxy = new UserProxy.Builder(context)
                 .email(email.getText().toString().trim())
                 .password(password.getText().toString().trim())
                 .build();
 
         proxy.doLogin(new UserProxy.CallBack() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(String nick) {
                 dialog.dismiss();
-                AppMsg.makeText(getContext(), "欢迎", AppMsg.STYLE_INFO).show();
+                AppMsg.makeText(context, "欢迎" + nick, AppMsg.STYLE_INFO).show();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -124,57 +140,65 @@ public class LoginFragment extends XBaseFragment implements
                     }
                 };
 
-                handler.postDelayed(runnable,1200);
+                handler.postDelayed(runnable, 1200);
 
             }
 
             @Override
             public void onFailure(String reason) {
                 dialog.dismiss();
-                AppMsg.makeText(getContext(),reason,AppMsg.STYLE_ALERT).show();
+                AppMsg.makeText(context, reason, AppMsg.STYLE_ALERT).show();
             }
         });
     }
 
+    /*Login by QQ*/
     private void loginWithQQ()
     {
-        new QQLogin(getActivity(), context, new XBaseLogin.TPLoginCallback() {
-            @Override
-            public void onSuccess() {
 
+        if(tencent == null)
+        {
+            tencent = Tencent.createInstance(OP.QQ_APP_ID, context);
+        }
+
+        qqListener = new QQAuthListener(context, new XBaseAuth.AuthCallback() {
+            @Override
+            public void onSuccess(String desc) {
+                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
             }
 
             @Override
             public void onFailure(String why) {
-
+                AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
             }
 
             @Override
-            public void onCancel(String who) {
-
+            public void onCancel(String desc) {
+                AppMsg.makeText(context,desc,AppMsg.STYLE_ALERT).show();
             }
         });
+
+        tencent.logout(context);
+        tencent.login(LoginFragment.this, "all", qqListener);
+
     }
 
+    /*Login by Weibo*/
     private void loginWithWeibo()
     {
-        AuthInfo authInfo = new AuthInfo(context, OP.WEIBO_APP_KEY, OP.WEIBO_REDIRECT_URL, OP.WEIBO_SCOPE);
-        login_weibo.setWeiboAuthInfo(authInfo,new WBLogin(context, new XBaseLogin.TPLoginCallback() {
-            @Override
-            public void onSuccess() {
 
-            }
+    }
 
-            @Override
-            public void onFailure(String why) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            }
 
-            @Override
-            public void onCancel(String who) {
-
-            }
-        }));
+        /*!!!how terrible with Tencent SDK document*/
+        Tencent.onActivityResultData(requestCode, resultCode, data, qqListener);
+//        if (requestCode == Constants.REQUEST_API)
+//        {
+//            Tencent.handleResultData(data, qqListener);
+//        }
     }
 
     /*TextWatcher*/

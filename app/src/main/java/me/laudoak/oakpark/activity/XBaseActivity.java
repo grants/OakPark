@@ -1,8 +1,6 @@
 package me.laudoak.oakpark.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import cn.bmob.v3.Bmob;

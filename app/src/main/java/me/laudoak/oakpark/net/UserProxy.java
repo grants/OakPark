@@ -44,7 +44,7 @@ public class UserProxy {
                 {
                     if(poet.getEmailVerified())
                     {
-                        callBack.onSuccess();
+                        callBack.onSuccess(poet.getUsername());
                     }else {
                         callBack.onFailure("邮箱没有验证");
                     }
@@ -62,7 +62,7 @@ public class UserProxy {
 
     public void doRegister(final CallBack callBack)
     {
-        Poet poet = new Poet();
+        final Poet poet = new Poet();
         poet.setUsername(this.nick);
         poet.setEmail(this.email);
         poet.setPassword(this.password);
@@ -71,7 +71,7 @@ public class UserProxy {
         poet.signUp(this.context, new SaveListener() {
             @Override
             public void onSuccess() {
-                callBack.onSuccess();
+                callBack.onSuccess(poet.getUsername());
             }
 
             @Override
@@ -99,7 +99,7 @@ public class UserProxy {
                     curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
                         @Override
                         public void onSuccess() {
-                            callBack.onSuccess();
+                            callBack.onSuccess(poet.getUsername());
                         }
 
                         @Override
@@ -125,7 +125,7 @@ public class UserProxy {
             curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
                 @Override
                 public void onSuccess() {
-                    callBack.onSuccess();
+                    callBack.onSuccess(poet.getUsername());
                 }
 
                 @Override
@@ -176,12 +176,6 @@ public class UserProxy {
 
     }
 
-    public interface CallBack
-    {
-        void onSuccess();
-        void onFailure(String reason);
-    }
-
     public static Poet currentPoet(Context context)
     {
         Poet poet = BmobUser.getCurrentUser(context,Poet.class);
@@ -199,6 +193,12 @@ public class UserProxy {
             return true;
         }
         return false;
+    }
+
+    public interface CallBack
+    {
+        void onSuccess(String nick);
+        void onFailure(String reason);
     }
 
 }
