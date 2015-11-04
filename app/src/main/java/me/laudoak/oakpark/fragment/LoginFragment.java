@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -38,9 +37,6 @@ public class LoginFragment extends XBaseFragment implements
 
     private static final String TAG = "LoginFragment";
 
-    private static final int REQUEST_INFO = 120;
-    private static final String DIALOG_INFO = "me.laudoak.oakpark,qqinfo";
-
     public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+"
     );
@@ -70,9 +66,7 @@ public class LoginFragment extends XBaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View loginView = inflater.inflate(R.layout.view_login, container, false);
-
-        return loginView;
+        return inflater.inflate(R.layout.view_login, container, false);
     }
 
 
@@ -182,7 +176,7 @@ public class LoginFragment extends XBaseFragment implements
     /*Login by Weibo*/
     private void loginWithWeibo()
     {
-        
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by LaudOak on 2015-10-9 at 17:03.
@@ -21,11 +22,20 @@ public class TimeUtil {
     }
 
     private static final String dateTextPattern = "yyyy-MM-dd";
+    private static final String welcomeDatePattern = "MMM.d    EEEE";
 
     public static Date getNowDate()
     {
         Date date = new Date(System.currentTimeMillis());
         return date;
+    }
+
+    public static String getWelcomeDateText()
+    {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM.d    EEEE", Locale.ENGLISH);
+
+        return formatter.format(getNowDate());
     }
 
     public static String parseDateToDateText()

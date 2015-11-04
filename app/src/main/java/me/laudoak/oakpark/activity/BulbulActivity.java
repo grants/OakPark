@@ -135,7 +135,7 @@ public class BulbulActivity extends XBaseActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(BulbulActivity.this,R.style.CustomDialog)
-                        .setMessage("进入完全编辑模式?")
+                        .setMessage("确定退出登录?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -164,7 +164,7 @@ public class BulbulActivity extends XBaseActivity {
             }
         };
 
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 800);
     }
 
     private void initViews()
