@@ -1,7 +1,10 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +21,8 @@ public class HelloActivity extends XBaseActivity {
 
     private View hello;
     private TextView sipTv;
+    private TextView version;
+    private TextView oakpark;
 
     @Override
     protected void setView() {
@@ -32,6 +37,14 @@ public class HelloActivity extends XBaseActivity {
         FontsManager.changeFonts(hello);
 
         sipTv = (TextView) findViewById(R.id.view_welcome_sip);
+        version = (TextView) findViewById(R.id.hello_app_version);
+        if (null != getVersion())
+        {
+            version.setText(getVersion());
+        }
+        oakpark = (TextView) findViewById(R.id.hello_app_name);
+        FontsManager.changeFonts(oakpark);
+
 
         new SipGetter(this, new SipGetter.CallBack() {
             @Override
@@ -50,10 +63,28 @@ public class HelloActivity extends XBaseActivity {
             }
         };
 
-        handler.postDelayed(runnable,5000);
-
+        handler.postDelayed(runnable, 5000);
 
     }
+
+    private String getVersion()
+    {
+        PackageManager packageManager = getPackageManager();
+
+        try {
+
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(),0);
+            String versionName = packageInfo.versionName;
+
+            return versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
 
 }

@@ -1,6 +1,9 @@
 package me.laudoak.oakpark.widget.damp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -115,7 +118,6 @@ public class DampEditor extends ScrollView {
         }
     }
 
-
     /**当从上往下,移动距离达到一半时，回调接口*/
     private boolean shouldCallBack(int dy) {
         if (dy > 0 && contentView.getTop() > getHeight() / 2)
@@ -145,6 +147,27 @@ public class DampEditor extends ScrollView {
             return true;
         }
         return false;
+    }
+
+    /**Convert ScrollView to Bitmap*/
+    public Bitmap getThisBitmap()
+    {
+        int height = 0;
+        Bitmap dest = null;
+
+        for (int i=0 ; i<getChildCount() ; i++)
+        {
+            height += getChildAt(i).getHeight();
+            getChildAt(0).setBackgroundColor(Color.WHITE);
+        }
+
+        dest = Bitmap.createBitmap(getWidth(),height, Bitmap.Config.RGB_565);
+
+        final Canvas canvas = new Canvas(dest);
+        draw(canvas);
+
+        return dest;
+
     }
 
     /**当scrollView下拉到一定程度后，进行的回调方法*/

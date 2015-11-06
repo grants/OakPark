@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="40dp"
-    android:id="@+id/view_welcome">
+    android:id="@+id/view_welcome"
+    android:background="@color/white">
 
     <me.laudoak.oakpark.widget.text.CalText
         android:layout_width="wrap_content"
