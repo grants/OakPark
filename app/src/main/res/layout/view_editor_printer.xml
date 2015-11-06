@@ -1,29 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:autofit="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/window_background">
 
-    <include layout="@layout/view_actionbar_normal"/>
-
+    <include layout="@layout/view_actionbar_normal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ach"
+        android:id="@+id/printer_ac"/>
 
     <me.laudoak.oakpark.widget.damp.DampEditor
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/printer_ac"
         android:layout_marginTop="@dimen/ach"
         android:background="@color/white"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="5dp">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:padding="3dp"
-            android:src="@mipmap/ic_launcher"
-            android:id="@+id/printer_image"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            fresco:placeholderImage ="@android:color/transparent" />
+            android:layout_height="wrap_content">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/printer_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                fresco:placeholderImage ="@color/window_background" />
+
+            <LinearLayout
+                android:id="@+id/printer_container_title"
+                android:layout_below="@+id/printer_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:background="@color/darkergreen"
+                    android:layout_width="3dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                    style="@style/PrinterTitleText"
+                    android:id="@+id/printer_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    autofit:minTextSize="18sp"
+                    autofit:sizeToFit="true"/>
+
+            </LinearLayout>
+
+            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                android:id="@+id/printer_author"
+                style="@style/PrinterAuthorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/printer_container_title"
+                autofit:minTextSize="10sp"
+                autofit:sizeToFit="true"/>
+
+            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                android:id="@+id/printer_verse"
+                style="@style/PrinterVerseText"
+                android:layout_below="@+id/printer_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
     </me.laudoak.oakpark.widget.damp.DampEditor>
+
+
 
 </RelativeLayout>
