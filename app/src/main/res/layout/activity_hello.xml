@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/window_background">
 
-    <include layout="@layout/view_welcome"
+    <include layout="@layout/view_hello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

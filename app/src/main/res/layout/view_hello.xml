@@ -9,7 +9,7 @@
     <me.laudoak.oakpark.widget.text.CalText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -18,12 +18,14 @@
 
 
     <TextView
-        android:id="@+id/view_welcome_text"
-        android:text="你的名字是树叶呢喃,\n在没有野兔的树林的边缘"
+        android:id="@+id/view_welcome_sip"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"/>
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"/>
 
     <View
         android:layout_width="match_parent"

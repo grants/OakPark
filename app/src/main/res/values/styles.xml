@@ -5,6 +5,10 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="HelloTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="CustomActionBar" parent="Base.Widget.AppCompat.ActionBar">
         <item name="background">@color/white</item>
         <item name="titleTextStyle">@style/CustomActionBarTitle</item>

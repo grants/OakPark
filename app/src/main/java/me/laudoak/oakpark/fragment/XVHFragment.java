@@ -73,6 +73,7 @@ public class XVHFragment extends XBaseFragment{
     {
 
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
+
         mRecyclerView.setVisibility(View.GONE);
 
         loani = (ProgressWheel) view.findViewById(R.id.view_recy_loading);

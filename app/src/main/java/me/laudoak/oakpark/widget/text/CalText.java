@@ -36,7 +36,7 @@ public class CalText extends TextView {
     private void init() {
         FontsManager.initFormAssets(context, "fonts/optima.ttf"); //初始化
         FontsManager.changeFonts(this);
-        setTextSize(22);
+        setTextSize(23);
         setTextColor(Color.BLACK);
         setText(TimeUtil.getWelcomeDateText());
     }

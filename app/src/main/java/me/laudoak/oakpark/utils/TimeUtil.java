@@ -23,17 +23,17 @@ public class TimeUtil {
 
     private static final String dateTextPattern = "yyyy-MM-dd";
     private static final String welcomeDatePattern = "MMM.d    EEEE";
+    private static final String todayDateCodePattern = "yyyy-MM-dd";
 
     public static Date getNowDate()
     {
-        Date date = new Date(System.currentTimeMillis());
-        return date;
+        return new Date(System.currentTimeMillis());
     }
 
     public static String getWelcomeDateText()
     {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM.d    EEEE", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat(welcomeDatePattern, Locale.ENGLISH);
 
         return formatter.format(getNowDate());
     }
@@ -45,5 +45,12 @@ public class TimeUtil {
         String dateStr = formatter.format(getNowDate());
 
         return dateStr;
+    }
+
+    public static String getTodayDateCode()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat(todayDateCodePattern);
+
+        return formatter.format(getNowDate());
     }
 }
