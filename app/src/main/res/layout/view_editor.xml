@@ -6,7 +6,7 @@
     android:background="@color/window_background">
 
 
-    <me.laudoak.oakpark.widget.damp.DampEditor
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -74,7 +74,7 @@
 
         </RelativeLayout>
 
-    </me.laudoak.oakpark.widget.damp.DampEditor>
+    </ScrollView>
 
 
     <me.laudoak.oakpark.widget.panel.XBasePanelView

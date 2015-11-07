@@ -13,10 +13,11 @@
         android:id="@+id/printer_ac"/>
 
     <me.laudoak.oakpark.widget.damp.DampEditor
+        android:id="@+id/printer_damp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/printer_ac"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:background="@color/white"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -24,7 +25,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/printer_image"
@@ -71,10 +72,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ach"
+                android:orientation="vertical"
+                android:layout_below="@+id/printer_verse">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/drb_divider"
+                    android:layout_marginRight="5dp"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp">
+
+                    <include layout="@layout/view_logo"
+                        android:layout_height="@dimen/ach"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:text="LaudOak"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </RelativeLayout>
+
 
     </me.laudoak.oakpark.widget.damp.DampEditor>
 
 
+    <me.laudoak.oakpark.view.PrinterPanelView
+        android:id="@+id/printer_panel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ach"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

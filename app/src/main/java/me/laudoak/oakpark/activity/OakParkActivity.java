@@ -44,7 +44,6 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
     private ImageView indicator;
     private int indicatorWidth;
     private int curPage;
-    private ImageView whisper,comment,share;
     private TextView dateCode;
 
     private NXVUCallback whisperNotier;
@@ -100,9 +99,9 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
 
          /*three indicator button*/
-        whisper = (ImageView) findViewById(R.id.sup_head_whisper);
-        comment = (ImageView) findViewById(R.id.sup_head_comment);
-        share = (ImageView) findViewById(R.id.sup_head_share);
+        ImageView whisper = (ImageView) findViewById(R.id.sup_head_whisper);
+        ImageView comment = (ImageView) findViewById(R.id.sup_head_comment);
+        ImageView share = (ImageView) findViewById(R.id.sup_head_share);
 
         /*dateCode*/
         dateCode = (TextView) findViewById(R.id.sup_head_date);

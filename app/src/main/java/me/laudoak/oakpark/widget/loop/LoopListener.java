@@ -7,6 +7,5 @@ package me.laudoak.oakpark.widget.loop;
 
 public interface LoopListener
 {
-
-    public abstract void onItemSelect(int item);
+    void onItemSelect(int item);
 }
