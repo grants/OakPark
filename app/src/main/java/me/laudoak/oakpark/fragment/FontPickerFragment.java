@@ -33,7 +33,7 @@ public class FontPickerFragment extends XBaseDialog {
         private static final FontPickerFragment fragment = new FontPickerFragment();
     }
 
-    public FontPickerFragment newInstance()
+    public static FontPickerFragment newInstance()
     {
         return ClassHolder.fragment;
     }

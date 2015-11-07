@@ -63,22 +63,6 @@ public class SUPShareFragment extends XBaseFragment
 
         title = (TextView) view.findViewById(R.id.sup_share_title);
         author = (TextView) view.findViewById(R.id.sup_share_author);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        onShowNow();
-    }
-
-    private void onShowNow()
-    {
-
-        if (null != currXV)
-        {
-            title.setText(currXV.getTitle());
-            author.setText(currXV.getAuthor());
-        }
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +73,24 @@ public class SUPShareFragment extends XBaseFragment
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //onShowNow();
+    }
+
+    private void onShowNow()
+    {
+
+        if (null != currXV && title != null && author != null)
+        {
+            title.setText(currXV.getTitle());
+            author.setText(currXV.getAuthor());
+        }
+
     }
 
 
@@ -104,8 +106,11 @@ public class SUPShareFragment extends XBaseFragment
         intent.putExtra(PrinterActivity.EXTRA_VERSE_CONT, currXV);
 
         /**/
-        Uri uri = Uri.parse(currXV.getImageURL());
-        intent.putExtra(PrinterActivity.EXTRA_VERSE_URI_STR,uri.toString());
+        if (null != currXV.getImageURL())
+        {
+            Uri uri = Uri.parse(currXV.getImageURL());
+            intent.putExtra(PrinterActivity.EXTRA_VERSE_URI_STR,uri.toString());
+        }
 
         startActivity(intent);
     }
@@ -116,7 +121,7 @@ public class SUPShareFragment extends XBaseFragment
         if (currXV != xv)
         {
             currXV = xv;
-            //onShowNow();
+            onShowNow();
         }
     }
 

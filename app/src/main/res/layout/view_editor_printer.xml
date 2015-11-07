@@ -80,10 +80,10 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="1px"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/drb_divider"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    android:background="@color/gray_1" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -91,17 +91,18 @@
                     android:layout_height="49dp">
 
                     <include layout="@layout/view_logo"
-                        android:layout_height="@dimen/ach"
+                        android:layout_height="49dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"/>
 
                     <TextView
+                        android:id="@+id/printer_nick"
                         android:text="LaudOak"
                         android:textColor="@color/black"
+                        android:layout_height="wrap_content"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textSize="18sp"
-                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"/>
 
                 </LinearLayout>

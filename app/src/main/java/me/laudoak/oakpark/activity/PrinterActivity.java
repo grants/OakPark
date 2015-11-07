@@ -3,6 +3,7 @@ package me.laudoak.oakpark.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,9 +30,13 @@ public class PrinterActivity extends XBaseActivity implements
     public static final String EXTRA_VERSE_CONT = "extra data content";
     public static final String EXTRA_VERSE_URI_STR = "extra data uri string";
 
+    private static final String TAG_DLG_FONT = "dialog of fontpicker fragment";
+
+    private FragmentManager fm;
+
     private DampEditor dampEditor;
     private SimpleDraweeView draweeView;
-    private AutofitTextView title,author,verse;
+    private AutofitTextView title,author,verse,nick;
     private PrinterPanelView pinterPanel;
 
 
@@ -57,6 +62,7 @@ public class PrinterActivity extends XBaseActivity implements
     @Override
     protected void setView() {
         setContentView(R.layout.view_editor_printer);
+        fm = getSupportFragmentManager();
         findViews();
         getExtraData();
     }
@@ -81,7 +87,7 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(xVerse.getTitle());
                 author.setText(xVerse.getAuthor());
                 verse.setText(xVerse.getVerse());
-
+                nick.setText(xVerse.getPoet().getUsername());
 
                 break;
             }
@@ -91,6 +97,7 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(vrse.getTitle());
                 author.setText(vrse.getAuthor());
                 verse.setText(vrse.getVerse());
+                nick.setText(vrse.getPoet().getUsername());
 
                 break;
             }
@@ -120,6 +127,7 @@ public class PrinterActivity extends XBaseActivity implements
         author = (AutofitTextView) findViewById(R.id.printer_author);
         verse = (AutofitTextView) findViewById(R.id.printer_verse);
         pinterPanel = (PrinterPanelView) findViewById(R.id.printer_panel);
+        nick = (AutofitTextView) findViewById(R.id.printer_nick);
         setListener();
     }
 
@@ -148,7 +156,7 @@ public class PrinterActivity extends XBaseActivity implements
         {
             case R.id.printer_panel_font:
             {
-
+                showFontDlg();
                 break;
             }
             case R.id.printer_panel_save:
@@ -162,11 +170,20 @@ public class PrinterActivity extends XBaseActivity implements
         }
     }
 
+    private void showFontDlg()
+    {
+        FontPickerFragment fragment = FontPickerFragment.newInstance();
+        if (null != fm)
+        {
+            fragment.show(fm,TAG_DLG_FONT);
+        }
+    }
+
     /**FontPickerFragment CallBack*/
     @Override
     public void onSelected(Typeface typeface) {
+
         FontsManager.init(typeface);
         FontsManager.changeFonts(dampEditor);
-
     }
 }

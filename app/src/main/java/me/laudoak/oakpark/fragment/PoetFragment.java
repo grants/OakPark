@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.List;
 
@@ -20,8 +21,7 @@ import me.laudoak.oakpark.widget.paging.PagingListView;
  */
 public class PoetFragment extends XBaseFragment implements
         PagingListView.LoadCallback,
-        QueryVerse.QueryCallback
-{
+        QueryVerse.QueryCallback {
 
     private PagingListView pagingListView;
     private PoetAdapter adapter;
@@ -64,6 +64,13 @@ public class PoetFragment extends XBaseFragment implements
         pagingListView = (PagingListView) view.findViewById(R.id.lv_poet);
         pagingListView.setLoadCallback(this);
         pagingListView.setAdapter(adapter);
+        pagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                return false;
+            }
+        });
     }
 
     @Override

@@ -14,6 +14,20 @@
         android:padding="20dp"
         android:background="@drawable/bg_ac_btn">
 
+
+        <TextView
+            android:text="分享这首诗"
+            android:textColor="@color/gray_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_1"/>
+
+
         <TextView
             android:id="@+id/sup_share_title"
             android:text="致橡树"
@@ -28,18 +42,6 @@
             android:text="舒婷"
             android:textSize="15sp"
             android:textColor="@color/gray_6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/drb_divider"/>
-
-        <TextView
-            android:text="分享这首诗"
-            android:textColor="@color/gray_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"/>
