@@ -32,7 +32,7 @@
         android:layout_height="52dp"
         android:padding="4dp"
         android:layout_gravity="center"
-        wheel:matProg_barColor="@color/darkergreen"
+        wheel:matProg_barColor="@color/gray_3"
         wheel:matProg_progressIndeterminate="true" />
 
 </FrameLayout>

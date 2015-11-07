@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.OakParkActivity;
 import me.laudoak.oakpark.activity.PrinterActivity;
@@ -27,6 +29,18 @@ public class SUPShareFragment extends XBaseFragment
     private TextView title,author;
     private LinearLayout linearLayout;
     private XVerse currXV;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
 
     public static SUPShareFragment newInstance()
     {
@@ -76,11 +90,6 @@ public class SUPShareFragment extends XBaseFragment
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //onShowNow();
-    }
 
     private void onShowNow()
     {

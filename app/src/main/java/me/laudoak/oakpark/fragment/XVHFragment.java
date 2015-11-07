@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.List;
 
 import me.laudoak.oakpark.R;
@@ -35,6 +37,18 @@ public class XVHFragment extends XBaseFragment{
     private TextView loadFailed;
 
     private int currPage = 0;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
 
     public static XVHFragment newInstance()
     {

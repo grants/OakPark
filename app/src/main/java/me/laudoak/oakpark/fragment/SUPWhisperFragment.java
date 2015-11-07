@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.OakParkActivity;
@@ -26,6 +27,20 @@ public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity
     private SimpleDraweeView avatar;
     private TextView nick;
     private XVerse curXV;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setCurr();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
 
     public static SUPWhisperFragment newInstance()
     {
@@ -57,11 +72,6 @@ public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity
         nick = (TextView) view.findViewById(R.id.sup_whisper_nick);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        setCurr();
-    }
 
     private void setCurr()
     {

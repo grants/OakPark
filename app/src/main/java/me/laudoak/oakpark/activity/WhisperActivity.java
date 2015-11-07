@@ -3,6 +3,8 @@ package me.laudoak.oakpark.activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
 import me.laudoak.oakpark.widget.fittext.AutofitTextView;
@@ -18,6 +20,18 @@ public class WhisperActivity extends XBaseActivity {
     public static final String RESULT_WHISPER = "RESULT_WHISPER";
 
     private AutofitTextView whisper;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void setView()

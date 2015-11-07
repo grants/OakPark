@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.WhisperActivity;
@@ -56,6 +58,19 @@ public class EntireEditorFragment extends XBaseFragment implements
     private int dateCode;
 
     private ProgressDialog ld;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

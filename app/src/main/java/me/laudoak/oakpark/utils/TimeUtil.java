@@ -53,4 +53,12 @@ public class TimeUtil {
 
         return formatter.format(getNowDate());
     }
+
+    public static String genFileName()
+    {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA).format(new Date());
+        return timeStamp;
+    }
+
+
 }

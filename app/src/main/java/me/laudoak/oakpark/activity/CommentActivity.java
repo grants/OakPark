@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.entity.XVerse;
@@ -29,6 +31,18 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     private XVerse xv;
 
     private ProgressDialog ld;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void setView()
@@ -125,4 +139,5 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
         AppMsg.makeText(this,why,AppMsg.STYLE_ALERT).show();
     }
     /*Comment callback*/
+
 }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.List;
 
 import me.laudoak.oakpark.R;
@@ -23,12 +25,26 @@ public class PoetFragment extends XBaseFragment implements
         PagingListView.LoadCallback,
         QueryVerse.QueryCallback {
 
+    private static final String TAG = "PoetFragment";
+
     private PagingListView pagingListView;
     private PoetAdapter adapter;
 
     private View rootView;
 
     private int currPage;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
 
     public static PoetFragment newIastance()
     {

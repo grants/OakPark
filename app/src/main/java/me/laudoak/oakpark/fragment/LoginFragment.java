@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.tencent.tauth.Tencent;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -50,6 +51,18 @@ public class LoginFragment extends XBaseFragment implements
     private static Tencent tencent;
     private QQAuthListener qqListener;
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("LoginFragment"); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("LoginFragment");
+    }
 
     public static LoginFragment newInstance()
     {

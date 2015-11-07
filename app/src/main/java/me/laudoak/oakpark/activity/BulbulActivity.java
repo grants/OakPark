@@ -199,4 +199,5 @@ public class BulbulActivity extends XBaseActivity {
             avatar.setImageURI(uri);
         }
     }
+
 }

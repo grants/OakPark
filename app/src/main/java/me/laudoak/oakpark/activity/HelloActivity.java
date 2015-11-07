@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.raw.SipGetter;
 import me.laudoak.oakpark.utils.font.FontsManager;
@@ -23,6 +25,19 @@ public class HelloActivity extends XBaseActivity {
     private TextView sipTv;
     private TextView version;
     private TextView oakpark;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void setView() {

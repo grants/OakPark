@@ -68,7 +68,7 @@ public class FontPickerFragment extends XBaseDialog {
         });
         loopView.setArrayList(list);
         loopView.setPosition(0);
-        loopView.setTextSize(25);
+        loopView.setTextSize(20);
     }
 
     @Override

@@ -1,8 +1,11 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
@@ -14,6 +17,24 @@ import me.laudoak.oakpark.widget.message.AppMsg;
 public class SettingActivity extends XBaseActivity {
 
     private LinearLayout account,cache;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MobclickAgent.openActivityDurationTrack(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void setView()

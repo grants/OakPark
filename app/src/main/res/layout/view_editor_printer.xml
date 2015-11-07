@@ -25,12 +25,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="4dp">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/printer_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="3dp"
                 fresco:placeholderImage ="@color/window_background" />
 
             <LinearLayout
@@ -73,47 +75,30 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/ach"
-                android:orientation="vertical"
+                android:layout_height="31dp"
                 android:layout_below="@+id/printer_verse">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@color/gray_1" />
+                <include layout="@layout/view_tail"
+                    android:layout_height="30dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"/>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="49dp">
-
-                    <include layout="@layout/view_logo"
-                        android:layout_height="49dp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:id="@+id/printer_nick"
-                        android:text="LaudOak"
-                        android:textColor="@color/black"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:textSize="18sp"
-                        android:layout_gravity="center_vertical"/>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/printer_nick"
+                    android:text="LaudOak"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical"/>
 
             </LinearLayout>
 
         </RelativeLayout>
 
-
     </me.laudoak.oakpark.widget.damp.DampEditor>
-
 
     <me.laudoak.oakpark.view.PrinterPanelView
         android:id="@+id/printer_panel"

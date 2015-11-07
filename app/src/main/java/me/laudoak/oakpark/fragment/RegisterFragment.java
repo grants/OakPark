@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import me.laudoak.oakpark.view.RegisterView;
 
 /**
@@ -21,6 +23,19 @@ public class RegisterFragment extends XBaseFragment {
         RegisterFragment fragment = new RegisterFragment();
 
         return fragment;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("RegisterFragment"); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("RegisterFragment");
     }
 
     @Nullable

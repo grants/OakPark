@@ -112,6 +112,7 @@
     <orderEntry type="library" exported="" name="fresco-0.7.0" level="project" />
     <orderEntry type="library" exported="" name="BmobSDK_V3.4.3_0828" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
+    <orderEntry type="library" exported="" name="umeng-analytics-v5.6.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="drawee-0.7.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
