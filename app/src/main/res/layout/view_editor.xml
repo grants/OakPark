@@ -5,63 +5,77 @@
     android:layout_height="match_parent"
     android:background="@color/window_background">
 
-    <me.laudoak.oakpark.widget.text.DateText
-        android:id="@+id/view_edit_date"
-        android:padding="5dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
 
-    <me.laudoak.oakpark.widget.fittext.AutofitTextView
-        android:id="@+id/view_edit_title"
-        style="@style/TitleEditor"
-        android:hint="题目"
+    <me.laudoak.oakpark.widget.damp.DampEditor
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_edit_date"
-        autofit:minTextSize="20sp"
-        autofit:sizeToFit="true"/>
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-    <me.laudoak.oakpark.widget.fittext.AutofitTextView
-        android:id="@+id/view_edit_author"
-        style="@style/AuthorEditor"
-        android:hint="作者/译者"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_edit_title"
-        autofit:minTextSize="12sp"
-        autofit:sizeToFit="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <me.laudoak.oakpark.widget.fittext.LinedEditor
-        android:id="@+id/view_edit_verse"
-        style="@style/VerseEditor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_edit_author"
-        autofit:minTextSize="19sp"
-        android:maxLines="10"
-        autofit:sizeToFit="true"/>
+            <me.laudoak.oakpark.widget.text.DateText
+                android:id="@+id/view_edit_date"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
 
-    <me.laudoak.oakpark.widget.fittext.AutofitTextView
-        android:id="@+id/view_edit_whisper"
-        style="@style/WhisperEditor"
-        android:hint="写下耳语..."
-        android:editable="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_edit_verse"
-        autofit:minTextSize="14sp"
-        autofit:sizeToFit="true"/>
+            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                android:id="@+id/view_edit_title"
+                style="@style/TitleEditor"
+                android:hint="题目"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_edit_date"
+                autofit:minTextSize="20sp"
+                autofit:sizeToFit="true"/>
 
-    <me.laudoak.oakpark.widget.portable.PortableImage
-        android:id="@+id/view_edit_image"
-        android:visibility="gone"
-        android:layout_width="150dp"
-        android:layout_height="90dp"
-        android:adjustViewBounds="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="5dp"/>
+            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                android:id="@+id/view_edit_author"
+                style="@style/AuthorEditor"
+                android:hint="作者/译者"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_edit_title"
+                autofit:minTextSize="12sp"
+                autofit:sizeToFit="true"/>
+
+            <me.laudoak.oakpark.widget.fittext.LinedEditor
+                android:id="@+id/view_edit_verse"
+                style="@style/VerseEditor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_edit_author"
+                autofit:minTextSize="19sp"
+                autofit:sizeToFit="true"/>
+
+            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                android:id="@+id/view_edit_whisper"
+                style="@style/WhisperEditor"
+                android:hint="写下耳语..."
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_edit_verse"
+                autofit:minTextSize="14sp"
+                autofit:sizeToFit="true"/>
+
+            <me.laudoak.oakpark.widget.portable.PortableImage
+                android:id="@+id/view_edit_image"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:adjustViewBounds="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="5dp"/>
+
+        </RelativeLayout>
+
+    </me.laudoak.oakpark.widget.damp.DampEditor>
+
 
     <me.laudoak.oakpark.widget.panel.XBasePanelView
         android:id="@+id/view_edit_panel"
@@ -70,6 +84,5 @@
         android:layout_margin="10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
-
 
 </RelativeLayout>
