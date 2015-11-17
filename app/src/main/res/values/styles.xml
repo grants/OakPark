@@ -205,7 +205,7 @@
         <item name="android:background">@null</item>
         <item name="android:padding">5dp</item>
         <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:textColor">@color/gray_11</item>
+        <item name="android:textColor">@color/gray_9</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">2dp</item>
     </style>

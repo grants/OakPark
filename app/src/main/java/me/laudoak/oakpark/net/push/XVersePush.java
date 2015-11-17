@@ -19,7 +19,6 @@ import me.laudoak.oakpark.net.UserProxy;
  */
 public class XVersePush extends XBasePush {
 
-    private int dateCode;
     private String whisper;
 
     private static final String TAG = "XVersePush";
@@ -32,7 +31,6 @@ public class XVersePush extends XBasePush {
         this.verse = builder.verse;
         this.imagePath = builder.imagePath;
         this.whisper = builder.whisper;
-        this.dateCode = builder.dateCode;
     }
 
     @Override
@@ -48,12 +46,12 @@ public class XVersePush extends XBasePush {
 
         final XVerse v = new XVerse();
 
-        v.setPoet(poet);
+        v.setBulbul(poet);
         v.setTitle(this.title);
         v.setAuthor(this.author);
         v.setVerse(this.verse);
         v.setWhisper(this.whisper);
-        v.setDateCode(this.dateCode);
+        v.setPass(false);
 
         if (null!=this.imagePath)
         {
@@ -169,12 +167,6 @@ public class XVersePush extends XBasePush {
             this.whisper = w;
             return this;
         }
-        public Builder dateCode(int dc)
-        {
-            this.dateCode = dc;
-            return this;
-        }
-
     }
 
 }

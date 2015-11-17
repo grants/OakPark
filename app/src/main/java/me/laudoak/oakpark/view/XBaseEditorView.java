@@ -10,7 +10,6 @@ import me.laudoak.oakpark.widget.fittext.AutofitTextView;
 import me.laudoak.oakpark.widget.fittext.LinedEditor;
 import me.laudoak.oakpark.widget.panel.XBasePanelView;
 import me.laudoak.oakpark.widget.portable.PortableImage;
-import me.laudoak.oakpark.widget.text.DateText;
 
 /**
  * Created by LaudOak on 2015-9-29.
@@ -25,7 +24,6 @@ public abstract class XBaseEditorView extends RelativeLayout{
     protected AutofitTextView author;
     protected LinedEditor verse;
     protected AutofitTextView whisper;
-    protected DateText dateCodeText;
     protected PortableImage image;
     protected XBasePanelView panel;
 
@@ -49,7 +47,6 @@ public abstract class XBaseEditorView extends RelativeLayout{
         author = (AutofitTextView) view.findViewById(R.id.view_edit_author);
         verse = (LinedEditor) view.findViewById(R.id.view_edit_verse);
         whisper = (AutofitTextView) view.findViewById(R.id.view_edit_whisper);
-        dateCodeText = (DateText) view.findViewById(R.id.view_edit_date);
         image = (PortableImage) view.findViewById(R.id.view_edit_image);
 
         panel = (XBasePanelView) findViewById(R.id.view_edit_panel);

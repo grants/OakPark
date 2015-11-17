@@ -7,7 +7,6 @@ import me.laudoak.oakpark.widget.fittext.AutofitTextView;
 import me.laudoak.oakpark.widget.fittext.LinedEditor;
 import me.laudoak.oakpark.widget.panel.XBasePanelView;
 import me.laudoak.oakpark.widget.portable.PortableImage;
-import me.laudoak.oakpark.widget.text.DateText;
 
 /**
  * Created by LaudOak on 2015-9-29.
@@ -41,7 +40,6 @@ public class EntireEditorView extends XBaseEditorView {
         holder.author = author;
         holder.verse = verse;
         holder.whisper = whisper;
-        holder.dateCodeText = dateCodeText;
         holder.image = image;
     }
 
@@ -52,7 +50,6 @@ public class EntireEditorView extends XBaseEditorView {
         public AutofitTextView author;
         public LinedEditor verse;
         public AutofitTextView whisper;
-        public DateText dateCodeText;
         public PortableImage image;
     }
 

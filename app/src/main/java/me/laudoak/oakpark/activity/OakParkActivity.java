@@ -26,7 +26,6 @@ import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
-import me.laudoak.oakpark.utils.CalUtil;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
@@ -253,7 +252,6 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         whisperNotier.onUpdateXV(xv);
         commentNotier.onUpdateXV(xv);
         shareNotier.onUpdateXV(xv);
-        dateCode.setText(CalUtil.dateCodeToDateString(xv.getDateCode()));
     }
 
     public interface NXVUCallback

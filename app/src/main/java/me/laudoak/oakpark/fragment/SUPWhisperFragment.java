@@ -33,7 +33,7 @@ public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity
     public void onResume() {
         super.onResume();
         setCurr();
-        MobclickAgent.onPageStart(TAG); //统计页面
+        MobclickAgent.onPageStart(TAG);
     }
 
     @Override
@@ -78,11 +78,11 @@ public class SUPWhisperFragment extends XBaseFragment implements OakParkActivity
         if (null != curXV)
         {
             whisper.setText(curXV.getWhisper());
-            nick.setText(curXV.getPoet().getUsername());
+            nick.setText(curXV.getBulbul().getUsername());
 
-            if (null != curXV.getPoet().getAvatarURL())
+            if (null != curXV.getBulbul().getAvatarURL())
             {
-                Uri uri = Uri.parse(curXV.getPoet().getAvatarURL());
+                Uri uri = Uri.parse(curXV.getBulbul().getAvatarURL());
                 avatar.setImageURI(uri);
             }
         }

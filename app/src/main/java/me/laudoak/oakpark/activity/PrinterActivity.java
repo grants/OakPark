@@ -14,6 +14,7 @@ import com.umeng.analytics.MobclickAgent;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.entity.Verse;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.FontPickerFragment;
@@ -134,9 +135,10 @@ public class PrinterActivity extends XBaseActivity implements
     public void buildView()
     {
         buildBar();
-        if (null != UserProxy.currentPoet(this))
+        Poet poet = UserProxy.currentPoet(this);
+        if (null != poet)
         {
-            nick.setText("shared by "+UserProxy.currentPoet(this).getUsername());
+            nick.setText(poet.getUsername());
         }
     }
 
@@ -217,6 +219,7 @@ public class PrinterActivity extends XBaseActivity implements
         oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
+        oks.setUrl(null);
 
         // 启动分享GUI
         oks.show(this);

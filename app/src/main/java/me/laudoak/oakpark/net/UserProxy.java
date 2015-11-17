@@ -142,6 +142,7 @@ public class UserProxy {
         private String nick;
         private String password;
 
+
         public Builder(Context context)
         {
             this.context = context;
@@ -172,23 +173,27 @@ public class UserProxy {
 
     }
 
+
+    /*Boolean class*/
     public static Poet currentPoet(Context context)
     {
         Poet poet = BmobUser.getCurrentUser(context,Poet.class);
         if (null != poet)
         {
-            if (null == poet.getEmail())
+
+            if (null == poet.getEmail() || poet.getEmail().equals(""))
             {
                 return poet;
             }else
             {
-                if (poet.getEmailVerified())
+                if (null != poet.getEmailVerified() && poet.getEmailVerified())
                 {
                     return poet;
                 }
             }
         }
         return null;
+
     }
 
     public static boolean ifLogin(Context contex)
@@ -197,11 +202,11 @@ public class UserProxy {
         if(null!=BmobUser.getCurrentUser(contex,Poet.class))
         {
 
-            if (null == poet.getEmail())
+            if (null == poet.getEmail() || poet.getEmail().equals(""))
             {
                 return true;
             }else {
-                if (poet.getEmailVerified())
+                if (null != poet.getEmailVerified() && poet.getEmailVerified())
                 {
                     return true;
                 }

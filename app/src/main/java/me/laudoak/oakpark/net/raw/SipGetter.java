@@ -24,8 +24,6 @@ public class SipGetter {
 
     private static final String KEY_CONTEXT = "content";
 
-    private static final String DEF_SIP = "愿光影和你如这诗篇永远美丽";
-
     public SipGetter(XBaseActivity activity, final CallBack callback)
     {
         final SharedPreferences preferences = activity.getPreferences(Context.MODE_PRIVATE);
@@ -46,8 +44,6 @@ public class SipGetter {
                     if (null != sip)
                     {
                         callback.onGet(sip);
-                    }else {
-                        callback.onGet(DEF_SIP);
                     }
                 }
 
@@ -64,9 +60,7 @@ public class SipGetter {
                         editor.putString(SHR_KEY_SIP,sipContent);
                         editor.apply();
 
-
                     } catch (JSONException e) {
-                        callback.onGet(DEF_SIP);
                         e.printStackTrace();
                     }
                 }

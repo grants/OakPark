@@ -10,7 +10,7 @@ import cn.bmob.v3.BmobObject;
 public class XVerse extends BmobObject implements Serializable{
 
     private String whisper;
-    private int DateCode;
+    private int dateCode;
 
     private Poet bulbul;
     private String title;
@@ -19,13 +19,31 @@ public class XVerse extends BmobObject implements Serializable{
     private String imageName;
     private String imageURL;
 
+    private boolean pass;
 
-    public Poet getPoet() {
+
+    public String getWhisper() {
+        return whisper;
+    }
+
+    public void setWhisper(String whisper) {
+        this.whisper = whisper;
+    }
+
+    public int getDateCode() {
+        return dateCode;
+    }
+
+    public void setDateCode(int dateCode) {
+        this.dateCode = dateCode;
+    }
+
+    public Poet getBulbul() {
         return bulbul;
     }
 
-    public void setPoet(Poet poet) {
-        this.bulbul = poet;
+    public void setBulbul(Poet bulbul) {
+        this.bulbul = bulbul;
     }
 
     public String getTitle() {
@@ -52,14 +70,6 @@ public class XVerse extends BmobObject implements Serializable{
         this.verse = verse;
     }
 
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
     public String getImageName() {
         return imageName;
     }
@@ -68,20 +78,19 @@ public class XVerse extends BmobObject implements Serializable{
         this.imageName = imageName;
     }
 
-
-    public String getWhisper() {
-        return whisper;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setWhisper(String whisper) {
-        this.whisper = whisper;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public int getDateCode() {
-        return DateCode;
+    public boolean isPass() {
+        return pass;
     }
 
-    public void setDateCode(int dateCode) {
-        DateCode = dateCode;
+    public void setPass(boolean pass) {
+        this.pass = pass;
     }
 }

@@ -56,6 +56,8 @@
         AppKey = "b7ee44adeaa0"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
     
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
+
+    <!-- OakPark using-->
     <SinaWeibo
         Id="1"
         SortId="1"
@@ -63,14 +65,6 @@
         AppSecret="86ba365befc13c497104e6c4161b424e"
         RedirectUrl="https://api.weibo.com/oauth2/default.html"
         ShareByAppClient="true"
-        Enable="true" />
-
-    <TencentWeibo
-        Id="2" 
-        SortId="2"
-        AppKey="801307650"
-        AppSecret="ae36f4ee3946e1cbb98d6965b0b2ff5c"
-        RedirectUri="http://sharesdk.cn"
         Enable="true" />
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
@@ -81,7 +75,45 @@
         AppKey="7QASLlgCEmzl4itc"
         ShareByAppClient="true"
         Enable="true" />
-    
+
+    <QQ
+        Id="7"
+        SortId="7"
+        AppId="1104939996"
+        AppKey="7QASLlgCEmzl4itc"
+        ShareByAppClient="true"
+        Enable="true" />
+
+    <Wechat
+        Id="4"
+        SortId="4"
+        AppId="wxf38f61ccb4adb5ac"
+        AppSecret="d4624c36b6795d1d99dcf0547af5443d"
+        BypassApproval="false"
+        Enable="true" />
+
+    <WechatMoments
+        Id="5"
+        SortId="5"
+        AppId="wxf38f61ccb4adb5ac"
+        AppSecret="d4624c36b6795d1d99dcf0547af5443d"
+        BypassApproval="false"
+        Enable="true" />
+
+    <WechatFavorite
+        Id="6"
+        SortId="6"
+        AppId="wxf38f61ccb4adb5ac"
+        AppSecret="d4624c36b6795d1d99dcf0547af5443d"
+        Enable="true" />
+
+    <Email
+        Id="12"
+        SortId="12"
+        Enable="true" />
+
+    <!--OakPark using -->
+
     <!-- 
     	Wechat微信和WechatMoments微信朋友圈的appid是一样的；
     
@@ -94,38 +126,17 @@
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
 		默认值为false。此外，微信收藏不支持此字段。
 	-->
-    <Wechat
-        Id="4"
-        SortId="4"
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        BypassApproval="false"
-        Enable="true" />
-    
-    <WechatMoments
-        Id="5"
-        SortId="5"
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        BypassApproval="false"
-        Enable="true" />
-        
-	<WechatFavorite
-        Id="6"
-        SortId="6"
-        AppId="wx4868b35061f87885"
-        AppSecret="64020361b8ec4c99936c0e3999a9f249"
-        Enable="true" />
     
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-	<QQ
-        Id="7"
-        SortId="7"
-        AppId="1104939996"
-        AppKey="7QASLlgCEmzl4itc"
-        ShareByAppClient="true"
+
+    <TencentWeibo
+        Id="2"
+        SortId="2"
+        AppKey="801307650"
+        AppSecret="ae36f4ee3946e1cbb98d6965b0b2ff5c"
+        RedirectUri="http://sharesdk.cn"
         Enable="true" />
-    
+
     <Facebook
         Id="8"
         SortId="8"
@@ -156,11 +167,6 @@
         AppKey="358443394194887cee81ff5890870c7c"
         AppSecret="da32179d859c016169f66d90b6db2a23"
         RedirectUri="http://www.sharesdk.cn"
-        Enable="true" />
-    
-    <Email
-        Id="12" 
-        SortId="12"
         Enable="true" />
     
     <ShortMessage

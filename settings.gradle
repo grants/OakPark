@@ -1,1 +1,1 @@
-include ':app', ':sharesdk', ':onekeyshare', 'picker'
+include ':app', ':onekeyshare', ':sharesdk', 'picker'

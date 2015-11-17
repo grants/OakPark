@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -18,9 +19,10 @@ import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
+import me.laudoak.oakpark.activity.PrinterActivity;
 import me.laudoak.oakpark.activity.WhisperActivity;
+import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.push.XVersePush;
-import me.laudoak.oakpark.view.CalPicker;
 import me.laudoak.oakpark.view.EntireEditorView;
 import me.laudoak.oakpark.widget.dialog.MessageDialog;
 import me.laudoak.oakpark.widget.message.AppMsg;
@@ -34,8 +36,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class EntireEditorFragment extends XBaseFragment implements
         EditorActivity.PushCallback,
         XBasePanelView.OnPanelClickListener,
-        XVersePush.PushCallBack,
-        CalPicker.Callback{
+        XVersePush.PushCallBack{
 
     private static final String TAG = "EntireEditorFragment";
 
@@ -52,10 +53,7 @@ public class EntireEditorFragment extends XBaseFragment implements
     private EntireEditorView entireEditorView;
     private EntireEditorView.Holder holder;
 
-    private View rootView;
-
     private String imagePath;
-    private int dateCode;
 
     private ProgressDialog ld;
 
@@ -81,7 +79,6 @@ public class EntireEditorFragment extends XBaseFragment implements
         entireEditorView = new EntireEditorView(context);
         this.holder = entireEditorView.getHolder();
         imagePath = null;
-        dateCode = holder.dateCodeText.getDateCode();
     }
 
 
@@ -101,7 +98,6 @@ public class EntireEditorFragment extends XBaseFragment implements
 
     private void buildEditorView() {
 
-        holder.dateCodeText.setVisibility(View.VISIBLE);
         holder.whisper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +107,7 @@ public class EntireEditorFragment extends XBaseFragment implements
                 intent.setClass(context, WhisperActivity.class);
                 intent.putExtra(EXTRA_WHISPER, whisper);
 
-                startActivityForResult(intent,REQUEST_WHISPER);
+                startActivityForResult(intent, REQUEST_WHISPER);
             }
         });
     }
@@ -128,6 +124,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         {
             case R.id.edit_panel_preview:
             {
+                doPreview();
                 break;
             }
 
@@ -143,18 +140,56 @@ public class EntireEditorFragment extends XBaseFragment implements
                 break;
 
             }
-
-            case R.id.edit_panel_calendar:
-            {
-                new CalPicker(context,this);
-                break;
-            }
         }
     }
 
-    /*EditorActivity callback*/
-    @Override
-    public void onPush() {
+    /**go to PinterActivity*/
+    private void doPreview()
+    {
+
+        XVerse shareXVerse = genTempXVerse();
+        if (null == shareXVerse)
+        {
+            showUncompleteDlg(checkShareAccord());
+            return ;
+        }
+
+        Intent intent = new Intent(getActivity(), PrinterActivity.class);
+        /**/
+        PrinterActivity.VerseTag tag = PrinterActivity.VerseTag.XVERSE;
+        tag.attachTo(intent);
+        /**/
+        intent.putExtra(PrinterActivity.EXTRA_VERSE_CONT, shareXVerse);
+        /**/
+        if (null != imagePath)
+        {
+            Uri uri = Uri.parse(imagePath);
+            intent.putExtra(PrinterActivity.EXTRA_VERSE_URI_STR,uri.toString());
+        }
+
+        startActivity(intent);
+
+    }
+
+    private XVerse genTempXVerse()
+    {
+        XVerse xv = null;
+
+        if (checkShareAccord().equals(""))
+        {
+            xv = new XVerse();
+            xv.setTitle(holder.title.getText().toString().trim());
+            xv.setAuthor(holder.author.getText().toString().trim());
+            xv.setVerse(holder.verse.getText().toString());
+
+        }
+
+        return xv;
+    }
+
+
+    private String checkCompleteAccord()
+    {
 
         StringBuilder noticeBuilder = new StringBuilder();
 
@@ -176,10 +211,53 @@ public class EntireEditorFragment extends XBaseFragment implements
         }
 
         String notice = noticeBuilder.toString();
+
         if (!notice.equals(""))
         {
-            MessageDialog dialog = MessageDialog.newInstance(noticeBuilder.toString());
-            dialog.show(fragmentManager,TAG_DIALOG_NOTICE);
+            return notice;
+        }
+
+        return "";
+    }
+
+    private String checkShareAccord()
+    {
+
+        StringBuilder noticeBuilder = new StringBuilder();
+
+        if (holder.title.getText().toString().trim().equals(""))
+        {
+            noticeBuilder.append("题目不能为空").append(System.getProperty("line.separator"));
+        }
+        if (holder.verse.getText().toString().trim().length()<6)
+        {
+            noticeBuilder.append("主体部分过短").append(System.getProperty("line.separator"));
+        }
+
+        String notice = noticeBuilder.toString();
+
+        if (!notice.equals(""))
+        {
+            return notice;
+        }
+
+        return "";
+    }
+
+    private void showUncompleteDlg(String what)
+    {
+        MessageDialog dialog = MessageDialog.newInstance(what);
+        dialog.show(fragmentManager,TAG_DIALOG_NOTICE);
+    }
+
+    /*EditorActivity callback*/
+    @Override
+    public void onPush() {
+
+        String notice = checkCompleteAccord();
+        if (!notice.equals(""))
+        {
+            showUncompleteDlg(notice);
             return;
         }
 
@@ -195,7 +273,6 @@ public class EntireEditorFragment extends XBaseFragment implements
                 .author(holder.author.getText().toString().trim())
                 .verse(holder.verse.getText().toString())
                 .whisper(holder.whisper.getText().toString())
-                .dateCode(dateCode)
                 .imagePath(imagePath);
 
         builder.build().push(this);
@@ -251,13 +328,5 @@ public class EntireEditorFragment extends XBaseFragment implements
             }
         }
 
-    }
-
-
-    /*CalPicker callback*/
-    @Override
-    public void onPick(int dc) {
-        dateCode = dc;
-        holder.dateCodeText.setDateCode(dc);
     }
 }

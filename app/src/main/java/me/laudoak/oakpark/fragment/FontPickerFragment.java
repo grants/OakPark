@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
@@ -22,7 +23,6 @@ public class FontPickerFragment extends XBaseDialog {
     private static final String TAG = "FontPickerFragment";
 
     private View rootView;
-    private LoopView loopView;
 
     private int fontId = 0;
 
@@ -46,22 +46,21 @@ public class FontPickerFragment extends XBaseDialog {
 
     @Override
     protected void initData() {
+
         rootView = getActivity().getLayoutInflater().inflate(R.layout.view_pinter_loop,null);
-        loopView = (LoopView) rootView.findViewById(R.id.pinter_font_loop);
+        LoopView loopView = (LoopView) rootView.findViewById(R.id.pinter_font_loop);
 
         ArrayList<String> list = new ArrayList<String>();
 
         list.add("系统字体");
-        list.add("方正宋刻本秀楷");
+        list.add("方正宋刻");
 
         loopView.setNotLoop();
 
         loopView.setListener(new LoopListener() {
             @Override
-            public void onItemSelect(int item)
-            {
-                if (item != fontId)
-                {
+            public void onItemSelect(int item) {
+                if (item != fontId) {
                     fontId = item;
                 }
             }
@@ -73,12 +72,9 @@ public class FontPickerFragment extends XBaseDialog {
 
     @Override
     public Dialog callDialog() {
-        return initDialog();
-    }
 
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
-    private Dialog initDialog()
-    {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle("选择字体")
                 .setView(rootView)

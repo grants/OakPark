@@ -26,7 +26,7 @@ public class XBasePanelView extends RelativeLayout {
     protected XBasePanelView panel;
 
     protected ImageView add;
-    protected ImageView camera,preview,calendar;
+    protected ImageView camera,preview;
     protected LinearLayout activeLinear;
 
     public XBasePanelView(Context context) {
@@ -54,7 +54,6 @@ public class XBasePanelView extends RelativeLayout {
         add = (ImageView) panel.findViewById(R.id.edit_panel_add);
         preview = (ImageView) panel.findViewById(R.id.edit_panel_preview);
         camera = (ImageView) panel.findViewById(R.id.edit_panel_camera);
-        calendar = (ImageView) panel.findViewById(R.id.edit_panel_calendar);
         activeLinear = (LinearLayout) panel.findViewById(R.id.edit_panel_content);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,16 +87,6 @@ public class XBasePanelView extends RelativeLayout {
                 }
             }
         });
-        calendar.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(null!=listener)
-                {
-                    listener.onClick(calendar);
-                }
-            }
-        });
-
 
 //        //#2015-9-30
 //        //bug here , repeat draw panel!!!
@@ -173,10 +162,6 @@ public class XBasePanelView extends RelativeLayout {
         animation.setDuration((int) (initialWidth / view.getContext().getResources().getDisplayMetrics().density));
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         view.startAnimation(animation);
-    }
-
-    public ImageView getCalendar() {
-        return calendar;
     }
 
     public ImageView getPreview() {

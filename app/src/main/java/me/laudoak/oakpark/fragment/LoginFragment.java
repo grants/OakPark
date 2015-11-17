@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
 import com.umeng.analytics.MobclickAgent;
 
@@ -68,8 +69,10 @@ public class LoginFragment extends XBaseFragment implements
     {
         LoginFragment fragment = new LoginFragment();
 
+
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -177,7 +180,7 @@ public class LoginFragment extends XBaseFragment implements
 
             @Override
             public void onCancel(String desc) {
-                AppMsg.makeText(context,desc,AppMsg.STYLE_ALERT).show();
+                AppMsg.makeText(context,desc,AppMsg.STYLE_CONFIRM).show();
             }
         });
 

@@ -1,10 +1,7 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,11 +18,9 @@ public class HelloActivity extends XBaseActivity {
 
     private static final String TAG = "HelloActivity";
 
-    private View hello;
-    private TextView sipTv;
-    private TextView version;
     private TextView oakpark;
-
+    private View helloView;
+    private TextView sipText;
 
     @Override
     protected void onResume() {
@@ -48,26 +43,31 @@ public class HelloActivity extends XBaseActivity {
     public void buildView() {
 
         FontsManager.initFormAssets(this, "fonts/fang.TTF");
-        hello = findViewById(R.id.view_welcome);
-        FontsManager.changeFonts(hello);
-
-        sipTv = (TextView) findViewById(R.id.view_welcome_sip);
-        version = (TextView) findViewById(R.id.hello_app_version);
-        if (null != getVersion())
-        {
-            version.setText(getVersion());
-        }
         oakpark = (TextView) findViewById(R.id.hello_app_name);
         FontsManager.changeFonts(oakpark);
 
+        helloView = findViewById(R.id.view_welcome);
+        sipText = (TextView) findViewById(R.id.view_welcome_sip);
+
+        FontsManager.changeFonts(helloView);
+
+
+        final long startTime = System.currentTimeMillis();
 
         new SipGetter(this, new SipGetter.CallBack() {
             @Override
             public void onGet(String sip) {
-                sipTv.setText(sip);
+                long endTime=System.currentTimeMillis();
+                if ((endTime - startTime ) < 1500)
+                {
+                    if (helloView.getVisibility() == View.GONE)
+                    {
+                        sipText.setText(sip);
+                        helloView.setVisibility(View.VISIBLE);
+                    }
+                }
             }
         });
-
 
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -78,28 +78,8 @@ public class HelloActivity extends XBaseActivity {
             }
         };
 
-        handler.postDelayed(runnable, 5000);
+        handler.postDelayed(runnable, 4900);
 
     }
-
-    private String getVersion()
-    {
-        PackageManager packageManager = getPackageManager();
-
-        try {
-
-            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(),0);
-            String versionName = packageInfo.versionName;
-
-            return versionName;
-
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-
 
 }

@@ -21,7 +21,6 @@ public class QQAuthListener extends XBaseAuth implements
     private static final String TAG = "QQAuthListener";
 
 
-
     public QQAuthListener(Context ctxt, AuthCallback cb) {
         super(ctxt, cb);
     }

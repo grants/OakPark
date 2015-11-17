@@ -70,6 +70,10 @@
             android:label="">
         </activity>
 
+        <activity android:name=".activity.OuterActivity"
+            android:label="">
+        </activity>
+
         <!-- Login with QQ -->
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
