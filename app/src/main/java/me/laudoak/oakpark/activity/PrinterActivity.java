@@ -3,6 +3,7 @@ package me.laudoak.oakpark.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,9 +23,9 @@ import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.utils.FileUtil;
 import me.laudoak.oakpark.utils.font.FontsManager;
 import me.laudoak.oakpark.view.PrinterPanelView;
-import me.laudoak.oakpark.widget.damp.DampEditor;
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.damp.DampEditor;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-11-6 at 22:46.
@@ -68,6 +69,16 @@ public class PrinterActivity extends XBaseActivity implements
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.view_editor_printer);
+        buildView();
+
+        fm = getSupportFragmentManager();
+        getExtraData();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
@@ -77,14 +88,6 @@ public class PrinterActivity extends XBaseActivity implements
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-    }
-
-    @Override
-    protected void setView() {
-        setContentView(R.layout.view_editor_printer);
-        fm = getSupportFragmentManager();
-        findViews();
-        getExtraData();
     }
 
 
@@ -131,10 +134,10 @@ public class PrinterActivity extends XBaseActivity implements
 
     }
 
-    @Override
-    public void buildView()
+    private void buildView()
     {
         buildBar();
+        findViews();
         Poet poet = UserProxy.currentPoet(this);
         if (null != poet)
         {
@@ -160,6 +163,9 @@ public class PrinterActivity extends XBaseActivity implements
 
     private void buildBar() {
         getSupportActionBar().hide();
+
+        TextView title = (TextView) findViewById(R.id.ca_normal_title);
+        title.setText("分享");
 
         ImageView acBack = (ImageView) findViewById(R.id.ca_normal_back);
         acBack.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +225,7 @@ public class PrinterActivity extends XBaseActivity implements
         oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
-        oks.setUrl(null);
+        oks.setUrl("https://github.com/");
 
         // 启动分享GUI
         oks.show(this);

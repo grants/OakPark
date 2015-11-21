@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/view_edit_title"
                 style="@style/TitleEditor"
                 android:hint="题目"
@@ -24,7 +24,7 @@
                 autofit:minTextSize="20sp"
                 autofit:sizeToFit="true"/>
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/view_edit_author"
                 style="@style/AuthorEditor"
                 android:hint="作者/译者"
@@ -34,7 +34,7 @@
                 autofit:minTextSize="12sp"
                 autofit:sizeToFit="true"/>
 
-            <me.laudoak.oakpark.widget.fittext.LinedEditor
+            <me.laudoak.oakpark.ui.fittext.LinedEditor
                 android:id="@+id/view_edit_verse"
                 style="@style/VerseEditor"
                 android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                 autofit:minTextSize="19sp"
                 autofit:sizeToFit="true"/>
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/view_edit_whisper"
                 style="@style/WhisperEditor"
                 android:hint="写下耳语..."
@@ -59,7 +59,7 @@
     </ScrollView>
 
 
-    <me.laudoak.oakpark.widget.portable.PortableImage
+    <me.laudoak.oakpark.ui.portable.PortableImage
         android:id="@+id/view_edit_image"
         android:visibility="gone"
         android:layout_width="150dp"
@@ -69,7 +69,7 @@
         android:layout_alignParentLeft="true"
         android:layout_margin="5dp"/>
 
-    <me.laudoak.oakpark.widget.panel.XBasePanelView
+    <me.laudoak.oakpark.ui.panel.XBasePanelView
         android:id="@+id/view_edit_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

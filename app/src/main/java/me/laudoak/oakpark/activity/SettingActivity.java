@@ -9,7 +9,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-10-20 at 17:42.
@@ -21,6 +21,8 @@ public class SettingActivity extends XBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        buildView();
         MobclickAgent.openActivityDurationTrack(false);
     }
 
@@ -36,17 +38,21 @@ public class SettingActivity extends XBaseActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView()
-    {
-        setContentView(R.layout.activity_setting);
-    }
-
-    @Override
-    public void buildView()
+   private void buildView()
     {
         buildBar();
-        initViews();
+
+        account = (LinearLayout) findViewById(R.id.set_account);
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserProxy.ifLogin(SettingActivity.this)) {
+                    startActivity(new Intent(SettingActivity.this, BulbulActivity.class));
+                } else {
+                    AppMsg.makeText(SettingActivity.this, "未登录", AppMsg.STYLE_CONFIRM).show();
+                }
+            }
+        });
     }
 
     private void buildBar() {
@@ -62,18 +68,4 @@ public class SettingActivity extends XBaseActivity {
         findViewById(R.id.ca_normal_done).setVisibility(View.GONE);
     }
 
-    private void initViews() {
-        account = (LinearLayout) findViewById(R.id.set_account);
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (UserProxy.ifLogin(SettingActivity.this))
-                {
-                    startActivity(new Intent(SettingActivity.this,BulbulActivity.class));
-                }else {
-                    AppMsg.makeText(SettingActivity.this,"未登录",AppMsg.STYLE_CONFIRM).show();
-                }
-            }
-        });
-    }
 }

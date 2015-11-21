@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.fittext.LinedEditor;
-import me.laudoak.oakpark.widget.panel.XBasePanelView;
-import me.laudoak.oakpark.widget.portable.PortableImage;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.fittext.LinedEditor;
+import me.laudoak.oakpark.ui.panel.XBasePanelView;
+import me.laudoak.oakpark.ui.portable.PortableImage;
 
 
 /**

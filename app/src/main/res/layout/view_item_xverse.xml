@@ -36,7 +36,7 @@
                     android:layout_height="22dp"
                     android:layout_gravity="center_vertical"/>
 
-                <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                <me.laudoak.oakpark.ui.fittext.AutofitTextView
                     style="@style/XVerseTitleText"
                     android:id="@+id/item_xverse_title"
                     android:layout_width="match_parent"
@@ -46,7 +46,7 @@
 
             </LinearLayout>
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/item_xverse_author"
                 style="@style/XVerseAuthorText"
                 android:layout_width="match_parent"

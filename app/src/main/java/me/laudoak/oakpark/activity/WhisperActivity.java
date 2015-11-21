@@ -1,14 +1,15 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-10-15 at 17:35.
@@ -22,6 +23,13 @@ public class WhisperActivity extends XBaseActivity {
     private AutofitTextView whisper;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_whisper);
+        buildView();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
@@ -33,14 +41,7 @@ public class WhisperActivity extends XBaseActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView()
-    {
-        setContentView(R.layout.activity_whisper);
-    }
-
-    @Override
-    public void buildView()
+    private void buildView()
     {
         whisper = (AutofitTextView) findViewById(R.id.activity_whisper_whisper);
 

@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="18dp">
 
-        <me.laudoak.oakpark.widget.clocktext.ClockText
+        <me.laudoak.oakpark.ui.clocktext.ClockText
             android:id="@+id/item_verse_date"
             style="@style/ItemDateText"
             android:layout_width="40dp"
@@ -26,7 +26,7 @@
     <!-- bubble arrow height:30-->
     <!-- bubble arrow width:25-->
     <!-- bubble arrow position:40-->
-    <me.laudoak.oakpark.widget.bubble.BubbleLinear
+    <me.laudoak.oakpark.ui.bubble.BubbleLinear
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/linear_verse_dot"
@@ -76,6 +76,6 @@
 
         </LinearLayout>
 
-    </me.laudoak.oakpark.widget.bubble.BubbleLinear>
+    </me.laudoak.oakpark.ui.bubble.BubbleLinear>
 
 </RelativeLayout>

@@ -42,6 +42,8 @@ public class EnterActivity extends XBaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_enter);
+        buildView();
         MobclickAgent.openActivityDurationTrack(false);
     }
 
@@ -57,13 +59,7 @@ public class EnterActivity extends XBaseActivity{
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_enter);
-    }
-
-    @Override
-    public void buildView() {
+    private void buildView() {
 
         buildBar();
 

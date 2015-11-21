@@ -7,7 +7,7 @@
     android:gravity="center"
     android:layout_gravity="center">
 
-    <me.laudoak.oakpark.widget.loading.RotateLoading
+    <me.laudoak.oakpark.ui.loading.RotateLoading
         android:id="@+id/loading_dialog_rotateloading"
         android:layout_height="56dp"
         android:layout_width="56dp"

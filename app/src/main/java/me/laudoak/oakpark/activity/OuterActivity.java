@@ -1,5 +1,7 @@
 package me.laudoak.oakpark.activity;
 
+import android.os.Bundle;
+
 import me.laudoak.oakpark.R;
 
 /**
@@ -10,12 +12,9 @@ public class OuterActivity extends XBaseActivity {
     private static final String TAG = "OuterActivity";
 
     @Override
-    protected void setView() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outer);
     }
 
-    @Override
-    public void buildView() {
-
-    }
 }

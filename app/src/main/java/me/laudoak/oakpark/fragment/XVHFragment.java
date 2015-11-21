@@ -16,16 +16,18 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
+import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
+import me.laudoak.oakpark.ctrl.xv.AbXVSubject;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.query.QueryXVerse;
-import me.laudoak.oakpark.widget.loani.ProgressWheel;
-import me.laudoak.oakpark.widget.message.AppMsg;
-import me.laudoak.oakpark.widget.recy.RecyclerViewPager;
+import me.laudoak.oakpark.ui.loani.ProgressWheel;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.recy.RecyclerViewPager;
 
 /**
  * Created by LaudOak on 2015-10-20 at 17:51.
  */
-public class XVHFragment extends XBaseFragment{
+public class XVHFragment extends AbXVSubject{
 
     private static final String TAG = "XVHFragment";
 
@@ -50,14 +52,23 @@ public class XVHFragment extends XBaseFragment{
         MobclickAgent.onPageEnd(TAG);
     }
 
-    public static XVHFragment newInstance()
+    private static final class SingletonClassHolder
     {
-        return ClassHolder.fragment;
+        private static final XVHFragment fragment = new XVHFragment();
     }
 
-    private static final class ClassHolder
+    public static XVHFragment newInstance()
     {
-        private static XVHFragment fragment = new XVHFragment();
+        return SingletonClassHolder.fragment;
+    }
+
+    //
+    @Override
+    public void notifyAllXVUpdated() {
+        for (AbXVOberver oberver : obervers)
+        {
+            oberver.notifyXVUpdate();
+        }
     }
 
     @Override
@@ -128,7 +139,7 @@ public class XVHFragment extends XBaseFragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
 

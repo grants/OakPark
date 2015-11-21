@@ -18,13 +18,12 @@ import me.laudoak.oakpark.fragment.PoetFragment;
  */
 public class PoetActivity extends XBaseActivity {
 
-    private ImageView close;
-    private ImageView newVerse;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_poet);
+        buildView();
         MobclickAgent.openActivityDurationTrack(false);
     }
 
@@ -40,14 +39,7 @@ public class PoetActivity extends XBaseActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_poet);
-    }
-
-    @Override
-    public void buildView() {
-
+    private void buildView() {
         buildBar();
         PoetFragment fragment = PoetFragment.newIastance();
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_poet_container,fragment).commit();
@@ -57,7 +49,7 @@ public class PoetActivity extends XBaseActivity {
 
         getSupportActionBar().hide();
 
-        close = (ImageView) findViewById(R.id.ca_poet_back);
+        ImageView close = (ImageView) findViewById(R.id.ca_poet_back);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +57,13 @@ public class PoetActivity extends XBaseActivity {
             }
         });
 
-        newVerse = (ImageView) findViewById(R.id.ca_poet_done);
+        ImageView newVerse = (ImageView) findViewById(R.id.ca_poet_done);
         newVerse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG,0);
-                intent.setClass(PoetActivity.this,EditorActivity.class);
+                intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 0);
+                intent.setClass(PoetActivity.this, EditorActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,15 +73,15 @@ public class PoetActivity extends XBaseActivity {
             public boolean onLongClick(View v) {
 
                 /*LongClick begin Entire Editor*/
-                AlertDialog.Builder builder = new AlertDialog.Builder(PoetActivity.this,R.style.CustomDialog)
+                AlertDialog.Builder builder = new AlertDialog.Builder(PoetActivity.this, R.style.CustomDialog)
                         .setMessage("进入完全编辑模式?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
                                 Intent intent = new Intent();
-                                intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG,1);
-                                intent.setClass(PoetActivity.this,EditorActivity.class);
+                                intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 1);
+                                intent.setClass(PoetActivity.this, EditorActivity.class);
                                 startActivity(intent);
 
                             }

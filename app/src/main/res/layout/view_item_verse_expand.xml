@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <me.laudoak.oakpark.widget.fittext.ExpandableLinear
+    <me.laudoak.oakpark.ui.fittext.ExpandableLinear
         android:id="@+id/item_verse_linear_expand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +27,6 @@
             android:background="@android:color/transparent"
             android:contentDescription="@null" />
 
-    </me.laudoak.oakpark.widget.fittext.ExpandableLinear>
+    </me.laudoak.oakpark.ui.fittext.ExpandableLinear>
 
 </LinearLayout>

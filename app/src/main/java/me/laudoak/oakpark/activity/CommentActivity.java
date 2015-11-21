@@ -2,6 +2,7 @@ package me.laudoak.oakpark.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
@@ -14,8 +15,8 @@ import me.laudoak.oakpark.fragment.EntireEditorFragment;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.net.DoComment;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-10-22 at 22:33.
@@ -33,6 +34,15 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     private ProgressDialog ld;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment);
+        xv = (XVerse) getIntent().getSerializableExtra(SUPCommentFragment.EXTRA_XVERSE);
+        buildView();
+    }
+
+
+    @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
@@ -44,20 +54,10 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView()
-    {
-        setContentView(R.layout.activity_comment);
-        xv = (XVerse) getIntent().getSerializableExtra(SUPCommentFragment.EXTRA_XVERSE);
-    }
-
-    @Override
-    public void buildView() {
+    private void buildView() {
         comment = (AutofitTextView) findViewById(R.id.activity_comment_comment);
-
         Intent i = getIntent();
         comment.setText(i.getStringExtra(EntireEditorFragment.EXTRA_WHISPER));
-
         buildBar();
     }
 

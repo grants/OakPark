@@ -21,6 +21,7 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
+import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
@@ -30,12 +31,11 @@ import me.laudoak.oakpark.fragment.XVHFragment;
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
  */
-public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpdateCallback{
+public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private static final String TAG = "OakParkActivity";
 
 
-    private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private SlidingUpPanelLayout slidingUpPanelLayout;
@@ -46,16 +46,16 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
     private int curPage;
     private TextView dateCode;
 
-    private NXVUCallback whisperNotier;
-    private NXVUCallback commentNotier;
-    private NXVUCallback shareNotier;
-
     private List<Fragment> supFragments;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_oakpark);
+        buildView();
+
         MobclickAgent.openActivityDurationTrack(false);
     }
 
@@ -71,24 +71,17 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_oakpark);
-    }
 
-    @Override
-    public void buildView()
+    private void buildView()
     {
-        initDrawer();
-
+        buildDrawer();
         buildSUP();
     }
 
     /*build drawer layout & pager*/
-    private void initDrawer()
+    private void buildDrawer()
     {
-        drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
-
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerOpened(View drawerView)
             {
@@ -137,15 +130,12 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
         supFragments = new ArrayList<Fragment>();
 
         SUPWhisperFragment whisperFragment = SUPWhisperFragment.newInstance();
-        whisperNotier =  whisperFragment;
         supFragments.add(whisperFragment);
 
         SUPCommentFragment commentFragment = SUPCommentFragment.newInstance();
-        commentNotier = commentFragment;
         supFragments.add(commentFragment);
 
         SUPShareFragment shareFragment = SUPShareFragment.newInstance();
-        shareNotier = shareFragment;
         supFragments.add(shareFragment);
         /**/
 
@@ -227,12 +217,8 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item))
-        {
-            return true;
-        }
+        return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -248,15 +234,8 @@ public class OakParkActivity extends XBaseActivity implements XVHFragment.XVUpda
     }
 
     @Override
-    public void onUpdateXV(XVerse xv) {
-        whisperNotier.onUpdateXV(xv);
-        commentNotier.onUpdateXV(xv);
-        shareNotier.onUpdateXV(xv);
-    }
+    public void notifyXVUpdate(XVerse xv) {
 
-    public interface NXVUCallback
-    {
-        void onUpdateXV(XVerse xv);
     }
 
 }

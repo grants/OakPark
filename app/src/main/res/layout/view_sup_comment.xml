@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <me.laudoak.oakpark.widget.loani.ProgressWheel
+    <me.laudoak.oakpark.ui.loani.ProgressWheel
         android:id="@+id/sup_comment_loani"
         android:layout_width="40dp"
         android:layout_height="40dp"

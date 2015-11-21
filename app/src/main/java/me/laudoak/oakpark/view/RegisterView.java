@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-9-27.

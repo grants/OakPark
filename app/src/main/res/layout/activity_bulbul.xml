@@ -30,7 +30,7 @@
             fresco:roundWithOverlayColor="@color/white"
             fresco:roundAsCircle="true"/>
 
-        <me.laudoak.oakpark.widget.fittext.AutofitTextView
+        <me.laudoak.oakpark.ui.fittext.AutofitTextView
             android:id="@+id/bulbul_nick"
             style="@style/BulbulNick"
             android:hint="昵称"
@@ -40,7 +40,7 @@
             autofit:minTextSize="20sp"
             autofit:sizeToFit="true"/>
 
-        <me.laudoak.oakpark.widget.fittext.AutofitTextView
+        <me.laudoak.oakpark.ui.fittext.AutofitTextView
             android:id="@+id/bulbul_email"
             style="@style/BulbulOther"
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             autofit:minTextSize="14sp"
             autofit:sizeToFit="true"/>
 
-        <me.laudoak.oakpark.widget.fittext.AutofitTextView
+        <me.laudoak.oakpark.ui.fittext.AutofitTextView
             android:id="@+id/bulbul_num"
             style="@style/BulbulOther"
             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 android:layout_marginRight="18dp"
                 android:background="@drawable/bg_btn_tpl" />
 
-            <me.laudoak.oakpark.sosh.tplogin.weibo.LoginButton
+            <me.laudoak.oakpark.soci.tplogin.weibo.LoginButton
                 android:id="@+id/bulbul_weibo"
                 android:src="@mipmap/ic_share_weibo"
                 android:layout_width="55dp"

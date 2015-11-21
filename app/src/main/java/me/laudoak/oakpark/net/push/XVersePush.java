@@ -48,10 +48,11 @@ public class XVersePush extends XBasePush {
 
         v.setBulbul(poet);
         v.setTitle(this.title);
+        v.setDateCode(0);
+        v.setPass(false);
+        v.setWhisper(this.whisper);
         v.setAuthor(this.author);
         v.setVerse(this.verse);
-        v.setWhisper(this.whisper);
-        v.setPass(false);
 
         if (null!=this.imagePath)
         {

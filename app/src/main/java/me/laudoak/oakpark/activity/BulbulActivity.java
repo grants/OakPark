@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -20,8 +21,8 @@ import cn.bmob.v3.BmobUser;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.message.AppMsg;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
@@ -41,26 +42,32 @@ public class BulbulActivity extends XBaseActivity {
     private Button loginOut;
 
     private ImageView associateQQ,associateWeibo;
+    private TextView title;
 
     private String newPath = null;
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_bulbul);
-        poet = UserProxy.currentPoet(this);
-    }
-
-    @Override
-    public void buildView() {
+    private void buildView() {
         finViews();
         buildBar();
         initViews();
         initlistener();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bulbul);
+        poet = UserProxy.currentPoet(this);
+        buildView();
+    }
+
     private void buildBar()
     {
         getSupportActionBar().hide();
+
+        title = (TextView) findViewById(R.id.ca_normal_title);
+        title.setVisibility(View.VISIBLE);
+        title.setText("设置");
 
         findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener() {
             @Override

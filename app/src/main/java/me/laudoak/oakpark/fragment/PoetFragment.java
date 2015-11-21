@@ -15,8 +15,8 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.PoetAdapter;
 import me.laudoak.oakpark.entity.Verse;
 import me.laudoak.oakpark.net.query.QueryVerse;
-import me.laudoak.oakpark.widget.message.AppMsg;
-import me.laudoak.oakpark.widget.paging.PagingListView;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.paging.PagingListView;
 
 /**
  * Created by LaudOak on 2015-10-8 at 20:22.

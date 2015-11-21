@@ -25,10 +25,11 @@
         android:id="@+id/custom_actionbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="#545454"
+        android:textColor="#151515"
         android:textSize="20sp"
+        android:layout_toRightOf="@+id/btn_back"
+        android:layout_marginLeft="16dp"
         android:text="选择图片"/>
 
     <TextView

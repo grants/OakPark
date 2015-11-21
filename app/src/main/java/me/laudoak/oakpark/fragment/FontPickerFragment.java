@@ -11,9 +11,9 @@ import android.view.View;
 import java.util.ArrayList;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.widget.dialog.XBaseDialog;
-import me.laudoak.oakpark.widget.loop.LoopListener;
-import me.laudoak.oakpark.widget.loop.LoopView;
+import me.laudoak.oakpark.ui.dialog.XBaseDialog;
+import me.laudoak.oakpark.ui.loop.LoopListener;
+import me.laudoak.oakpark.ui.loop.LoopView;
 
 /**
  * Created by LaudOak on 2015-11-7 at 10:10.
@@ -75,7 +75,7 @@ public class FontPickerFragment extends XBaseDialog {
 
         setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomDialog)
                 .setTitle("选择字体")
                 .setView(rootView)
                 .setNegativeButton("取消", null)

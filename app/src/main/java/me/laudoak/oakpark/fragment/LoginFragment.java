@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
 import com.umeng.analytics.MobclickAgent;
 
@@ -26,10 +25,10 @@ import java.util.regex.Pattern;
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.sosh.tplogin.qq.QQAuthListener;
-import me.laudoak.oakpark.sosh.tplogin.XBaseAuth;
-import me.laudoak.oakpark.sosh.tplogin.weibo.LoginButton;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.soci.tplogin.qq.QQAuthListener;
+import me.laudoak.oakpark.soci.tplogin.XBaseAuth;
+import me.laudoak.oakpark.soci.tplogin.weibo.LoginButton;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-9-27.

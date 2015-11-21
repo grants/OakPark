@@ -16,7 +16,7 @@
 
     </RelativeLayout>
 
-    <me.laudoak.oakpark.widget.paging.PagingListView
+    <me.laudoak.oakpark.ui.paging.PagingListView
         android:id="@+id/lv_poet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

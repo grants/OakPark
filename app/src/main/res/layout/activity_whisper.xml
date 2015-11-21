@@ -8,7 +8,7 @@
 
     <include layout="@layout/view_actionbar_normal"/>
 
-    <me.laudoak.oakpark.widget.fittext.AutofitTextView
+    <me.laudoak.oakpark.ui.fittext.AutofitTextView
         android:id="@+id/activity_whisper_whisper"
         style="@style/WhisperActivityEditor"
         android:layout_width="match_parent"

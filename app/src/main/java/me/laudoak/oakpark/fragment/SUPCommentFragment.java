@@ -23,8 +23,8 @@ import me.laudoak.oakpark.adapter.CommentAdapter;
 import me.laudoak.oakpark.entity.Comment;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.query.QueryComment;
-import me.laudoak.oakpark.widget.loani.ProgressWheel;
-import me.laudoak.oakpark.widget.message.AppMsg;
+import me.laudoak.oakpark.ui.loani.ProgressWheel;
+import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.

@@ -15,7 +15,7 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.XVerse;
-import me.laudoak.oakpark.widget.fittext.AutofitTextView;
+import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 
 /**
  * Created by LaudOak on 2015-10-20 at 18:02.

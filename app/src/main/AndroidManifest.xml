@@ -110,7 +110,7 @@
 
         <!-- WeChat share callback-->
         <activity
-            android:name=".sosh.soshare.wxapi.WXEntryActivity"
+            android:name=".soci.soshare.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"

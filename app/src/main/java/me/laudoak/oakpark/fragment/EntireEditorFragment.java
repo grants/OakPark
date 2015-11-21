@@ -24,9 +24,9 @@ import me.laudoak.oakpark.activity.WhisperActivity;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.push.XVersePush;
 import me.laudoak.oakpark.view.EntireEditorView;
-import me.laudoak.oakpark.widget.dialog.MessageDialog;
-import me.laudoak.oakpark.widget.message.AppMsg;
-import me.laudoak.oakpark.widget.panel.XBasePanelView;
+import me.laudoak.oakpark.ui.dialog.MessageDialog;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.panel.XBasePanelView;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 

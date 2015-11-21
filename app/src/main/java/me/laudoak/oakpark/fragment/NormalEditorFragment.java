@@ -20,9 +20,9 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.net.push.VersePush;
 import me.laudoak.oakpark.view.NormalEditorView;
-import me.laudoak.oakpark.widget.dialog.MessageDialog;
-import me.laudoak.oakpark.widget.message.AppMsg;
-import me.laudoak.oakpark.widget.panel.XBasePanelView;
+import me.laudoak.oakpark.ui.dialog.MessageDialog;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.panel.XBasePanelView;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 

@@ -16,13 +16,9 @@ public abstract class XBaseActivity extends AppCompatActivity {
 
     private static final String TAG = "XBaseActivity";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setView();
-        buildView();
 
         /*Bmob initialize*/
         Bmob.initialize(XBaseActivity.this, OP.BMOB_APP_ID);
@@ -36,9 +32,4 @@ public abstract class XBaseActivity extends AppCompatActivity {
         super.onDestroy();
         ShareSDK.stopSDK(this);
     }
-
-    protected abstract void setView();
-
-    public abstract void buildView();
-
 }

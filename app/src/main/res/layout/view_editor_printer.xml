@@ -12,7 +12,7 @@
         android:layout_height="@dimen/ach"
         android:id="@+id/printer_ac"/>
 
-    <me.laudoak.oakpark.widget.damp.DampEditor
+    <me.laudoak.oakpark.ui.damp.DampEditor
         android:id="@+id/printer_damp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,7 +48,7 @@
                     android:layout_height="22dp"
                     android:layout_gravity="center_vertical"/>
 
-                <me.laudoak.oakpark.widget.fittext.AutofitTextView
+                <me.laudoak.oakpark.ui.fittext.AutofitTextView
                     style="@style/PrinterTitleText"
                     android:id="@+id/printer_title"
                     android:layout_width="match_parent"
@@ -58,7 +58,7 @@
 
             </LinearLayout>
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/printer_author"
                 style="@style/PrinterAuthorText"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 autofit:minTextSize="10sp"
                 autofit:sizeToFit="true"/>
 
-            <me.laudoak.oakpark.widget.fittext.AutofitTextView
+            <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/printer_verse"
                 style="@style/PrinterVerseText"
                 android:layout_below="@+id/printer_author"
@@ -82,7 +82,7 @@
 
         </RelativeLayout>
 
-    </me.laudoak.oakpark.widget.damp.DampEditor>
+    </me.laudoak.oakpark.ui.damp.DampEditor>
 
     <me.laudoak.oakpark.view.PrinterPanelView
         android:id="@+id/printer_panel"

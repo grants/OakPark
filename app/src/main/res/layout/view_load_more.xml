@@ -7,7 +7,7 @@
     android:padding="4dp"
     android:gravity="center">
 
-    <me.laudoak.oakpark.widget.loani.ProgressWheel
+    <me.laudoak.oakpark.ui.loani.ProgressWheel
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:padding="10dp"

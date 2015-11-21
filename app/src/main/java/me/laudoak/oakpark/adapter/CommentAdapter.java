@@ -12,7 +12,7 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Comment;
-import me.laudoak.oakpark.widget.clocktext.ClockText;
+import me.laudoak.oakpark.ui.clocktext.ClockText;
 
 /**
  * Created by LaudOak on 2015-10-23 at 10:52.

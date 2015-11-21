@@ -11,9 +11,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.Verse;
-import me.laudoak.oakpark.widget.clocktext.ClockText;
-import me.laudoak.oakpark.widget.fittext.ExpandableLinear;
-import me.laudoak.oakpark.widget.paging.XBasePagingAdapter;
+import me.laudoak.oakpark.ui.clocktext.ClockText;
+import me.laudoak.oakpark.ui.fittext.ExpandableLinear;
+import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
 
 
 /**

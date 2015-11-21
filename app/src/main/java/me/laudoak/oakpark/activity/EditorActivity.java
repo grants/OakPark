@@ -25,16 +25,13 @@ public class EditorActivity extends XBaseActivity{
 
     private XBaseFragment fragment;
 
-    private TextView push;
-    private ImageView close;
-
-    private int flag;
-
     private PushCallback pushCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_editor);
+        buildView();
         MobclickAgent.openActivityDurationTrack(false);
     }
 
@@ -50,26 +47,17 @@ public class EditorActivity extends XBaseActivity{
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_editor);
-    }
-
-    @Override
-    public void buildView() {
-
-        getSupportActionBar().hide();
-
+    private void buildView() {
         buildBar();
-
         handleIntent();
     }
 
     private void handleIntent() {
+        TextView title = (TextView) findViewById(R.id.ca_normal_title);
         Intent intent = getIntent();
         if (null!=intent)
         {
-            flag = intent.getIntExtra(EXTRA_FRAGMENT_FLAG,-1);
+            int flag = intent.getIntExtra(EXTRA_FRAGMENT_FLAG, -1);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -79,12 +67,22 @@ public class EditorActivity extends XBaseActivity{
                 {
                     //#2015-10-1 bug here
                     fragment = new NormalEditorFragment();
+                    if (null != title)
+                    {
+                        title.setText("新建");
+                    }
+
                     break;
                 }
 
                 case 1:
                 {
                     fragment = new EntireEditorFragment();
+                    if (null != title)
+                    {
+                        title.setText("新建卡片");
+                    }
+
                     break;
                 }
 
@@ -99,7 +97,9 @@ public class EditorActivity extends XBaseActivity{
     }
 
     private void buildBar() {
-        close = (ImageView) findViewById(R.id.ca_editor_back);
+
+        getSupportActionBar().hide();
+        ImageView close = (ImageView) findViewById(R.id.ca_editor_back);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,18 +107,16 @@ public class EditorActivity extends XBaseActivity{
             }
         });
 
-        push = (TextView) findViewById(R.id.ca_editor_done);
+        TextView push = (TextView) findViewById(R.id.ca_editor_done);
         push.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(null!=fragment&&null!=pushCallback)
-                {
+                if (null != fragment && null != pushCallback) {
                     pushCallback.onPush();
                 }
             }
         });
-
     }
 
     public interface PushCallback

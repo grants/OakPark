@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:visibility="gone"/>
 
-    <me.laudoak.oakpark.widget.recy.RecyclerViewPager
+    <me.laudoak.oakpark.ui.recy.RecyclerViewPager
         android:id="@+id/view_recy"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="52dp"
@@ -26,7 +26,7 @@
         app:triggerOffset="0.1"
         android:background="@android:color/transparent"/>
 
-    <me.laudoak.oakpark.widget.loani.ProgressWheel
+    <me.laudoak.oakpark.ui.loani.ProgressWheel
         android:id="@+id/view_recy_loading"
         android:layout_width="52dp"
         android:layout_height="52dp"

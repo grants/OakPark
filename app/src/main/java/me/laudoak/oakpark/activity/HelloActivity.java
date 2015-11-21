@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +24,13 @@ public class HelloActivity extends XBaseActivity {
     private TextView sipText;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hello);
+        buildView();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
@@ -34,13 +42,7 @@ public class HelloActivity extends XBaseActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void setView() {
-        setContentView(R.layout.activity_hello);
-    }
-
-    @Override
-    public void buildView() {
+   private void buildView() {
 
         FontsManager.initFormAssets(this, "fonts/fang.TTF");
         oakpark = (TextView) findViewById(R.id.hello_app_name);
