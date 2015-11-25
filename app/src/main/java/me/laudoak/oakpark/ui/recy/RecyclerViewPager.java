@@ -18,11 +18,6 @@ import java.util.List;
 import me.laudoak.oakpark.BuildConfig;
 import me.laudoak.oakpark.R;
 
-/**
- * RecyclerViewPager
- *
- * @author Green
- */
 public class RecyclerViewPager extends RecyclerView {
     public static final boolean DEBUG = BuildConfig.DEBUG;
 
@@ -37,7 +32,7 @@ public class RecyclerViewPager extends RecyclerView {
     private boolean mSinglePageFling;
 
     boolean mNeedAdjust;
-    int mFisrtLeftWhenDragging;
+    int mFirstLeftWhenDragging;
     int mFirstTopWhenDragging;
     View mCurView;
     int mMaxLeftWhenDragging = Integer.MIN_VALUE;
@@ -319,7 +314,7 @@ public class RecyclerViewPager extends RecyclerView {
                 if (DEBUG) {
                     Log.d("@", "mPositionBeforeScroll:" + mPositionBeforeScroll);
                 }
-                mFisrtLeftWhenDragging = mCurView.getLeft();
+                mFirstLeftWhenDragging = mCurView.getLeft();
                 mFirstTopWhenDragging = mCurView.getTop();
             } else {
                 mPositionBeforeScroll = -1;
@@ -329,7 +324,7 @@ public class RecyclerViewPager extends RecyclerView {
             mNeedAdjust = false;
             if (mCurView != null) {
                 if (getLayoutManager().canScrollHorizontally()) {
-                    mTouchSpan = mCurView.getLeft() - mFisrtLeftWhenDragging;
+                    mTouchSpan = mCurView.getLeft() - mFirstLeftWhenDragging;
                 } else {
                     mTouchSpan = mCurView.getTop() - mFirstTopWhenDragging;
                 }
@@ -344,7 +339,7 @@ public class RecyclerViewPager extends RecyclerView {
                 if (mCurView != null) {
                     targetPosition = getChildAdapterPosition(mCurView);
                     if (getLayoutManager().canScrollHorizontally()) {
-                        int spanX = mCurView.getLeft() - mFisrtLeftWhenDragging;
+                        int spanX = mCurView.getLeft() - mFirstLeftWhenDragging;
                         // if user is tending to cancel paging action, don't perform position changing
                         if (spanX > mCurView.getWidth() * mTriggerOffset && mCurView.getLeft() >= mMaxLeftWhenDragging) {
                             targetPosition--;

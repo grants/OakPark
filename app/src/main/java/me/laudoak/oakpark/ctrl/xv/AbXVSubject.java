@@ -2,6 +2,7 @@ package me.laudoak.oakpark.ctrl.xv;
 
 import java.util.ArrayList;
 
+import me.laudoak.oakpark.activity.XBaseActivity;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.XBaseFragment;
 
@@ -14,7 +15,7 @@ public abstract class AbXVSubject extends XBaseFragment
 
     protected ArrayList<AbXVOberver> obervers = new ArrayList<AbXVOberver>();
 
-    public abstract void notifyAllXVUpdated();
+    public abstract void notifyAllXVUpdated(XVerse xVerse);
 
     public void attach(AbXVOberver newObserver)
     {

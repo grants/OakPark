@@ -20,6 +20,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.CommentActivity;
 import me.laudoak.oakpark.activity.OakParkActivity;
 import me.laudoak.oakpark.adapter.CommentAdapter;
+import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.Comment;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.net.query.QueryComment;
@@ -29,8 +30,7 @@ import me.laudoak.oakpark.ui.message.AppMsg;
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public class SUPCommentFragment extends XBaseFragment implements
-        OakParkActivity.NXVUCallback{
+public class SUPCommentFragment extends XBaseFragment implements AbXVOberver{
 
     private static final String TAG = "SUPCommentFragment";
 
@@ -44,28 +44,15 @@ public class SUPCommentFragment extends XBaseFragment implements
 
     private XVerse curXV;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart(TAG); //统计页面
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd(TAG);
-    }
-
-    public static SUPCommentFragment newInstance()
-    {
-        return ClassHolder.fragment;
-    }
-
     private static class ClassHolder
     {
         private final static SUPCommentFragment fragment = new SUPCommentFragment();
     }
 
+    public static SUPCommentFragment getSingletonInstance()
+    {
+        return ClassHolder.fragment;
+    }
 
     @Nullable
     @Override
@@ -82,6 +69,27 @@ public class SUPCommentFragment extends XBaseFragment implements
 
         return rootView;
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(TAG); //统计页面
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(TAG);
+    }
+
+
+    @Override
+    public void notifyXVUpdate(XVerse xv) {
+
+    }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -135,15 +143,6 @@ public class SUPCommentFragment extends XBaseFragment implements
                 loani.setVisibility(View.GONE);
             }
         });
-    }
-
-    @Override
-    public void onUpdateXV(XVerse xv) {
-        if (xv != curXV)
-        {
-            curXV = xv;
-            getComments();
-        }
     }
 
     @Override

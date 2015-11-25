@@ -19,9 +19,9 @@ import me.laudoak.oakpark.net.UserProxy;
  */
 public class XVersePush extends XBasePush {
 
-    private String whisper;
-
     private static final String TAG = "XVersePush";
+
+    private String whisper;
 
     private XVersePush(Builder builder)
     {
@@ -130,7 +130,6 @@ public class XVersePush extends XBasePush {
         String verse;
         String imagePath;
         String whisper;
-        int dateCode;
 
         public Builder(Context c)
         {

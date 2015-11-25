@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -45,7 +47,12 @@ public class FontPickerFragment extends XBaseDialog {
     }
 
     @Override
-    protected void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+        private void init() {
 
         rootView = getActivity().getLayoutInflater().inflate(R.layout.view_pinter_loop,null);
         LoopView loopView = (LoopView) rootView.findViewById(R.id.pinter_font_loop);
@@ -72,8 +79,6 @@ public class FontPickerFragment extends XBaseDialog {
 
     @Override
     public Dialog callDialog() {
-
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomDialog)
                 .setTitle("选择字体")

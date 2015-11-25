@@ -2,7 +2,6 @@ package me.laudoak.oakpark.ui.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import me.laudoak.oakpark.R;
@@ -28,14 +27,14 @@ public class MessageDialog extends XBaseDialog {
     }
 
     @Override
-    protected void initData() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         this.message = getArguments().getString(BUNDLE_MESSAGE);
     }
 
     @Override
     public Dialog callDialog() {
-
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.CustomDialog);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.CustomDialog);
         builder.setMessage(message)

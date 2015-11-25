@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,12 +23,18 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
+import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
+import me.laudoak.oakpark.ctrl.xv.AbXVSubject;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
+import me.laudoak.oakpark.net.query.QueryXVerse;
+import me.laudoak.oakpark.ui.loani.ProgressWheel;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.recy.RecyclerViewPager;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
@@ -37,26 +45,26 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-
     private SlidingUpPanelLayout slidingUpPanelLayout;
-
     private ViewPager supPager;
     private ImageView indicator;
     private int indicatorWidth;
-    private int curPage;
-    private TextView dateCode;
+    private int currViewPagerPage;
 
-    private List<Fragment> supFragments;
-
+    private XVHFragment xvhFragment;
+    private SUPWhisperFragment whisperFragment;
+    private SUPCommentFragment commentFragment;
+    private SUPShareFragment shareFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobclickAgent.openActivityDurationTrack(false);
 
         setContentView(R.layout.activity_oakpark);
+        buildFragments();
         buildView();
 
-        MobclickAgent.openActivityDurationTrack(false);
     }
 
     @Override
@@ -71,6 +79,15 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
         MobclickAgent.onPause(this);
     }
 
+    private void buildFragments()
+    {
+        whisperFragment = SUPWhisperFragment.getSingletonInstance();
+        commentFragment = SUPCommentFragment.getSingletonInstance();
+        shareFragment = SUPShareFragment.getSingletonInstance();
+
+        xvhFragment = XVHFragment.getSingletonInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment,xvhFragment).commit();
+    }
 
     private void buildView()
     {
@@ -105,9 +122,6 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private void buildSUP() {
 
-        XVHFragment fragment = XVHFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment, fragment).commit();
-
         slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
 
          /*three indicator button*/
@@ -116,7 +130,7 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
         ImageView share = (ImageView) findViewById(R.id.sup_head_share);
 
         /*dateCode*/
-        dateCode = (TextView) findViewById(R.id.sup_head_date);
+        //dateCode = (TextView) findViewById(R.id.sup_head_date);
 
         /*indicator attr*/
         indicator = (ImageView) findViewById(R.id.sup_head_indicator);
@@ -127,38 +141,32 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
 
         /*init viewpager fragments & update xverse callback*/
-        supFragments = new ArrayList<Fragment>();
-
-        SUPWhisperFragment whisperFragment = SUPWhisperFragment.newInstance();
+        List<Fragment> supFragments = new ArrayList<Fragment>();
         supFragments.add(whisperFragment);
-
-        SUPCommentFragment commentFragment = SUPCommentFragment.newInstance();
         supFragments.add(commentFragment);
-
-        SUPShareFragment shareFragment = SUPShareFragment.newInstance();
         supFragments.add(shareFragment);
-        /**/
-
         supPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), supFragments));
 
-        supPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        supPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) indicator.getLayoutParams();
 
-                if (curPage == 0 && position == 0)
+                if (currViewPagerPage == 0 && position == 0)
                 {
                     layoutParams.leftMargin = (int) (positionOffset * indicatorWidth);
-                } else if (curPage == 1 && position == 0)
+                } else if (currViewPagerPage == 1 && position == 0)
                 {
-                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
-                } else if (curPage == 1 && position == 1)
+                    layoutParams.leftMargin = (int) (currViewPagerPage * indicatorWidth + (positionOffset - 1) * indicatorWidth);
+                } else if (currViewPagerPage == 1 && position == 1)
                 {
-                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + positionOffset
+                    layoutParams.leftMargin = (int) (currViewPagerPage * indicatorWidth + positionOffset
                             * indicatorWidth);
-                } else if (curPage == 2 && position == 1)
+                } else if (currViewPagerPage == 2 && position == 1)
                 {
-                    layoutParams.leftMargin = (int) (curPage * indicatorWidth + ( positionOffset-1)
+                    layoutParams.leftMargin = (int) (currViewPagerPage * indicatorWidth + ( positionOffset-1)
                             * indicatorWidth);
                 }
 
@@ -167,7 +175,7 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
             @Override
             public void onPageSelected(int position) {
-                curPage = position;
+                currViewPagerPage = position;
             }
 
             @Override
@@ -177,7 +185,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
         });
 
 
-        whisper.setOnClickListener(new View.OnClickListener() {
+        whisper.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 judgeSUP();
@@ -214,6 +223,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
         }
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -234,7 +245,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     }
 
     @Override
-    public void notifyXVUpdate(XVerse xv) {
+    public void notifyXVUpdate(XVerse xv)
+    {
 
     }
 

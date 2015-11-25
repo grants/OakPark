@@ -25,25 +25,74 @@ import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.recy.RecyclerViewPager;
 
 /**
- * Created by LaudOak on 2015-10-20 at 17:51.
+ * Created by LaudOak on 2015-11-24 at 16:32.
  */
-public class XVHFragment extends AbXVSubject{
+public class XVHFragment extends AbXVSubject {
 
     private static final String TAG = "XVHFragment";
 
-    private View mRootView;
+    private int currXVPage = 0;
+    private View rootView;
     protected RecyclerViewPager mRecyclerView;
-    private XVUpdateCallback mXvucall;
-
     private ProgressWheel loani;
     private TextView loadFailed;
 
-    private int currPage = 0;
+
+    private static class ClassHolder
+    {
+        private final static XVHFragment fragment = new XVHFragment();
+    }
+
+    public static XVHFragment getSingletonInstance()
+    {
+        return ClassHolder.fragment;
+    }
+
+    /**/
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        this.attach((AbXVOberver) context);
+        this.attach(SUPWhisperFragment.getSingletonInstance());
+        this.attach(SUPCommentFragment.getSingletonInstance());
+        this.attach(SUPShareFragment.getSingletonInstance());
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (null == rootView)
+        {
+            rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
+        }else if (null != (rootView.getParent())){
+            ((ViewGroup)rootView.getParent()).removeView(rootView);
+        }
+
+        buildViews(rootView);
+
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(TAG); //统计页面
+        MobclickAgent.onPageStart(TAG);
     }
 
     @Override
@@ -52,68 +101,52 @@ public class XVHFragment extends AbXVSubject{
         MobclickAgent.onPageEnd(TAG);
     }
 
-    private static final class SingletonClassHolder
-    {
-        private static final XVHFragment fragment = new XVHFragment();
-    }
-
-    public static XVHFragment newInstance()
-    {
-        return SingletonClassHolder.fragment;
-    }
-
-    //
     @Override
-    public void notifyAllXVUpdated() {
-        for (AbXVOberver oberver : obervers)
-        {
-            oberver.notifyXVUpdate();
-        }
+    public void onStop() {
+        super.onStop();
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.mXvucall = (XVUpdateCallback) context;
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        if (null == mRootView)
-        {
-            mRootView = inflater.inflate(R.layout.view_xv_recy,container,false);
-        }else if (null != (mRootView.getParent())){
-            ((ViewGroup)mRootView.getParent()).removeView(mRootView);
-        }
-
-        buildViews(mRootView);
-
-        return mRootView;
-
+    public void onDestroy() {
+        super.onDestroy();
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+    /**/
 
     private void buildViews(View view)
     {
-
         mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
-
-        mRecyclerView.setVisibility(View.GONE);
-
         loani = (ProgressWheel) view.findViewById(R.id.view_recy_loading);
         loadFailed = (TextView) view.findViewById(R.id.view_recy_load_failed);
+
+        buildRecy();
+    }
+
+    private void buildRecy()
+    {
+
+        mRecyclerView.setVisibility(View.GONE);
 
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layout);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLongClickable(true);
 
-        new QueryXVerse(context, new QueryXVerse.QueryCallback() {
+        new QueryXVerse(context, new QueryXVerse.QueryCallback()
+        {
             @Override
             public void onFailure(String why)
             {
-                AppMsg.makeText(context,"获取数据出错了",AppMsg.STYLE_CONFIRM).show();
+                AppMsg.makeText(context, "获取数据出错了", AppMsg.STYLE_CONFIRM).show();
                 loani.setVisibility(View.GONE);
                 if (loadFailed.getVisibility() != View.VISIBLE)
                 {
@@ -125,20 +158,19 @@ public class XVHFragment extends AbXVSubject{
             public void onSuccess(List<XVerse> results) {
 
                 mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
-                mXvucall.onUpdateXV(results.get(currPage));
-
                 mRecyclerView.setVisibility(View.VISIBLE);
                 loani.setVisibility(View.GONE);
+                notifyAllXVUpdated(results.get(0));
 
             }
         });
 
+        setRecyListener();
+
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    private void setRecyListener()
+    {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
@@ -146,11 +178,11 @@ public class XVHFragment extends AbXVSubject{
                 int tmp = mRecyclerView.getCurrentPosition();
 
                 XVAdapter adapter = (XVAdapter) mRecyclerView.getAdapter();
-                if (null != adapter && tmp != currPage) {
-
-                    currPage = tmp;
-                    XVerse xv = adapter.getxVerseList().get(currPage);
-                    mXvucall.onUpdateXV(xv);
+                if (null != adapter && tmp != currXVPage)
+                {
+                    currXVPage = tmp;
+                    XVerse xv = adapter.getxVerseList().get(currXVPage);
+                    notifyAllXVUpdated(xv);
                 }
 
             }
@@ -214,12 +246,15 @@ public class XVHFragment extends AbXVSubject{
 
             }
         });
-
     }
 
-    public interface XVUpdateCallback
+    @Override
+    public void notifyAllXVUpdated(XVerse xVerse)
     {
-        void onUpdateXV(XVerse xv);
+        for (AbXVOberver oberver : obervers)
+        {
+            oberver.notifyXVUpdate(xVerse);
+        }
     }
 
 }

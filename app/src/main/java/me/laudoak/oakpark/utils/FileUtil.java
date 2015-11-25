@@ -1,14 +1,20 @@
 package me.laudoak.oakpark.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by LaudOak on 2015-11-7 at 15:41.
@@ -84,7 +90,46 @@ public class FileUtil {
                 });
 
         return destFile.getAbsolutePath();
+    }
 
+    public static String readTxtFromAssets(Context context, String target) throws IOException {
+        AssetManager as = context.getApplicationContext().getResources().getAssets();
+
+        StringBuilder sb = new StringBuilder();
+
+        InputStream is = null;
+        BufferedReader br = null;
+        try
+        {
+            is = as.open(target);
+            br = new BufferedReader(new InputStreamReader(is));
+
+            String s;
+            while ((s = br.readLine()) != null)
+            {
+                sb.append(s).append("\n");
+            }
+        } finally
+        {
+            closeQuietly(br);
+            closeQuietly(is);
+        }
+
+        return sb.toString();
+    }
+
+    private static void closeQuietly(Closeable closeable)
+    {
+        if (closeable == null)
+        {
+            return;
+        }
+        try
+        {
+            closeable.close();
+        } catch (IOException ignore) {
+            //Do nothing
+        }
     }
 
 }

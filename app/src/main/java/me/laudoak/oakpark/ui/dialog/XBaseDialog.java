@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.ui.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -14,14 +15,12 @@ import me.laudoak.oakpark.R;
  */
 public abstract class XBaseDialog extends DialogFragment {
 
-    Context context;
+    protected Context context;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.context = getActivity();
-        setStyle(DialogFragment.STYLE_NORMAL,R.style.CustomDialog);
-        initData();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.context = activity;
     }
 
     @NonNull
@@ -30,6 +29,6 @@ public abstract class XBaseDialog extends DialogFragment {
         return callDialog();
     }
 
-    protected abstract void initData();
     public abstract Dialog callDialog();
+
 }
