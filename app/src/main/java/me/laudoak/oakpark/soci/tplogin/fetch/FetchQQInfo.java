@@ -9,7 +9,11 @@ import com.squareup.okhttp.Request;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Random;
+
+import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.net.raw.OkHttpClientManager;
+import me.laudoak.oakpark.utils.StringUtil;
 
 /**
  * Created by LaudOak on 2015-11-25 at 22:36.
@@ -18,12 +22,15 @@ public class FetchQQInfo extends AbFetcher {
 
     private static final String TAG = "FetchQQInfo";
 
+//    http://wiki.open.qq.com/wiki/website/get_user_info
+//    {"qq":{"access_token":"EB00E6E39DE1E322FD6F874CF7E6F241","expires_in":7776000,"openid":"3E406204BB5BA421D530D8E55AEEAFE3"}}
+
+
     private static final String FETCH_URL = "https://graph.qq.com/user/get_user_info";
 
     private static final String PAR_ACC_TOKEN = "access_token";
     private static final String PAR_OPEN_ID = "openid";
-    private static final String PAR_OAU_CONS_KEY = "oauth_consumer_key";
-    private static final String PAR_FORMAT = "format";
+    private static final String PAR_OAU_CONS_KEY = "oauth_consumer_key";//use qq appid
 
 
     private static final String KEY_RET = "ret";
@@ -34,7 +41,7 @@ public class FetchQQInfo extends AbFetcher {
 
     private String _access_token;
     private String _openid;
-    private String _oauth_consumer_key;
+
 
     public FetchQQInfo(Context context, JSONObject authoinfo, XBaseFetcher.FetchCallback callback)
     {
@@ -46,7 +53,6 @@ public class FetchQQInfo extends AbFetcher {
 
             _access_token = qqAuthInfo.getString("access_token");
             _openid = qqAuthInfo.getString("openid");
-            _oauth_consumer_key = qqAuthInfo.getString("expires_in");
 
         } catch (JSONException e)
         {
@@ -93,17 +99,51 @@ public class FetchQQInfo extends AbFetcher {
             "is_yellow_year_vip":"1"
     }
 */
+
+
+//    参数	含义
+//    access_token	可通过使用Authorization_Code获取Access_Token 或来获取。
+//    access_token有3个月有效期。
+//    oauth_consumer_key	申请QQ登录成功后，分配给应用的appid
+//    openid	用户的ID，与QQ号码一一对应。
+//    可通过调用https://graph.qq.com/oauth2.0/me?access_token=YOUR_ACCESS_TOKEN 来获取。
+
+/**useful example*/
+//    https://graph.qq.com/user/get_user_info?access_token=YOUR_ACCESS_TOKEN&oauth_consumer_key=YOUR_APP_ID&openid=YOUR_OPENID
+//    https://graph.qq.com/user/get_user_info?access_token=EB00E6E39DE1E322FD6F874CF7E6F241&oauth_consumer_key=1104939996&openid=3E406204BB5BA421D530D8E55AEEAFE3
+//    describe:
+//----------------------------
+//    access_token:YOUR_ACCESS_TOKEN
+//    oauth_consumer_key:YOUR_APP_ID
+//    openid:YOUR_OPENID
     @Override
     public void onFetch()
     {
-        OkHttpClientManager.postAsyn(FETCH_URL,
-                new OkHttpClientManager.Param[]
-                        {
-                                new OkHttpClientManager.Param(PAR_ACC_TOKEN,_access_token),
-                                new OkHttpClientManager.Param(PAR_OPEN_ID,_openid),
-                                new OkHttpClientManager.Param(PAR_OAU_CONS_KEY,_oauth_consumer_key),
-                                new OkHttpClientManager.Param(PAR_FORMAT,"json")
-                        },
+        StringBuilder desUrlBuilder = new StringBuilder();
+        desUrlBuilder
+                .append(FETCH_URL)
+                .append("?")
+
+                //access_token
+                .append(PAR_ACC_TOKEN)
+                .append("=")
+                .append(_access_token)
+
+                //oauth_consumer_key
+                .append("&")
+                .append(PAR_OAU_CONS_KEY)
+                .append("=")
+                .append(OP.QQ_APP_ID)
+
+                //openid
+                .append("&")
+                .append(PAR_OPEN_ID)
+                .append("=")
+                .append(_openid);
+
+        String destUrl = desUrlBuilder.toString();
+
+        OkHttpClientManager.getAsyn(destUrl,
                 new OkHttpClientManager.ResultCallback<String>()
                 {
                     @Override
@@ -120,11 +160,13 @@ public class FetchQQInfo extends AbFetcher {
                             Log.d(TAG,"onResponse(String response)"+response);
 
                             JSONObject object = new JSONObject(response);
+
                             switch (object.getInt(KEY_RET))
                             {
                                 case 0:
                                 {
-                                    String qqNick = object.getString(KEY_NICK);
+                                    String tail = StringUtil.genNickTail(_openid);
+                                    String qqNick = object.getString(KEY_NICK) + tail;
                                     String qqFigure = object.getString(KEY_FIGURE);
 
                                     reUpdateInfo(qqNick,qqFigure);
@@ -142,6 +184,8 @@ public class FetchQQInfo extends AbFetcher {
                         }
                     }
                 });
+
     }
+
 
 }

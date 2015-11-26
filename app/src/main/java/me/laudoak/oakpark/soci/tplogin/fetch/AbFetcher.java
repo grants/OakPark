@@ -34,10 +34,10 @@ abstract class AbFetcher {
             @Override
             protected Void doInBackground(Void... params)
             {
-                Poet poet = UserProxy.currentPoet(context);
                 UserProxy.doUpdate(context, nick, figure, new UserProxy.CallBack() {
                     @Override
-                    public void onSuccess(String nick) {
+                    public void onSuccess(String nick)
+                    {
                         callback.onFetchSuccess("Hello. "+nick);
                     }
 

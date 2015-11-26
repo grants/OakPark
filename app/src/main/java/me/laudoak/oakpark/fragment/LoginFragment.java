@@ -21,6 +21,7 @@ import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
 import com.umeng.analytics.MobclickAgent;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.regex.Pattern;
@@ -34,6 +35,7 @@ import me.laudoak.oakpark.soci.tplogin.XBaseAuth;
 import me.laudoak.oakpark.soci.tplogin.weibo.LoginButton;
 import me.laudoak.oakpark.soci.tplogin.weibo.MWeiboAuthListener;
 import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.utils.StringUtil;
 
 /**
  * Created by LaudOak on 2015-9-27.
@@ -177,19 +179,35 @@ public class LoginFragment extends XBaseFragment implements
         qqListener = new QQAuthListener(context, new XBaseAuth.AuthCallback() {
             @Override
             public void onXBSuccess(String desc,JSONObject authInfo) {
-                AppMsg.makeText(context,"欢迎"+UserProxy.currentPoet(context).getUsername(),AppMsg.STYLE_INFO).show();
 
-                new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
-                    @Override
-                    public void onFetchSuccess(String desc) {
-                        loginSuccess();
+                try {
+
+                    JSONObject object = authInfo.getJSONObject("qq");
+                    if (StringUtil.needReUpdate(object.getString("openid")))
+                    {
+                        new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
+                            @Override
+                            public void onFetchSuccess(String desc) {
+                                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+
+                                loginSuccess();
+                            }
+
+                            @Override
+                            public void onFetchFailure(String why) {
+                                AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
+                            }
+                        });
+
+                    }else
+                    {
+                        AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
                     }
 
-                    @Override
-                    public void onFetchFailure(String why) {
-                        AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
-                    }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
