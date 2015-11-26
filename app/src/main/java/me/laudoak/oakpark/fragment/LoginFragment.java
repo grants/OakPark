@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.tencent.connect.common.Constants;
 import com.tencent.tauth.Tencent;
 import com.umeng.analytics.MobclickAgent;
 
@@ -25,9 +28,11 @@ import java.util.regex.Pattern;
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.soci.tplogin.fetch.XBaseFetcher;
 import me.laudoak.oakpark.soci.tplogin.qq.QQAuthListener;
 import me.laudoak.oakpark.soci.tplogin.XBaseAuth;
 import me.laudoak.oakpark.soci.tplogin.weibo.LoginButton;
+import me.laudoak.oakpark.soci.tplogin.weibo.MWeiboAuthListener;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
@@ -68,10 +73,14 @@ public class LoginFragment extends XBaseFragment implements
     {
         LoginFragment fragment = new LoginFragment();
 
-
         return fragment;
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -167,18 +176,29 @@ public class LoginFragment extends XBaseFragment implements
 
         qqListener = new QQAuthListener(context, new XBaseAuth.AuthCallback() {
             @Override
-            public void onSuccess(String desc,JSONObject authInfo) {
+            public void onXBSuccess(String desc,JSONObject authInfo) {
                 AppMsg.makeText(context,"欢迎"+UserProxy.currentPoet(context).getUsername(),AppMsg.STYLE_INFO).show();
-                loginSuccess();
+
+                new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
+                    @Override
+                    public void onFetchSuccess(String desc) {
+                        loginSuccess();
+                    }
+
+                    @Override
+                    public void onFetchFailure(String why) {
+                        AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
+                    }
+                });
             }
 
             @Override
-            public void onFailure(String why) {
+            public void onXBFailure(String why) {
                 AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
             }
 
             @Override
-            public void onCancel(String desc) {
+            public void onXBCancel(String desc) {
                 AppMsg.makeText(context,desc,AppMsg.STYLE_CONFIRM).show();
             }
         });
@@ -191,18 +211,39 @@ public class LoginFragment extends XBaseFragment implements
     /*Login by Weibo*/
     private void loginWithWeibo()
     {
+        AuthInfo authInfo = new AuthInfo(context,OP.WEIBO_APP_KEY,OP.WEIBO_REDIRECT_URL,OP.WEIBO_SCOPE);
+        login_weibo.setWeiboAuthInfo(authInfo, new MWeiboAuthListener(context, new XBaseAuth.AuthCallback()
+        {
+            @Override
+            public void onXBSuccess(String desc, JSONObject userAuth)
+            {
+                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+            }
 
+            @Override
+            public void onXBFailure(String why)
+            {
+                AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
+            }
+
+            @Override
+            public void onXBCancel(String desc)
+            {
+                AppMsg.makeText(context,desc,AppMsg.STYLE_CONFIRM).show();
+            }
+        }));
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        login_weibo.onActivityResult(requestCode,resultCode,data);
         /*!!!how terrible with Tencent SDK document*/
         Tencent.onActivityResultData(requestCode, resultCode, data, qqListener);
-//        if (requestCode == Constants.REQUEST_API)
-//        {
-//            Tencent.handleResultData(data, qqListener);
-//        }
+        if (requestCode == Constants.REQUEST_API)
+        {
+            Tencent.handleResultData(data, qqListener);
+        }
     }
 
     private Handler handler = new Handler();
@@ -215,7 +256,6 @@ public class LoginFragment extends XBaseFragment implements
 
     private void loginSuccess()
     {
-
         handler.postDelayed(runnable, 1200);
     }
 

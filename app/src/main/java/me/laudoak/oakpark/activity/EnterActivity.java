@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -131,4 +132,14 @@ public class EnterActivity extends XBaseActivity{
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (null != fragments)
+        {
+            fragments.get(0).onActivityResult(requestCode,resultCode,data);
+        }
+
+    }
 }

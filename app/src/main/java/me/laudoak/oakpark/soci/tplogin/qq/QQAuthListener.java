@@ -20,6 +20,7 @@ public class QQAuthListener extends XBaseAuth implements
 
     private static final String TAG = "QQAuthListener";
 
+//    {"qq":{"access_token":"EB00E6E39DE1E322FD6F874CF7E6F241","expires_in":7776000,"openid":"3E406204BB5BA421D530D8E55AEEAFE3"}}
 
     public QQAuthListener(Context ctxt, AuthCallback cb) {
         super(ctxt, cb);
@@ -41,7 +42,7 @@ public class QQAuthListener extends XBaseAuth implements
                 loginWithAuth(authInfo);
 
             } catch (JSONException e) {
-                callback.onFailure(e.toString());
+                callback.onXBFailure(e.toString());
             }
         }
     }
@@ -49,13 +50,13 @@ public class QQAuthListener extends XBaseAuth implements
     @Override
     public void onError(UiError uiError) {
         Log.d(TAG, "QQ auth error:" + uiError.errorCode + "-" + uiError.errorDetail);
-        callback.onFailure(uiError.errorMessage);
+        callback.onXBFailure(uiError.errorMessage);
     }
 
     @Override
     public void onCancel() {
         Log.d(TAG, "QQ authorized is cancelled");
-        callback.onCancel("QQ授权被取消");
+        callback.onXBCancel("QQ授权被取消");
     }
 
 }

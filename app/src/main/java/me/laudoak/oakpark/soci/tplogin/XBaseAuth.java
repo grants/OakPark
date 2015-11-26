@@ -26,20 +26,23 @@ public class XBaseAuth {
     }
 
 
-    protected void loginWithAuth(final BmobUser.BmobThirdUserAuth authInfo){
+    protected void loginWithAuth(final BmobUser.BmobThirdUserAuth authInfo)
+    {
 
-        BmobUser.loginWithAuthData(context, authInfo, new OtherLoginListener() {
-
+        BmobUser.loginWithAuthData(context, authInfo, new OtherLoginListener()
+        {
             @Override
-            public void onSuccess(JSONObject userAuth) {
+            public void onSuccess(JSONObject userAuth)
+            {
                 Log.d(TAG, authInfo.getSnsType() + "Third party loginsuccess:(UserAuth Info)" + userAuth);
-                callback.onSuccess("第三方登录成功",userAuth);
+                callback.onXBSuccess("第三方登录成功",userAuth);
             }
 
             @Override
-            public void onFailure(int code, String msg) {
+            public void onFailure(int code, String msg)
+            {
                 Log.d(TAG, "Third party login failure:"+msg);
-                callback.onFailure("第三方登录失败"+msg);
+                callback.onXBFailure("第三方登录失败" + msg);
             }
 
         });
@@ -47,9 +50,9 @@ public class XBaseAuth {
 
     public interface AuthCallback
     {
-        void onSuccess(String desc,JSONObject userAuth);
-        void onFailure(String why);
-        void onCancel(String desc);
+        void onXBSuccess(String desc,JSONObject userAuth);
+        void onXBFailure(String why);
+        void onXBCancel(String desc);
     }
 
 }
