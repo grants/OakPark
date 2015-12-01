@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.net.UserProxy;
 import me.laudoak.oakpark.soci.tplogin.fetch.XBaseFetcher;
 import me.laudoak.oakpark.soci.tplogin.qq.QQAuthListener;
@@ -180,32 +181,29 @@ public class LoginFragment extends XBaseFragment implements
             @Override
             public void onXBSuccess(String desc,JSONObject authInfo) {
 
-                try {
+                Poet poet = UserProxy.currentPoet(context);
 
-                    JSONObject object = authInfo.getJSONObject("qq");
-                    if (StringUtil.needReUpdate(object.getString("openid")))
-                    {
-                        new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
-                            @Override
-                            public void onFetchSuccess(String desc) {
-                                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+                assert poet != null;
+                if (StringUtil.needReUpdate("qq",poet.getUsername()))
+                {
+                    new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
+                        @Override
+                        public void onFetchSuccess(String desc) {
+                            AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
 
-                                loginSuccess();
-                            }
+                            loginSuccess();
+                        }
 
-                            @Override
-                            public void onFetchFailure(String why) {
-                                AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
-                            }
-                        });
+                        @Override
+                        public void onFetchFailure(String why) {
+                            AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
+                        }
+                    });
 
-                    }else
-                    {
-                        AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                }else
+                {
+                    AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+                    loginSuccess();
                 }
 
             }
@@ -229,13 +227,34 @@ public class LoginFragment extends XBaseFragment implements
     /*Login by Weibo*/
     private void loginWithWeibo()
     {
-        AuthInfo authInfo = new AuthInfo(context,OP.WEIBO_APP_KEY,OP.WEIBO_REDIRECT_URL,OP.WEIBO_SCOPE);
+        final AuthInfo authInfo = new AuthInfo(context,OP.WEIBO_APP_KEY,OP.WEIBO_REDIRECT_URL,OP.WEIBO_SCOPE);
         login_weibo.setWeiboAuthInfo(authInfo, new MWeiboAuthListener(context, new XBaseAuth.AuthCallback()
         {
             @Override
             public void onXBSuccess(String desc, JSONObject userAuth)
             {
-                AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+                Poet poet = UserProxy.currentPoet(context);
+
+                assert poet != null;
+                if (StringUtil.needReUpdate("weibo",poet.getUsername()))
+                {
+                    new XBaseFetcher("weibo", context, userAuth, new XBaseFetcher.FetchCallback() {
+                        @Override
+                        public void onFetchSuccess(String desc) {
+                            AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+                            loginSuccess();
+                        }
+
+                        @Override
+                        public void onFetchFailure(String why) {
+                            AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
+                        }
+                    });
+                }else {
+                    AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
+                    loginSuccess();
+                }
+
             }
 
             @Override

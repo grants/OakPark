@@ -58,4 +58,10 @@
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
 
+    <!-- PullSeparateListView-->
+    <declare-styleable name="SeparateListView">
+        <attr name="separate_all" format="boolean"/>
+        <attr name="showDownAnim" format="boolean"/>
+    </declare-styleable>
+
 </resources>

@@ -1,29 +1,39 @@
 package me.laudoak.oakpark.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.umeng.analytics.MobclickAgent;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.net.UserProxy;
-import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ctrl.SettingLvListener;
+import me.laudoak.oakpark.ui.seplv.SeparateListView;
+import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
 
 /**
  * Created by LaudOak on 2015-10-20 at 17:42.
  */
 public class SettingActivity extends XBaseActivity {
 
-    private LinearLayout account,cache;
+    private static final String TAG = "SettingActivity";
+
+    private SettingLvAdapter settingLvAdapter;
+
+    @Bind(R.id.lv_setting) SeparateListView settingListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        buildView();
+
         MobclickAgent.openActivityDurationTrack(false);
+
+        setContentView(R.layout.activity_setting);
+        ButterKnife.bind(this);
+
+        buildView();
+
     }
 
     @Override
@@ -42,17 +52,10 @@ public class SettingActivity extends XBaseActivity {
     {
         buildBar();
 
-        account = (LinearLayout) findViewById(R.id.set_account);
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (UserProxy.ifLogin(SettingActivity.this)) {
-                    startActivity(new Intent(SettingActivity.this, BulbulActivity.class));
-                } else {
-                    AppMsg.makeText(SettingActivity.this, "未登录", AppMsg.STYLE_CONFIRM).show();
-                }
-            }
-        });
+        settingLvAdapter = new SettingLvAdapter(this);
+        settingListView.setAdapter(settingLvAdapter);
+        settingListView.setOnItemClickListener(new SettingLvListener(this, settingLvAdapter));
+
     }
 
     private void buildBar() {

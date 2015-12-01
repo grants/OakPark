@@ -23,11 +23,12 @@ public class LicenseDlgFragment extends XBaseDialog {
 
     private static final String LICENSE_NAME = "license.txt";
 
+
     @Bind(R.id.fragment_license_text) TextView license;
     private View contentView;
     private String licenseText;
 
-    public LicenseDlgFragment newInstance()
+    public static LicenseDlgFragment newInstance()
     {
         return new LicenseDlgFragment();
     }

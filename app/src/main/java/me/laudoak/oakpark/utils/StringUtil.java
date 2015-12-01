@@ -9,6 +9,7 @@ public class StringUtil {
 
     public static String genNickTail(String source)
     {
+
         int opidlen = source.length();
         String dest = "";
         for (int i = 0 ; i < 4 ; i++)
@@ -19,9 +20,23 @@ public class StringUtil {
         return dest;
     }
 
-    public static boolean needReUpdate(String nick)
+    public static boolean needReUpdate(String who ,String nick)
     {
-        return nick.length() > 28;
+        boolean res = true;
+        switch (who)
+        {
+            case "qq":
+            {
+                res = nick.length() > 28;
+                break;
+            }
+            case "weibo":
+            {
+                res = nick.length() > 25;
+                break;
+            }
+        }
+        return res;
     }
 
     private static int genRandom(int len)
