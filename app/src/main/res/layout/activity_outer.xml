@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-</LinearLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/activity_outer_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/activity_outer_collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/activity_outer_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/starry"
+                fresco:placeholderImage ="@color/white"
+                app:layout_collapseMode="parallax"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/activity_outer_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_outer_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/activity_outer_avatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        fresco:placeholderImage ="@color/white"
+        fresco:roundingBorderWidth="1dp"
+        fresco:roundingBorderColor="@color/gray_7"
+        fresco:roundWithOverlayColor="@color/white"
+        fresco:roundAsCircle="true"
+        android:layout_gravity="center_vertical"
+        app:layout_anchor="@id/activity_outer_app_bar"
+        app:layout_anchorGravity="bottom|end" />
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
@@ -12,6 +13,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,18 +23,24 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+
     compile 'com.facebook.fresco:fresco:0.7.0+'
     compile 'com.sothree.slidinguppanel:library:3.2.0'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+
     compile project(':picker')
+    compile project(':onekeyshare')
+
     compile files('libs/BmobSDK_V3.4.3_0828.jar')
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/open_sdk_r5509.jar')
     compile files('libs/weibosdkcore.jar')
-    compile project(':onekeyshare')
     compile files('libs/umeng-analytics-v5.6.1.jar')
+
 }

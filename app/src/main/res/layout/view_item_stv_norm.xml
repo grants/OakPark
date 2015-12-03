@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical">
+    android:layout_gravity="center_vertical"
+    android:background="@color/white"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/item_stv_normal_tv"

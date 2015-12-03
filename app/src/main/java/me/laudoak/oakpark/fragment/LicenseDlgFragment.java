@@ -55,9 +55,9 @@ public class LicenseDlgFragment extends XBaseDialog {
     private void buildView()
     {
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_license,null);
+        ButterKnife.bind(this,view);
         contentView = view;
         license.setText(licenseText);
-        ButterKnife.bind(this,view);
     }
 
     @Override
