@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import me.laudoak.oakpark.ui.extlv.ListViewExt;
 /**
  * Created by LaudOak on 2015-12-3 at 13:49.
  */
-public class PoetryPickerFragment extends XBaseDialog {
+public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnItemClickListener{
 
     private static final String TAG = PoetryPickerFragment.class.getName();
 
@@ -62,36 +62,37 @@ public class PoetryPickerFragment extends XBaseDialog {
     {
         webLists = new ArrayList<PoetryWebSite>();
 
-        webLists.add(new PoetryWebSite("http://www.thepoemforyou.com/","The Poem For You"));
-        webLists.add(new PoetryWebSite("http://www.bedtimepoem.com/","读首诗再睡觉"));
-        webLists.add(new PoetryWebSite("http://www.poemhunter.com/","PoemHunter.com: Poems - Quotes - Poetry"));
-        webLists.add(new PoetryWebSite("http://www.poetryfoundation.org/","Poetry Foundation"));
-        webLists.add(new PoetryWebSite("https://www.poets.org/","Poem-A-Day | Academy of American Poets"));
-        webLists.add(new PoetryWebSite("http://poems.com/","Poetry Daily, a new poem every day"));
-        webLists.add(new PoetryWebSite("http://hellopoetry.com/","Hello Poetry"));
-        webLists.add(new PoetryWebSite("http://www.poetry-archive.com/","Poetry Archive | Poems"));
+        webLists.add(0,new PoetryWebSite("http://www.thepoemforyou.com/","The Poem For You"));
+        webLists.add(1,new PoetryWebSite("http://www.bedtimepoem.com/","读首诗再睡觉"));
+        webLists.add(2,new PoetryWebSite("http://www.poetryfoundation.org/","Poetry Foundation"));
+        webLists.add(3,new PoetryWebSite("http://poems.com/","Poetry Daily, a new poem every day"));
+        webLists.add(4,new PoetryWebSite("http://hellopoetry.com/","Hello Poetry"));
+        webLists.add(5, new PoetryWebSite("http://www.poetry-archive.com/", "Poetry Archive | Poems"));
+        webLists.add(6, new PoetryWebSite("https://www.poets.org/", "Poem-A-Day | Academy of American Poets"));
+        webLists.add(7, new PoetryWebSite("http://www.poemhunter.com/", "PoemHunter.com: Poems - Quotes - Poetry"));
     }
 
     @SuppressLint("InflateParams")
     private void initViews()
     {
+        Log.d(TAG, "private void initViews()");
+
         contentView = getActivity().getLayoutInflater().inflate(R.layout.fragment_poetry_picker,null);
-        ButterKnife.bind(this,contentView);
+        ButterKnife.bind(this, contentView);
 
-        listViewExt.setAdapter(new PoetryWebAdapter(webLists,context));
+        listViewExt.setAdapter(new PoetryWebAdapter(webLists, context));
+        listViewExt.setOnItemClickListener(this);
+    }
 
-        listViewExt.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
-            {
-//                BrowserHelper helper = new BrowserHelper(context);
-//                helper.show(webLists.get(position).getUrl());
-//                PoetryPickerFragment.this.dismiss();
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+    {
+        Log.d(TAG, "listViewExt Clicked & position = " + position);
 
-                new FinestWebView.Builder(getActivity()).show(webLists.get(position).getUrl());
-            }
-        });
+        BrowserHelper helper = new BrowserHelper(context);
+        helper.show(webLists.get(position).getUrl());
+        PoetryPickerFragment.this.dismiss();
+
     }
 
     @Override
