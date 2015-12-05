@@ -6,13 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -23,18 +20,12 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
-import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
-import me.laudoak.oakpark.ctrl.xv.AbXVSubject;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
-import me.laudoak.oakpark.net.query.QueryXVerse;
-import me.laudoak.oakpark.ui.loani.ProgressWheel;
-import me.laudoak.oakpark.ui.message.AppMsg;
-import me.laudoak.oakpark.ui.recy.RecyclerViewPager;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.

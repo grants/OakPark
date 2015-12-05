@@ -12,9 +12,9 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.List;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.adapter.PoetAdapter;
+import me.laudoak.oakpark.adapter.PagingPoetAdapter;
 import me.laudoak.oakpark.entity.Verse;
-import me.laudoak.oakpark.net.query.QueryVerse;
+import me.laudoak.oakpark.net.bmob.query.QueryVerse;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.paging.PagingListView;
 
@@ -23,51 +23,56 @@ import me.laudoak.oakpark.ui.paging.PagingListView;
  */
 public class PoetFragment extends XBaseFragment implements
         PagingListView.LoadCallback,
-        QueryVerse.QueryCallback {
+        QueryVerse.QueryCallback
+{
 
     private static final String TAG = "PoetFragment";
 
     private PagingListView pagingListView;
-    private PoetAdapter adapter;
+    private PagingPoetAdapter adapter;
 
     private View rootView;
 
     private int currPage;
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MobclickAgent.onPageStart(TAG); //统计页面
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
     }
 
     public static PoetFragment newIastance()
     {
-        PoetFragment fragment = new PoetFragment();
-        return fragment;
+        return new PoetFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         currPage = 0;
-        adapter = new PoetAdapter(context);
+        adapter = new PagingPoetAdapter(context);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         if (null == rootView)
         {
-            rootView = inflater.inflate(R.layout.fragment_poet,container,false);
-        }else if (null != (rootView.getParent())){
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
+            rootView = inflater.inflate(R.layout.fragment_poet, container, false);
+        } else if (null != (rootView.getParent()))
+        {
+            ((ViewGroup) rootView.getParent()).removeView(rootView);
         }
 
         buildViews(rootView);
@@ -76,13 +81,16 @@ public class PoetFragment extends XBaseFragment implements
     }
 
 
-    private void buildViews(View view) {
+    private void buildViews(View view)
+    {
         pagingListView = (PagingListView) view.findViewById(R.id.lv_poet);
         pagingListView.setLoadCallback(this);
         pagingListView.setAdapter(adapter);
-        pagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        pagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
 
                 return false;
             }
@@ -90,19 +98,22 @@ public class PoetFragment extends XBaseFragment implements
     }
 
     @Override
-    public void onLoadMore() {
-        new QueryVerse(context,currPage++,this);
+    public void onLoadMore()
+    {
+        new QueryVerse(context, currPage++, this);
     }
 
 
     /*Query callback*/
     @Override
-    public void onFailure(String why) {
-        AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
+    public void onFailure(String why)
+    {
+        AppMsg.makeText(context, why, AppMsg.STYLE_CONFIRM).show();
     }
 
     @Override
-    public void onSuccess(boolean hasMore, List<Verse> results) {
-        pagingListView.onLoadCompleted(hasMore,results);
+    public void onSuccess(boolean hasMore, List<Verse> results)
+    {
+        pagingListView.onLoadCompleted(hasMore, results);
     }
 }

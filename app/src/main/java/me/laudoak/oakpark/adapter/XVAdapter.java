@@ -20,13 +20,12 @@ import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 /**
  * Created by LaudOak on 2015-10-20 at 18:02.
  */
-public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
+public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>
+{
 
     private static final String TAG = "XVAdapter";
 
-    private Context context;
     private LayoutInflater inflater;
-    private RecyclerView recyclerView;
 
     protected List<XVerse> xVerseList;
 
@@ -36,21 +35,21 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
         return this.xVerseList;
     }
 
-    public XVAdapter(Context c, List<XVerse> list,RecyclerView recy) {
-
-        this.context = c;
+    public XVAdapter(Context context, List<XVerse> list,RecyclerView recy)
+    {
         this.inflater = LayoutInflater.from(context);
         this.xVerseList = list;
-        this.recyclerView = recy;
 
     }
 
-    public void addItem(int position) {
+    public void addItem(int position)
+    {
 
         notifyItemInserted(position);
     }
 
-    public void removeItem(int position) {
+    public void removeItem(int position)
+    {
         xVerseList.remove(position);
         notifyItemRemoved(position);
     }
@@ -62,7 +61,8 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
     }
 
     @Override
-    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
 
         final View view = inflater.inflate(R.layout.view_item_xverse,parent,false);
 
@@ -70,7 +70,8 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(SimpleViewHolder holder, int position) {
+    public void onBindViewHolder(SimpleViewHolder holder, int position)
+    {
 
         XVerse vs = xVerseList.get(position);
 
@@ -88,7 +89,8 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>{
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return xVerseList.size();
     }
 

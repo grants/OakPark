@@ -20,7 +20,8 @@ import me.laudoak.oakpark.ui.loop.LoopView;
 /**
  * Created by LaudOak on 2015-11-7 at 10:10.
  */
-public class FontPickerFragment extends XBaseDialog {
+public class FontPickerFragment extends XBaseDialog
+{
 
     private static final String TAG = "FontPickerFragment";
 
@@ -41,7 +42,8 @@ public class FontPickerFragment extends XBaseDialog {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
         callBack = (CallBack) activity;
     }
@@ -52,7 +54,8 @@ public class FontPickerFragment extends XBaseDialog {
         init();
     }
 
-        private void init() {
+        private void init()
+        {
 
         rootView = getActivity().getLayoutInflater().inflate(R.layout.view_pinter_loop,null);
         LoopView loopView = (LoopView) rootView.findViewById(R.id.pinter_font_loop);
@@ -64,10 +67,13 @@ public class FontPickerFragment extends XBaseDialog {
 
         loopView.setNotLoop();
 
-        loopView.setListener(new LoopListener() {
+        loopView.setListener(new LoopListener()
+        {
             @Override
-            public void onItemSelect(int item) {
-                if (item != fontId) {
+            public void onItemSelect(int item)
+            {
+                if (item != fontId)
+                {
                     fontId = item;
                 }
             }
@@ -78,15 +84,18 @@ public class FontPickerFragment extends XBaseDialog {
     }
 
     @Override
-    public Dialog callDialog() {
+    public Dialog callDialog()
+    {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.CustomDialog)
                 .setTitle("选择字体")
                 .setView(rootView)
                 .setNegativeButton("取消", null)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         Typeface typeface = null;
 
                         switch (fontId)
@@ -98,7 +107,7 @@ public class FontPickerFragment extends XBaseDialog {
                             }
                             case 1:
                             {
-                                typeface = Typeface.createFromAsset(getContext().getAssets(),"fonts/fang.TTF");
+                                typeface = Typeface.createFromAsset(context.getAssets(),"fonts/fang.TTF");
                                 break;
                             }
                         }

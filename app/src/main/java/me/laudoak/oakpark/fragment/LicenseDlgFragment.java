@@ -17,14 +17,15 @@ import me.laudoak.oakpark.utils.FileUtil;
 /**
  * Created by LaudOak on 2015-11-25 at 14:46.
  */
-public class LicenseDlgFragment extends XBaseDialog {
+public class LicenseDlgFragment extends XBaseDialog
+{
 
-    private static final String TAG = "LicenseDlgFragment";
+    private static final String TAG = LicenseDlgFragment.class.getName();
 
     private static final String LICENSE_NAME = "license.txt";
 
-
     @Bind(R.id.fragment_license_text) TextView license;
+
     private View contentView;
     private String licenseText;
 
@@ -34,7 +35,8 @@ public class LicenseDlgFragment extends XBaseDialog {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         readLicenseString();
         buildView();

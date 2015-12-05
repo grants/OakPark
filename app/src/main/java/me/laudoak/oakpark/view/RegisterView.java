@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**

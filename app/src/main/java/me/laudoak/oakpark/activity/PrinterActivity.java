@@ -19,7 +19,7 @@ import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.entity.Verse;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.FontPickerFragment;
-import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.utils.FileUtil;
 import me.laudoak.oakpark.utils.font.FontsManager;
 import me.laudoak.oakpark.view.PrinterPanelView;

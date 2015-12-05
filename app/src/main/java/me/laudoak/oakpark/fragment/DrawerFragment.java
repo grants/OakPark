@@ -17,7 +17,7 @@ import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
 import me.laudoak.oakpark.entity.Poet;
-import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 
 /**
  * Created by LaudOak on 2015-10-16 at 22:03.

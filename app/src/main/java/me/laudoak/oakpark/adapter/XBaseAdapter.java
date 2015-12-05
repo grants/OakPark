@@ -11,13 +11,15 @@ import java.util.List;
 /**
  * Created by LaudOak on 2015-10-28 at 22:41.
  */
-public abstract class XBaseAdapter<T> extends BaseAdapter {
+public abstract class XBaseAdapter<T> extends BaseAdapter
+{
 
     protected List<T> datas;
     protected Context context;
     protected LayoutInflater inflater;
 
-    public XBaseAdapter(List<T> dataList, Context context) {
+    public XBaseAdapter(List<T> dataList, Context context)
+    {
 
         this.datas = dataList;
         this.context = context;

@@ -18,7 +18,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
-import me.laudoak.oakpark.net.push.VersePush;
+import me.laudoak.oakpark.net.bmob.push.PushVerse;
 import me.laudoak.oakpark.view.NormalEditorView;
 import me.laudoak.oakpark.ui.dialog.MessageDialog;
 import me.laudoak.oakpark.ui.message.AppMsg;
@@ -32,7 +32,8 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class NormalEditorFragment extends XBaseFragment implements
         EditorActivity.PushCallback ,
         XBasePanelView.OnPanelClickListener ,
-        VersePush.PushCallBack{
+        PushVerse.PushCallBack
+{
 
     private static final String TAG = "NormalEditorFragment";
 
@@ -50,19 +51,22 @@ public class NormalEditorFragment extends XBaseFragment implements
 
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MobclickAgent.onPageStart(TAG); //统计页面
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         this.context = getActivity();
         fragmentManager = getFragmentManager();
@@ -73,7 +77,8 @@ public class NormalEditorFragment extends XBaseFragment implements
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
 
         buildActivePanelView();
 
@@ -88,7 +93,8 @@ public class NormalEditorFragment extends XBaseFragment implements
 
     /*XPanelView callback*/
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         switch (view.getId())
         {
             case R.id.edit_panel_preview:
@@ -112,7 +118,8 @@ public class NormalEditorFragment extends XBaseFragment implements
 
     /*Get bitmap path*/
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         /*handle crop result*/
@@ -170,7 +177,7 @@ public class NormalEditorFragment extends XBaseFragment implements
         ld.setCanceledOnTouchOutside(false);
         ld.show();
 
-        VersePush.Builder builder = new VersePush.Builder(context);
+        PushVerse.Builder builder = new PushVerse.Builder(context);
         builder.title(holder.title.getText().toString().trim())
                 .author(holder.author.getText().toString().trim())
                 .verse(holder.verse.getText().toString())
@@ -181,7 +188,8 @@ public class NormalEditorFragment extends XBaseFragment implements
 
     /*push callback*/
     @Override
-    public void onSuccess() {
+    public void onSuccess()
+    {
 
         if(null!=ld)
         {
@@ -194,7 +202,8 @@ public class NormalEditorFragment extends XBaseFragment implements
     }
 
     @Override
-    public void onFailure(String reason) {
+    public void onFailure(String reason)
+    {
 
         if(null!=ld)
         {

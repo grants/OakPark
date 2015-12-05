@@ -13,8 +13,8 @@ import me.laudoak.oakpark.entity.Poet;
 import me.laudoak.oakpark.entity.XVerse;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
-import me.laudoak.oakpark.net.DoComment;
-import me.laudoak.oakpark.net.UserProxy;
+import me.laudoak.oakpark.net.bmob.DoComment;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 import me.laudoak.oakpark.ui.message.AppMsg;
 

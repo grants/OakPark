@@ -9,21 +9,24 @@ import android.support.v4.app.Fragment;
 /**
  * Created by LaudOak on 2015-9-27.
  */
-public abstract class XBaseFragment extends Fragment {
+public abstract class XBaseFragment extends Fragment
+{
+
 
     protected Context context;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        this.context = getContext();
+        this.context = this.getActivity();
     }
-
 
     public void delayExit()
     {
         Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
+        Runnable runnable = new Runnable()
+        {
             @Override
             public void run() {
                 getActivity().setResult(Activity.RESULT_OK,null);

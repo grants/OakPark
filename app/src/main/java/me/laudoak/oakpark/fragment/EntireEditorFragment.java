@@ -22,7 +22,7 @@ import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.PrinterActivity;
 import me.laudoak.oakpark.activity.WhisperActivity;
 import me.laudoak.oakpark.entity.XVerse;
-import me.laudoak.oakpark.net.push.XVersePush;
+import me.laudoak.oakpark.net.bmob.push.PushXVerse;
 import me.laudoak.oakpark.view.EntireEditorView;
 import me.laudoak.oakpark.ui.dialog.MessageDialog;
 import me.laudoak.oakpark.ui.message.AppMsg;
@@ -36,7 +36,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 public class EntireEditorFragment extends XBaseFragment implements
         EditorActivity.PushCallback,
         XBasePanelView.OnPanelClickListener,
-        XVersePush.PushCallBack{
+        PushXVerse.PushCallBack{
 
     private static final String TAG = "EntireEditorFragment";
 
@@ -268,7 +268,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         ld.setCanceledOnTouchOutside(false);
         ld.show();
 
-        XVersePush.Builder builder = new XVersePush.Builder(context);
+        PushXVerse.Builder builder = new PushXVerse.Builder(context);
         builder.title(holder.title.getText().toString().trim())
                 .author(holder.author.getText().toString().trim())
                 .verse(holder.verse.getText().toString())

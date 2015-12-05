@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +20,10 @@ import me.laudoak.oakpark.entity.XVerse;
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver{
+public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver
+{
 
-    private static final String TAG = "SUPWhisperFragment";
+    private static final String TAG = SUPWhisperFragment.class.getName();
 
     private View rootView;
     private TextView whisper;
@@ -41,18 +43,21 @@ public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver{
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
 
         if (null == rootView)
         {
@@ -68,30 +73,35 @@ public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver{
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         onXVUpdate();
         MobclickAgent.onPageStart(TAG);
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         isViewCreated = false;
     }

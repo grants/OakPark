@@ -103,7 +103,7 @@
                 android:layout_marginRight="18dp"
                 android:background="@drawable/bg_btn_tpl" />
 
-            <me.laudoak.oakpark.soci.tplogin.weibo.LoginButton
+            <me.laudoak.oakpark.sns.tpl.weibo.LoginButton
                 android:id="@+id/bulbul_weibo"
                 android:src="@mipmap/ic_share_weibo"
                 android:layout_width="55dp"

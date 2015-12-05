@@ -13,34 +13,36 @@ import me.laudoak.oakpark.view.RegisterView;
 /**
  * Created by LaudOak on 2015-9-27.
  */
-public class RegisterFragment extends XBaseFragment {
+public class RegisterFragment extends XBaseFragment
+{
 
     private static final String TAG = "RegisterFragment";
 
 
     public static RegisterFragment newInstance()
     {
-        RegisterFragment fragment = new RegisterFragment();
-
-        return fragment;
+        return new RegisterFragment();
     }
 
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MobclickAgent.onPageStart("RegisterFragment"); //统计页面
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd("RegisterFragment");
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         return new RegisterView(getActivity());
     }
 }

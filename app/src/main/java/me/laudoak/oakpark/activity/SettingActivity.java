@@ -8,7 +8,7 @@ import com.umeng.analytics.MobclickAgent;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.ctrl.SettingLvListener;
+import me.laudoak.oakpark.ctrl.listener.SettingLvListener;
 import me.laudoak.oakpark.ui.seplv.SeparateListView;
 import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
 

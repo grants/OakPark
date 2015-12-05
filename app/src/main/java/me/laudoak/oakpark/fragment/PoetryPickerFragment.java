@@ -13,13 +13,15 @@ public class PoetryPickerFragment extends XBaseDialog {
     private static final String TAG = "PoetryPickerFragment";
 
     /**
-     * http://www.bedtimepoem.com/
-     * http://www.thepoemforyou.com/
-     * https://www.poets.org/poetsorg/poem-day
-     * http://www.poemhunter.com/
-     * http://www.poetryfoundation.org/
-     * http://www.poetry-archive.com/
-     * https://www.poets.org/*/
+     *      http://www.thepoemforyou.com/
+     *      http://www.bedtimepoem.com/
+     *      http://www.poemhunter.com/
+     *      http://www.poetryfoundation.org/
+     *      https://www.poets.org/
+     *      http://www.poetry-archive.com/
+     *      http://poems.com/
+     *      http://hellopoetry.com/
+     */
 
     public static PoetryPickerFragment newInstance()
     {
@@ -27,17 +29,20 @@ public class PoetryPickerFragment extends XBaseDialog {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
 
     }
 
     @Override
-    public Dialog callDialog() {
+    public Dialog callDialog()
+    {
         return null;
     }
 }

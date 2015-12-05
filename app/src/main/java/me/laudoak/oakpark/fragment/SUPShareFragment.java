@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +23,8 @@ import me.laudoak.oakpark.entity.XVerse;
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
 public class SUPShareFragment extends XBaseFragment
-        implements AbXVOberver{
+        implements AbXVOberver
+{
 
     private static final String TAG = "SUPShareFragment";
 
@@ -44,18 +46,21 @@ public class SUPShareFragment extends XBaseFragment
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
 
         if (null == rootView)
         {
@@ -71,30 +76,35 @@ public class SUPShareFragment extends XBaseFragment
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         onXVUpdate();
         MobclickAgent.onPageStart(TAG); //统计页面
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         isViewCreated = false;
     }
@@ -106,10 +116,13 @@ public class SUPShareFragment extends XBaseFragment
         title = (TextView) view.findViewById(R.id.sup_share_title);
         author = (TextView) view.findViewById(R.id.sup_share_author);
 
-        linearLayout.setOnClickListener(new View.OnClickListener() {
+        linearLayout.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if (null != currXV) {
+            public void onClick(View v)
+            {
+                if (null != currXV)
+                {
                     doShare();
                 }
             }
