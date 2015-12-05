@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.laudoak.oakpark" >
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,7 +29,6 @@
             android:theme="@style/HelloTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -74,6 +74,11 @@
             android:label="">
         </activity>
 
+
+        <activity
+            android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+            android:theme="@style/FinestWebViewTheme" />
+        
         <!-- Login with QQ -->
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import me.laudoak.oakpark.activity.BulbulActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
 import me.laudoak.oakpark.fragment.LicenseDlgFragment;
+import me.laudoak.oakpark.fragment.PoetryPickerFragment;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
@@ -20,6 +21,7 @@ public class SettingLvListener implements AdapterView.OnItemClickListener
     private static final String TAG = "SettingLvListener";
 
     private static final String FLAG_DLG_LICENSE = "license dlg flag";
+    private static final String FLAG_DLG_WEBSITES = "about poetry websites";
 
     private Context context;
     private SettingLvAdapter adapter;
@@ -60,6 +62,14 @@ public class SettingLvListener implements AdapterView.OnItemClickListener
             {
                 LicenseDlgFragment licensedlg = LicenseDlgFragment.newInstance();
                 licensedlg.show(((SettingActivity)context).getSupportFragmentManager(),FLAG_DLG_LICENSE);
+                break;
+            }
+
+            /**about poem website*/
+            case 3:
+            {
+                PoetryPickerFragment poetryPickerFragment = PoetryPickerFragment.newInstance();
+                poetryPickerFragment.show(((SettingActivity)context).getSupportFragmentManager(),FLAG_DLG_WEBSITES);
                 break;
             }
 

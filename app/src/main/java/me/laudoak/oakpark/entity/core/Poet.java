@@ -1,4 +1,4 @@
-package me.laudoak.oakpark.entity;
+package me.laudoak.oakpark.entity.core;
 
 import cn.bmob.v3.BmobUser;
 

@@ -9,8 +9,8 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
-import me.laudoak.oakpark.entity.Poet;
-import me.laudoak.oakpark.entity.Verse;
+import me.laudoak.oakpark.entity.core.Poet;
+import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 
 /**

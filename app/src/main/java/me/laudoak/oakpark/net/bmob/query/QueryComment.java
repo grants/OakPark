@@ -8,8 +8,8 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
-import me.laudoak.oakpark.entity.Comment;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.Comment;
+import me.laudoak.oakpark.entity.core.XVerse;
 
 /**
  * Created by LaudOak on 2015-10-24 at 16:31.

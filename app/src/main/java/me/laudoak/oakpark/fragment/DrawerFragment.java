@@ -16,7 +16,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
-import me.laudoak.oakpark.entity.Poet;
+import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 
 /**

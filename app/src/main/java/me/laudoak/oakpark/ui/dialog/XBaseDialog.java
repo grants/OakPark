@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
-import me.laudoak.oakpark.R;
-
-
 /**
  * Created by LaudOak on 2015-9-29.
  */
-public abstract class XBaseDialog extends DialogFragment {
+public abstract class XBaseDialog extends DialogFragment
+{
 
     protected Context context;
 
@@ -25,7 +23,8 @@ public abstract class XBaseDialog extends DialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState)
+    {
         return callDialog();
     }
 

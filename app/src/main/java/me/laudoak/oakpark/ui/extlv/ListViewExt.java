@@ -4,16 +4,15 @@ import android.animation.AnimatorSet;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import java.lang.reflect.Field;
-import java.util.List;
 
-public class ListViewExt extends ListView {
+public class ListViewExt extends ListView
+{
     private static final String TAG = ListViewExt.class.getName();
+
     protected boolean mIsShortList;
     protected int mOffsetY;
     protected AnimatorSet mAnimatorSet;
@@ -27,9 +26,11 @@ public class ListViewExt extends ListView {
     private int mScrollState;
 
     private OnScrollListener mScrollListener;
-    private OnScrollListener mScrollListenerWrapper = new OnScrollListener() {
+    private OnScrollListener mScrollListenerWrapper = new OnScrollListener()
+    {
         @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
+        public void onScrollStateChanged(AbsListView view, int scrollState)
+        {
             if (mScrollListener != null) {
                 mScrollListener.onScrollStateChanged(view, scrollState);
             }
@@ -45,12 +46,14 @@ public class ListViewExt extends ListView {
     };
 
     @Override
-    public void setOnScrollListener(OnScrollListener l) {
+    public void setOnScrollListener(OnScrollListener l)
+    {
         mScrollListener = l;
     }
 
     @Override
-    public void onTouchModeChanged(boolean isInTouchMode) {
+    public void onTouchModeChanged(boolean isInTouchMode)
+    {
         super.onTouchModeChanged(isInTouchMode);
     }
 
@@ -60,12 +63,14 @@ public class ListViewExt extends ListView {
         init();
     }
 
-    public ListViewExt(Context context, AttributeSet attrs) {
+    public ListViewExt(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         init();
     }
 
-    public ListViewExt(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ListViewExt(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -78,15 +83,18 @@ public class ListViewExt extends ListView {
 
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public boolean onInterceptTouchEvent(MotionEvent ev)
+    {
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
+    public boolean onTouchEvent(MotionEvent ev)
+    {
 
         int y = (int) ev.getY();
-        switch (ev.getActionMasked()) {
+        switch (ev.getActionMasked())
+        {
             case MotionEvent.ACTION_DOWN://0
             case MotionEvent.ACTION_POINTER_DOWN:
                 ListViewEnhance.onTouchDown(this, ev);
@@ -96,30 +104,37 @@ public class ListViewExt extends ListView {
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_UP:
                 this.mLastY = y;
-                if (this.mIsTouching) {
+                if (this.mIsTouching)
+                {
                     this.mIsTouching = false;
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
-                if (this.mIsTouching) {
+                if (this.mIsTouching)
+                {
                     this.mIsTouching = false;
                     ListViewEnhance.resetScale(this);
                 }
                 break;
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE:
+            {
                 int offset = (y - this.mDownMotionY);
 
-                if (!this.mIsTouching) {
+                if (!this.mIsTouching)
+                {
                     ListViewEnhance.onTouchDown(this, ev);
                 }
                 this.mInertia = y - mDownMotionY;
 
-                if (ListViewEnhance.needListScale(this, offset)) {
+                if (ListViewEnhance.needListScale(this, offset))
+                {
                     this.mLastY = y;
                     return true;
-                } else {
+                } else
+                {
                     if (mScrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {//TOUCH_MODE_SCROLL
-                        if (y != this.mLastY) {
+                        if (y != this.mLastY)
+                        {
                             this.mLastY = y;
                         }
                     }
@@ -131,10 +146,12 @@ public class ListViewExt extends ListView {
         return super.onTouchEvent(ev);
     }
 
-    protected void dispatchDraw(Canvas canvas) {
+    protected void dispatchDraw(Canvas canvas)
+    {
         super.dispatchDraw(canvas);
 
-        if (canvas != null) {
+        if (canvas != null)
+        {
             ListViewEnhance.onRenderTick(this, canvas);
         }
     }

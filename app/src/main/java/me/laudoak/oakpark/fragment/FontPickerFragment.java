@@ -54,8 +54,8 @@ public class FontPickerFragment extends XBaseDialog
         init();
     }
 
-        private void init()
-        {
+    private void init()
+    {
 
         rootView = getActivity().getLayoutInflater().inflate(R.layout.view_pinter_loop,null);
         LoopView loopView = (LoopView) rootView.findViewById(R.id.pinter_font_loop);

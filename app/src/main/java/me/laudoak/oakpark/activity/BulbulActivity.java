@@ -19,7 +19,7 @@ import java.io.File;
 
 import cn.bmob.v3.BmobUser;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.Poet;
+import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 import me.laudoak.oakpark.ui.message.AppMsg;

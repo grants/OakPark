@@ -12,7 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.Comment;
+import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.ui.clocktext.ClockText;
 import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
 

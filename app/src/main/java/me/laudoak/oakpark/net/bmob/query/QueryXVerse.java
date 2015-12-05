@@ -8,7 +8,7 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 
 /**
  * Created by LaudOak on 2015-10-20 at 23:05.

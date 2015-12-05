@@ -39,27 +39,33 @@ public class SettingLvAdapter extends BaseAdapter
         fillings.add(0,new NormalFill("个人信息"));
         fillings.add(1,new ToggleFill("使用系统字体",false));
         fillings.add(2,new NormalFill("开源协议"));
-        fillings.add(3,new NormalFill("关于"));
+        fillings.add(3,new NormalFill("有关诗歌的网站"));
+        fillings.add(4,new NormalFill("关于"));
+
     }
 
     /**necessarily method*/
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return fillings.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return fillings.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         return holderPool.getView(position,convertView,parent);
     }
     /***/
@@ -68,12 +74,14 @@ public class SettingLvAdapter extends BaseAdapter
     /**ListView with multi layout item*/
 
     @Override
-    public int getViewTypeCount() {
+    public int getViewTypeCount()
+    {
         return holderPool.getViewTypeCount();
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position)
+    {
         return holderPool.getItemViewType(position);
     }
     /***/

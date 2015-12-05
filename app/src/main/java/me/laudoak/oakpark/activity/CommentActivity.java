@@ -9,8 +9,8 @@ import android.view.View;
 import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.Poet;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.Poet;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.net.bmob.DoComment;

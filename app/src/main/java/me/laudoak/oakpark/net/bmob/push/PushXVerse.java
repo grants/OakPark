@@ -10,8 +10,8 @@ import com.bmob.btp.callback.UploadListener;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import me.laudoak.oakpark.OP;
-import me.laudoak.oakpark.entity.Poet;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.Poet;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 
 /**

@@ -6,9 +6,11 @@
 
     <include layout="@layout/view_actionbar_normal"/>
 
-    <me.laudoak.oakpark.ui.seplv.SeparateListView
+    <me.laudoak.oakpark.ui.extlv.ListViewExt
         android:id="@+id/lv_setting"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:divider="@color/window_background"
+        android:dividerHeight="1px"/>
 
 </LinearLayout>

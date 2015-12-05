@@ -21,7 +21,7 @@ import java.util.List;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;

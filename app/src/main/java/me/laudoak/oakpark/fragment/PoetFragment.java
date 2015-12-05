@@ -13,7 +13,7 @@ import java.util.List;
 
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.PagingPoetAdapter;
-import me.laudoak.oakpark.entity.Verse;
+import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryVerse;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.paging.PagingListView;

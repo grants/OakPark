@@ -2,8 +2,7 @@ package me.laudoak.oakpark.ctrl.xv;
 
 import java.util.ArrayList;
 
-import me.laudoak.oakpark.activity.XBaseActivity;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.fragment.XBaseFragment;
 
 /**

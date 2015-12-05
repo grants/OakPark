@@ -17,7 +17,8 @@ import me.laudoak.oakpark.ui.settinglv.holder.ToggleViewHolder;
 /**
  * Created by LaudOak on 2015-11-30 at 23:17.
  */
-public class ViewHolderPool {
+public class ViewHolderPool
+{
 
     private static final String TAG = "ViewHolderPool";
 

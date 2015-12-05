@@ -13,7 +13,7 @@ import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import me.laudoak.oakpark.OP;
-import me.laudoak.oakpark.entity.Poet;
+import me.laudoak.oakpark.entity.core.Poet;
 
 /**
  * Created by LaudOak on 2015-9-27.

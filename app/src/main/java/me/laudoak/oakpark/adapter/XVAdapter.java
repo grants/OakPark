@@ -14,7 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 
 /**

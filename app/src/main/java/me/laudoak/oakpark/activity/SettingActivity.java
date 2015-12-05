@@ -9,7 +9,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.ctrl.listener.SettingLvListener;
-import me.laudoak.oakpark.ui.seplv.SeparateListView;
+import me.laudoak.oakpark.ui.extlv.ListViewExt;
 import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
 
 /**
@@ -17,21 +17,17 @@ import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
  */
 public class SettingActivity extends XBaseActivity {
 
-    private static final String TAG = "SettingActivity";
+    private static final String TAG = SettingActivity.class.getName();
 
-    private SettingLvAdapter settingLvAdapter;
-
-    @Bind(R.id.lv_setting) SeparateListView settingListView;
+    @Bind(R.id.lv_setting) ListViewExt settingLv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         MobclickAgent.openActivityDurationTrack(false);
-
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
-
         buildView();
 
     }
@@ -52,9 +48,9 @@ public class SettingActivity extends XBaseActivity {
     {
         buildBar();
 
-        settingLvAdapter = new SettingLvAdapter(this);
-        settingListView.setAdapter(settingLvAdapter);
-        settingListView.setOnItemClickListener(new SettingLvListener(this, settingLvAdapter));
+        SettingLvAdapter settingLvAdapter = new SettingLvAdapter(this);
+        settingLv.setAdapter(settingLvAdapter);
+        settingLv.setOnItemClickListener(new SettingLvListener(this, settingLvAdapter));
 
     }
 
@@ -62,12 +58,14 @@ public class SettingActivity extends XBaseActivity {
 
         getSupportActionBar().hide();
 
-        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 SettingActivity.this.finish();
             }
         });
+
         findViewById(R.id.ca_normal_done).setVisibility(View.GONE);
     }
 

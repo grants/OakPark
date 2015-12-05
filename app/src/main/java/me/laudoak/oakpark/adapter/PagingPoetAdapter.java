@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.Verse;
+import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.ui.clocktext.ClockText;
 import me.laudoak.oakpark.ui.fittext.ExpandableLinear;
 import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;

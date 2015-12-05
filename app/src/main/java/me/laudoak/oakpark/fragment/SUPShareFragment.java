@@ -1,7 +1,6 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import com.umeng.analytics.MobclickAgent;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.PrinterActivity;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.

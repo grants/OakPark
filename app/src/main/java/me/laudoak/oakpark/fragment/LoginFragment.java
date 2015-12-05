@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 import me.laudoak.oakpark.OP;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.entity.Poet;
+import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.sns.tpl.fetch.XBaseFetcher;
 import me.laudoak.oakpark.sns.tpl.qq.QQAuthListener;

@@ -63,11 +63,13 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
     }
 
     /*Getter & Setter*/
-    public boolean hasMoreItems() {
+    public boolean hasMoreItems()
+    {
         return this.hasMoreItems;
     }
 
-    public void setHasMoreItems(boolean hasMoreItems) {
+    public void setHasMoreItems(boolean hasMoreItems)
+    {
         this.hasMoreItems = hasMoreItems;
         if (!hasMoreItems)
         {
@@ -75,11 +77,13 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
         }
     }
 
-    public boolean isLoading() {
+    public boolean isLoading()
+    {
         return this.isLoading;
     }
 
-    public void setIsLoading(boolean isLoading) {
+    public void setIsLoading(boolean isLoading)
+    {
         this.isLoading = isLoading;
         if (isLoading())
         {

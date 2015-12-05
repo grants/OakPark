@@ -8,8 +8,8 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
-import me.laudoak.oakpark.entity.Comment;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.Comment;
+import me.laudoak.oakpark.entity.core.XVerse;
 
 /**
  * Created by LaudOak on 2015-12-4 at 23:22.
@@ -21,7 +21,7 @@ public class QueryPagingComment
     private static final String QK_POET = "poet";
     private static final String QK_XVERSE = "xVerse";
     private static final String QK_ORDER = "-createdAt";
-    private static final int QK_LIMIT = 10;
+    private static final int QK_LIMIT = 15;
 
 
     public QueryPagingComment(final Context context,int page,final XVerse xVerse, final QueryCallback callback)
@@ -29,7 +29,8 @@ public class QueryPagingComment
         new AsyncTask<Integer,Void,Void>()
         {
             @Override
-            protected Void doInBackground(Integer... params) {
+            protected Void doInBackground(Integer... params)
+            {
 
                 int currentPage = params[0];
 
@@ -37,7 +38,6 @@ public class QueryPagingComment
                 query.addWhereEqualTo(QK_XVERSE, new BmobPointer(xVerse));
                 query.include(QK_POET);
                 query.order(QK_ORDER);
-                query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
                 query.setLimit(QK_LIMIT);
                 query.setSkip(QK_LIMIT * currentPage);
                 query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -51,7 +51,7 @@ public class QueryPagingComment
                         {
                             callback.onSuccess(true,list);
 
-                        }else if (list.size()==0||list.size()<QK_LIMIT)
+                        }else if (list.size()==0 || list.size()<QK_LIMIT)
                         {
                             callback.onSuccess(false,list);
                         }

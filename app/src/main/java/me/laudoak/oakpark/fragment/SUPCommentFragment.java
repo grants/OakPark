@@ -21,8 +21,8 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.CommentActivity;
 import me.laudoak.oakpark.adapter.PagingComAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
-import me.laudoak.oakpark.entity.Comment;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.Comment;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.net.bmob.query.QueryPagingComment;
 import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;
@@ -114,6 +114,11 @@ public class SUPCommentFragment extends XBaseFragment implements
     {
         super.onResume();
         MobclickAgent.onPageStart(TAG); //统计页面
+
+        if (null != currentVerse)
+        {
+            beginLoad();
+        }
     }
 
     @Override
@@ -171,28 +176,39 @@ public class SUPCommentFragment extends XBaseFragment implements
     @Override
     public void onLoadMore()
     {
-        new QueryPagingComment(
-                context,
-                currentPage,
-                currentVerse,
-                new QueryPagingComment.QueryCallback()
-        {
-            @Override
-            public void onFailure(String why)
-            {
-                loani.setVisibility(View.GONE);
-                if (loadFailed.getVisibility() != View.VISIBLE)
-                {
-                    loadFailed.setVisibility(View.VISIBLE);
-                }
-            }
+        beginLoad();
+    }
 
-            @Override
-            public void onSuccess(boolean hasMore, List<Comment> results)
-            {
-                loani.setVisibility(View.GONE);
-            }
-        });
+    private void beginLoad()
+    {
+        if (null != currentVerse)
+        {
+            currentPage = 0;
+
+            new QueryPagingComment(
+                    context,
+                    currentPage,
+                    currentVerse,
+                    new QueryPagingComment.QueryCallback()
+                    {
+                        @Override
+                        public void onFailure(String why)
+                        {
+                            loani.setVisibility(View.GONE);
+                            if (loadFailed.getVisibility() != View.VISIBLE)
+                            {
+                                loadFailed.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(boolean hasMore, List<Comment> results)
+                        {
+                            loani.setVisibility(View.GONE);
+                        }
+                    });
+
+        }
     }
 
     /**Query PagingComment callback*/

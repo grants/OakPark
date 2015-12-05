@@ -67,7 +67,7 @@ public class SwitchButton
         setBackgroundColor(Color.argb(0, 0, 0, 0));
         super.setOnCheckedChangeListener(this);
 
-        disableColor = getResources().getColor(R.color.gray_1);
+        disableColor = getResources().getColor(R.color.window_background);
         enableColor = getResources().getColor(R.color.darkergreen);
         isInitial = true;
 

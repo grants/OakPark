@@ -18,7 +18,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.ctrl.xv.AbXVSubject;
-import me.laudoak.oakpark.entity.XVerse;
+import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.net.bmob.query.QueryXVerse;
 import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;

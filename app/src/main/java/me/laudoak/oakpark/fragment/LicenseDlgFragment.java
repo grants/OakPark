@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -54,11 +55,11 @@ public class LicenseDlgFragment extends XBaseDialog
         }
     }
 
+    @SuppressLint("InflateParams")
     private void buildView()
     {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_license,null);
-        ButterKnife.bind(this,view);
-        contentView = view;
+        contentView = getActivity().getLayoutInflater().inflate(R.layout.fragment_license,null);
+        ButterKnife.bind(this,contentView);
         license.setText(licenseText);
     }
 
