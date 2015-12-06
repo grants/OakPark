@@ -7,8 +7,19 @@ import cn.bmob.v3.BmobUser;
  */
 public class Poet extends BmobUser {
 
+    private String coverURL;
     private String avatarURL;
     private boolean snib;
+
+    public String getCoverURL()
+    {
+        return coverURL;
+    }
+
+    public void setCoverURL(String coverURL)
+    {
+        this.coverURL = coverURL;
+    }
 
     public String getAvatarURL() {
         return avatarURL;

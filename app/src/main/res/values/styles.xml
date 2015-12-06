@@ -240,7 +240,7 @@
     <style name="BulbulNick" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:background">@color/translucent</item>
-        <item name="android:padding">6dp</item>
+        <item name="android:padding">5dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginTop">5dp</item>

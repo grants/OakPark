@@ -8,8 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +25,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.ctrl.bulbul.BulbulController;
+import me.laudoak.oakpark.ctrl.bulbul.UpdateCallback;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.sns.tpl.weibo.LoginButton;
-import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.nereo.multi_image_selector.CropperActivity;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -32,23 +37,29 @@ import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 /**
  * Created by LaudOak on 2015-10-20 at 20:01.
  */
-public class BulbulActivity extends XBaseActivity {
+public class BulbulActivity extends XBaseActivity implements TextWatcher{
 
     private static final String TAG = "BulbulActivity";
 
     private static final int REQUEST_PICKER = 106;
+    private static final int REQUEST_COVER = 107;
 
+
+    @Bind(R.id.bulbul_cover) SimpleDraweeView cover;
     @Bind(R.id.bulbul_avatar) SimpleDraweeView avatar;
-    @Bind(R.id.bulbul_nick) AutofitTextView nick;
-    @Bind(R.id.bulbul_email) AutofitTextView email;
-    @Bind(R.id.bulbul_num) AutofitTextView num;
+    @Bind(R.id.bulbul_nick) EditText nick;
+    @Bind(R.id.bulbul_email) TextView email;
+    @Bind(R.id.bulbul_num) TextView num;
     @Bind(R.id.bulbul_qq) ImageView associateQQ;
     @Bind(R.id.bulbul_weibo) LoginButton associateWeibo;
     @Bind(R.id.bulbul_logout) Button loginOut;
 
     private Poet poet;
 
-    private String newPath = null;
+    private BulbulController bulbulController;
+    private String oldNick;
+    private String newAvatarPath = null;
+    private String newCoverPath = null;
 
     private void buildView()
     {
@@ -65,6 +76,11 @@ public class BulbulActivity extends XBaseActivity {
         ButterKnife.bind(this);
 
         poet = UserProxy.currentPoet(this);
+        if (poet != null)
+        {
+            oldNick = poet.getUsername();
+        }
+        bulbulController = new BulbulController(this);
         buildView();
     }
 
@@ -90,42 +106,61 @@ public class BulbulActivity extends XBaseActivity {
         done.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
-                if (nick.getText().toString().trim().length() >= 2)
-                {
-                    final ProgressDialog dialog = new ProgressDialog(BulbulActivity.this);
-                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    dialog.show();
+            public void onClick(View v)
+            {
 
-                    UserProxy.doUpdate(BulbulActivity.this,
-                            nick.getText().toString().trim(),
-                            newPath,
-                            new UserProxy.CallBack() {
-                                @Override
-                                public void onSuccess(String nick)
-                                {
-                                    dialog.dismiss();
-                                    AppMsg.makeText(BulbulActivity.this, "已更新", AppMsg.STYLE_INFO).show();
-                                    delayExit();
-                                }
+                final ProgressDialog dialog = new ProgressDialog(BulbulActivity.this);
+                dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.show();
 
-                                @Override
-                                public void onFailure(String reason)
-                                {
-                                    dialog.dismiss();
-                                    AppMsg.makeText(BulbulActivity.this, reason, AppMsg.STYLE_ALERT).show();
-                                }
-                            });
-                } else
+                bulbulController.update(new UpdateCallback()
                 {
-                    AppMsg.makeText(BulbulActivity.this, "用户名不符", AppMsg.STYLE_CONFIRM).show();
-                }
+                    @Override
+                    public void onForbidden(String why)
+                    {
+                        dialog.dismiss();
+                        AppMsg.makeText(BulbulActivity.this, why, AppMsg.STYLE_CONFIRM).show();
+                    }
+
+                    @Override
+                    public void onFailure(String why)
+                    {
+                        dialog.dismiss();
+                        AppMsg.makeText(BulbulActivity.this,why,AppMsg.STYLE_ALERT).show();
+                    }
+
+                    @Override
+                    public void onSuccess()
+                    {
+                        bulbulController.onNickChanged(false,nick.getText().toString());
+                        bulbulController.onCoverChanged(false, newCoverPath);
+                        bulbulController.onAvatarChanged(false,newAvatarPath);
+                        dialog.dismiss();
+                        AppMsg.makeText(BulbulActivity.this,"已更新",AppMsg.STYLE_INFO).show();
+                    }
+                });
+
             }
         });
     }
 
     private void initlistener()
     {
+        cover.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //!!!
+                //this -> MultiImageSelectorActivity -> CropperActivity
+                //CropperActivity -> MultiImageSelectorActivity -> this
+                Intent intent = new Intent();
+                intent.setClass(BulbulActivity.this, MultiImageSelectorActivity.class);
+                intent.putExtra(CropperActivity.EXTRA_CROP_MODE, CropperActivity.CROP_MODE_NORMAL);
+                startActivityForResult(intent,REQUEST_COVER);
+            }
+        });
+
         avatar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -165,6 +200,9 @@ public class BulbulActivity extends XBaseActivity {
                 builder.create().show();
             }
         });
+
+        nick.addTextChangedListener(this);
+
     }
 
     private void delayExit()
@@ -193,11 +231,24 @@ public class BulbulActivity extends XBaseActivity {
                 Uri uri = Uri.parse(poet.getAvatarURL());
                 avatar.setImageURI(uri);
             }
+
+            if (null != poet.getCoverURL())
+            {
+                Uri uri = Uri.parse(poet.getCoverURL());
+                cover.setAspectRatio(1.67f);
+                cover.setImageURI(uri);
+            }else
+            {
+                Uri uri = Uri.parse("res://me.luadoak.oakpark/"+R.drawable.sower);
+                cover.setAspectRatio(1.67f);
+                cover.setImageURI(uri);
+            }
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode!=RESULT_OK)
@@ -207,11 +258,42 @@ public class BulbulActivity extends XBaseActivity {
 
         if (requestCode == REQUEST_PICKER&&data!=null)
         {
-            String path = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);
-            newPath = path;
-            Uri uri = Uri.fromFile(new File(path));
+            this.newAvatarPath = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);;
+            bulbulController.onAvatarChanged(true,newAvatarPath);
+            Uri uri = Uri.fromFile(new File(newAvatarPath));
             avatar.setImageURI(uri);
+        }
+
+        if(requestCode==REQUEST_COVER && data != null)
+        {
+            this.newCoverPath = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);
+            bulbulController.onCoverChanged(true,newCoverPath);
+            Log.d(TAG, "requestCode==REQUEST_PICKER && data != null" + "imagePath" + newCoverPath);
+            Uri uri = Uri.fromFile(new File(newCoverPath));
+            cover.setAspectRatio(1.67f);
+            cover.setImageURI(uri);
         }
     }
 
+    /**Monitor nick change*/
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+    {
+        //doNothing
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+    {
+        //doNothing
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable)
+    {
+        if (!nick.getText().toString().equals(oldNick))
+        {
+            bulbulController.onNickChanged(true,nick.getText().toString());
+        }
+    }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    xmlns:autofit="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/white"
@@ -19,13 +18,10 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp">
 
-
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/bubul_cover"
+            android:id="@+id/bulbul_cover"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/sower"
-            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
             fresco:placeholderImage ="@android:color/transparent" />
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -34,13 +30,13 @@
             android:layout_height="90dp"
             android:padding="10dp"
             android:layout_centerHorizontal="true"
-            fresco:placeholderImage ="@color/window_background"
+            fresco:placeholderImage ="@android:color/white"
             fresco:roundingBorderWidth="1dp"
-            fresco:roundingBorderColor="@color/gray_7"
-            fresco:roundWithOverlayColor="@color/white"
+            fresco:roundingBorderColor="@color/translucent"
+            fresco:roundWithOverlayColor="@android:color/transparent"
             fresco:roundAsCircle="true"/>
 
-        <me.laudoak.oakpark.ui.fittext.AutofitTextView
+        <EditText
             android:id="@+id/bulbul_nick"
             style="@style/BulbulNick"
             android:hint="昵称"
@@ -49,30 +45,25 @@
             android:gravity="center_horizontal"
             android:layout_below="@+id/bulbul_avatar"
             android:layout_centerHorizontal="true"
-            autofit:minTextSize="20sp"
-            autofit:sizeToFit="true"/>
+            android:layout_marginBottom="10dp"/>
 
-        <me.laudoak.oakpark.ui.fittext.AutofitTextView
+        <TextView
             android:id="@+id/bulbul_email"
             style="@style/BulbulOther"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_below="@+id/bulbul_nick"
-            android:visibility="gone"
-            autofit:minTextSize="14sp"
-            autofit:sizeToFit="true"/>
+            android:visibility="gone"/>
 
-        <me.laudoak.oakpark.ui.fittext.AutofitTextView
+        <TextView
             android:id="@+id/bulbul_num"
             style="@style/BulbulOther"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_below="@+id/bulbul_email"
-            android:visibility="gone"
-            autofit:minTextSize="14sp"
-            autofit:sizeToFit="true"/>
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

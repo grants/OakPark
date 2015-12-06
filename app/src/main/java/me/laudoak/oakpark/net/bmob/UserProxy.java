@@ -37,7 +37,8 @@ public class UserProxy {
 
     public void doLogin(final CallBack callBack)
     {
-        BmobUser.loginByAccount(this.context, this.email, this.password, new LogInListener<Poet>() {
+        BmobUser.loginByAccount(this.context, this.email, this.password, new LogInListener<Poet>()
+        {
             @Override
             public void done(Poet poet, BmobException e) {
                 if (null != poet && null == e) {
@@ -65,14 +66,17 @@ public class UserProxy {
         poet.setPassword(this.password);
         poet.setSnib(false);
 
-        poet.signUp(this.context, new SaveListener() {
+        poet.signUp(this.context, new SaveListener()
+        {
             @Override
-            public void onSuccess() {
+            public void onSuccess()
+            {
                 callBack.onSuccess(poet.getUsername());
             }
 
             @Override
-            public void onFailure(int i, String s) {
+            public void onFailure(int i, String s)
+            {
                 callBack.onFailure(s);
             }
         });
@@ -95,7 +99,8 @@ public class UserProxy {
                     curPoet.setAvatarURL(url);
                     curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
                         @Override
-                        public void onSuccess() {
+                        public void onSuccess()
+                        {
                             callBack.onSuccess(poet.getUsername());
                         }
 
@@ -121,12 +126,14 @@ public class UserProxy {
 
             curPoet.update(context, curPoet.getObjectId(), new UpdateListener() {
                 @Override
-                public void onSuccess() {
+                public void onSuccess()
+                {
                     callBack.onSuccess(poet.getUsername());
                 }
 
                 @Override
-                public void onFailure(int i, String s) {
+                public void onFailure(int i, String s)
+                {
                     callBack.onFailure(s);
                 }
             });

@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.File;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.PrinterActivity;
@@ -163,7 +165,7 @@ public class EntireEditorFragment extends XBaseFragment implements
         /**/
         if (null != imagePath)
         {
-            Uri uri = Uri.parse(imagePath);
+            Uri uri = Uri.fromFile(new File(imagePath));
             intent.putExtra(PrinterActivity.EXTRA_VERSE_URI_STR,uri.toString());
         }
 

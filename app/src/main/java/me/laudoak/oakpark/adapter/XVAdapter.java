@@ -102,7 +102,8 @@ public class XVAdapter extends RecyclerView.Adapter<XVAdapter.SimpleViewHolder>
         AutofitTextView author;
         TextView verse;
 
-        public SimpleViewHolder(View view) {
+        public SimpleViewHolder(View view)
+        {
             super(view);
             image = (SimpleDraweeView) view.findViewById(R.id.item_xverse_image);
             title = (AutofitTextView) view.findViewById(R.id.item_xverse_title);
