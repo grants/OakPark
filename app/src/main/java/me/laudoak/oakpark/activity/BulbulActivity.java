@@ -81,8 +81,10 @@ public class BulbulActivity extends XBaseActivity implements TextWatcher{
             oldNick = poet.getUsername();
         }
         bulbulController = new BulbulController(this);
+
         buildView();
     }
+
 
     private void buildBar()
     {
@@ -111,6 +113,7 @@ public class BulbulActivity extends XBaseActivity implements TextWatcher{
 
                 final ProgressDialog dialog = new ProgressDialog(BulbulActivity.this);
                 dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                dialog.setMessage("正在更新...");
                 dialog.show();
 
                 bulbulController.update(new UpdateCallback()
