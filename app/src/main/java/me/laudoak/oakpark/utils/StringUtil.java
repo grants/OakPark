@@ -1,5 +1,8 @@
 package me.laudoak.oakpark.utils;
 
+import android.text.style.URLSpan;
+import android.text.style.UnderlineSpan;
+
 import java.util.Random;
 
 /**
@@ -46,6 +49,35 @@ public class StringUtil {
         Random random = new Random();
 
         return random.nextInt ( max ) % ( max - min + 1) + min;
+    }
+
+    public enum SpannyType
+    {
+
+        UNDERLINE,
+        URL,
+        FOREIGN,
+        QUOTE,
+        MULTIPLE;
+
+    }
+
+    public static Spanny genSpannyText(String source , SpannyType type)
+    {
+        Spanny spanny = null;
+
+        if (null != source)
+        {
+            switch (type)
+            {
+                case UNDERLINE:
+                {
+                    spanny = new Spanny(source,new UnderlineSpan());
+                    break;
+                }
+            }
+        }
+        return spanny;
     }
 
 }

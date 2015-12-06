@@ -20,7 +20,7 @@
         style="@style/EditorButton"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_margin="4dp"
+        android:layout_margin="2dp"
         android:text="写下你的评论..."/>
 
     <me.laudoak.oakpark.ui.paging.PagingListView
@@ -34,10 +34,8 @@
         android:divider="@null"/>
 
 
-
     <TextView
         android:id="@+id/sup_comment_load_failed"
-        android:text="获取评论失败"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,12 @@ import me.laudoak.oakpark.adapter.PagingComAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.entity.core.XVerse;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.net.bmob.query.QueryPagingComment;
 import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.paging.PagingListView;
+import me.laudoak.oakpark.utils.StringUtil;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
@@ -34,7 +37,8 @@ import me.laudoak.oakpark.ui.paging.PagingListView;
 public class SUPCommentFragment extends XBaseFragment implements
         AbXVOberver,
         PagingListView.LoadCallback,
-        QueryPagingComment.QueryCallback
+        QueryPagingComment.QueryCallback,
+        View.OnClickListener
 {
 
     private static final String TAG = SUPCommentFragment.class.getName();
@@ -52,6 +56,8 @@ public class SUPCommentFragment extends XBaseFragment implements
     private PagingComAdapter adapter;
     private XVerse currentVerse;
 
+    private boolean isFirstLoad;
+
 
     private static class ClassHolder
     {
@@ -64,14 +70,12 @@ public class SUPCommentFragment extends XBaseFragment implements
     }
 
 
+    /**Lifecycle */
     @Override
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
     }
-
-    /**Lifecycle */
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -97,10 +101,7 @@ public class SUPCommentFragment extends XBaseFragment implements
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
-        listView.setAdapter(adapter);
-        listView.setLoadCallback(this);
-
+        loadFailed.setText(StringUtil.genSpannyText("获取评论失败,点击重新加载", StringUtil.SpannyType.UNDERLINE));
     }
 
     @Override
@@ -114,11 +115,6 @@ public class SUPCommentFragment extends XBaseFragment implements
     {
         super.onResume();
         MobclickAgent.onPageStart(TAG); //统计页面
-
-        if (null != currentVerse)
-        {
-            beginLoad();
-        }
     }
 
     @Override
@@ -136,30 +132,38 @@ public class SUPCommentFragment extends XBaseFragment implements
         if (currentVerse != xv)
         {
             currentVerse = xv;
+            isFirstLoad = true;
+            loadComment();
         }
     }
 
     private void buildListener()
     {
-
+        loadFailed.setOnClickListener(this);
         writeComment.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (null != currentVerse)
+                if (null != currentVerse && UserProxy.ifLogin(context))
                 {
                     Intent intent = new Intent();
                     intent.setClass(context, CommentActivity.class);
                     intent.putExtra(EXTRA_XVERSE, currentVerse);
                     startActivityForResult(intent, REQUEST_COMMENT);
 
-                } else
+                } else if (! UserProxy.ifLogin(context))
                 {
-                    AppMsg.makeText(context, "无法评论", AppMsg.STYLE_CONFIRM).show();
+                    AppMsg.makeText(context, "请先登录", AppMsg.STYLE_CONFIRM).show();
+                }else
+                {
+                    AppMsg.makeText(context, "暂时无法评论", AppMsg.STYLE_CONFIRM).show();
                 }
             }
         });
+
+        listView.setAdapter(adapter);
+        listView.setLoadCallback(this);
     }
 
     @Override
@@ -176,38 +180,26 @@ public class SUPCommentFragment extends XBaseFragment implements
     @Override
     public void onLoadMore()
     {
-        beginLoad();
-    }
+        Log.d(TAG,"onLoadMore()");
+        Log.d(TAG, "currentXV == null:" + (currentVerse == null));
 
-    private void beginLoad()
-    {
         if (null != currentVerse)
         {
+            loadComment();
+        }
+    }
+
+    private void loadComment()
+    {
+        if ( isFirstLoad && (null != adapter))
+        {
             currentPage = 0;
+            adapter.removeAllDatas();
+            new QueryPagingComment(context, currentPage++, currentVerse, this);
 
-            new QueryPagingComment(
-                    context,
-                    currentPage,
-                    currentVerse,
-                    new QueryPagingComment.QueryCallback()
-                    {
-                        @Override
-                        public void onFailure(String why)
-                        {
-                            loani.setVisibility(View.GONE);
-                            if (loadFailed.getVisibility() != View.VISIBLE)
-                            {
-                                loadFailed.setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                        @Override
-                        public void onSuccess(boolean hasMore, List<Comment> results)
-                        {
-                            loani.setVisibility(View.GONE);
-                        }
-                    });
-
+        }else
+        {
+            new QueryPagingComment(context, currentPage++, currentVerse, this);
         }
     }
 
@@ -215,6 +207,8 @@ public class SUPCommentFragment extends XBaseFragment implements
     @Override
     public void onFailure(String why)
     {
+        Log.d(TAG,why);
+
         loani.setVisibility(View.GONE);
         if (loadFailed.getVisibility() != View.VISIBLE)
         {
@@ -222,9 +216,22 @@ public class SUPCommentFragment extends XBaseFragment implements
         }
     }
 
+    /**handle reload*/
+    @Override
+    public void onClick(View view)
+    {
+        if ((view.getId() == R.id.sup_comment_load_failed) && (loadFailed.getVisibility() == View.VISIBLE))
+        {
+            loadComment();
+        }
+    }
+
+    /**Query PagingComment callback*/
     @Override
     public void onSuccess(boolean hasMore, List<Comment> results)
     {
+        Log.d(TAG,"onSuccess(boolean hasMore, List<Comment> results)");
+        isFirstLoad = false;
         listView.onLoadCompleted(hasMore, results);
     }
 

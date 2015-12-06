@@ -239,13 +239,13 @@
     <!-- Bulbul Text-->
     <style name="BulbulNick" parent="Base.Widget.AppCompat.EditText">
         <item name="android:textCursorDrawable">@null</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="android:background">@color/translucent</item>
         <item name="android:padding">6dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textColorHint">@color/gray_2</item>
-        <item name="android:textColor">@color/gray_8</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
         <item name="android:singleLine">true</item>
     </style>
@@ -282,10 +282,11 @@
 
     <style name="SUPNickText" parent="TextAppearance.AppCompat">
         <item name="android:paddingLeft">6dp</item>
-        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingBottom">2dp</item>
         <item name="android:paddingTop">1dp</item>
         <item name="android:textColor">@color/gray_5</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:singleLine">true</item>
     </style>
 
@@ -307,7 +308,7 @@
     </style>
 
     <style name="CommentText" parent="TextAppearance.AppCompat">
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">2dp</item>
         <item name="android:textColor">@color/gray_7</item>
         <item name="android:textSize">14sp</item>
     </style>

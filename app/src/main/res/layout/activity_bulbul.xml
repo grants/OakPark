@@ -9,21 +9,31 @@
 
     <include layout="@layout/view_actionbar_normal"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/white"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp">
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/bubul_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sower"
+            android:scaleType="centerCrop"
+            fresco:placeholderImage ="@android:color/transparent" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/bulbul_avatar"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:padding="10dp"
+            android:layout_centerHorizontal="true"
             fresco:placeholderImage ="@color/window_background"
             fresco:roundingBorderWidth="1dp"
             fresco:roundingBorderColor="@color/gray_7"
@@ -34,9 +44,11 @@
             android:id="@+id/bulbul_nick"
             style="@style/BulbulNick"
             android:hint="昵称"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_below="@+id/bulbul_avatar"
+            android:layout_centerHorizontal="true"
             autofit:minTextSize="20sp"
             autofit:sizeToFit="true"/>
 
@@ -46,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_below="@+id/bulbul_nick"
+            android:visibility="gone"
             autofit:minTextSize="14sp"
             autofit:sizeToFit="true"/>
 
@@ -55,10 +69,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layout_below="@+id/bulbul_email"
+            android:visibility="gone"
             autofit:minTextSize="14sp"
             autofit:sizeToFit="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bulbul_logout"
+        style="@style/CustomButton"
+        android:text="退出登录"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -86,8 +112,8 @@
             <ImageView
                 android:id="@+id/bulbul_qq"
                 android:src="@mipmap/ic_share_qq"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:padding="15dp"
                 android:layout_marginRight="18dp"
                 android:background="@drawable/bg_btn_tpl" />
@@ -96,8 +122,8 @@
             <ImageView
                 android:id="@+id/bulbul_weixin"
                 android:src="@mipmap/ic_share_wechat"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:padding="11dp"
                 android:visibility="gone"
                 android:layout_marginRight="18dp"
@@ -106,24 +132,13 @@
             <me.laudoak.oakpark.sns.tpl.weibo.LoginButton
                 android:id="@+id/bulbul_weibo"
                 android:src="@mipmap/ic_share_weibo"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:padding="12dp"
                 android:background="@drawable/bg_btn_tpl" />
-
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/bulbul_logout"
-        style="@style/CustomButton"
-        android:text="退出登录"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

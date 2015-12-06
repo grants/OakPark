@@ -49,7 +49,8 @@ public class PrinterActivity extends XBaseActivity implements
     private PrinterPanelView pinterPanel;
 
 
-    public enum VerseTag {
+    public enum VerseTag
+    {
 
         XVERSE, VERSE;
 

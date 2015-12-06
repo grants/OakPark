@@ -38,8 +38,7 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
      *      http://hellopoetry.com/
      */
 
-    @Bind(R.id.poetry_picker_listview)
-    ListViewExt listViewExt;
+    @Bind(R.id.poetry_picker_listview) ListViewExt listViewExt;
 
     private View contentView;
     private ArrayList<PoetryWebSite> webLists;
@@ -81,9 +80,11 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
         ButterKnife.bind(this, contentView);
 
         listViewExt.setAdapter(new PoetryWebAdapter(webLists, context));
+
         listViewExt.setOnItemClickListener(this);
     }
 
+    /**onItemClicked*/
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
     {

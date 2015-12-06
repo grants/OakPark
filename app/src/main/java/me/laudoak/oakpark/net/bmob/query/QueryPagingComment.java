@@ -2,6 +2,7 @@ package me.laudoak.oakpark.net.bmob.query;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class QueryPagingComment
     private static final String QK_POET = "poet";
     private static final String QK_XVERSE = "xVerse";
     private static final String QK_ORDER = "-createdAt";
-    private static final int QK_LIMIT = 15;
+    private static final int QK_LIMIT = 18;
 
 
     public QueryPagingComment(final Context context,int page,final XVerse xVerse, final QueryCallback callback)
@@ -47,6 +48,8 @@ public class QueryPagingComment
                     @Override
                     public void onSuccess(List<Comment> list)
                     {
+                        Log.d(TAG,"onSuccess(List<Comment> list):"+list.size());
+
                         if (list.size()==QK_LIMIT)
                         {
                             callback.onSuccess(true,list);
@@ -61,6 +64,7 @@ public class QueryPagingComment
                     @Override
                     public void onError(int i, String s)
                     {
+                        Log.d(TAG,"onError:"+s);
                         callback.onFailure(s);
                     }
                 });

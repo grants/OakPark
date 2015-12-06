@@ -70,7 +70,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
 
     }
 
-    public static class ViewHolder
+    public static class ViewHolder implements View.OnClickListener
     {
 
         @Bind(R.id.item_comment_avatar) SimpleDraweeView avatar;
@@ -81,6 +81,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
         public ViewHolder(View view)
         {
             ButterKnife.bind(this,view);
+            avatar.setOnClickListener(this);
         }
 
         void bindData(Comment cm)
@@ -98,6 +99,14 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
 
         }
 
+        @Override
+        public void onClick(View view)
+        {
+            if (view.getId() == R.id.item_comment_avatar)
+            {
+
+            }
+        }
     }
 
 }

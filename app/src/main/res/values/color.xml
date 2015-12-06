@@ -3,7 +3,7 @@
 
     <color name="white">#FFF</color>
     <color name="black">#000</color>
-
+    <color name="translucent">#cc000000</color>
     <color name="red">#B4CC0000</color>
     <color name="yellow">#B4FF8800</color>
     <color name="green">#B4669900</color>
