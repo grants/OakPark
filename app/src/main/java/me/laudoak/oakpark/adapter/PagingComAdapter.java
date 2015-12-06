@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.activity.OuterActivity;
 import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.ui.clocktext.ClockText;
 import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
@@ -22,6 +24,8 @@ import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
 public class PagingComAdapter extends XBasePagingAdapter<Comment> {
 
     private static final String TAG = PagingComAdapter.class.getName();
+
+    public static final String EXTRA_POET = "extra poet";
 
     private LayoutInflater inflater;
 
@@ -57,6 +61,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
         {
             convertView = inflater.inflate(R.layout.view_item_comment,parent,false);
             holder = new ViewHolder(convertView);
+
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -70,7 +75,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
 
     }
 
-    public static class ViewHolder implements View.OnClickListener
+    public class ViewHolder
     {
 
         @Bind(R.id.item_comment_avatar) SimpleDraweeView avatar;
@@ -78,14 +83,30 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
         @Bind(R.id.item_comment_time) ClockText commentTime;
         @Bind(R.id.item_comment_content) TextView commentContent;
 
+        private Comment comment;
+
         public ViewHolder(View view)
         {
-            ButterKnife.bind(this,view);
-            avatar.setOnClickListener(this);
+            ButterKnife.bind(this, view);
+
+            avatar.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    if (null != comment)
+                    {
+                        Intent intent = new Intent(context, OuterActivity.class);
+                        intent.putExtra(EXTRA_POET, comment.getPoet());
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
 
         void bindData(Comment cm)
         {
+            this.comment = cm;
             commentTime.setPushTime(cm.getCommentTime());
             nick.setText(cm.getPoet().getUsername());
             commentTime.setText(cm.getContent());
@@ -99,14 +120,6 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
 
         }
 
-        @Override
-        public void onClick(View view)
-        {
-            if (view.getId() == R.id.item_comment_avatar)
-            {
-
-            }
-        }
     }
 
 }

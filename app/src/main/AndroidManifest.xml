@@ -71,6 +71,7 @@
         </activity>
 
         <activity android:name=".activity.OuterActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
             android:label="">
         </activity>
 
