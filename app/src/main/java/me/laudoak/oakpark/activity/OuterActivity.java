@@ -1,14 +1,16 @@
 package me.laudoak.oakpark.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.ImageView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ import me.laudoak.oakpark.adapter.PagingComAdapter;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryOuterVerse;
+import me.laudoak.oakpark.ui.circle.CircleImageView;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
@@ -31,13 +34,13 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
 
     @Bind(R.id.activity_outer_collapsing) CollapsingToolbarLayout collapsingToolbarLayout;
 
-    @Bind(R.id.activity_outer_cover) SimpleDraweeView cover;
+    @Bind(R.id.activity_outer_cover) ImageView cover;
 
     @Bind(R.id.activity_outer_toolbar) Toolbar toolbar;
 
     @Bind(R.id.activity_outer_recycler) RecyclerView recyclerView;
 
-    @Bind(R.id.activity_outer_avatar) SimpleDraweeView avatar;
+    @Bind(R.id.activity_outer_avatar) CircleImageView avatar;
 
     private Poet outerPoet;
     private OuterPoetAdapter adapter;
@@ -74,21 +77,13 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
         /**init cover*/
         if (null != outerPoet.getCoverURL())
         {
-            Uri uri = Uri.parse(outerPoet.getCoverURL());
-            cover.setAspectRatio(1.67f);
-            cover.setImageURI(uri);
-        }else
-        {
-            Uri uri = Uri.parse("res://me.luadoak.oakpark/"+R.drawable.sower);
-            cover.setAspectRatio(1.67f);
-            cover.setImageURI(uri);
+            ImageLoader.getInstance().displayImage(outerPoet.getCoverURL(),cover);
         }
 
         /**init avatar*/
         if (null!=outerPoet.getAvatarURL())
         {
-            Uri uri = Uri.parse(outerPoet.getAvatarURL());
-            avatar.setImageURI(uri);
+            ImageLoader.getInstance().displayImage(outerPoet.getAvatarURL(), avatar);
         }
 
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -97,16 +92,34 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+            {
+                this.finish();
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     /**query callback*/
     @Override
     public void onFailure(String why)
     {
+        Log.d(TAG,"onFailure"+why);
         AppMsg.makeText(this,"Query Failure",AppMsg.STYLE_ALERT).show();
     }
 
     @Override
     public void onSuccess(List<Verse> results)
     {
+        Log.d(TAG,"onSuccess(List<Verse> results)"+results.size());
         adapter = new OuterPoetAdapter(this,results);
         recyclerView.setAdapter(adapter);
     }

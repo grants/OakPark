@@ -9,6 +9,15 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Actionbar color -->
+        <item name="colorPrimary">@color/white</item>
+        <!--Status bar color-->
+        <item name="colorPrimaryDark">@color/white</item>
+        <!--Window color-->
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="android:textColorSecondary">@color/gray_7</item>
+        <item name="colorControlNormal">@color/gray_7</item>
+        <item name="android:textColorPrimary">@color/gray_7</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

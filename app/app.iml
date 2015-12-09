@@ -118,5 +118,6 @@
     <orderEntry type="module" module-name="picker" exported="" />
     <orderEntry type="module" module-name="onekeyshare" exported="" />
     <orderEntry type="module" module-name="browser" exported="" />
+    <orderEntry type="module" module-name="imglod" exported="" />
   </component>
 </module>
