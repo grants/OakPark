@@ -11,23 +11,14 @@
         android:layout_height="40dp"
         android:padding="4dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/sup_comment_comment"
+        android:visibility="gone"
         wheel:matProg_barColor="@color/gray_7"
-        wheel:matProg_barWidth="3dp"/>
-
-    <Button
-        android:id="@+id/sup_comment_comment"
-        style="@style/EditorButton"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="2dp"
-        android:text="写下你的评论..."/>
+        wheel:matProg_barWidth="2dp"/>
 
     <me.laudoak.oakpark.ui.paging.PagingListView
         android:id="@+id/sup_comment_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/sup_comment_comment"
         android:dividerHeight="0.5dp"
         android:scrollbars="none"
         android:listSelector="@android:color/transparent"
@@ -35,13 +26,25 @@
 
 
     <TextView
+        android:text="Hello"
         android:id="@+id/sup_comment_load_failed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/sup_comment_comment"
         android:padding="30dp"
+        android:layout_below="@+id/sup_comment_lv"
         android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/sup_comment_comment"
+        android:src="@mipmap/ic_add"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:padding="6dp"
+        android:background="@drawable/bg_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"/>
 
 
 </RelativeLayout>

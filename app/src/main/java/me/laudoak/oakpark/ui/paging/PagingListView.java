@@ -16,7 +16,7 @@ import me.laudoak.oakpark.R;
  */
 public class PagingListView extends ListView implements AbsListView.OnScrollListener{
 
-    private static final String TAG = "PagingListView";
+    private static final String TAG = PagingListView.class.getName();
 
     private Context context;
 
@@ -31,19 +31,22 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
 
     private ListAdapter adapter;
 
-    public PagingListView(Context context) {
+    public PagingListView(Context context)
+    {
         super(context);
         this.context = context;
         init();
     }
 
-    public PagingListView(Context context, AttributeSet attrs) {
+    public PagingListView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         this.context = context;
         init();
     }
 
-    public PagingListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PagingListView(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
         this.context = context;
         init();
@@ -96,21 +99,24 @@ public class PagingListView extends ListView implements AbsListView.OnScrollList
     /**/
 
     @Override
-    public void setAdapter(ListAdapter adapter) {
+    public void setAdapter(ListAdapter adapter)
+    {
         super.setAdapter(adapter);
         this.adapter = adapter;
     }
 
     @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    public void onScrollStateChanged(AbsListView view, int scrollState)
+    {
 
     }
 
     @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+    {
         this.lastItem = firstVisibleItem+visibleItemCount;
         this.totalCount = totalItemCount;
-        if (!isLoading&&hasMoreItems&&(this.totalCount==this.lastItem)&&null!=callback)
+        if ( !isLoading && hasMoreItems && (this.totalCount == this.lastItem) && null!=callback )
         {
             setIsLoading(true);
             callback.onLoadMore();

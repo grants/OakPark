@@ -17,7 +17,7 @@
         style="@style/CATitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="6dp"
         android:layout_toRightOf="@+id/ca_normal_back"
         android:layout_centerVertical="true"/>
 

@@ -8,6 +8,8 @@ import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 /**
  * Created by LaudOak on 2015-10-8 at 20:46.
@@ -26,12 +28,13 @@ public class OPlication extends Application {
 
     private DisplayImageOptions getImageLoderDisplayOptions()
     {
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+
+        return new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
+                .displayer(new FadeInBitmapDisplayer(1000))
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .build();
-
-        return defaultOptions;
 
     }
 

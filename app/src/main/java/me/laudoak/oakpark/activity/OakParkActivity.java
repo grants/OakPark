@@ -22,6 +22,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.core.XVerse;
+import me.laudoak.oakpark.fragment.AbSUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPCommentFragment;
 import me.laudoak.oakpark.fragment.SUPShareFragment;
 import me.laudoak.oakpark.fragment.SUPWhisperFragment;
@@ -44,7 +45,7 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private XVHFragment xvhFragment;
     private SUPWhisperFragment whisperFragment;
-    private SUPCommentFragment commentFragment;
+    private AbSUPCommentFragment commentFragment;
     private SUPShareFragment shareFragment;
 
     @Override
