@@ -7,18 +7,18 @@ import com.umeng.analytics.MobclickAgent;
 /**
  * Created by LaudOak on 2015-12-12 at 12:28.
  */
-public class SUPCommentFragment extends AbSUPCommentFragment
+public class SupCommentFragment extends AbSupCommentFragment
 {
 
-    private static final String TAG = SUPCommentFragment.class.getName();
+    private static final String TAG = SupCommentFragment.class.getName();
 
 
     private static class ClassHolder
     {
-        private final static SUPCommentFragment fragment = new SUPCommentFragment();
+        private final static SupCommentFragment fragment = new SupCommentFragment();
     }
 
-    public static SUPCommentFragment getSingletonInstance()
+    public static SupCommentFragment getSingletonInstance()
     {
         return ClassHolder.fragment;
     }

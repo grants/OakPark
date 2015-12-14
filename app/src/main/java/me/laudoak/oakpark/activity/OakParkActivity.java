@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.core.XVerse;
-import me.laudoak.oakpark.fragment.AbSUPCommentFragment;
-import me.laudoak.oakpark.fragment.SUPCommentFragment;
-import me.laudoak.oakpark.fragment.SUPShareFragment;
-import me.laudoak.oakpark.fragment.SUPWhisperFragment;
+import me.laudoak.oakpark.fragment.AbSupCommentFragment;
+import me.laudoak.oakpark.fragment.SupCommentFragment;
+import me.laudoak.oakpark.fragment.SupShareFragment;
+import me.laudoak.oakpark.fragment.SupWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
 
 /**
@@ -33,7 +34,7 @@ import me.laudoak.oakpark.fragment.XVHFragment;
  */
 public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
-    private static final String TAG = "OakParkActivity";
+    private static final String TAG = OakParkActivity.class.getName();
 
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -44,14 +45,15 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     private int currViewPagerPage;
 
     private XVHFragment xvhFragment;
-    private SUPWhisperFragment whisperFragment;
-    private AbSUPCommentFragment commentFragment;
-    private SUPShareFragment shareFragment;
+    private SupWhisperFragment whisperFragment;
+    private AbSupCommentFragment commentFragment;
+    private SupShareFragment shareFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MobclickAgent.openActivityDurationTrack(false);
+        UmengUpdateAgent.update(this);
 
         setContentView(R.layout.activity_oakpark);
         buildFragments();
@@ -73,9 +75,9 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private void buildFragments()
     {
-        whisperFragment = SUPWhisperFragment.getSingletonInstance();
-        commentFragment = SUPCommentFragment.getSingletonInstance();
-        shareFragment = SUPShareFragment.getSingletonInstance();
+        whisperFragment = SupWhisperFragment.getSingletonInstance();
+        commentFragment = SupCommentFragment.getSingletonInstance();
+        shareFragment = SupShareFragment.getSingletonInstance();
 
         xvhFragment = XVHFragment.getSingletonInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.containe_rxverse_fragment,xvhFragment).commit();

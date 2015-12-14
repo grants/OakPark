@@ -1,6 +1,5 @@
 package me.laudoak.oakpark.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -23,7 +22,8 @@ import me.laudoak.oakpark.ui.extlv.ListViewExt;
 /**
  * Created by LaudOak on 2015-12-3 at 13:49.
  */
-public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnItemClickListener{
+public class PoetryPickerFragment extends XBaseDialog
+        implements AdapterView.OnItemClickListener{
 
     private static final String TAG = PoetryPickerFragment.class.getName();
 
@@ -71,7 +71,6 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
         webLists.add(7, new PoetryWebSite("http://www.poemhunter.com/", "PoemHunter.com: Poems - Quotes - Poetry"));
     }
 
-    @SuppressLint("InflateParams")
     private void initViews()
     {
         Log.d(TAG, "private void initViews()");
@@ -80,7 +79,6 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
         ButterKnife.bind(this, contentView);
 
         listViewExt.setAdapter(new PoetryWebAdapter(webLists, context));
-
         listViewExt.setOnItemClickListener(this);
     }
 
@@ -93,7 +91,6 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
         BrowserHelper helper = new BrowserHelper(context);
         helper.show(webLists.get(position).getUrl());
         PoetryPickerFragment.this.dismiss();
-
     }
 
     @Override
@@ -101,7 +98,7 @@ public class PoetryPickerFragment extends XBaseDialog implements AdapterView.OnI
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.CustomDialog)
                 .setTitle("一些诗歌网站")
-                .setNegativeButton("确定",null)
+                .setNegativeButton("关闭",null)
                 .setView(contentView);
 
         return builder.create();

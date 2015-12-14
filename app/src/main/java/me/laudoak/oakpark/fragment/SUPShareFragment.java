@@ -21,11 +21,11 @@ import me.laudoak.oakpark.entity.core.XVerse;
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public class SUPShareFragment extends XBaseFragment
+public class SupShareFragment extends XBaseFragment
         implements AbXVOberver
 {
 
-    private static final String TAG = "SUPShareFragment";
+    private static final String TAG = SupShareFragment.class.getName();
 
     private View rootView;
     private TextView title,author;
@@ -35,10 +35,10 @@ public class SUPShareFragment extends XBaseFragment
 
     private static class HolderClass
     {
-        private final static SUPShareFragment fragment = new SUPShareFragment();
+        private final static SupShareFragment fragment = new SupShareFragment();
     }
 
-    public static SUPShareFragment getSingletonInstance()
+    public static SupShareFragment getSingletonInstance()
     {
         return HolderClass.fragment;
     }

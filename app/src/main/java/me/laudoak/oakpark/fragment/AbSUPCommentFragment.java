@@ -33,14 +33,14 @@ import me.laudoak.oakpark.utils.StringUtil;
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public abstract class AbSUPCommentFragment extends XBaseFragment implements
+public abstract class AbSupCommentFragment extends XBaseFragment implements
         AbXVOberver,
         PagingListView.LoadCallback,
         QueryPagingComment.QueryCallback,
         View.OnClickListener
 {
 
-    private static final String TAG = AbSUPCommentFragment.class.getName();
+    private static final String TAG = AbSupCommentFragment.class.getName();
 
     public static final String EXTRA_XVERSE = "EXTRA_XVERSE";
     private static final int REQUEST_COMMENT = 121;

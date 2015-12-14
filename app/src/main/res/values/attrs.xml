@@ -82,4 +82,9 @@
         <attr name="mm_rtlEnabled" format="boolean"/>
     </declare-styleable>
 
+    <!-- DrawerMenu-->
+    <declare-styleable name="DrawerMenu">
+        <attr name="rightPadding" format="dimension"/>
+    </declare-styleable>
+
 </resources>

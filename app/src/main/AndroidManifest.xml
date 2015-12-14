@@ -36,7 +36,6 @@
         <activity
             android:name=".activity.OakParkActivity"
             android:label="@string/app_name" >
-
         </activity>
 
         <activity android:name=".activity.EnterActivity"
@@ -79,7 +78,7 @@
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:theme="@style/FinestWebViewTheme" />
-        
+
         <!-- Login with QQ -->
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
@@ -122,12 +121,22 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
+        <!-- Umeng Update-->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
 
         <!-- for UMeng-->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="562c59af67e58e58fb002ecd" >
         </meta-data>
+
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Wandoujia" >

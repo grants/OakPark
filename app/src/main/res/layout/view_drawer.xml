@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_dialog">
+    android:layout_height="match_parent"
+    android:background="@color/translucent_white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/drawer_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:padding="10dp"
-            fresco:placeholderImage ="@color/window_background"
-            fresco:roundingBorderWidth="1dp"
-            fresco:roundingBorderColor="@color/gray_7"
-            fresco:roundWithOverlayColor="@color/white"
-            fresco:roundAsCircle="true"/>
-
-    </LinearLayout>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/drawer_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        fresco:placeholderImage ="@color/window_background"
+        fresco:roundingBorderWidth="1px"
+        fresco:roundingBorderColor="@color/white"
+        fresco:roundWithOverlayColor="@android:color/transparent"
+        fresco:roundAsCircle="true"/>
 
 
     <LinearLayout
         android:id="@+id/drawer_container_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/drawer_avatar">
 
-        <TextView
+        <me.laudoak.oakpark.ui.text.FluidTextView
             android:id="@+id/drawer_nick"
             style="@style/DrawerNick"
             android:layout_width="match_parent"
@@ -44,22 +38,100 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/drawer_container_info"
+        android:layout_marginBottom="43dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/drawer_item_newpoem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_re_btn">
+
+            <ImageView
+                android:id="@+id/ca_poet_done"
+                android:src="@mipmap/ic_feather"
+                android:gravity="center_vertical"
+                android:layout_width="@dimen/height_ac"
+                android:layout_height="@dimen/height_ac"
+                android:padding="13dp"/>
+
+            <TextView
+                android:text="写下"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="#26343F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_item_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_re_btn">
+
+            <ImageView
+                android:src="@mipmap/ic_own"
+                android:layout_width="@dimen/height_ac"
+                android:layout_height="@dimen/height_ac"
+                android:padding="13dp"/>
+
+            <TextView
+                android:text="个人"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="#26343F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_item_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/bg_re_btn">
+
+            <ImageView
+                android:src="@mipmap/ic_calendar"
+                android:layout_width="@dimen/height_ac"
+                android:layout_height="@dimen/height_ac"
+                android:padding="13dp"/>
+
+            <TextView
+                android:text="日历"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="#26343F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/drawer_ll_setting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn_back"
+        android:layout_height="43dp"
+        android:background="@drawable/bg_re_btn"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
-
-        <View
-            android:background="@color/gray_4"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
 
         <ImageView
             android:layout_margin="8dp"
@@ -70,4 +142,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

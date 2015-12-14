@@ -12,7 +12,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
-import me.laudoak.oakpark.fragment.AbSUPCommentFragment;
+import me.laudoak.oakpark.fragment.AbSupCommentFragment;
 import me.laudoak.oakpark.net.bmob.DoComment;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.fittext.AutofitTextView;
@@ -37,7 +37,7 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-        xv = (XVerse) getIntent().getSerializableExtra(AbSUPCommentFragment.EXTRA_XVERSE);
+        xv = (XVerse) getIntent().getSerializableExtra(AbSupCommentFragment.EXTRA_XVERSE);
         buildView();
     }
 

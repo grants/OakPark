@@ -12,55 +12,61 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
+import me.laudoak.oakpark.ctrl.listener.DrawerItemClickListener;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
+import me.laudoak.oakpark.ui.text.FluidTextView;
 
 /**
  * Created by LaudOak on 2015-10-16 at 22:03.
  */
-public class DrawerFragment extends XBaseFragment {
+public class DrawerFragment extends XBaseFragment
+{
 
-    private static final String TAG = "DrawerFragment";
+    private static final String TAG = DrawerFragment.class.getName();
 
-    private View rootView;
+    @Bind(R.id.drawer_nick) FluidTextView nick;
+    @Bind(R.id.drawer_avatar) SimpleDraweeView avatar;
+    @Bind(R.id.drawer_num) TextView num;
+    @Bind(R.id.drawer_ll_setting) LinearLayout setting;
+
+    @Bind(R.id.drawer_item_newpoem) LinearLayout newpoem;
+    @Bind(R.id.drawer_item_personal) LinearLayout personal;
+    @Bind(R.id.drawer_item_calendar) LinearLayout calendar;
 
     private Poet poet;
-    private LinearLayout setting;
-    private SimpleDraweeView avatar;
-    private TextView nick,num;
-
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         poet = UserProxy.currentPoet(context);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (null == rootView)
-        {
-            rootView = inflater.inflate(R.layout.view_drawer,container,false);
-        }else if (null != (rootView.getParent())){
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.view_drawer,container,false);
+        ButterKnife.bind(this,view);
+        buildViews();
 
-        buildViews(rootView);
-
-        return rootView;
+        return view;
     }
 
-
-    private void buildViews(View view) {
-        avatar = (SimpleDraweeView) view.findViewById(R.id.drawer_avatar);
-        avatar.setOnClickListener(new View.OnClickListener() {
+    private void buildViews()
+    {
+        avatar.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 if (UserProxy.ifLogin(context))
                 {
                     Intent intent = new Intent();
@@ -77,20 +83,25 @@ public class DrawerFragment extends XBaseFragment {
             }
         });
 
-        nick = (TextView) view.findViewById(R.id.drawer_nick);
-        num = (TextView) view.findViewById(R.id.drawer_num);
-
-        setting = (LinearLayout) view.findViewById(R.id.drawer_ll_setting);
-        setting.setOnClickListener(new View.OnClickListener() {
+        setting.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 startActivity(new Intent(context, SettingActivity.class));
             }
         });
+
+        DrawerItemClickListener menuListener = new DrawerItemClickListener(context);
+        newpoem.setOnClickListener(menuListener);
+        newpoem.setOnLongClickListener(menuListener);
+        personal.setOnClickListener(menuListener);
+        calendar.setOnClickListener(menuListener);
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
 
         poet = UserProxy.currentPoet(context);

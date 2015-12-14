@@ -12,11 +12,13 @@ import android.support.v4.app.DialogFragment;
  */
 public abstract class XBaseDialog extends DialogFragment
 {
+    private static final String TAG = XBaseDialog.class.getName();
 
     protected Context context;
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity)
+    {
         super.onAttach(activity);
         this.context = activity;
     }

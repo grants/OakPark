@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,16 +14,19 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.activity.OuterActivity;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
 import me.laudoak.oakpark.entity.core.XVerse;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
  */
-public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver
+public class SupWhisperFragment extends XBaseFragment implements
+        AbXVOberver, View.OnClickListener
 {
+    private static final String TAG = SupWhisperFragment.class.getName();
 
-    private static final String TAG = SUPWhisperFragment.class.getName();
+    public static final String EXTRA_POET = "extra poet";
 
     private View rootView;
     private TextView whisper;
@@ -31,12 +35,13 @@ public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver
     private XVerse curXV;
     private boolean isViewCreated = false;
 
+
     private static class HolderClass
     {
-        private final static SUPWhisperFragment fragment = new SUPWhisperFragment();
+        private final static SupWhisperFragment fragment = new SupWhisperFragment();
     }
 
-    public static SUPWhisperFragment getSingletonInstance()
+    public static SupWhisperFragment getSingletonInstance()
     {
         return HolderClass.fragment;
     }
@@ -138,6 +143,17 @@ public class SUPWhisperFragment extends XBaseFragment implements AbXVOberver
             {
                 onXVUpdate();
             }
+        }
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        if (view.getId() == R.id.sup_whisper_avatar && curXV != null && curXV.getBulbul() != null)
+        {
+            Intent intent = new Intent(context, OuterActivity.class);
+            intent.putExtra(EXTRA_POET, curXV.getBulbul());
+            context.startActivity(intent);
         }
     }
 

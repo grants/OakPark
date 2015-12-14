@@ -31,6 +31,8 @@ public class XVHFragment extends AbXVSubject {
 
     private static final String TAG = "XVHFragment";
 
+
+
     private int currXVPage = 0;
     private View rootView;
     protected RecyclerViewPager mRecyclerView;
@@ -50,13 +52,14 @@ public class XVHFragment extends AbXVSubject {
 
     /**/
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
 
         this.attach((AbXVOberver) context);
-        this.attach(SUPWhisperFragment.getSingletonInstance());
-        this.attach(SUPCommentFragment.getSingletonInstance());
-        this.attach(SUPShareFragment.getSingletonInstance());
+        this.attach(SupWhisperFragment.getSingletonInstance());
+        this.attach(SupCommentFragment.getSingletonInstance());
+        this.attach(SupShareFragment.getSingletonInstance());
     }
 
     @Override
@@ -66,7 +69,8 @@ public class XVHFragment extends AbXVSubject {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         if (null == rootView)
         {
             rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
@@ -107,17 +111,20 @@ public class XVHFragment extends AbXVSubject {
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
     }
     /**/
