@@ -61,6 +61,7 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     {
         setSupportActionBar(toolbar);
         toolbar.setTitle(outerPoet.getUsername());
+        getSupportActionBar().setTitle(outerPoet.getUsername());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

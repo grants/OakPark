@@ -114,6 +114,7 @@ public class SupWhisperFragment extends XBaseFragment implements
     {
         whisper = (TextView) view.findViewById(R.id.sup_whisper_whisper);
         avatar = (SimpleDraweeView) view.findViewById(R.id.sup_whisper_avatar);
+        avatar.setOnClickListener(this);
         nick = (TextView) view.findViewById(R.id.sup_whisper_nick);
     }
 

@@ -34,7 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways"/>
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:theme="@style/ToolBarStyle"
+                app:theme="@style/ToolBarStyle"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
