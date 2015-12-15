@@ -42,6 +42,7 @@ public class SettingLvAdapter extends BaseAdapter
         fillings.add(3,new NormalFill("有关诗歌的网站"));
         fillings.add(4,new NormalFill("版本更新"));
         fillings.add(5,new NormalFill("关于"));
+        fillings.add(6,new NormalFill("反馈"));
 
     }
 

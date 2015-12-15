@@ -50,7 +50,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     private SupShareFragment shareFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         MobclickAgent.openActivityDurationTrack(false);
         UmengUpdateAgent.update(this);
@@ -62,13 +63,15 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
         MobclickAgent.onPause(this);
     }
@@ -114,7 +117,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    private void buildSUP() {
+    private void buildSUP()
+    {
 
         slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
 
@@ -168,12 +172,14 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(int position)
+            {
                 currViewPagerPage = position;
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(int state)
+            {
 
             }
         });
@@ -194,9 +200,11 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
                 supPager.setCurrentItem(1);
             }
         });
-        share.setOnClickListener(new View.OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 judgeSUP();
                 supPager.setCurrentItem(2);
             }

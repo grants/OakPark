@@ -60,10 +60,11 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     private void buildBar()
     {
         setSupportActionBar(toolbar);
-        toolbar.setTitle(outerPoet.getUsername());
-        getSupportActionBar().setTitle(outerPoet.getUsername());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(outerPoet.getUsername());
+        toolbar.setTitle(outerPoet.getUsername());
+        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
     }
 
 

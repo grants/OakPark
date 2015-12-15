@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.fb.FeedbackAgent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,11 +27,13 @@ public class SettingActivity extends XBaseActivity {
         super.onCreate(savedInstanceState);
 
         MobclickAgent.openActivityDurationTrack(false);
+        syncFeedBack();
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
         buildView();
 
     }
+
 
     @Override
     protected void onResume() {
@@ -42,6 +45,12 @@ public class SettingActivity extends XBaseActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    private void syncFeedBack()
+    {
+        FeedbackAgent agent = new FeedbackAgent(this);
+        agent.sync();
     }
 
    private void buildView()

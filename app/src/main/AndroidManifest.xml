@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".OPlication"
@@ -74,6 +75,15 @@
             android:label="">
         </activity>
 
+        <activity android:name=".activity.AboutActivity"
+                  android:label=""
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.LicenseActivity"
+                  android:label=""
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
@@ -130,6 +140,10 @@
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
+
+        <!-- Umeng feedback-->
+        <activity
+            android:name="com.umeng.fb.ConversationActivity"/>
 
         <!-- for UMeng-->
         <meta-data

@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.umeng.fb.FeedbackAgent;
+
+import me.laudoak.oakpark.activity.AboutActivity;
 import me.laudoak.oakpark.activity.BulbulActivity;
+import me.laudoak.oakpark.activity.LicenseActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
-import me.laudoak.oakpark.fragment.LicenseDlgFragment;
 import me.laudoak.oakpark.fragment.PoetryPickerFragment;
 import me.laudoak.oakpark.fragment.VersionDlgFragment;
 import me.laudoak.oakpark.net.bmob.UserProxy;
@@ -62,8 +65,8 @@ public class SettingLvListener implements AdapterView.OnItemClickListener
             /**Open Source License*/
             case 2:
             {
-                LicenseDlgFragment licensedlg = LicenseDlgFragment.newInstance();
-                licensedlg.show(((SettingActivity)context).getSupportFragmentManager(),FLAG_DLG_LICENSE);
+                Intent intent = new Intent(context, LicenseActivity.class);
+                context.startActivity(intent);
                 break;
             }
 
@@ -80,6 +83,22 @@ public class SettingLvListener implements AdapterView.OnItemClickListener
             {
                 VersionDlgFragment versionDlgFragment = VersionDlgFragment.newInstance();
                 versionDlgFragment.show(((SettingActivity)context).getSupportFragmentManager(),FLAG_DLG_VERSION);
+                break;
+            }
+
+            /**About*/
+            case 5:
+            {
+                context.startActivity(new Intent(context, AboutActivity.class));
+                break;
+            }
+
+            /**FeedBack*/
+            case 6:
+            {
+                FeedbackAgent agent = new FeedbackAgent(context);
+                agent.setWelcomeInfo("感谢使用和建议\uD83D\uDE3A \n你可以在此反馈,也可以发送邮件到1047627381@qq.com具体说明。");
+                agent.startFeedbackActivity();
                 break;
             }
 

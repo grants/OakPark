@@ -2,9 +2,12 @@ package me.laudoak.oakpark.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 
@@ -28,14 +31,14 @@ public class PoetryPickerFragment extends XBaseDialog
     private static final String TAG = PoetryPickerFragment.class.getName();
 
     /**
-     *      http://www.thepoemforyou.com/
-     *      http://www.bedtimepoem.com/
-     *      http://www.poemhunter.com/
-     *      http://www.poetryfoundation.org/
-     *      https://www.poets.org/
-     *      http://www.poetry-archive.com/
-     *      http://poems.com/
-     *      http://hellopoetry.com/
+     *    http://www.thepoemforyou.com/
+     *    http://www.bedtimepoem.com/
+     *    http://www.poemhunter.com/
+     *    http://www.poetryfoundation.org/
+     *    https://www.poets.org/
+     *    http://www.poetry-archive.com/
+     *    http://poems.com/
+     *    http://hellopoetry.com/
      */
 
     @Bind(R.id.poetry_picker_listview) ListViewExt listViewExt;

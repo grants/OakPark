@@ -34,6 +34,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.gabrielemariotti.changeloglib:changelog:2.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.umeng:fb:5.4.0'
     compile project(':picker')
     compile project(':onekeyshare')
     compile files('libs/BmobSDK_V3.4.3_0828.jar')
@@ -44,4 +45,9 @@ dependencies {
     compile project(':browser')
     compile project(':imglod')
     compile files('libs/umeng-update-v2.6.0.1.jar')
+}
+
+repositories {
+    jcenter()
+    maven { url "https://raw.githubusercontent.com/umeng/mvn-repo-umeng/master/repository" }
 }
