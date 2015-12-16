@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.net.bmob.query.QueryPagingComment;
 import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;
-import me.laudoak.oakpark.ui.paging.PagingListView;
+import me.laudoak.oakpark.ui.paging.ExtPagingListView;
 import me.laudoak.oakpark.utils.StringUtil;
 
 /**
@@ -35,7 +36,7 @@ import me.laudoak.oakpark.utils.StringUtil;
  */
 public abstract class AbSupCommentFragment extends XBaseFragment implements
         AbXVOberver,
-        PagingListView.LoadCallback,
+        ExtPagingListView.ExtListViewLoadCallback,
         QueryPagingComment.QueryCallback,
         View.OnClickListener
 {
@@ -46,9 +47,8 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     private static final int REQUEST_COMMENT = 121;
 
 
-    @Bind(R.id.sup_comment_lv) PagingListView listView;
+    @Bind(R.id.sup_comment_lv) ExtPagingListView listView;
     @Bind(R.id.sup_comment_loani) ProgressWheel loani;
-    @Bind(R.id.sup_comment_load_failed) TextView loadFailed;
     @Bind(R.id.sup_comment_comment) ImageView writeComment;
 
     private int currentPage;
@@ -56,7 +56,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     private XVerse currentVerse;
 
     protected boolean isFirstLoad;
-
 
 
     /**Lifecycle */
@@ -90,7 +89,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        loadFailed.setText(StringUtil.genSpannyText("获取评论失败\n点击重新加载", StringUtil.SpannyType.UNDERLINE));
     }
 
     @Override
@@ -126,7 +124,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
 
     private void buildListener()
     {
-        loadFailed.setOnClickListener(this);
         writeComment.setOnClickListener(this);
 
         listView.setAdapter(adapter);
@@ -177,6 +174,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     public void onFailure(String why)
     {
         onLoadFailed();
+        listView.onLoadFailed();
         Log.d(TAG, why);
     }
 
@@ -193,17 +191,8 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     @Override
     public void onClick(View view)
     {
-
         switch (view.getId())
         {
-            case R.id.sup_comment_load_failed:
-            {
-                if (loadFailed.getVisibility() == View.VISIBLE)
-                {
-                    loadComment();
-                }
-                break;
-            }
             case R.id.sup_comment_comment:
             {
                 if (null != currentVerse && UserProxy.ifLogin(context))

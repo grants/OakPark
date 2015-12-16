@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -19,6 +20,8 @@ import com.umeng.update.UmengUpdateAgent;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
@@ -28,6 +31,7 @@ import me.laudoak.oakpark.fragment.SupCommentFragment;
 import me.laudoak.oakpark.fragment.SupShareFragment;
 import me.laudoak.oakpark.fragment.SupWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
+import me.laudoak.oakpark.view.LanternTextView;
 
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
@@ -36,14 +40,16 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private static final String TAG = OakParkActivity.class.getName();
 
+    @Bind(R.id.activity_oakpark_drawer) DrawerLayout drawerLayout;
+    @Bind(R.id.sup_head_date) LanternTextView dateCode;
+    @Bind(R.id.sup_main_container_viewpager) ViewPager supPager;
+    @Bind(R.id.sup_head_indicator) ImageView indicator;
+    @Bind(R.id.sliding_layout) SlidingUpPanelLayout slidingUpPanelLayout;
 
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private SlidingUpPanelLayout slidingUpPanelLayout;
-    private ViewPager supPager;
-    private ImageView indicator;
     private int indicatorWidth;
     private int currViewPagerPage;
 
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private XVHFragment xvhFragment;
     private SupWhisperFragment whisperFragment;
     private AbSupCommentFragment commentFragment;
@@ -53,10 +59,13 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         MobclickAgent.openActivityDurationTrack(false);
         UmengUpdateAgent.update(this);
 
         setContentView(R.layout.activity_oakpark);
+        ButterKnife.bind(this);
+
         buildFragments();
         buildView();
 
@@ -95,8 +104,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     /*build drawer layout & pager*/
     private void buildDrawer()
     {
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.activity_oakpark_drawer);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close)
+        {
             public void onDrawerOpened(View drawerView)
             {
                 super.onDrawerOpened(drawerView);
@@ -119,24 +128,13 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
 
     private void buildSUP()
     {
-
-        slidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-
          /*three indicator button*/
         ImageView whisper = (ImageView) findViewById(R.id.sup_head_whisper);
         ImageView comment = (ImageView) findViewById(R.id.sup_head_comment);
         ImageView share = (ImageView) findViewById(R.id.sup_head_share);
 
-        /*dateCode*/
-        //dateCode = (TextView) findViewById(R.id.sup_head_date);
-
         /*indicator attr*/
-        indicator = (ImageView) findViewById(R.id.sup_head_indicator);
         indicatorWidth = indicator.getLayoutParams().width;
-
-        /*init viewpager*/
-        supPager = (ViewPager) findViewById(R.id.sup_main_container_viewpager);
-
 
         /*init viewpager fragments & update xverse callback*/
         List<Fragment> supFragments = new ArrayList<Fragment>();
@@ -226,22 +224,22 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     }
 
 
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(Configuration newConfig)
+    {
         super.onConfigurationChanged(newConfig);
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
@@ -249,7 +247,7 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver{
     @Override
     public void notifyXVUpdate(XVerse xv)
     {
-
+        dateCode.setLanternText(xv.getDateCode());
     }
 
 }

@@ -11,27 +11,28 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.PagingPoetAdapter;
 import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryVerse;
 import me.laudoak.oakpark.ui.message.AppMsg;
-import me.laudoak.oakpark.ui.paging.PagingListView;
+import me.laudoak.oakpark.ui.paging.ExtPagingListView;
 
 /**
  * Created by LaudOak on 2015-10-8 at 20:22.
  */
 public class PoetFragment extends XBaseFragment implements
-        PagingListView.LoadCallback,
+        ExtPagingListView.ExtListViewLoadCallback,
         QueryVerse.QueryCallback
 {
 
-    private static final String TAG = "PoetFragment";
+    private static final String TAG = PoetFragment.class.getName();
 
-    private PagingListView pagingListView;
+    @Bind(R.id.lv_poet) ExtPagingListView extPagingListView;
+    @Bind(R.id.fragment_poet_axle) View axle;
     private PagingPoetAdapter adapter;
-
-    private View rootView;
 
     private int currPage;
 
@@ -67,26 +68,19 @@ public class PoetFragment extends XBaseFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        if (null == rootView)
-        {
-            rootView = inflater.inflate(R.layout.fragment_poet, container, false);
-        } else if (null != (rootView.getParent()))
-        {
-            ((ViewGroup) rootView.getParent()).removeView(rootView);
-        }
+        View view = inflater.inflate(R.layout.fragment_poet, container, false);
+        ButterKnife.bind(this,view);
+        buildViews();
 
-        buildViews(rootView);
-
-        return rootView;
+        return view;
     }
 
 
-    private void buildViews(View view)
+    private void buildViews()
     {
-        pagingListView = (PagingListView) view.findViewById(R.id.lv_poet);
-        pagingListView.setLoadCallback(this);
-        pagingListView.setAdapter(adapter);
-        pagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        extPagingListView.setLoadCallback(this);
+        extPagingListView.setAdapter(adapter);
+        extPagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
@@ -95,6 +89,7 @@ public class PoetFragment extends XBaseFragment implements
                 return false;
             }
         });
+        axle.setVisibility(View.GONE);
     }
 
     @Override
@@ -109,11 +104,13 @@ public class PoetFragment extends XBaseFragment implements
     public void onFailure(String why)
     {
         AppMsg.makeText(context, why, AppMsg.STYLE_CONFIRM).show();
+        extPagingListView.onLoadFailed();
     }
 
     @Override
     public void onSuccess(boolean hasMore, List<Verse> results)
     {
-        pagingListView.onLoadCompleted(hasMore, results);
+        extPagingListView.onLoadCompleted(hasMore, results);
+        axle.setVisibility(View.VISIBLE);
     }
 }

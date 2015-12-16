@@ -14,7 +14,7 @@
         android:layout_height="@dimen/height_ac" />
 
     <TextView
-        android:text="我"
+        android:id="@+id/ca_poet_title"
         style="@style/CATitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
         android:textColor="#151515"
         android:textSize="20sp"
         android:layout_toRightOf="@+id/btn_back"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="6dp"
         android:text="选择图片"/>
 
     <TextView

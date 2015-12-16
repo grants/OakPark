@@ -97,7 +97,7 @@ public class SettingLvListener implements AdapterView.OnItemClickListener
             case 6:
             {
                 FeedbackAgent agent = new FeedbackAgent(context);
-                agent.setWelcomeInfo("感谢使用和建议\uD83D\uDE3A \n你可以在此反馈,也可以发送邮件到1047627381@qq.com具体说明。");
+                agent.setWelcomeInfo("感谢使用和提供反馈\uD83D\uDE3A \n你可以在此反馈,也可以发送邮件到1047627381@qq.com具体说明。");
                 agent.startFeedbackActivity();
                 break;
             }

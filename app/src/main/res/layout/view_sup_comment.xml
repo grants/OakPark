@@ -15,7 +15,7 @@
         wheel:matProg_barColor="@color/gray_7"
         wheel:matProg_barWidth="2dp"/>
 
-    <me.laudoak.oakpark.ui.paging.PagingListView
+    <me.laudoak.oakpark.ui.paging.ExtPagingListView
         android:id="@+id/sup_comment_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

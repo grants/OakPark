@@ -4,9 +4,8 @@
     android:layout_height="@dimen/height_ac"
     android:background="@color/white">
 
-    <TextView
+    <me.laudoak.oakpark.view.LanternTextView
         android:id="@+id/sup_head_date"
-        style="@style/SUPDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

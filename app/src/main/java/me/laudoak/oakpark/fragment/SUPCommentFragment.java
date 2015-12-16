@@ -1,6 +1,5 @@
 package me.laudoak.oakpark.fragment;
 
-import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -42,7 +41,6 @@ public class SupCommentFragment extends AbSupCommentFragment
     void onLoadingNew()
     {
         adapter.removeAllDatas();
-        adapter.notifyDataSetChanged();
         listView.setIsLoading(true);
     }
 
@@ -55,11 +53,6 @@ public class SupCommentFragment extends AbSupCommentFragment
     void onLoadFailed()
     {
         listView.setIsLoading(false);
-        loani.setVisibility(View.GONE);
-        if (loadFailed.getVisibility() != View.VISIBLE)
-        {
-            loadFailed.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
