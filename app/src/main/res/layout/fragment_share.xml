@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/shareend_weibo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_sinaweibo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="新浪微博"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_qq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_qq"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="QQ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_qzone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_qzone"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="QQ空间"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_wechatfriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_wechat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="微信好友"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_wechatfavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_wechatfavorite"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="微信收藏"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_wechatmoments"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="微信朋友圈"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shareend_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_email"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="邮件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

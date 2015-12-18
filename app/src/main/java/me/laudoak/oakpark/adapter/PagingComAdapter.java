@@ -62,17 +62,18 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
             convertView = inflater.inflate(R.layout.view_item_comment,parent,false);
             holder = new ViewHolder(convertView);
 
-        }else {
+        }else
+        {
             holder = (ViewHolder) convertView.getTag();
         }
 
         if (null != holder)
         {
             holder.bindData(datas.get(position));
+
         }
 
         return convertView;
-
     }
 
     public class ViewHolder
@@ -116,6 +117,9 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
             {
                 Uri uri = Uri.parse(cm.getPoet().getAvatarURL());
                 avatar.setImageURI(uri);
+            }else
+            {
+                avatar.setVisibility(View.GONE);
             }
 
         }

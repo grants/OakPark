@@ -2,12 +2,9 @@ package me.laudoak.oakpark.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 
@@ -17,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.PoetryWebAdapter;
-import me.laudoak.oakpark.ctrl.browser.BrowserHelper;
+import me.laudoak.oakpark.ctrl.helper.BrowserHelper;
 import me.laudoak.oakpark.entity.PoetryWebSite;
 import me.laudoak.oakpark.ui.dialog.XBaseDialog;
 import me.laudoak.oakpark.ui.extlv.ListViewExt;

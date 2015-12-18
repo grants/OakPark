@@ -136,6 +136,7 @@ public class ExtPagingListView extends ListView implements AbsListView.OnScrollL
     @Override
     public void setAdapter(ListAdapter adapter)
     {
+        //Caution: don't forget call super method;
         super.setAdapter(adapter);
         this.adapter = adapter;
     }

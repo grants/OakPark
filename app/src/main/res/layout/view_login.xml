@@ -61,7 +61,7 @@
 
             <ImageView
                 android:id="@+id/login_qq"
-                android:src="@mipmap/ic_share_qq"
+                android:src="@mipmap/ic_associate_qq"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:padding="15dp"
@@ -71,7 +71,7 @@
 
             <ImageView
                 android:id="@+id/login_weixin"
-                android:src="@mipmap/ic_share_wechat"
+                android:src="@mipmap/ic_associate_wechat"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:padding="11dp"
@@ -81,7 +81,7 @@
 
             <me.laudoak.oakpark.sns.tpl.weibo.LoginButton
                 android:id="@+id/login_weibo"
-                android:src="@mipmap/ic_share_weibo"
+                android:src="@mipmap/ic_associate_weibo"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:padding="12dp"
