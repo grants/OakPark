@@ -2,6 +2,7 @@ package me.laudoak.oakpark.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
@@ -66,7 +67,8 @@ public class SettingActivity extends XBaseActivity {
     private void buildBar() {
 
         getSupportActionBar().hide();
-
+        TextView done = (TextView) findViewById(R.id.ca_normal_done);
+        done.setText("设置");
         findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener()
         {
             @Override

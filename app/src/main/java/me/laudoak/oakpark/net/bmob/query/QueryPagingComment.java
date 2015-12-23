@@ -41,6 +41,7 @@ public class QueryPagingComment
                 query.order(QK_ORDER);
                 query.setLimit(QK_LIMIT);
                 query.setSkip(QK_LIMIT * currentPage);
+                query.setCachePolicy(BmobQuery.CachePolicy.IGNORE_CACHE);
 
                 query.findObjects(context, new FindListener<Comment>()
                 {
@@ -53,7 +54,7 @@ public class QueryPagingComment
                         {
                             callback.onSuccess(true,list);
 
-                        }else if (list.size()==0 || list.size()<QK_LIMIT)
+                        }else if (list.size() == 0 || list.size()<QK_LIMIT)
                         {
                             callback.onSuccess(false,list);
                         }

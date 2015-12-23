@@ -21,14 +21,14 @@ import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
 /**
  * Created by LaudOak on 2015-12-4 at 22:58.
  */
-public class PagingComAdapter extends XBasePagingAdapter<Comment> {
+public class PagingComAdapter extends XBasePagingAdapter<Comment>
+{
 
     private static final String TAG = PagingComAdapter.class.getName();
 
     public static final String EXTRA_POET = "extra poet";
 
     private LayoutInflater inflater;
-
 
     public PagingComAdapter(Context context)
     {
@@ -37,7 +37,8 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return datas.size();
     }
 
@@ -57,9 +58,10 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ViewHolder holder;
-        if (null==convertView)
+
+        if (null == convertView)
         {
-            convertView = inflater.inflate(R.layout.view_item_comment,parent,false);
+            convertView = inflater.inflate(R.layout.view_item_comment,null,false);
             holder = new ViewHolder(convertView);
 
         }else
@@ -67,18 +69,13 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        if (null != holder)
-        {
-            holder.bindData(datas.get(position));
-
-        }
+        holder.bindData((Comment) getItem(position));
 
         return convertView;
     }
 
     public class ViewHolder
     {
-
         @Bind(R.id.item_comment_avatar) SimpleDraweeView avatar;
         @Bind(R.id.item_comment_nick) TextView nick;
         @Bind(R.id.item_comment_time) ClockText commentTime;
@@ -89,6 +86,9 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
         public ViewHolder(View view)
         {
             ButterKnife.bind(this, view);
+
+            /**BUG here!!!#20151220#*/
+            view.setTag(this);
 
             avatar.setOnClickListener(new View.OnClickListener()
             {
@@ -110,18 +110,13 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment> {
             this.comment = cm;
             commentTime.setPushTime(cm.getCommentTime());
             nick.setText(cm.getPoet().getUsername());
-            commentTime.setText(cm.getContent());
             commentContent.setText(cm.getContent());
 
-            if (null!=cm.getPoet().getAvatarURL())
+            if (null != cm.getPoet().getAvatarURL())
             {
                 Uri uri = Uri.parse(cm.getPoet().getAvatarURL());
                 avatar.setImageURI(uri);
-            }else
-            {
-                avatar.setVisibility(View.GONE);
             }
-
         }
 
     }

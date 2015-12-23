@@ -11,7 +11,6 @@ public class SupCommentFragment extends AbSupCommentFragment
 
     private static final String TAG = SupCommentFragment.class.getName();
 
-
     private static class ClassHolder
     {
         private final static SupCommentFragment fragment = new SupCommentFragment();
@@ -47,7 +46,7 @@ public class SupCommentFragment extends AbSupCommentFragment
     @Override
     void onLoadingPaging()
     {
-
+        listView.setIsLoading(true);
     }
     @Override
     void onLoadFailed()

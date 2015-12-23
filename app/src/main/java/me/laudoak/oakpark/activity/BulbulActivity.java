@@ -92,7 +92,7 @@ public class BulbulActivity extends XBaseActivity implements TextWatcher{
 
         TextView title = (TextView) findViewById(R.id.ca_normal_title);
         title.setVisibility(View.VISIBLE);
-        title.setText("设置");
+        title.setText("个人");
 
         findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener()
         {

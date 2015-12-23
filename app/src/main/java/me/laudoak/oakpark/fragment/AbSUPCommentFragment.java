@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -29,7 +27,6 @@ import me.laudoak.oakpark.net.bmob.query.QueryPagingComment;
 import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.paging.ExtPagingListView;
-import me.laudoak.oakpark.utils.StringUtil;
 
 /**
  * Created by LaudOak on 2015-10-22 at 20:32.
@@ -100,6 +97,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     @Override
     public void onResume()
     {
+        adapter.notifyDataSetChanged();
         super.onResume();
     }
 
@@ -125,7 +123,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     private void buildListener()
     {
         writeComment.setOnClickListener(this);
-
         listView.setAdapter(adapter);
         listView.setLoadCallback(this);
     }
@@ -153,6 +150,15 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
         }
     }
 
+    @Override
+    public void onReload()
+    {
+        if (null != currentVerse)
+        {
+            ReloadComment();
+        }
+    }
+
     private void loadComment()
     {
         if ( isFirstLoad && (null != adapter) )
@@ -168,6 +174,16 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
         }
 
     }
+
+    private void ReloadComment()
+    {
+        if ( isFirstLoad && (null != adapter) )
+        {
+            onLoadingPaging();
+            new QueryPagingComment(context, currentPage, currentVerse, this);
+        }
+    }
+
 
     /**Query PagingComment callback*/
     @Override

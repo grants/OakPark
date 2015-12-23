@@ -21,6 +21,7 @@
         android:background="@color/white"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginBottom="@dimen/ach"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -77,10 +78,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <include layout="@layout/view_tail"
-                android:layout_height="30dp"
+            <me.laudoak.oakpark.view.StampView
+                android:id="@+id/printer_stamp"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/printer_verse" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/printer_verse"/>
 
 
         </RelativeLayout>

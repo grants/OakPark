@@ -69,7 +69,7 @@ public class ShareHelper implements
 
     private void initViews(View view)
     {
-        LinearLayout weibo,qq,qzone,wechatFriend,wechatFavorites,wechat,email;
+        LinearLayout weibo,qq,qzone,wechatFriend,wechatFavorites,wechat,email,more;
 
         weibo = (LinearLayout) view.findViewById(R.id.shareend_weibo);
         qq = (LinearLayout) view.findViewById(R.id.shareend_qq);
@@ -78,6 +78,7 @@ public class ShareHelper implements
         wechatFavorites = (LinearLayout) view.findViewById(R.id.shareend_wechatfavorite);
         wechat = (LinearLayout) view.findViewById(R.id.shareend_wechat);
         email = (LinearLayout) view.findViewById(R.id.shareend_email);
+        more = (LinearLayout) view.findViewById(R.id.shareend_more);
 
         weibo.setOnClickListener(this);
         qq.setOnClickListener(this);
@@ -86,6 +87,7 @@ public class ShareHelper implements
         wechatFavorites.setOnClickListener(this);
         wechat.setOnClickListener(this);
         email.setOnClickListener(this);
+        more.setOnClickListener(this);
     }
 
     @Override
@@ -109,9 +111,8 @@ public class ShareHelper implements
             {
                 Platform plat = ShareSDK.getPlatform(context, QQ.NAME);
                 QQ.ShareParams sp = new QQ.ShareParams();
-                sp.setTitle(title);
-                sp.setText(poem);
-                sp.setTitleUrl("http://www.baidu.com");
+                //sp.setTitle(title);
+                //sp.setText(poem);
                 sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
                 sp.setShareType(QQ.SHARE_IMAGE);
                 plat.setPlatformActionListener(this);
@@ -121,7 +122,6 @@ public class ShareHelper implements
             }
             case R.id.shareend_qzone:
             {
-
                 Platform plat = ShareSDK.getPlatform(context, QZone.NAME);
                 QZone.ShareParams sp = new QZone.ShareParams();
                 sp.setTitle(title);
@@ -179,6 +179,13 @@ public class ShareHelper implements
             }
             case R.id.shareend_email:
             {
+                break;
+            }
+
+            case R.id.shareend_more:
+            {
+                new LocalShare().share(FileUtil.saveImageToExternalStorage(context, image),title,context);
+                dialog.dismiss();
                 break;
             }
 

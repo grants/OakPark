@@ -11,7 +11,7 @@ import java.util.List;
  */
 public abstract class XBasePagingAdapter<T> extends BaseAdapter {
 
-    private static final String TAG = "XBasePagingAdapter<T>";
+    private static final String TAG = XBasePagingAdapter.class.getName();
 
     protected Context context;
 
@@ -50,5 +50,7 @@ public abstract class XBasePagingAdapter<T> extends BaseAdapter {
         this.datas.clear();
         this.notifyDataSetChanged();
     }
+
+
 
 }

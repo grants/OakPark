@@ -203,6 +203,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">22sp</item>
         <item name="android:singleLine">true</item>
+        <item name="android:editable">false</item>
     </style>
 
     <style name="PrinterAuthorText" parent="TextAppearance.AppCompat">
@@ -211,6 +212,7 @@
         <item name="android:textColor">@color/gray_7</item>
         <item name="android:textSize">12sp</item>
         <item name="android:maxLines">2</item>
+        <item name="android:editable">false</item>
     </style>
 
     <style name="PrinterVerseText" parent="TextAppearance.AppCompat">
@@ -220,6 +222,7 @@
         <item name="android:textColor">@color/gray_9</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:editable">false</item>
     </style>
 
 

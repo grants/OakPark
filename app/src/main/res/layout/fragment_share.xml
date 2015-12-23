@@ -165,6 +165,28 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/shareend_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_ac_btn">
+
+
+            <ImageView
+                android:src="@mipmap/ic_share_more"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="其他"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

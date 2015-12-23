@@ -92,10 +92,17 @@ public class PoetFragment extends XBaseFragment implements
         axle.setVisibility(View.GONE);
     }
 
+    /**ExtPagingListView*/
     @Override
     public void onLoadMore()
     {
         new QueryVerse(context, currPage++, this);
+    }
+
+    @Override
+    public void onReload()
+    {
+        new QueryVerse(context, currPage, this);
     }
 
 

@@ -14,7 +14,7 @@ import me.laudoak.oakpark.utils.StringUtil;
 /**
  * Created by LaudOak on 2015-12-15 at 21:39.
  */
-public class EndDividerView extends RelativeLayout
+public class EndDividerView extends RelativeLayout implements View.OnClickListener
 {
 
     private static final String TAG = EndDividerView.class.getName();
@@ -24,6 +24,8 @@ public class EndDividerView extends RelativeLayout
     private LinearLayout end;
     private ProgressWheel progressBar;
     private TextView loadFailed;
+
+    private ReloadCallback reloadCallback;
 
     public EndDividerView(Context context)
     {
@@ -53,7 +55,8 @@ public class EndDividerView extends RelativeLayout
         end = (LinearLayout) view.findViewById(R.id.tailed_end);
         progressBar = (ProgressWheel) view.findViewById(R.id.tailed_progressbar);
         loadFailed = (TextView) view.findViewById(R.id.tailed_loadfailed);
-        loadFailed.setText(StringUtil.genSpannyText("获取评论失败\n点击重新加载", StringUtil.SpannyType.UNDERLINE));
+        loadFailed.setText(StringUtil.genSpannyText("获取数据失败\n点击重新加载", StringUtil.SpannyType.UNDERLINE));
+        loadFailed.setOnClickListener(this);
     }
 
     public void load()
@@ -80,5 +83,34 @@ public class EndDividerView extends RelativeLayout
         loadFailed.setVisibility(View.GONE);
         end.setVisibility(View.GONE);
     }
+
+    public void setReloadCallback(ReloadCallback reloadCallback)
+    {
+        this.reloadCallback = reloadCallback;
+    }
+
+    /**load failed text*/
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.tailed_loadfailed:
+            {
+                if (null != reloadCallback)
+                {
+                    reloadCallback.reload();
+                }
+
+                break;
+            }
+        }
+    }
+
+    public interface ReloadCallback
+    {
+        void reload();
+    }
+
 
 }

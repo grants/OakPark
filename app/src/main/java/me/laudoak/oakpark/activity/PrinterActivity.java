@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.umeng.analytics.MobclickAgent;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.sns.share.ShareHelper;
 import me.laudoak.oakpark.entity.core.Poet;
@@ -26,6 +30,7 @@ import me.laudoak.oakpark.view.PrinterPanelView;
 import me.laudoak.oakpark.ui.damp.DampEditor;
 import me.laudoak.oakpark.ui.fittext.AutofitTextView;
 import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.view.StampView;
 
 /**
  * Created by LaudOak on 2015-11-6 at 22:46.
@@ -43,12 +48,14 @@ public class PrinterActivity extends XBaseActivity implements
 
     private FragmentManager fm;
 
-    private DampEditor dampEditor;
-    private SimpleDraweeView draweeView;
-    private AutofitTextView title,author,verse;
-    private TextView nick;
-    private PrinterPanelView pinterPanel;
 
+    @Bind(R.id.printer_damp) DampEditor dampEditor;
+    @Bind(R.id.printer_image) SimpleDraweeView draweeView;
+    @Bind(R.id.printer_title) AutofitTextView title;
+    @Bind(R.id.printer_author) AutofitTextView author;
+    @Bind(R.id.printer_verse) AutofitTextView verse;
+    @Bind(R.id.printer_panel) PrinterPanelView pinterPanel;
+    @Bind(R.id.printer_stamp ) StampView stamp;
 
     public enum VerseTag
     {
@@ -75,6 +82,7 @@ public class PrinterActivity extends XBaseActivity implements
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_editor_printer);
+        ButterKnife.bind(this);
         buildView();
 
         fm = getSupportFragmentManager();
@@ -116,6 +124,7 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(xVerse.getTitle());
                 author.setText(xVerse.getAuthor());
                 verse.setText(xVerse.getVerse());
+                stamp.setCreator(xVerse.getBulbul().getUsername());
 
                 break;
             }
@@ -125,6 +134,7 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(vrse.getTitle());
                 author.setText(vrse.getAuthor());
                 verse.setText(vrse.getVerse());
+                stamp.setCreator(vrse.getPoet().getUsername());
 
                 break;
             }
@@ -143,25 +153,14 @@ public class PrinterActivity extends XBaseActivity implements
     private void buildView()
     {
         buildBar();
-        findViews();
         Poet poet = UserProxy.currentPoet(this);
         if (null != poet)
         {
-            nick.setText(poet.getUsername());
+            stamp.setBy(poet.getUsername());
         }
-    }
-
-    private void findViews()
-    {
-        dampEditor = (DampEditor) findViewById(R.id.printer_damp);
-        draweeView = (SimpleDraweeView) findViewById(R.id.printer_image);
-        title = (AutofitTextView) findViewById(R.id.printer_title);
-        author = (AutofitTextView) findViewById(R.id.printer_author);
-        verse = (AutofitTextView) findViewById(R.id.printer_verse);
-        pinterPanel = (PrinterPanelView) findViewById(R.id.printer_panel);
-        nick = (TextView) findViewById(R.id.printer_nick);
         setListener();
     }
+
 
     private void setListener()
     {

@@ -14,7 +14,9 @@ import me.laudoak.oakpark.view.EndDividerView;
 /**
  * Created by LaudOak on 2015-12-15 at 21:56.
  */
-public class ExtPagingListView extends ListView implements AbsListView.OnScrollListener
+public class ExtPagingListView extends ListView implements
+        AbsListView.OnScrollListener ,
+        EndDividerView.ReloadCallback
 {
     private static final String TAG = ExtPagingListView.class.getName();
 
@@ -79,6 +81,7 @@ public class ExtPagingListView extends ListView implements AbsListView.OnScrollL
             {
                 ((XBasePagingAdapter) adapter).addItems(newDatas);
             }
+
         }
     }
 
@@ -88,7 +91,6 @@ public class ExtPagingListView extends ListView implements AbsListView.OnScrollL
         footerView.failed();
     }
     //
-
 
     //Getter & Setter
     public boolean isLoading()
@@ -171,8 +173,17 @@ public class ExtPagingListView extends ListView implements AbsListView.OnScrollL
         }
     }
 
+    /**when click loadfailed text reload*/
+    @Override
+    public void reload()
+    {
+        setIsLoading(true);
+        loadCallback.onReload();
+    }
+
     public interface ExtListViewLoadCallback
     {
         void onLoadMore();
+        void onReload();
     }
 }
