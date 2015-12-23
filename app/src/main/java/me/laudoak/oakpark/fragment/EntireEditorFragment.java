@@ -24,6 +24,7 @@ import me.laudoak.oakpark.activity.EditorActivity;
 import me.laudoak.oakpark.activity.PrinterActivity;
 import me.laudoak.oakpark.activity.WhisperActivity;
 import me.laudoak.oakpark.entity.core.XVerse;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.net.bmob.push.PushXVerse;
 import me.laudoak.oakpark.view.EntireEditorView;
 import me.laudoak.oakpark.ui.dialog.MessageDialog;
@@ -183,7 +184,7 @@ public class EntireEditorFragment extends XBaseFragment implements
             xv.setTitle(holder.title.getText().toString().trim());
             xv.setAuthor(holder.author.getText().toString().trim());
             xv.setVerse(holder.verse.getText().toString());
-
+            xv.setBulbul(UserProxy.currentPoet(context));
         }
 
         return xv;

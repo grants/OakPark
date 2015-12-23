@@ -14,7 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/item_comment_avatar"
@@ -33,7 +34,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="2dp"
-            android:background="@drawable/bg_item_lv"
             android:layout_toRightOf="@+id/item_comment_avatar">
 
             <TextView

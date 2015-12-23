@@ -83,8 +83,8 @@ public class PrinterActivity extends XBaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_editor_printer);
         ButterKnife.bind(this);
-        buildView();
 
+        buildView();
         fm = getSupportFragmentManager();
         getExtraData();
     }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -16,8 +17,14 @@ import android.view.ViewGroup;
 
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.File;
+
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.EditorActivity;
+import me.laudoak.oakpark.activity.PrinterActivity;
+import me.laudoak.oakpark.entity.core.Verse;
+import me.laudoak.oakpark.entity.core.XVerse;
+import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.net.bmob.push.PushVerse;
 import me.laudoak.oakpark.view.NormalEditorView;
 import me.laudoak.oakpark.ui.dialog.MessageDialog;
@@ -99,6 +106,7 @@ public class NormalEditorFragment extends XBaseFragment implements
         {
             case R.id.edit_panel_preview:
             {
+                doPreview();
                 break;
             }
 
@@ -114,6 +122,80 @@ public class NormalEditorFragment extends XBaseFragment implements
                 break;
             }
         }
+    }
+
+
+    private void doPreview()
+    {
+
+        Verse shareVerse = genTempXVerse();
+        if (null == shareVerse)
+        {
+            showUncompleteDlg(checkShareAccord());
+            return ;
+        }
+
+        Intent intent = new Intent(getActivity(), PrinterActivity.class);
+        /**/
+        PrinterActivity.VerseTag tag = PrinterActivity.VerseTag.VERSE;
+        tag.attachTo(intent);
+        /**/
+        intent.putExtra(PrinterActivity.EXTRA_VERSE_CONT, shareVerse);
+        /**/
+        if (null != imagePath)
+        {
+            Uri uri = Uri.fromFile(new File(imagePath));
+            intent.putExtra(PrinterActivity.EXTRA_VERSE_URI_STR,uri.toString());
+        }
+
+        startActivity(intent);
+
+    }
+
+    private Verse genTempXVerse()
+    {
+        Verse xv = null;
+
+        if (checkShareAccord().equals(""))
+        {
+            xv = new Verse();
+            xv.setTitle(holder.title.getText().toString().trim());
+            xv.setAuthor(holder.author.getText().toString().trim());
+            xv.setVerse(holder.verse.getText().toString());
+            xv.setPoet(UserProxy.currentPoet(context));
+        }
+
+        return xv;
+    }
+
+    private String checkShareAccord()
+    {
+
+        StringBuilder noticeBuilder = new StringBuilder();
+
+        if (holder.title.getText().toString().trim().equals(""))
+        {
+            noticeBuilder.append("题目不能为空").append(System.getProperty("line.separator"));
+        }
+        if (holder.verse.getText().toString().trim().length()<6)
+        {
+            noticeBuilder.append("主体部分过短").append(System.getProperty("line.separator"));
+        }
+
+        String notice = noticeBuilder.toString();
+
+        if (!notice.equals(""))
+        {
+            return notice;
+        }
+
+        return "";
+    }
+
+    private void showUncompleteDlg(String what)
+    {
+        MessageDialog dialog = MessageDialog.newInstance(what);
+        dialog.show(fragmentManager,TAG_DIALOG_NOTICE);
     }
 
     /*Get bitmap path*/

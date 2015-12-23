@@ -11,6 +11,7 @@ public class Poet extends BmobUser implements Serializable{
 
     private String coverURL;
     private String avatarURL;
+    private String sign;
     private boolean snib;
 
     public String getCoverURL()
@@ -39,4 +40,13 @@ public class Poet extends BmobUser implements Serializable{
         this.snib = snib;
     }
 
+    public String getSign()
+    {
+        return sign;
+    }
+
+    public void setSign(String sign)
+    {
+        this.sign = sign;
+    }
 }

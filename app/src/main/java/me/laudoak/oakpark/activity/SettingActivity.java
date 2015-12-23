@@ -67,8 +67,8 @@ public class SettingActivity extends XBaseActivity {
     private void buildBar() {
 
         getSupportActionBar().hide();
-        TextView done = (TextView) findViewById(R.id.ca_normal_done);
-        done.setText("设置");
+        TextView title = (TextView) findViewById(R.id.ca_normal_title);
+        title.setText("设置");
         findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener()
         {
             @Override

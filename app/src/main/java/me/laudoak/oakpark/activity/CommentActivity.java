@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -65,12 +66,17 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
 
         getSupportActionBar().hide();
 
-        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ca_normal_back).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 CommentActivity.this.finish();
             }
         });
+
+        TextView title = (TextView) findViewById(R.id.ca_normal_title);
+        title.setText("评论");
 
         findViewById(R.id.ca_normal_done).setOnClickListener(new View.OnClickListener() {
             @Override

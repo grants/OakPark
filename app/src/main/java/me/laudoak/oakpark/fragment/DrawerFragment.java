@@ -19,19 +19,23 @@ import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
 import me.laudoak.oakpark.ctrl.listener.DrawerItemClickListener;
+import me.laudoak.oakpark.ctrl.listener.SignClickListener;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
-import me.laudoak.oakpark.ui.text.FluidTextView;
+import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.text.FangTextView;
 
 /**
  * Created by LaudOak on 2015-10-16 at 22:03.
  */
 public class DrawerFragment extends XBaseFragment
+        implements SignClickListener.SignUpdateCallback
 {
 
     private static final String TAG = DrawerFragment.class.getName();
 
-    @Bind(R.id.drawer_nick) FluidTextView nick;
+    @Bind(R.id.drawer_nick) FangTextView nick;
+    @Bind(R.id.drawer_sign) TextView sign;
     @Bind(R.id.drawer_avatar) SimpleDraweeView avatar;
     @Bind(R.id.drawer_num) TextView num;
     @Bind(R.id.drawer_ll_setting) LinearLayout setting;
@@ -54,7 +58,7 @@ public class DrawerFragment extends XBaseFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.view_drawer,container,false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         buildViews();
 
         return view;
@@ -83,6 +87,8 @@ public class DrawerFragment extends XBaseFragment
             }
         });
 
+        sign.setOnClickListener(new SignClickListener(context,this));
+
         setting.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -104,9 +110,15 @@ public class DrawerFragment extends XBaseFragment
     {
         super.onResume();
 
+        updateBasic();
+        updateSign();
+    }
+
+    private void updateBasic()
+    {
         poet = UserProxy.currentPoet(context);
 
-        if (null!=poet)
+        if (null != poet)
         {
             nick.setText(poet.getUsername());
             if (null!=poet.getAvatarURL())
@@ -118,8 +130,29 @@ public class DrawerFragment extends XBaseFragment
             nick.setText("");
             avatar.setImageURI(null);
         }
+    }
 
+    private void updateSign()
+    {
+        poet = UserProxy.currentPoet(context);
 
+        if (null != poet  && null != poet.getSign())
+        {
+            sign.setText(poet.getSign());
+        }
+    }
 
+    /**Sign update callback*/
+    @Override
+    public void onSuccess()
+    {
+        AppMsg.makeText(context,"签名已更新",AppMsg.STYLE_INFO).show();
+        updateSign();
+    }
+
+    @Override
+    public void onFailure(String why)
+    {
+        AppMsg.makeText(context,"签名更新失败",AppMsg.STYLE_ALERT).show();
     }
 }
