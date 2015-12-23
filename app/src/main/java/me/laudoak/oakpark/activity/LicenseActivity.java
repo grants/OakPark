@@ -52,6 +52,7 @@ public class LicenseActivity extends XBaseActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("开源协议");
     }
 
     @Override

@@ -1,11 +1,13 @@
 package me.laudoak.oakpark.entity.core;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by LaudOak on 2015-10-23 at 8:56.
  */
-public class Comment extends BmobObject {
+public class Comment extends BmobObject implements Serializable{
 
     private String content;
     private Poet poet;

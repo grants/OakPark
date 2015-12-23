@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 
 import me.laudoak.oakpark.R;
+import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.fragment.EntireEditorFragment;
@@ -22,7 +23,9 @@ import me.laudoak.oakpark.ui.message.AppMsg;
 /**
  * Created by LaudOak on 2015-10-22 at 22:33.
  */
-public class CommentActivity extends XBaseActivity implements DoComment.CallBack{
+public class CommentActivity extends XBaseActivity implements
+        DoComment.CallBack
+{
 
     private static final String TAG = "CommentActivity";
 
@@ -33,6 +36,8 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     private XVerse xv;
 
     private ProgressDialog ld;
+
+    private String cotent = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +83,13 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
         TextView title = (TextView) findViewById(R.id.ca_normal_title);
         title.setText("评论");
 
-        findViewById(R.id.ca_normal_done).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ca_normal_done).setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if (comment.getText().toString().length() > 2) {
+            public void onClick(View v)
+            {
+                if (comment.getText().toString().length() > 2)
+                {
 
                     Poet poet = UserProxy.currentPoet(CommentActivity.this);
                     if (null != poet)
@@ -93,18 +101,22 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
                         ld.setCanceledOnTouchOutside(false);
                         ld.show();
 
+                        cotent = comment.getText().toString();
+
                         DoComment doComment = new DoComment.Builder(CommentActivity.this)
-                                .content(comment.getText().toString())
+                                .content(cotent)
                                 .xVerse(xv)
                                 .poet(poet)
                                 .commentTime(System.currentTimeMillis())
                                 .build();
                         doComment.doComment(CommentActivity.this);
-                    }else {
+                    } else
+                    {
                         AppMsg.makeText(CommentActivity.this, "用户不存在", AppMsg.STYLE_CONFIRM).show();
                     }
 
-                } else {
+                } else
+                {
                     AppMsg.makeText(CommentActivity.this, "文本太短", AppMsg.STYLE_CONFIRM).show();
                 }
             }
@@ -113,7 +125,8 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
 
     /*Comment callback*/
     @Override
-    public void onSuccess() {
+    public void onSuccess()
+    {
 
         if (null!=ld&&ld.isShowing())
         {
@@ -123,11 +136,23 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
         AppMsg.makeText(this,"评论成功",AppMsg.STYLE_INFO).show();
 
         Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
+        Runnable runnable = new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
+                Intent intent = new Intent();
 
-                CommentActivity.this.setResult(RESULT_OK,null);
+                Comment comment = new Comment();
+                comment.setCommentTime(System.currentTimeMillis());
+                comment.setPoet(UserProxy.currentPoet(CommentActivity.this));
+                comment.setContent(cotent);
+                comment.setxVerse(xv);
+
+                intent.putExtra("comment", comment);
+
+                CommentActivity.this.setResult(1205, intent);
+
                 CommentActivity.this.finish();
             }
         };
@@ -137,13 +162,15 @@ public class CommentActivity extends XBaseActivity implements DoComment.CallBack
     }
 
     @Override
-    public void onFailure(String why) {
+    public void onFailure(String why)
+    {
         if (null!=ld&&ld.isShowing())
         {
             ld.dismiss();
         }
         AppMsg.makeText(this,why,AppMsg.STYLE_ALERT).show();
     }
+
     /*Comment callback*/
 
 }

@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

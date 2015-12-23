@@ -26,7 +26,7 @@ public class TimeUtil {
     private static final String dateTextPattern = "yyyy-MM-dd";
     private static final String welcomeDatePattern = "MMM.d    EEEE";
     private static final String todayDateCodePattern = "yyyy-MM-dd";
-    private static final String rawDateCodePattern = "yyyMMdd";
+    private static final String rawDateCodePattern = "yyyyMMdd";
 
     public static Date getNowDate()
     {

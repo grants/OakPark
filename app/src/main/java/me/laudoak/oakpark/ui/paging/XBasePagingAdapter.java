@@ -39,6 +39,18 @@ public abstract class XBasePagingAdapter<T> extends BaseAdapter {
         this.datas = datas;
     }
 
+    public void addItem(int position , T item)
+    {
+        this.datas.add(position, item);
+        this.notifyDataSetChanged();
+    }
+
+    public void addItem(T item)
+    {
+        this.datas.add(item);
+        this.notifyDataSetChanged();
+    }
+
     public void addItems(List<T> datas)
     {
         this.datas.addAll(datas);

@@ -41,7 +41,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     private static final String TAG = AbSupCommentFragment.class.getName();
 
     public static final String EXTRA_XVERSE = "EXTRA_XVERSE";
-    private static final int REQUEST_COMMENT = 121;
+    public static final int REQUEST_COMMENT = 121;
 
 
     @Bind(R.id.sup_comment_lv) ExtPagingListView listView;
@@ -53,7 +53,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     private XVerse currentVerse;
 
     protected boolean isFirstLoad;
-
 
     /**Lifecycle */
     @Override
@@ -132,8 +131,13 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_COMMENT && resultCode == Activity.RESULT_OK)
+        Log.d(TAG,"requestCode:"+requestCode+"　&　resultCode:"+resultCode);
+
+        if (requestCode == REQUEST_COMMENT && resultCode == 1205 && null != data)
         {
+
+            Comment comment = (Comment) data.getSerializableExtra("comment");
+            adapter.addItem(0,comment);
         }
     }
 

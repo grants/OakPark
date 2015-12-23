@@ -61,7 +61,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
 
         if (null == convertView)
         {
-            convertView = inflater.inflate(R.layout.view_item_comment,null,false);
+            convertView = inflater.inflate(R.layout.view_item_comment,parent,false);
             holder = new ViewHolder(convertView);
 
         }else

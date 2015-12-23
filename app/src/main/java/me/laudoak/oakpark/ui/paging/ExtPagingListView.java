@@ -132,7 +132,7 @@ public class ExtPagingListView extends ListView implements
     @Override
     public ListAdapter getAdapter()
     {
-        return adapter;
+        return super.getAdapter();
     }
 
     @Override
