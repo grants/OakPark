@@ -6,4 +6,10 @@
     <dimen name="mm_up_arrow_margin">-16dp</dimen>
 
     <dimen name="height_ac">50dp</dimen>
+
+    <dimen name="height_usrsub">58dp</dimen>
+
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="image_width">120dp</dimen>
+
 </resources>

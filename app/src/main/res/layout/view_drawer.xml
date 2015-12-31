@@ -18,54 +18,13 @@
         fresco:roundWithOverlayColor="@android:color/transparent"
         fresco:roundAsCircle="true"/>
 
-
-    <LinearLayout
+    <include
+        layout="@layout/view_nicksign"
         android:id="@+id/drawer_container_info"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/drawer_avatar">
-
-        <me.laudoak.oakpark.ui.text.FangTextView
-            android:id="@+id/drawer_nick"
-            style="@style/DrawerNick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:focusableInTouchMode="true"
-            android:focusable="true"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp">
-
-            <ImageView
-                android:src="@mipmap/ic_quote"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="10dp"/>
-
-            <TextView
-                android:id="@+id/drawer_sign"
-                style="@style/DrawerSign"
-                android:hint="编辑签名"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:layout_gravity="bottom"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/drawer_num"
-            style="@style/DrawerNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+        android:layout_below="@+id/drawer_avatar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView
@@ -105,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView
@@ -129,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <me.laudoak.oakpark.ui.text.FangTextView
+        android:id="@+id/drawer_nick"
+        style="@style/DrawerNick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:src="@mipmap/ic_quote"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="10dp"/>
+
+        <me.laudoak.oakpark.ui.text.FluidTextView
+            android:id="@+id/drawer_sign"
+            style="@style/DrawerSign"
+            android:hint="编辑签名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/drawer_num"
+        style="@style/DrawerNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+</LinearLayout>

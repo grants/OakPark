@@ -265,6 +265,21 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
+    <!-- UsrSubText-->
+    <style name="UsrSubNick" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="UsrSubSign" parent="TextAppearance.AppCompat">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
     <!-- Bulbul Text-->
     <style name="BulbulNick" parent="Base.Widget.AppCompat.EditText">

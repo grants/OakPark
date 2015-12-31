@@ -1,6 +1,5 @@
 package me.laudoak.oakpark.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;

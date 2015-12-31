@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="70dp"
+    android:layout_height="46dp"
+    android:layout_centerInParent="true"
+    android:padding="4dp"
+    android:background="@drawable/bg_follow">
+
+    <TextView
+        android:id="@+id/view_follow_text"
+        android:text="UnFollow"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <me.laudoak.oakpark.ui.loani.ProgressWheel
+        android:id="@+id/view_follow_loani"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:layout_centerInParent="true"
+        wheel:matProg_barColor="@color/white"
+        wheel:matProg_progressIndeterminate="true"
+        wheel:matProg_barWidth="2dp"/>
+
+</RelativeLayout>

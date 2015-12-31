@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/activity_outer_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -24,10 +24,22 @@
 
             <ImageView
                 android:id="@+id/activity_outer_cover"
+                android:src="@drawable/sower"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"/>
+
+            <FrameLayout
+                android:id="@+id/activity_outer_cover_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_usrsub"
+                android:layout_gravity="bottom|center_horizontal"
+                app:layout_collapseMode="parallax">
+
+                <include layout="@layout/view_usrsub"/>
+
+            </FrameLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/activity_outer_toolbar"
@@ -36,7 +48,20 @@
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
                 android:theme="@style/ToolBarStyle"
-                app:theme="@style/ToolBarStyle"/>
+                app:theme="@style/ToolBarStyle">
+
+
+                <TextView
+                    android:id="@+id/activity_outer_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:visibility="invisible"/>
+
+            </android.support.v7.widget.Toolbar>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -49,17 +74,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
-    <me.laudoak.oakpark.ui.circle.CircleImageView
-        android:id="@+id/activity_outer_avatar"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="center_vertical"
-        app:civ_border_width="0dp"
-        app:layout_anchor="@id/activity_outer_app_bar"
-        app:layout_anchorGravity="bottom|end"
-        android:layout_margin="10dp"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

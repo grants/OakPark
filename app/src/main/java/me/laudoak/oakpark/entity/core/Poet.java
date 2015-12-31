@@ -3,6 +3,7 @@ package me.laudoak.oakpark.entity.core;
 import java.io.Serializable;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by LaudOak on 2015-9-27.
@@ -13,6 +14,8 @@ public class Poet extends BmobUser implements Serializable{
     private String avatarURL;
     private String sign;
     private boolean snib;
+
+    private BmobRelation follow;
 
     public String getCoverURL()
     {
@@ -48,5 +51,15 @@ public class Poet extends BmobUser implements Serializable{
     public void setSign(String sign)
     {
         this.sign = sign;
+    }
+
+    public BmobRelation getFollow()
+    {
+        return follow;
+    }
+
+    public void setFollow(BmobRelation follow)
+    {
+        this.follow = follow;
     }
 }

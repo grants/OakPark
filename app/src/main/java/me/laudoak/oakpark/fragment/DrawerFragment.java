@@ -24,6 +24,7 @@ import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.text.FangTextView;
+import me.laudoak.oakpark.ui.text.FluidTextView;
 
 /**
  * Created by LaudOak on 2015-10-16 at 22:03.
@@ -35,7 +36,7 @@ public class DrawerFragment extends XBaseFragment
     private static final String TAG = DrawerFragment.class.getName();
 
     @Bind(R.id.drawer_nick) FangTextView nick;
-    @Bind(R.id.drawer_sign) TextView sign;
+    @Bind(R.id.drawer_sign) FluidTextView sign;
     @Bind(R.id.drawer_avatar) SimpleDraweeView avatar;
     @Bind(R.id.drawer_num) TextView num;
     @Bind(R.id.drawer_ll_setting) LinearLayout setting;

@@ -6,6 +6,8 @@
     <color name="translucent_white2">#EEEFEFEF</color>
     <color name="black">#000</color>
     <color name="translucent">#cc000000</color>
+    <color name="translight">#99000000</color>
+    <color name="transweight">#cc000000</color>
     <color name="red">#B4CC0000</color>
     <color name="yellow">#B4FF8800</color>
     <color name="green">#B4669900</color>
