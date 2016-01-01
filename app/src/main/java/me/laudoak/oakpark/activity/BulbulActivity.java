@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 
@@ -85,6 +86,19 @@ public class BulbulActivity extends XBaseActivity implements TextWatcher{
         buildView();
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     private void buildBar()
     {

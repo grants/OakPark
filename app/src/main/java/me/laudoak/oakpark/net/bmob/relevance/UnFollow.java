@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.net.bmob.relevance;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.UpdateListener;
@@ -17,41 +18,51 @@ public class UnFollow extends AbRelevance
         super(context, callBack);
     }
 
-    public void unFollow(Poet secondaryPoet)
+    public void unFollow(final Poet secondaryPoet)
     {
-        Poet currentPoet = UserProxy.currentPoet(context);
-
-        if (null != currentPoet)
+        new AsyncTask<Void, Void, Void>()
         {
-            BmobRelation relation = new BmobRelation();
-            relation.remove(secondaryPoet);
-
-            currentPoet.setFollow(relation);
-
-            currentPoet.update(context, currentPoet.getObjectId(), new UpdateListener()
+            @Override
+            protected Void doInBackground(Void... voids)
             {
-                @Override
-                public void onSuccess()
+                Poet currentPoet = UserProxy.currentPoet(context);
+
+                if (null != currentPoet)
                 {
-                    if (null != callBack)
+                    BmobRelation relation = new BmobRelation();
+                    relation.remove(secondaryPoet);
+
+                    currentPoet.setFollow(relation);
+
+                    currentPoet.update(context, currentPoet.getObjectId(), new UpdateListener()
                     {
-                        callBack.onAssociateSucess();
-                    }
+                        @Override
+                        public void onSuccess()
+                        {
+                            if (null != callBack)
+                            {
+                                callBack.onAssociateSucess();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s)
+                        {
+                            if (null != callBack)
+                            {
+                                callBack.onAssociateFailure(s);
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    callBack.onAssociateFailure("请先登录");
                 }
 
-                @Override
-                public void onFailure(int i, String s)
-                {
-                    if (null != callBack)
-                    {
-                        callBack.onAssociateFailure(s);
-                    }
-                }
-            });
-        }
-        else
-        {
-            callBack.onAssociateFailure("请先登录");
-        }
+                return null;
+            }
+        }.execute();
+
     }
 }

@@ -8,6 +8,7 @@
     android:background="@color/translight">
 
     <me.laudoak.oakpark.view.FollowButtonView
+        android:id="@+id/usrsub_followbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"/>
@@ -22,7 +23,7 @@
 
         <TextView
             style="@style/UsrSubNick"
-            android:id="@+id/drawer_nick"
+            android:id="@+id/usrsub_nick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -31,7 +32,7 @@
 
         <me.laudoak.oakpark.ui.text.FluidTextView
             style="@style/UsrSubSign"
-            android:id="@+id/drawer_sign"
+            android:id="@+id/usrsub_sign"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -43,12 +44,12 @@
     </LinearLayout>
 
     <me.laudoak.oakpark.ui.circle.CircleImageView
-        android:id="@+id/activity_outer_avatar"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:id="@+id/usrsub_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="10dp"
-        app:civ_border_width="1dp"
+        app:civ_border_width="0dp"
         app:civ_border_color="@color/gray_1"/>
 
 

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryOuterVerse;
 import me.laudoak.oakpark.ui.circle.CircleImageView;
 import me.laudoak.oakpark.ui.message.AppMsg;
+import me.laudoak.oakpark.ui.text.FluidTextView;
+import me.laudoak.oakpark.view.FollowButtonView;
 
 /**
  * Created by LaudOak on 2015-11-14 at 14:25.
@@ -38,30 +41,26 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
 
     private static final String TAG = OuterActivity.class.getName();
 
-
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
 
     private boolean mIsTheTitleVisible = false;
     private boolean mIsTheTitleContainerVisible = true;
 
     @Bind(R.id.activity_outer_collapsing) CollapsingToolbarLayout collapsingToolbarLayout;
-
-    @Bind(R.id.activity_outer_cover) ImageView cover;
-
     @Bind(R.id.activity_outer_toolbar) Toolbar toolbar;
-
     @Bind(R.id.activity_outer_app_bar) AppBarLayout alphAppBar;
-
+    @Bind(R.id.activity_outer_toolbar_title) TextView toolBarTitle;
     @Bind(R.id.activity_outer_cover_title_container) FrameLayout titleContainer;
 
+    @Bind(R.id.activity_outer_cover) ImageView cover;
+    @Bind(R.id.usrsub_followbtn) FollowButtonView followButtonView;
+    @Bind(R.id.usrsub_avatar) CircleImageView avatar;
+    @Bind(R.id.usrsub_nick) TextView nick;
+    @Bind(R.id.usrsub_sign) FluidTextView sign;
+
     @Bind(R.id.activity_outer_recycler) RecyclerView recyclerView;
-
-    @Bind(R.id.activity_outer_avatar) CircleImageView avatar;
-
-    @Bind(R.id.activity_outer_toolbar_title) TextView toolBarTitle;
 
     private Poet outerPoet;
     private OuterPoetAdapter adapter;
@@ -78,13 +77,26 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
         buildViews();
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
     private void buildBar()
     {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(outerPoet.getUsername());
-        toolbar.setTitle("");
+        toolbar.setTitle(outerPoet.getUsername());
         collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.black));
         alphAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener()
         {
@@ -191,8 +203,11 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
         recyclerView.setLayoutManager(manager);
         new QueryOuterVerse(this,outerPoet,this);
 
-    }
+        nick.setText(outerPoet.getUsername());
+        sign.setText(outerPoet.getSign());
+        followButtonView.setSecondaryPoet(outerPoet);
 
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
