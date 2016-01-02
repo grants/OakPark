@@ -1,9 +1,13 @@
 package me.laudoak.oakpark;
 
+import android.util.Log;
+
 /**
  * Created by LaudOak on 2015-10-2.
  */
 public class OP {
+
+    private static final String TAG = OP.class.getSimpleName();
 
     /*Bmob Key*/
     public static final String BMOB_APP_ID = "49ef0b98a0a390a69f457dcd31051cf6";
@@ -20,4 +24,10 @@ public class OP {
                     + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
                     + "follow_app_official_microblog," + "invitation_write";
 
+
+    //Test gitignore
+    public void helloWorld()
+    {
+        Log.d(TAG,"hello world!")
+    }
 }

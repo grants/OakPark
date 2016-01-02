@@ -7,17 +7,16 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
-
     <me.laudoak.oakpark.view.AvatarView
-        android:id="@+id/item_comment_avatar"
+        android:id="@+id/item_friend_avatar"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:padding="2dp"
         android:layout_margin="4dp"
-        fresco:placeholderImage ="@color/window_background"
+        fresco:placeholderImage ="@color/white"
         fresco:roundingBorderWidth="0dp"
         fresco:roundingBorderColor="@color/gray_7"
-        fresco:roundWithOverlayColor="@color/white"
+        fresco:roundWithOverlayColor="@android:color/transparent"
         fresco:roundAsCircle="true"/>
 
     <include layout="@layout/view_item_outerpoet"/>

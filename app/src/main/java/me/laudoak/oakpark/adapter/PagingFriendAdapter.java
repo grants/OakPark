@@ -71,7 +71,7 @@ public class PagingFriendAdapter extends XBasePagingAdapter<Verse>
 
     public class ViewHolder
     {
-        @Bind(R.id.item_comment_avatar) AvatarView avatar;
+        @Bind(R.id.item_friend_avatar) AvatarView avatar;
         @Bind(R.id.item_overse_image) SimpleDraweeView image;
         @Bind(R.id.item_overse_title) TextView title;
         @Bind(R.id.item_overse_author) TextView author;
