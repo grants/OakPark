@@ -35,7 +35,8 @@ import me.laudoak.oakpark.view.LanternTextView;
 /**
  * Created by LaudOak on 2015-10-16 at 21:46.
  */
-public class OakParkActivity extends XBaseActivity implements AbXVOberver{
+public class OakParkActivity extends XBaseActivity implements AbXVOberver
+{
 
     private static final String TAG = OakParkActivity.class.getName();
 
