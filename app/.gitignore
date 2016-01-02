@@ -1,2 +1,7 @@
 /build
+
+#Application Key here
 /src/main/java/me/laudoak/oakpark/OP.java
+
+#Social Share Key here
+/src/main/assets/ShareSDK.xml
