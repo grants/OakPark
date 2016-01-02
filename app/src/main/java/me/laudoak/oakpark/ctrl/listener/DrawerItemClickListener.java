@@ -9,6 +9,7 @@ import android.view.View;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.BulbulActivity;
 import me.laudoak.oakpark.activity.EditorActivity;
+import me.laudoak.oakpark.activity.FriendActivity;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
@@ -47,6 +48,11 @@ public class DrawerItemClickListener implements
             {
                 break;
             }
+            case R.id.drawer_item_friend:
+            {
+                goFriend();
+                break;
+            }
         }
     }
 
@@ -80,9 +86,11 @@ public class DrawerItemClickListener implements
          /*LongClick begin Entire Editor*/
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialog)
                 .setMessage("进入完全编辑模式?")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
 
                         Intent intent = new Intent();
                         intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 1);
@@ -102,5 +110,18 @@ public class DrawerItemClickListener implements
         intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 0);
         intent.setClass(context, EditorActivity.class);
         context.startActivity(intent);
+    }
+
+    private void goFriend()
+    {
+        if (UserProxy.ifLogin(context))
+        {
+            context.startActivity(new Intent(context,FriendActivity.class));
+        }else
+        {
+            AppMsg.makeText(context, "请先登录", AppMsg.STYLE_CONFIRM).show();
+        }
+
+
     }
 }

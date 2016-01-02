@@ -85,6 +85,11 @@ public class ExtPagingListView extends ListView implements
         }
     }
 
+    public void hideFooter()
+    {
+        footerView.hideAll();
+    }
+
     public void onLoadFailed()
     {
         Log.d(TAG, "onLoadFailed()");

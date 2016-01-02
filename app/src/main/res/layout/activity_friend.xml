@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_friend"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ToolBarStyle"
+        android:background="@color/white"
+        app:theme="@style/ToolBarStyle"/>
+
+    <View
+        android:id="@+id/activity_friend_axle"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="?attr/actionBarSize"/>
+
+    <me.laudoak.oakpark.ui.paging.ExtPagingListView
+        android:id="@+id/activity_friend_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_friend"
+        android:dividerHeight="0dp"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:divider="@null"/>
+
+
+    <TextView
+        android:id="@+id/hint_nofollow"
+        android:text="你没有关注的用户"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

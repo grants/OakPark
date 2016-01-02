@@ -27,6 +27,7 @@
         android:layout_below="@+id/drawer_avatar"/>
 
     <LinearLayout
+        android:id="@+id/drawer_menu_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/drawer_container_info"
@@ -38,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
+            android:paddingLeft="8dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView
@@ -65,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
+            android:paddingLeft="8dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView
@@ -90,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="10dp"
+            android:paddingLeft="8dp"
             android:background="@drawable/bg_re_btn">
 
             <ImageView
@@ -101,6 +102,31 @@
 
             <TextView
                 android:text="日历"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="#26343F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drawer_item_friend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:background="@drawable/bg_re_btn">
+
+            <ImageView
+                android:src="@mipmap/ic_friend"
+                android:layout_width="@dimen/height_ac"
+                android:layout_height="@dimen/height_ac"
+                android:padding="13dp"/>
+
+            <TextView
+                android:text="关注"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:textColor="#26343F"
@@ -130,5 +156,7 @@
             android:src="@mipmap/ic_setting" />
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

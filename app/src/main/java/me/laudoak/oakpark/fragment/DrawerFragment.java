@@ -40,10 +40,13 @@ public class DrawerFragment extends XBaseFragment
     @Bind(R.id.drawer_avatar) SimpleDraweeView avatar;
     @Bind(R.id.drawer_num) TextView num;
     @Bind(R.id.drawer_ll_setting) LinearLayout setting;
+    @Bind(R.id.container_nicksign) LinearLayout signContainer;
 
+    @Bind(R.id.drawer_menu_container) LinearLayout drawerMenuContainer;
     @Bind(R.id.drawer_item_newpoem) LinearLayout newpoem;
     @Bind(R.id.drawer_item_personal) LinearLayout personal;
     @Bind(R.id.drawer_item_calendar) LinearLayout calendar;
+    @Bind(R.id.drawer_item_friend) LinearLayout friend;
 
     private Poet poet;
 
@@ -104,12 +107,22 @@ public class DrawerFragment extends XBaseFragment
         newpoem.setOnLongClickListener(menuListener);
         personal.setOnClickListener(menuListener);
         calendar.setOnClickListener(menuListener);
+        friend.setOnClickListener(menuListener);
     }
 
     @Override
     public void onResume()
     {
         super.onResume();
+
+        if (!UserProxy.ifLogin(context))
+        {
+            unLogin();
+        }else
+        {
+           login();
+        }
+
 
         updateBasic();
         updateSign();
@@ -155,5 +168,18 @@ public class DrawerFragment extends XBaseFragment
     public void onFailure(String why)
     {
         AppMsg.makeText(context,"签名更新失败",AppMsg.STYLE_ALERT).show();
+    }
+
+    private void unLogin()
+    {
+        nick.setText("点击头像登录");
+        drawerMenuContainer.setVisibility(View.GONE);
+        signContainer.setVisibility(View.GONE);
+    }
+
+    private void login()
+    {
+        drawerMenuContainer.setVisibility(View.VISIBLE);
+        signContainer.setVisibility(View.VISIBLE);
     }
 }

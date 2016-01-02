@@ -26,8 +26,6 @@ public class SupWhisperFragment extends XBaseFragment implements
 {
     private static final String TAG = SupWhisperFragment.class.getName();
 
-    public static final String EXTRA_POET = "extra poet";
-
     private View rootView;
     private TextView whisper;
     private SimpleDraweeView avatar;
@@ -153,7 +151,7 @@ public class SupWhisperFragment extends XBaseFragment implements
         if (view.getId() == R.id.sup_whisper_avatar && curXV != null && curXV.getBulbul() != null)
         {
             Intent intent = new Intent(context, OuterActivity.class);
-            intent.putExtra(EXTRA_POET, curXV.getBulbul());
+            intent.putExtra(OuterActivity.EXTRA_POET, curXV.getBulbul());
             context.startActivity(intent);
         }
     }

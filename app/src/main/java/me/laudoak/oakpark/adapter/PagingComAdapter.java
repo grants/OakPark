@@ -26,8 +26,6 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
 
     private static final String TAG = PagingComAdapter.class.getName();
 
-    public static final String EXTRA_POET = "extra poet";
-
     private LayoutInflater inflater;
 
     public PagingComAdapter(Context context)
@@ -98,7 +96,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
                     if (null != comment)
                     {
                         Intent intent = new Intent(context, OuterActivity.class);
-                        intent.putExtra(EXTRA_POET, comment.getPoet());
+                        intent.putExtra(OuterActivity.EXTRA_POET, comment.getPoet());
                         context.startActivity(intent);
                     }
                 }

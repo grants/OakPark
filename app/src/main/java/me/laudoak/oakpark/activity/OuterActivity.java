@@ -41,6 +41,8 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
 
     private static final String TAG = OuterActivity.class.getName();
 
+    public static final String EXTRA_POET = "extra_poet";
+
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
     private static final int ALPHA_ANIMATIONS_DURATION = 200;
@@ -182,7 +184,7 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     public void getExtraIntent()
     {
         Intent intent = getIntent();
-        outerPoet = (Poet) intent.getSerializableExtra(PagingComAdapter.EXTRA_POET);
+        outerPoet = (Poet) intent.getSerializableExtra(EXTRA_POET);
     }
 
     private void buildViews()
