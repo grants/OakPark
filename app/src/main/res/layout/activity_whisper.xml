@@ -13,7 +13,7 @@
         style="@style/WhisperActivityEditor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="写下耳语..."
+        android:hint="@string/activity_whisper_hint_write"
         autofit:minTextSize="18sp"
         autofit:sizeToFit="true"/>
 

@@ -1,6 +1,5 @@
 package me.laudoak.oakpark.utils;
 
-import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
 
 import java.util.Random;
@@ -15,7 +14,7 @@ public class StringUtil {
 
         int opidlen = source.length();
         String dest = "";
-        for (int i = 0 ; i < 4 ; i++)
+        for (int i = 0 ; i < 2 ; i++)
         {
             dest = dest + source.charAt(genRandom(opidlen-1));
         }
@@ -30,12 +29,12 @@ public class StringUtil {
         {
             case "qq":
             {
-                res = nick.length() > 28;
+                res = nick.length() > 15;
                 break;
             }
             case "weibo":
             {
-                res = nick.length() > 25;
+                res = nick.length() > 15;
                 break;
             }
         }

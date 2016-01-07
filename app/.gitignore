@@ -5,3 +5,6 @@
 
 #Social Share Key here
 /src/main/assets/ShareSDK.xml
+
+#AndroidManifest.xml
+/src/main/res/AndroidManifest.xml

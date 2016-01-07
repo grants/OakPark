@@ -2,6 +2,7 @@ package me.laudoak.oakpark.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
@@ -11,7 +12,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.ctrl.listener.SettingLvListener;
-import me.laudoak.oakpark.ui.extlv.ListViewExt;
 import me.laudoak.oakpark.ui.settinglv.SettingLvAdapter;
 
 /**
@@ -21,7 +21,7 @@ public class SettingActivity extends XBaseActivity {
 
     private static final String TAG = SettingActivity.class.getName();
 
-    @Bind(R.id.lv_setting) ListViewExt settingLv;
+    @Bind(R.id.lv_setting) ListView settingLv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

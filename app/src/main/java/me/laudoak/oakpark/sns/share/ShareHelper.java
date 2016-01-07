@@ -99,9 +99,11 @@ public class ShareHelper implements
             {
                 SinaWeibo.ShareParams sp = new SinaWeibo.ShareParams();
                 Platform pf = ShareSDK.getPlatform(context, SinaWeibo.NAME);
-                sp.setImageData(image);
-                sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
-                sp.setShareType(Platform.SHARE_IMAGE);
+                //sp.setImageData(image);
+                sp.imagePath = FileUtil.saveImageToExternalStorage(context, image);
+                sp.text = title;
+                //sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
+                //sp.setShareType(Platform.SHARE_IMAGE);
                 pf.setPlatformActionListener(this);
                 pf.share(sp);
                 dialog.dismiss();

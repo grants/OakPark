@@ -76,7 +76,7 @@
                 android:padding="13dp"/>
 
             <TextView
-                android:text="个人"
+                android:text="我的"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:textColor="#26343F"
@@ -101,7 +101,7 @@
                 android:padding="13dp"/>
 
             <TextView
-                android:text="日历"
+                android:text="挂历"
                 android:padding="10dp"
                 android:textSize="16sp"
                 android:textColor="#26343F"

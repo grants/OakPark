@@ -14,6 +14,8 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.XVAdapter;
 import me.laudoak.oakpark.ctrl.xv.AbXVOberver;
@@ -27,18 +29,16 @@ import me.laudoak.oakpark.ui.recy.RecyclerViewPager;
 /**
  * Created by LaudOak on 2015-11-24 at 16:32.
  */
-public class XVHFragment extends AbXVSubject {
+public class XVHFragment extends AbXVSubject
+{
 
-    private static final String TAG = "XVHFragment";
+    private static final String TAG = XVHFragment.class.getSimpleName();
 
-
+    @Bind(R.id.view_recy) RecyclerViewPager mRecyclerView;
+    @Bind(R.id.view_recy_loading) ProgressWheel loani;
+    @Bind(R.id.view_recy_load_failed) TextView loadFailed;
 
     private int currXVPage = 0;
-    private View rootView;
-    protected RecyclerViewPager mRecyclerView;
-    private ProgressWheel loani;
-    private TextView loadFailed;
-
 
     private static class ClassHolder
     {
@@ -63,7 +63,8 @@ public class XVHFragment extends AbXVSubject {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
     }
 
@@ -71,20 +72,17 @@ public class XVHFragment extends AbXVSubject {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        if (null == rootView)
-        {
-            rootView = inflater.inflate(R.layout.view_xv_recy,container,false);
-        }else if (null != (rootView.getParent())){
-            ((ViewGroup)rootView.getParent()).removeView(rootView);
-        }
 
-        buildViews(rootView);
+        View view  = inflater.inflate(R.layout.view_xv_recy,container,false);
+        ButterKnife.bind(this,view);
+        buildRecy();
 
-        return rootView;
+        return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -94,19 +92,22 @@ public class XVHFragment extends AbXVSubject {
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
         MobclickAgent.onPageStart(TAG);
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
     }
 
     @Override
-    public void onStop() {
+    public void onStop()
+    {
         super.onStop();
     }
 
@@ -128,15 +129,6 @@ public class XVHFragment extends AbXVSubject {
         super.onDetach();
     }
     /**/
-
-    private void buildViews(View view)
-    {
-        mRecyclerView = (RecyclerViewPager) view.findViewById(R.id.view_recy);
-        loani = (ProgressWheel) view.findViewById(R.id.view_recy_loading);
-        loadFailed = (TextView) view.findViewById(R.id.view_recy_load_failed);
-
-        buildRecy();
-    }
 
     private void buildRecy()
     {
@@ -162,18 +154,19 @@ public class XVHFragment extends AbXVSubject {
             }
 
             @Override
-            public void onSuccess(List<XVerse> results) {
+            public void onSuccess(List<XVerse> results)
+            {
+                if (results.size() > 0)
+                {
+                    mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    loani.setVisibility(View.GONE);
+                    notifyAllXVUpdated(results.get(0));
 
-                mRecyclerView.setAdapter(new XVAdapter(context, results, mRecyclerView));
-                mRecyclerView.setVisibility(View.VISIBLE);
-                loani.setVisibility(View.GONE);
-                notifyAllXVUpdated(results.get(0));
-
+                    setRecyListener();
+                }
             }
         });
-
-        setRecyListener();
-
     }
 
     private void setRecyListener()

@@ -41,20 +41,18 @@ public class TimeUtil {
         return formatter.format(getNowDate());
     }
 
-    public static String parseDateToDateText()
-    {
-        SimpleDateFormat formatter = new SimpleDateFormat(dateTextPattern);
-
-        String dateStr = formatter.format(getNowDate());
-
-        return dateStr;
-    }
-
     public static String getTodayDateCode()
     {
         SimpleDateFormat formatter = new SimpleDateFormat(todayDateCodePattern);
 
         return formatter.format(getNowDate());
+    }
+
+    public static int getTodayDateCodeNumber()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat(rawDateCodePattern);
+
+        return Integer.parseInt(formatter.format(getNowDate()));
     }
 
     public static String genFileName()
@@ -96,7 +94,8 @@ public class TimeUtil {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
 
-                return String.valueOf(calendar.get(Calendar.MONTH)) + "月";
+                /**calendar.get(Calendar.MONTH) is return real month-1*/
+                return String.valueOf(calendar.get(Calendar.MONTH)+1) + "月";
 
             } catch (ParseException e)
             {

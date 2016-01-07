@@ -115,6 +115,9 @@ public class DrawerFragment extends XBaseFragment
     {
         super.onResume();
 
+        updateBasic();
+        updateSign();
+
         if (!UserProxy.ifLogin(context))
         {
             unLogin();
@@ -122,10 +125,6 @@ public class DrawerFragment extends XBaseFragment
         {
            login();
         }
-
-
-        updateBasic();
-        updateSign();
     }
 
     private void updateBasic()

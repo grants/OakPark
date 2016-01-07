@@ -39,7 +39,7 @@
         <EditText
             android:id="@+id/bulbul_nick"
             style="@style/BulbulNick"
-            android:hint="昵称"
+            android:hint="@string/activity_bulbul_hint_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -70,7 +70,7 @@
     <Button
         android:id="@+id/bulbul_logout"
         style="@style/CustomButton"
-        android:text="退出登录"
+        android:text="@string/activity_bulbul_logout"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/bulbul_social_notice"
-            android:text="绑定账号:"
+            android:text="@string/activity_bulbul_bind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>

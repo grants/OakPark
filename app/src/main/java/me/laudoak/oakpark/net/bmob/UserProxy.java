@@ -142,6 +142,30 @@ public class UserProxy {
 
     }
 
+    public static void qqUpdate(final Context context,String newNick,String newAvatarPath, final CallBack callBack)
+    {
+        final Poet poet = currentPoet(context);
+        final Poet curPoet = new Poet();
+        curPoet.setObjectId(poet.getObjectId());
+        curPoet.setUsername(newNick);
+        curPoet.setAvatarURL(newAvatarPath);
+        curPoet.update(context, curPoet.getObjectId(), new UpdateListener()
+        {
+            @Override
+            public void onSuccess()
+            {
+                callBack.onSuccess(poet.getUsername());
+            }
+
+            @Override
+            public void onFailure(int i, String s)
+            {
+                callBack.onFailure(s);
+            }
+        });
+
+    }
+
     public static class Builder
     {
         private Context context;

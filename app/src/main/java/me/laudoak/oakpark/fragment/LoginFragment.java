@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -75,7 +76,6 @@ public class LoginFragment extends XBaseFragment implements
 
     public static LoginFragment newInstance()
     {
-
         return new LoginFragment();
     }
 
@@ -98,7 +98,6 @@ public class LoginFragment extends XBaseFragment implements
     {
         return inflater.inflate(R.layout.view_login, container, false);
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
@@ -191,25 +190,37 @@ public class LoginFragment extends XBaseFragment implements
         qqListener = new QQAuthListener(context, new XBaseAuth.AuthCallback()
         {
             @Override
-            public void onXBSuccess(String desc,JSONObject authInfo) {
+            public void onXBSuccess(String desc,JSONObject authInfo)
+            {
 
                 Poet poet = UserProxy.currentPoet(context);
 
                 assert poet != null;
                 if (StringUtil.needReUpdate("qq",poet.getUsername()))
                 {
+                    Log.d(TAG,"needReUpdate(\"qq\",poet.getUsername()");
+
+                    final ProgressDialog dialog = new ProgressDialog(context);
+                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    dialog.setMessage("正在获取QQ的个人信息...");
+                    dialog.setTitle(null);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.show();
+
                     new XBaseFetcher("qq", context, authInfo, new XBaseFetcher.FetchCallback() {
                         @Override
                         public void onFetchSuccess(String desc)
                         {
                             AppMsg.makeText(context,desc,AppMsg.STYLE_INFO).show();
-
                             loginSuccess();
+
+                            dialog.dismiss();
                         }
 
                         @Override
                         public void onFetchFailure(String why)
                         {
+                            dialog.dismiss();
                             AppMsg.makeText(context,why,AppMsg.STYLE_CONFIRM).show();
                         }
                     });

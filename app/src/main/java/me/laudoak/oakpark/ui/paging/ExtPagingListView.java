@@ -64,6 +64,7 @@ public class ExtPagingListView extends ListView implements
 
         footerView = new EndDividerView(context);
         addFooterView(footerView);
+        footerView.setReloadCallback(this);
 
         //!!!don't forget add listener to this class
         this.setOnScrollListener(this);

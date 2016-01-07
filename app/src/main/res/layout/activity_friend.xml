@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/hint_nofollow"
-        android:text="你没有关注的用户"
+        android:text="@string/activity_friend_nofriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

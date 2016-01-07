@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ac_comment"
-        android:hint="写下评论..."
+        android:hint="@string/activity_comment_hint_comment"
         autofit:minTextSize="18sp"
         autofit:sizeToFit="true"/>
 </RelativeLayout>
