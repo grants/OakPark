@@ -17,7 +17,7 @@
             <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/view_edit_title"
                 style="@style/TitleEditor"
-                android:hint="*题目"
+                android:hint="题目*"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 autofit:minTextSize="20sp"
@@ -36,7 +36,7 @@
             <me.laudoak.oakpark.ui.fittext.LinedEditor
                 android:id="@+id/view_edit_verse"
                 style="@style/VerseEditor"
-                android:hint="*在这里写下诗句..."
+                android:hint="在这里写下诗句...*"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view_edit_author"
@@ -46,7 +46,7 @@
             <me.laudoak.oakpark.ui.fittext.AutofitTextView
                 android:id="@+id/view_edit_whisper"
                 style="@style/WhisperEditor"
-                android:hint="*点击这里写下耳语..."
+                android:hint="点击这里写下耳语...*"
                 android:editable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
