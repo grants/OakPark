@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import me.laudoak.oakpark.fragment.SupCommentFragment;
 import me.laudoak.oakpark.fragment.SupShareFragment;
 import me.laudoak.oakpark.fragment.SupWhisperFragment;
 import me.laudoak.oakpark.fragment.XVHFragment;
+import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.view.LanternTextView;
 
 /**
@@ -128,6 +130,8 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver
 
     private void buildSUP()
     {
+
+        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
          /*three indicator button*/
         ImageView whisper = (ImageView) findViewById(R.id.sup_head_whisper);
         ImageView comment = (ImageView) findViewById(R.id.sup_head_comment);
@@ -244,9 +248,40 @@ public class OakParkActivity extends XBaseActivity implements AbXVOberver
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /***/
+    long slice = 0L;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
+        {
+
+            if (slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED)
+            {
+                slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+            }else
+            {
+                if((System.currentTimeMillis() - slice) > 2000)
+                {
+                    AppMsg.makeText(this,"再按一次退出",AppMsg.STYLE_CONFIRM).show();
+                    slice = System.currentTimeMillis();
+                }
+                else
+                {
+                    finish();
+                    System.exit(0);
+                }
+            }
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void notifyXVUpdate(XVerse xv)
     {
+        slidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         dateCode.setLanternText(xv.getDateCode());
     }
 

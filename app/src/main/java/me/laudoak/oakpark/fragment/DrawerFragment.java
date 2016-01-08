@@ -70,39 +70,12 @@ public class DrawerFragment extends XBaseFragment
 
     private void buildViews()
     {
-        avatar.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (UserProxy.ifLogin(context))
-                {
-                    Intent intent = new Intent();
-                    intent.setClass(context, PoetActivity.class);
-
-                    startActivity(intent);
-                }else
-                {
-                    Intent intent = new Intent();
-                    intent.setClass(context, EnterActivity.class);
-
-                    startActivity(intent);
-                }
-            }
-        });
-
-        sign.setOnClickListener(new SignClickListener(context,this));
-
-        setting.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(context, SettingActivity.class));
-            }
-        });
 
         DrawerItemClickListener menuListener = new DrawerItemClickListener(context);
+
+        avatar.setOnClickListener(menuListener);
+        sign.setOnClickListener(new SignClickListener(context,this));
+        setting.setOnClickListener(menuListener);
         newpoem.setOnClickListener(menuListener);
         newpoem.setOnLongClickListener(menuListener);
         personal.setOnClickListener(menuListener);

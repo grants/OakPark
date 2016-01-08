@@ -92,7 +92,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="8dp"
-            android:background="@drawable/bg_re_btn">
+            android:background="@drawable/bg_re_btn"
+            android:visibility="gone">
 
             <ImageView
                 android:src="@mipmap/ic_calendar"

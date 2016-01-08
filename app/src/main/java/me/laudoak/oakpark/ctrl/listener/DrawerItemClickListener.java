@@ -9,7 +9,10 @@ import android.view.View;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.activity.BulbulActivity;
 import me.laudoak.oakpark.activity.EditorActivity;
+import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.FriendActivity;
+import me.laudoak.oakpark.activity.PoetActivity;
+import me.laudoak.oakpark.activity.SettingActivity;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
@@ -34,6 +37,12 @@ public class DrawerItemClickListener implements
     {
         switch (view.getId())
         {
+
+            case R.id.drawer_avatar:
+            {
+                goPersonal();
+                break;
+            }
             case R.id.drawer_item_newpoem:
             {
                 goNormalEditor();
@@ -41,7 +50,7 @@ public class DrawerItemClickListener implements
             }
             case R.id.drawer_item_personal:
             {
-                goPersonal();
+                goPoetHome();
                 break;
             }
             case R.id.drawer_item_calendar:
@@ -51,6 +60,11 @@ public class DrawerItemClickListener implements
             case R.id.drawer_item_friend:
             {
                 goFriend();
+                break;
+            }
+            case R.id.drawer_ll_setting:
+            {
+                goSetting();
                 break;
             }
         }
@@ -70,6 +84,21 @@ public class DrawerItemClickListener implements
         return true;
     }
 
+
+    private void goPoetHome()
+    {
+        if (UserProxy.ifLogin(context))
+        {
+            Intent intent = new Intent();
+            intent.setClass(context, PoetActivity.class);
+
+            context.startActivity(intent);
+        }else
+        {
+            AppMsg.makeText(context, "未登录", AppMsg.STYLE_CONFIRM).show();
+        }
+    }
+
     private void goPersonal()
     {
         if (UserProxy.ifLogin(context))
@@ -77,7 +106,11 @@ public class DrawerItemClickListener implements
             context.startActivity(new Intent(context, BulbulActivity.class));
         } else
         {
-            AppMsg.makeText(context, "未登录", AppMsg.STYLE_CONFIRM).show();
+
+            Intent intent = new Intent();
+            intent.setClass(context, EnterActivity.class);
+
+            context.startActivity(intent);
         }
     }
 
@@ -122,6 +155,10 @@ public class DrawerItemClickListener implements
             AppMsg.makeText(context, "请先登录", AppMsg.STYLE_CONFIRM).show();
         }
 
+    }
 
+    private void goSetting()
+    {
+        context.startActivity(new Intent(context, SettingActivity.class));
     }
 }

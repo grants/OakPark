@@ -75,4 +75,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
+    <me.laudoak.oakpark.view.LvStateView
+        android:gravity="center"
+        android:id="@+id/activity_outer_lvsta"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
 </android.support.design.widget.CoordinatorLayout>

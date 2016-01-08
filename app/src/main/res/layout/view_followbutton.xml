@@ -21,7 +21,7 @@
     <me.laudoak.oakpark.ui.loani.ProgressWheel
         android:id="@+id/view_follow_loani"
         android:layout_width="28dp"
-        android:layout_height="28"
+        android:layout_height="28dp"
         android:padding="2dp"
         android:layout_centerInParent="true"
         wheel:matProg_barColor="@color/white"

@@ -24,7 +24,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.OuterPoetAdapter;
-import me.laudoak.oakpark.adapter.PagingComAdapter;
 import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryOuterVerse;
@@ -32,6 +31,7 @@ import me.laudoak.oakpark.ui.circle.CircleImageView;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.text.FluidTextView;
 import me.laudoak.oakpark.view.FollowButtonView;
+import me.laudoak.oakpark.view.LvStateView;
 
 /**
  * Created by LaudOak on 2015-11-14 at 14:25.
@@ -62,6 +62,8 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     @Bind(R.id.usrsub_nick) TextView nick;
     @Bind(R.id.usrsub_sign) FluidTextView sign;
 
+
+    @Bind(R.id.activity_outer_lvsta) LvStateView lvStateView;
     @Bind(R.id.activity_outer_recycler) RecyclerView recyclerView;
 
     private Poet outerPoet;
@@ -189,25 +191,29 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
 
     private void buildViews()
     {
-        /**init cover*/
-        if (null != outerPoet.getCoverURL())
+        if (null != outerPoet)
         {
-            ImageLoader.getInstance().displayImage(outerPoet.getCoverURL(),cover);
+            /**init cover*/
+            if (null != outerPoet.getCoverURL())
+            {
+                ImageLoader.getInstance().displayImage(outerPoet.getCoverURL(),cover);
+            }
+
+            /**init avatar*/
+            if (null!=outerPoet.getAvatarURL())
+            {
+                ImageLoader.getInstance().displayImage(outerPoet.getAvatarURL(), avatar);
+            }
+
+            LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+            recyclerView.setLayoutManager(manager);
+            lvStateView.loading();
+            new QueryOuterVerse(this,outerPoet,this);
+
+            nick.setText(outerPoet.getUsername());
+            sign.setText(outerPoet.getSign());
+            followButtonView.setSecondaryPoet(outerPoet);
         }
-
-        /**init avatar*/
-        if (null!=outerPoet.getAvatarURL())
-        {
-            ImageLoader.getInstance().displayImage(outerPoet.getAvatarURL(), avatar);
-        }
-
-        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager);
-        new QueryOuterVerse(this,outerPoet,this);
-
-        nick.setText(outerPoet.getUsername());
-        sign.setText(outerPoet.getSign());
-        followButtonView.setSecondaryPoet(outerPoet);
 
     }
 
@@ -230,6 +236,7 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     @Override
     public void onFailure(String why)
     {
+        lvStateView.loadFailed();
         Log.d(TAG,"onFailure"+why);
         AppMsg.makeText(this,"Query Failure",AppMsg.STYLE_ALERT).show();
     }
@@ -237,6 +244,14 @@ public class OuterActivity extends XBaseActivity implements QueryOuterVerse.Quer
     @Override
     public void onSuccess(List<Verse> results)
     {
+        if (results.size() == 0)
+        {
+            lvStateView.noData();
+        }else
+        {
+            lvStateView.hide();
+        }
+
         Log.d(TAG,"onSuccess(List<Verse> results)"+results.size());
         adapter = new OuterPoetAdapter(this,results);
         recyclerView.setAdapter(adapter);
