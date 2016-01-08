@@ -114,16 +114,21 @@ public class PoetFragment extends XBaseFragment implements
         extPagingListView.onLoadFailed();
     }
 
-    private boolean needAxle = false;
+    private boolean isFirst = true;
 
     @Override
     public void onSuccess(boolean hasMore, List<Verse> results)
     {
         extPagingListView.onLoadCompleted(hasMore, results);
-        if (needAxle)
+        axle.setVisibility(View.VISIBLE);
+
+        if (isFirst && results.size()==0)
+        {
+            axle.setVisibility(View.GONE);
+        }else if (isFirst && results.size() > 0 )
         {
             axle.setVisibility(View.VISIBLE);
         }
-        needAxle = true;
+        isFirst = false;
     }
 }

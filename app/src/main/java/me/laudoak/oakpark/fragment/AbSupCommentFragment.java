@@ -137,7 +137,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
         {
 
             Comment comment = (Comment) data.getSerializableExtra("comment");
-            adapter.addItem(0,comment);
+            adapter.addItem(0, comment);
         }
     }
 
@@ -145,7 +145,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     @Override
     public void onLoadMore()
     {
-        Log.d(TAG,"onLoadMore()");
+        Log.d(TAG, "onLoadMore()");
         Log.d(TAG, "currentXV == null:" + (currentVerse == null));
 
         if (null != currentVerse)
@@ -194,7 +194,11 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     public void onFailure(String why)
     {
         onLoadFailed();
-        listView.onLoadFailed();
+        if (null != listView)
+        {
+            listView.onLoadFailed();
+        }
+
         Log.d(TAG, why);
     }
 
@@ -202,7 +206,11 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     @Override
     public void onSuccess(boolean hasMore, List<Comment> results)
     {
-        listView.onLoadCompleted(hasMore, results);
+        if (null != listView)
+        {
+            listView.onLoadCompleted(hasMore, results);
+        }
+
         onLoadSuccess();
         Log.d(TAG, "onSuccess(boolean hasMore, List<Comment> results)");
     }

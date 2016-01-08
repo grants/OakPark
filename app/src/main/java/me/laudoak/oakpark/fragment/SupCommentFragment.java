@@ -46,12 +46,19 @@ public class SupCommentFragment extends AbSupCommentFragment
     @Override
     void onLoadingPaging()
     {
-        listView.setIsLoading(true);
+        if (null != listView)
+        {
+            listView.setIsLoading(true);
+        }
     }
     @Override
     void onLoadFailed()
     {
-        listView.setIsLoading(false);
+        if (null != listView)
+        {
+            listView.setIsLoading(false);
+        }
+
     }
 
     @Override

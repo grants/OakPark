@@ -29,12 +29,15 @@ public class UnFollow extends AbRelevance
 
                 if (null != currentPoet)
                 {
+                    Poet poet = new Poet();
+                    poet.setObjectId(currentPoet.getObjectId());
+
                     BmobRelation relation = new BmobRelation();
                     relation.remove(secondaryPoet);
 
-                    currentPoet.setFollow(relation);
+                    poet.setFollow(relation);
 
-                    currentPoet.update(context, currentPoet.getObjectId(), new UpdateListener()
+                    poet.update(context, poet.getObjectId(), new UpdateListener()
                     {
                         @Override
                         public void onSuccess()
