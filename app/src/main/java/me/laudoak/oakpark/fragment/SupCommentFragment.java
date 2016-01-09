@@ -58,7 +58,6 @@ public class SupCommentFragment extends AbSupCommentFragment
         {
             listView.setIsLoading(false);
         }
-
     }
 
     @Override

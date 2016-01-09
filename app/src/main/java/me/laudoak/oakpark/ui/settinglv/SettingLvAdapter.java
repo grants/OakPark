@@ -31,13 +31,13 @@ public class SettingLvAdapter extends BaseAdapter
         fillings = new ArrayList<AbFilling>();
         genFillings();
 
-        holderPool = new ViewHolderPool(inflater,fillings);
+        holderPool = new ViewHolderPool(context,inflater,fillings);
     }
 
     private void genFillings()
     {
         fillings.add(0,new NormalFill("个人信息"));
-        fillings.add(1,new ToggleFill("使用系统字体",false));
+        fillings.add(1,new ToggleFill("主页卡片使用系统字体",true));
         fillings.add(2,new NormalFill("开源协议"));
         fillings.add(3,new NormalFill("有关诗歌的网站"));
         fillings.add(4,new NormalFill("版本更新"));

@@ -19,7 +19,7 @@ public class StampView extends LinearLayout
 
     private Context context;
 
-    private TextView creator,by;
+    private TextView by;
 
     public StampView(Context context)
     {
@@ -45,15 +45,9 @@ public class StampView extends LinearLayout
     private void init()
     {
         View view = inflate(context, R.layout.view_stamp,this);
-        creator = (TextView) view.findViewById(R.id.stamp_creator);
         by = (TextView) view.findViewById(R.id.stamp_by);
         FontsManager.initFormAssets(context,"fonts/fang.TTF");
         FontsManager.changeFonts(this);
-    }
-
-    public void setCreator(String creatorStr)
-    {
-        creator.setText(creatorStr);
     }
 
     public void setBy(String byStr)

@@ -18,10 +18,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_about">
 
         <TextView
-            android:text="很感谢下载使用"
+            android:text="很感谢下载使用 : )"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -39,7 +40,6 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:autoLink="email"/>
-
 
     </LinearLayout>
 

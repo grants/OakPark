@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.ui.settinglv.holder;
 
+import android.content.Context;
 import android.view.View;
 
 import me.laudoak.oakpark.ui.settinglv.fill.AbFilling;
@@ -10,8 +11,11 @@ import me.laudoak.oakpark.ui.settinglv.fill.AbFilling;
 public abstract class AbViewHolder
 {
 
-    public AbViewHolder(View view)
+    protected Context context;
+
+    public AbViewHolder(Context context ,View view)
     {
+        this.context = context;
     }
     public abstract void bind(AbFilling filling);
 }

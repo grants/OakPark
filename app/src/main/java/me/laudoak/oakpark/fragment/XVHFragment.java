@@ -72,7 +72,6 @@ public class XVHFragment extends AbXVSubject
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
         View view  = inflater.inflate(R.layout.view_xv_recy,container,false);
         ButterKnife.bind(this,view);
         buildRecy();
@@ -171,9 +170,11 @@ public class XVHFragment extends AbXVSubject
 
     private void setRecyListener()
     {
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState)
+            {
 
                 int tmp = mRecyclerView.getCurrentPosition();
 
@@ -188,16 +189,20 @@ public class XVHFragment extends AbXVSubject
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
+            public void onScrolled(RecyclerView recyclerView, int i, int i2)
+            {
                 int childCount = mRecyclerView.getChildCount();
                 int width = mRecyclerView.getChildAt(0).getWidth();
                 int padding = (mRecyclerView.getWidth() - width) / 2;
 
-                for (int j = 0; j < childCount; j++) {
+                for (int j = 0; j < childCount; j++)
+                {
                     View v = recyclerView.getChildAt(j);
                     float rate = 0;
-                    if (v.getLeft() <= padding) {
-                        if (v.getLeft() >= padding - v.getWidth()) {
+                    if (v.getLeft() <= padding)
+                    {
+                        if (v.getLeft() >= padding - v.getWidth())
+                        {
                             rate = (padding - v.getLeft()) * 1f / v.getWidth();
                         } else {
                             rate = 1;
@@ -205,8 +210,10 @@ public class XVHFragment extends AbXVSubject
                         v.setScaleY(1 - rate * 0.1f);
                         v.setScaleX(1 - rate * 0.1f);
 
-                    } else {
-                        if (v.getLeft() <= recyclerView.getWidth() - padding) {
+                    } else
+                    {
+                        if (v.getLeft() <= recyclerView.getWidth() - padding)
+                        {
                             rate = (recyclerView.getWidth() - padding - v.getLeft()) * 1f / v.getWidth();
                         }
                         v.setScaleY(0.9f + rate * 0.1f);
@@ -216,12 +223,17 @@ public class XVHFragment extends AbXVSubject
             }
         });
 
-        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener()
+        {
             @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (mRecyclerView.getChildCount() < 3) {
-                    if (mRecyclerView.getChildAt(1) != null) {
-                        if (mRecyclerView.getCurrentPosition() == 0) {
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
+            {
+                if (mRecyclerView.getChildCount() < 3)
+                {
+                    if (mRecyclerView.getChildAt(1) != null)
+                    {
+                        if (mRecyclerView.getCurrentPosition() == 0)
+                        {
                             View v1 = mRecyclerView.getChildAt(1);
                             v1.setScaleY(0.9f);
                             v1.setScaleX(0.9f);
@@ -231,13 +243,16 @@ public class XVHFragment extends AbXVSubject
                             v1.setScaleX(0.9f);
                         }
                     }
-                } else {
-                    if (mRecyclerView.getChildAt(0) != null) {
+                } else
+                {
+                    if (mRecyclerView.getChildAt(0) != null)
+                    {
                         View v0 = mRecyclerView.getChildAt(0);
                         v0.setScaleY(0.9f);
                         v0.setScaleX(0.9f);
                     }
-                    if (mRecyclerView.getChildAt(2) != null) {
+                    if (mRecyclerView.getChildAt(2) != null)
+                    {
                         View v2 = mRecyclerView.getChildAt(2);
                         v2.setScaleY(0.9f);
                         v2.setScaleX(0.9f);

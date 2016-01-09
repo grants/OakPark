@@ -14,7 +14,8 @@ import me.laudoak.oakpark.ui.message.AppMsg;
 /**
  * Created by LaudOak on 2015-10-15 at 17:35.
  */
-public class WhisperActivity extends XBaseActivity {
+public class WhisperActivity extends XBaseActivity
+{
 
     private static final String TAG = "WhisperActivity";
 
@@ -23,20 +24,23 @@ public class WhisperActivity extends XBaseActivity {
     private AutofitTextView whisper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whisper);
         buildView();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
         MobclickAgent.onPause(this);
     }
@@ -51,7 +55,8 @@ public class WhisperActivity extends XBaseActivity {
         buildBar();
     }
 
-    private void buildBar() {
+    private void buildBar()
+    {
 
         getSupportActionBar().hide();
 

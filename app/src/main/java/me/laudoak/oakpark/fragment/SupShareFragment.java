@@ -65,12 +65,13 @@ public class SupShareFragment extends XBaseFragment
         {
             rootView = inflater.inflate(R.layout.view_sup_share,container,false);
 
-        }else if (null != (rootView.getParent())){
-
+        }else if (null != (rootView.getParent()))
+        {
             ((ViewGroup)rootView.getParent()).removeView(rootView);
         }
         buildViews(rootView);
         isViewCreated = true;
+
         return rootView;
     }
 

@@ -50,7 +50,6 @@
                     android:layout_gravity="center_vertical"/>
 
                 <me.laudoak.oakpark.ui.fittext.AutofitTextView
-                    android:text="Hello"
                     style="@style/PrinterTitleText"
                     android:id="@+id/printer_title"
                     android:layout_width="match_parent"
@@ -80,7 +79,6 @@
 
             <me.laudoak.oakpark.view.StampView
                 android:id="@+id/printer_stamp"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

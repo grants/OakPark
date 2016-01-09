@@ -15,8 +15,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.sns.share.ShareHelper;
 import me.laudoak.oakpark.entity.core.Poet;
@@ -124,7 +122,6 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(xVerse.getTitle());
                 author.setText(xVerse.getAuthor());
                 verse.setText(xVerse.getVerse());
-                stamp.setCreator(xVerse.getBulbul().getUsername());
 
                 break;
             }
@@ -134,7 +131,6 @@ public class PrinterActivity extends XBaseActivity implements
                 title.setText(vrse.getTitle());
                 author.setText(vrse.getAuthor());
                 verse.setText(vrse.getVerse());
-                stamp.setCreator(vrse.getPoet().getUsername());
 
                 break;
             }
@@ -305,8 +301,8 @@ public class PrinterActivity extends XBaseActivity implements
 
     /**FontPickerFragment CallBack*/
     @Override
-    public void onSelected(Typeface typeface) {
-
+    public void onSelected(Typeface typeface)
+    {
         FontsManager.init(typeface);
         FontsManager.changeFonts(dampEditor);
     }

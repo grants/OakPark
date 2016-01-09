@@ -24,7 +24,6 @@ import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.entity.core.XVerse;
 import me.laudoak.oakpark.net.bmob.UserProxy;
 import me.laudoak.oakpark.net.bmob.query.QueryPagingComment;
-import me.laudoak.oakpark.ui.loani.ProgressWheel;
 import me.laudoak.oakpark.ui.message.AppMsg;
 import me.laudoak.oakpark.ui.paging.ExtPagingListView;
 
@@ -43,9 +42,7 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     public static final String EXTRA_XVERSE = "EXTRA_XVERSE";
     public static final int REQUEST_COMMENT = 121;
 
-
     @Bind(R.id.sup_comment_lv) ExtPagingListView listView;
-    @Bind(R.id.sup_comment_loani) ProgressWheel loani;
     @Bind(R.id.sup_comment_comment) ImageView writeComment;
 
     private int currentPage;
@@ -106,7 +103,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
         super.onPause();
     }
 
-
     /**AbObserver callback*/
     @Override
     public void notifyXVUpdate(XVerse xv)
@@ -135,10 +131,10 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
 
         if (requestCode == REQUEST_COMMENT && resultCode == 1205 && null != data)
         {
-
             Comment comment = (Comment) data.getSerializableExtra("comment");
             adapter.addItem(0, comment);
         }
+
     }
 
     /**PagingListView callback*/

@@ -1,6 +1,7 @@
 package me.laudoak.oakpark.ui.settinglv;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +29,13 @@ public class ViewHolderPool
     public static final int TYPE_ISTV_WITH_RIGHTTXT = 104;
     public static final int TYPE_ISTV_WITH_SUBTXT = 105;
 
+    private Context context;
     private LayoutInflater inflater;
     private List<AbFilling> fillings;
 
-    public ViewHolderPool (LayoutInflater inflater,List<AbFilling> fils)
+    public ViewHolderPool (Context context,LayoutInflater inflater,List<AbFilling> fils)
     {
+        this.context = context;
         this.inflater = inflater;
         this.fillings = fils;
     }
@@ -59,21 +62,21 @@ public class ViewHolderPool
                 case TYPE_ISTV_NORMAL:
                 {
                     convertView = inflater.inflate(R.layout.view_item_stv_norm,parent,false);
-                    viewHolder = new NormalViewHolder(convertView);
+                    viewHolder = new NormalViewHolder(context,convertView);
 
                     break;
                 }
                 case TYPE_ISTV_WITH_TOGGLE:
                 {
                     convertView = inflater.inflate(R.layout.view_item_stv_swibt,parent,false);
-                    viewHolder = new ToggleViewHolder(convertView);
+                    viewHolder = new ToggleViewHolder(context,convertView);
 
                     break;
                 }
                 case TYPE_ISTV_WITH_LOAD:
                 {
                     convertView = inflater.inflate(R.layout.view_item_stv_load,parent,false);
-                    viewHolder = new LoadingViewHolder(convertView);
+                    viewHolder = new LoadingViewHolder(context,convertView);
 
                     break;
                 }

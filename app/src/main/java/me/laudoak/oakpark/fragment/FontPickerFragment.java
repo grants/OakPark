@@ -16,6 +16,7 @@ import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.ui.dialog.XBaseDialog;
 import me.laudoak.oakpark.ui.loop.LoopListener;
 import me.laudoak.oakpark.ui.loop.LoopView;
+import me.laudoak.oakpark.utils.font.FontsHelper;
 
 /**
  * Created by LaudOak on 2015-11-7 at 10:10.
@@ -107,7 +108,7 @@ public class FontPickerFragment extends XBaseDialog
                             }
                             case 1:
                             {
-                                typeface = Typeface.createFromAsset(context.getAssets(),"fonts/fang.TTF");
+                                typeface = FontsHelper.fang(context);
                                 break;
                             }
                         }

@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.ui.settinglv.holder;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,8 +18,8 @@ public class LoadingViewHolder extends AbViewHolder{
     private ProgressBar progressBar;
 
 
-    public LoadingViewHolder(View view) {
-        super(view);
+    public LoadingViewHolder(Context context ,View view) {
+        super(context,view);
         title = (TextView) view.findViewById(R.id.item_stv_load_tv);
         progressBar = (ProgressBar) view.findViewById(R.id.item_stv_load);
     }

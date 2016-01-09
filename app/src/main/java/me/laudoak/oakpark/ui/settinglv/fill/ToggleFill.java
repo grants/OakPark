@@ -16,12 +16,13 @@ public class ToggleFill extends AbFilling {
         this.isSelected = isSelected;
     }
 
-    public boolean isSelected() {
+    public boolean isSelected()
+    {
         return isSelected;
     }
 
-
-    public void setIsSelected(boolean isSelected) {
+    public void setIsSelected(boolean isSelected)
+    {
         this.isSelected = isSelected;
     }
 }
