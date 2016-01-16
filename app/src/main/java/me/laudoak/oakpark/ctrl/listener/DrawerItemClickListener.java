@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.ctrl.listener;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +14,9 @@ import me.laudoak.oakpark.activity.EnterActivity;
 import me.laudoak.oakpark.activity.FriendActivity;
 import me.laudoak.oakpark.activity.PoetActivity;
 import me.laudoak.oakpark.activity.SettingActivity;
+import me.laudoak.oakpark.entity.core.Poet;
 import me.laudoak.oakpark.net.bmob.UserProxy;
+import me.laudoak.oakpark.net.bmob.cloud.Snib;
 import me.laudoak.oakpark.ui.message.AppMsg;
 
 /**
@@ -114,27 +117,67 @@ public class DrawerItemClickListener implements
         }
     }
 
+    private ProgressDialog ld;
+
     private void goEntireEditor()
     {
          /*LongClick begin Entire Editor*/
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialog)
-                .setMessage("进入完全编辑模式?")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener()
+
+        ld = new ProgressDialog(context);
+        ld.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ld.setMessage("请稍等...");
+        ld.setTitle(null);
+        ld.show();
+
+
+        Poet poet = UserProxy.currentPoet(context);
+        if (null != poet)
+        {
+            new Snib(context).querySnib(poet.getObjectId(), new Snib.SnibCallback()
+            {
+                @Override
+                public void onFailure(String why)
                 {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    ld.dismiss();
+                    AppMsg.makeText(context,why,AppMsg.STYLE_ALERT).show();
+                }
 
-                        Intent intent = new Intent();
-                        intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 1);
-                        intent.setClass(context, EditorActivity.class);
-                        context.startActivity(intent);
+                @Override
+                public void pass()
+                {
+                    ld.dismiss();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialog)
+                            .setMessage("进入编辑模式?")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which)
+                                {
 
-                    }
-                })
-                .setNegativeButton("取消", null);
+                                    Intent intent = new Intent();
+                                    intent.putExtra(EditorActivity.EXTRA_FRAGMENT_FLAG, 1);
+                                    intent.setClass(context, EditorActivity.class);
+                                    context.startActivity(intent);
 
-        builder.create().show();
+                                }
+                            })
+                            .setNegativeButton("取消", null);
+
+                    builder.create().show();
+                }
+
+                @Override
+                public void block()
+                {
+                    ld.dismiss();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialog)
+                            .setMessage("没有权限!")
+                            .setPositiveButton("确定", null);
+                    builder.create().show();
+                }
+            });
+        }
+
     }
 
     private void goNormalEditor()
