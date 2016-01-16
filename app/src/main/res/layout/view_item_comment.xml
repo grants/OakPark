@@ -18,7 +18,7 @@
         android:orientation="horizontal"
         android:background="@color/white">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <me.laudoak.oakpark.view.AvatarView
             android:id="@+id/item_comment_avatar"
             android:layout_width="38dp"
             android:layout_height="38dp"

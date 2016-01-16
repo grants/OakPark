@@ -41,7 +41,8 @@
                     fresco:roundingBorderColor="@color/gray_7"
                     fresco:roundWithOverlayColor="@color/white"
                     fresco:roundAsCircle="true"
-                    android:layout_gravity="center_vertical"/>
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/sup_whisper_nick"

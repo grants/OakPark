@@ -15,6 +15,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.PagingPoetAdapter;
+import me.laudoak.oakpark.ctrl.listener.PoetLongClickListener;
 import me.laudoak.oakpark.entity.core.Verse;
 import me.laudoak.oakpark.net.bmob.query.QueryVerse;
 import me.laudoak.oakpark.ui.message.AppMsg;
@@ -33,6 +34,8 @@ public class PoetFragment extends XBaseFragment implements
     @Bind(R.id.lv_poet) ExtPagingListView extPagingListView;
     @Bind(R.id.fragment_poet_axle) View axle;
     private PagingPoetAdapter adapter;
+
+    private PoetLongClickListener itemLongClickListener;
 
     private int currPage;
 
@@ -62,6 +65,7 @@ public class PoetFragment extends XBaseFragment implements
 
         currPage = 0;
         adapter = new PagingPoetAdapter(context);
+        itemLongClickListener = new PoetLongClickListener(context,getFragmentManager(),adapter);
     }
 
     @Nullable
@@ -80,15 +84,7 @@ public class PoetFragment extends XBaseFragment implements
     {
         extPagingListView.setLoadCallback(this);
         extPagingListView.setAdapter(adapter);
-        extPagingListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
-            {
-
-                return false;
-            }
-        });
+        extPagingListView.setOnItemLongClickListener(itemLongClickListener);
         axle.setVisibility(View.GONE);
     }
 
@@ -110,7 +106,7 @@ public class PoetFragment extends XBaseFragment implements
     @Override
     public void onFailure(String why)
     {
-        AppMsg.makeText(context, why, AppMsg.STYLE_CONFIRM).show();
+        AppMsg.makeText(context, why, AppMsg.STYLE_ALERT).show();
         extPagingListView.onLoadFailed();
     }
 

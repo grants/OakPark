@@ -23,6 +23,7 @@
         android:layout_height="match_parent"
         android:dividerHeight="0dp"
         android:scrollbars="none"
+        android:longClickable="true"
         android:listSelector="@android:color/transparent"
         android:divider="@android:color/transparent"/>
 

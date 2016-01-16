@@ -63,6 +63,12 @@ public abstract class XBasePagingAdapter<T> extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
+    public void removeItem(int position)
+    {
+        datas.remove(position);
+        this.notifyDataSetChanged();
+    }
+
 
 
 }

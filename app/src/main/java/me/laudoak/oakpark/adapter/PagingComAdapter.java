@@ -1,22 +1,20 @@
 package me.laudoak.oakpark.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.laudoak.oakpark.R;
-import me.laudoak.oakpark.activity.OuterActivity;
 import me.laudoak.oakpark.entity.core.Comment;
 import me.laudoak.oakpark.ui.clocktext.ClockText;
 import me.laudoak.oakpark.ui.paging.XBasePagingAdapter;
+import me.laudoak.oakpark.view.AvatarView;
 
 /**
  * Created by LaudOak on 2015-12-4 at 22:58.
@@ -74,12 +72,10 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
 
     public class ViewHolder
     {
-        @Bind(R.id.item_comment_avatar) SimpleDraweeView avatar;
+        @Bind(R.id.item_comment_avatar) AvatarView avatar;
         @Bind(R.id.item_comment_nick) TextView nick;
         @Bind(R.id.item_comment_time) ClockText commentTime;
         @Bind(R.id.item_comment_content) TextView commentContent;
-
-        private Comment comment;
 
         public ViewHolder(View view)
         {
@@ -87,25 +83,10 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
 
             /**BUG here!!!#20151220#*/
             view.setTag(this);
-
-            avatar.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    if (null != comment)
-                    {
-                        Intent intent = new Intent(context, OuterActivity.class);
-                        intent.putExtra(OuterActivity.EXTRA_POET, comment.getPoet());
-                        context.startActivity(intent);
-                    }
-                }
-            });
         }
 
         void bindData(Comment cm)
         {
-            this.comment = cm;
             commentTime.setPushTime(cm.getCommentTime());
             nick.setText(cm.getPoet().getUsername());
             commentContent.setText(cm.getContent());
@@ -115,6 +96,7 @@ public class PagingComAdapter extends XBasePagingAdapter<Comment>
                 Uri uri = Uri.parse(cm.getPoet().getAvatarURL());
                 avatar.setImageURI(uri);
             }
+            avatar.setPoet(cm.getPoet());
         }
 
     }
