@@ -99,11 +99,8 @@ public class ShareHelper implements
             {
                 SinaWeibo.ShareParams sp = new SinaWeibo.ShareParams();
                 Platform pf = ShareSDK.getPlatform(context, SinaWeibo.NAME);
-                //sp.setImageData(image);
                 sp.imagePath = FileUtil.saveImageToExternalStorage(context, image);
                 sp.text = title;
-                //sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
-                //sp.setShareType(Platform.SHARE_IMAGE);
                 pf.setPlatformActionListener(this);
                 pf.share(sp);
                 dialog.dismiss();
@@ -210,7 +207,7 @@ public class ShareHelper implements
     {
         if (null != callBack)
         {
-            callBack.onFailure("share error");
+            callBack.onFailure("分享失败");
         }
     }
 
@@ -219,7 +216,7 @@ public class ShareHelper implements
     {
         if (null != callBack)
         {
-            callBack.onCalcle("share cancel");
+            callBack.onCalcle("分享被取消");
         }
     }
     /**end of Share Platform Callback*/
@@ -269,7 +266,6 @@ public class ShareHelper implements
         }
 
     }
-
 
     public interface ShareCallBack
     {
