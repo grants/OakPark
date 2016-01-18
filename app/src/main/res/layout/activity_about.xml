@@ -29,7 +29,7 @@
             android:gravity="center"/>
 
         <TextView
-            android:text="如果你有自己的或发现的诗词愿意分享可以发送给我，或者加入橡树园"
+            android:text="如果你有自己的或发现的诗词愿意分享可以发送给我，或者加入我们"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"/>

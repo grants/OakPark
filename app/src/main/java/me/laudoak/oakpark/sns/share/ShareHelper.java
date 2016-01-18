@@ -1,5 +1,6 @@
 package me.laudoak.oakpark.sns.share;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
@@ -97,6 +98,7 @@ public class ShareHelper implements
         {
             case R.id.shareend_weibo:
             {
+                showLoading();
                 SinaWeibo.ShareParams sp = new SinaWeibo.ShareParams();
                 Platform pf = ShareSDK.getPlatform(context, SinaWeibo.NAME);
                 sp.imagePath = FileUtil.saveImageToExternalStorage(context, image);
@@ -123,10 +125,21 @@ public class ShareHelper implements
             {
                 Platform plat = ShareSDK.getPlatform(context, QZone.NAME);
                 QZone.ShareParams sp = new QZone.ShareParams();
-                sp.setTitle(title);
-                sp.setText(poem);
-                sp.setImageData(image);
-                sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
+
+                String url = "https://github.com/LaudOak/OakPark";
+
+                /***/
+                sp.title = title;
+                sp.titleUrl = url;
+                sp.site = "橡树园";
+                sp.siteUrl = url;
+                sp.imagePath = FileUtil.saveImageToExternalStorage(context, image);
+                /***/
+
+//                sp.setTitle(title);
+//                sp.setText(poem);
+//                sp.setImageData(image);
+//                sp.setImagePath(FileUtil.saveImageToExternalStorage(context, image));
                 sp.setShareType(QZone.SHARE_IMAGE);
                 plat.setPlatformActionListener(this);
                 plat.share(sp);
@@ -164,6 +177,7 @@ public class ShareHelper implements
             }
             case R.id.shareend_wechatfriend:
             {
+
                 Platform plat = ShareSDK.getPlatform(context, Wechat.NAME);
                 Wechat.ShareParams sp = new Wechat.ShareParams();
                 sp.setTitle(title);
@@ -191,11 +205,31 @@ public class ShareHelper implements
         }
     }
 
+    private ProgressDialog ld;
 
+    private void showLoading()
+    {
+        ld = new ProgressDialog(context);
+        ld.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ld.setMessage("请稍等...");
+        ld.setTitle(null);
+        ld.setCanceledOnTouchOutside(false);
+        ld.show();
+    }
+
+    private void dimissLoading()
+    {
+        if (null != ld && ld.isShowing())
+        {
+            ld.dismiss();
+        }
+    }
     /**Share Platform Callback*/
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap)
     {
+        dimissLoading();
+
         if (null != callBack)
         {
             callBack.onSuccess();
@@ -205,6 +239,7 @@ public class ShareHelper implements
     @Override
     public void onError(Platform platform, int i, Throwable throwable)
     {
+        dimissLoading();
         if (null != callBack)
         {
             callBack.onFailure("分享失败");
@@ -214,6 +249,7 @@ public class ShareHelper implements
     @Override
     public void onCancel(Platform platform, int i)
     {
+        dimissLoading();
         if (null != callBack)
         {
             callBack.onCalcle("分享被取消");
