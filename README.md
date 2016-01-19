@@ -9,28 +9,31 @@
 [测试版下载](http://fir.im/oakpark)
 
 QQ群：322271535
-<img src="http://ww1.sinaimg.cn/large/005BQ0rRjw1f04thy5ipzj30f00kkt9p.jpg"/>
+<img src="http://ww1.sinaimg.cn/large/005BQ0rRjw1f04thy5ipzj30f00kkt9p.jpg"
+width="270" height="370"/>
+
 ===
 
-<img src="http://ww3.sinaimg.cn/large/005BQ0rRjw1f04t7g7gxxj318g1xgtlp.jpg" width="160" height="250"/>
+<img src="http://ww3.sinaimg.cn/large/005BQ0rRjw1f04t7g7gxxj318g1xgtlp.jpg" width="480" height="750"/>
 
 <img src="http://ww4.sinaimg.cn/large/005BQ0rRjw1f04t9ee7x1j318g1xgn8y.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
 
 <img src="http://ww1.sinaimg.cn/large/005BQ0rRjw1f04t9ugd37j318g1xg10u.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
 
 <img src="http://ww1.sinaimg.cn/large/005BQ0rRjw1f04ta8bdowj318g1xgtgo.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
 
 <img src="http://ww3.sinaimg.cn/large/005BQ0rRjw1f04tai33buj318g1xhguu.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
 
 <img src="http://ww1.sinaimg.cn/large/005BQ0rRjw1f04tapa5q3j318g1xg4oo.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
 
 <img src="http://ww3.sinaimg.cn/large/005BQ0rRjw1f04tayhbuuj318g1xg7b5.jpg"
-width="160" height="250"/>
+width="480" height="750"/>
+
 
 ##非常感谢
 ####开源库
@@ -51,7 +54,7 @@ width="160" height="250"/>
 *   [Mob](http://www.mob.com/)
 
 ##其他
-####欢迎对代码提意见
-####如果你对诗歌感兴趣，很期待你加入我
-####项目的几个文件存放重要信息未上传，需要编译运行的可以联系我
-####我的邮箱1047627381@qq.com
+*   欢迎对代码提意见
+*   如果你对诗歌感兴趣，很期待你加入我
+*   项目的几个文件存放重要信息未上传，需要编译运行的可以联系我
+*   我的邮箱1047627381@qq.com
