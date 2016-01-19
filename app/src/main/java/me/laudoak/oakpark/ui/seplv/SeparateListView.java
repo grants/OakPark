@@ -228,10 +228,7 @@ public class SeparateListView extends ListView{
 			}
 			//deltaY=0，说明位置已经复原，然后交给父类处理
 		}
-		if(deltaY == 0){
-			return false;
-		}
-		return true;
+		return deltaY != 0;
 	}
 	
 	private boolean separateFromBottom(float currentY) {
@@ -360,11 +357,7 @@ public class SeparateListView extends ListView{
 		int firstVisPos = getFirstVisiblePosition();
 		if(firstVisPos == 0){
 			View firstView = getChildAt(firstVisPos);
-			if(firstView != null && firstView.getTop() >= 0){
-				return true;
-			}else{
-				return false;
-			}
+			return firstView != null && firstView.getTop() >= 0;
 		}
 		return false;
 	}
@@ -378,11 +371,7 @@ public class SeparateListView extends ListView{
 		int lastVisPos = getLastVisiblePosition();
 		if(lastVisPos == getCount() - 1){
 			View lastView = getChildAt(getChildCount() - 1);
-			if(lastView != null && lastView.getBottom() <= getHeight() && getCount() > getChildCount()){
-				return true;
-			}else{
-				return false;
-			}
+			return lastView != null && lastView.getBottom() <= getHeight() && getCount() > getChildCount();
 		}
 		return false;
 	}

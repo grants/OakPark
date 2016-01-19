@@ -275,7 +275,7 @@ public class BulbulActivity extends XBaseActivity implements TextWatcher{
 
         if (requestCode == REQUEST_PICKER&&data!=null)
         {
-            this.newAvatarPath = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);;
+            this.newAvatarPath = data.getStringExtra(MultiImageSelectorActivity.EXTRA_CROPPER_RESULT);
             bulbulController.onAvatarChanged(true,newAvatarPath);
             Uri uri = Uri.fromFile(new File(newAvatarPath));
             avatar.setImageURI(uri);

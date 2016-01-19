@@ -161,7 +161,7 @@ public class FontsManager {
 				if (v instanceof ViewGroup) {
 					changeFonts((ViewGroup) v, typeface);
 				} else if (v instanceof View) {
-					changeFonts((View) v, typeface);
+					changeFonts(v, typeface);
 				}
 			}
 		} catch (Exception e) {

@@ -83,7 +83,7 @@ public class WhisperActivity extends XBaseActivity
     private void sendWhisper()
     {
         Intent intent = new Intent();
-        intent.putExtra(this.RESULT_WHISPER,whisper.getText().toString());
+        intent.putExtra(RESULT_WHISPER,whisper.getText().toString());
         setResult(RESULT_OK, intent);
 
         this.finish();

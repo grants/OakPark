@@ -5,5 +5,5 @@ package me.laudoak.oakpark;
  */
 public interface PreferConstants
 {
-    public static final String USE_DEFAULT_FONT = "_use_default_font";
+    String USE_DEFAULT_FONT = "_use_default_font";
 }

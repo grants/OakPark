@@ -130,9 +130,7 @@ public class DampView extends ScrollView
     /**当从上往下,移动距离达到一半时，回调接口*/
     private boolean shouldCallBack(int dy)
     {
-        if (dy > 0 && contentView.getTop() > getHeight() / 2)
-            return true;
-        return false;
+        return dy > 0 && contentView.getTop() > getHeight() / 2;
     }
 
     /**重置坐标*/
@@ -155,11 +153,7 @@ public class DampView extends ScrollView
         int offset = contentView.getMeasuredHeight() - getHeight();
         int scrollY = getScrollY();
         // 0是顶部，后面那个是底部
-        if (scrollY == 0 || scrollY == offset)
-        {
-            return true;
-        }
-        return false;
+        return scrollY == 0 || scrollY == offset;
     }
 
 

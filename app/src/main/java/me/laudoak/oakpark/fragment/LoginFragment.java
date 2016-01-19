@@ -306,7 +306,7 @@ public class LoginFragment extends XBaseFragment implements
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
 
-        login_weibo.onActivityResult(requestCode,resultCode,data);
+        //login_weibo.onActivityResult(requestCode,resultCode,data);
         /*!!!how terrible with Tencent SDK document*/
         Tencent.onActivityResultData(requestCode, resultCode, data, qqListener);
         if (requestCode == Constants.REQUEST_API)

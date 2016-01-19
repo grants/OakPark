@@ -454,6 +454,6 @@ public class AutofitHelper {
 
     public interface OnTextSizeChangeListener {
 
-        public void onTextSizeChange(float textSize, float oldTextSize);
+        void onTextSizeChange(float textSize, float oldTextSize);
     }
 }

@@ -65,7 +65,7 @@ public class ScaleGestureDetector {
          *          only wants to update scaling factors if the change is
          *          greater than 0.01.
          */
-        public boolean onScale(View view, ScaleGestureDetector detector);
+        boolean onScale(View view, ScaleGestureDetector detector);
 
         /**
          * Responds to the beginning of a scaling gesture. Reported by
@@ -79,7 +79,7 @@ public class ScaleGestureDetector {
          *          sense, onScaleBegin() may return false to ignore the
          *          rest of the gesture.
          */
-        public boolean onScaleBegin(View view, ScaleGestureDetector detector);
+        boolean onScaleBegin(View view, ScaleGestureDetector detector);
 
         /**
          * Responds to the end of a scale gesture. Reported by existing
@@ -92,7 +92,7 @@ public class ScaleGestureDetector {
          * @param detector The detector reporting the event - use this to
          *          retrieve extended info about event state.
          */
-        public void onScaleEnd(View view, ScaleGestureDetector detector);
+        void onScaleEnd(View view, ScaleGestureDetector detector);
     }
 
     /**

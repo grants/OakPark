@@ -354,7 +354,7 @@ public class ExpandableLinear extends LinearLayout implements View.OnClickListen
         public boolean willChangeBounds( ) {
             return true;
         }
-    };
+    }
 
     public interface OnExpandStateChangeListener {
         /**

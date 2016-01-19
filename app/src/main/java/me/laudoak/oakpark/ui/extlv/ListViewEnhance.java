@@ -171,21 +171,9 @@ public class ListViewEnhance {
             int itemCount = listView.getAdapter() != null ? listView.getAdapter().getCount() : 0;
 
 
-            if (firstPosition != 0 || firstTop < listView.getPaddingTop()) {
-                isScrollAtTop = false;
-            } else {
-                isScrollAtTop = true;
-            }
-            if (firstPosition + childCount != itemCount || lastBottom > listView.getHeight() - listView.getPaddingBottom()) {
-                isScrollAtBottom = false;
-            } else {
-                isScrollAtBottom = true;
-            }
-            if (isScrollAtBottom && isScrollAtTop) {
-                isShortList = true;
-            } else {
-                isShortList = false;
-            }
+            isScrollAtTop = !(firstPosition != 0 || firstTop < listView.getPaddingTop());
+            isScrollAtBottom = !(firstPosition + childCount != itemCount || lastBottom > listView.getHeight() - listView.getPaddingBottom());
+            isShortList = isScrollAtBottom && isScrollAtTop;
             listView.mIsShortList = isShortList;
             if (listView.mIsShortList) {
                 if (listView.mOffsetY == 0) {

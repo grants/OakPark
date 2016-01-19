@@ -57,7 +57,7 @@ public class StringUtil {
         URL,
         FOREIGN,
         QUOTE,
-        MULTIPLE;
+        MULTIPLE
 
     }
 
