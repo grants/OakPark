@@ -21,7 +21,8 @@ import java.io.InputStreamReader;
  */
 public class FileUtil {
 
-    public static void SaveImage(Bitmap finalBitmap) {
+    public static void SaveImage(Bitmap finalBitmap)
+    {
 
         String root = Environment.getExternalStorageDirectory().toString();
 
@@ -50,34 +51,43 @@ public class FileUtil {
         }
     }
 
-    public static String saveImageToExternalStorage(Context context,Bitmap finalBitmap) {
-
+    public static String saveImageToExternalStorage(Context context,String name,Bitmap finalBitmap)
+    {
         String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-        File oakDir = new File(root + "/OakPark");
+        File oakDir = new File(root + "/橡树园");
 
         if (!oakDir.exists())
         {
             oakDir.mkdirs();
         }
 
-        String timaStamp = TimeUtil.genFileName();
-        String fname = "verse_" + timaStamp + ".jpg";
+        String timaStamp;
 
+        if (name.equals("") || null == name)
+        {
+            timaStamp = TimeUtil.genFileName();
+        }else
+        {
+            timaStamp = name;
+        }
+
+        String fname = "verse_" + timaStamp + ".jpg";
 
         File destFile = new File(oakDir, fname);
 
         if (destFile.exists())
             destFile.delete();
-        try {
+        try
+        {
             FileOutputStream out = new FileOutputStream(destFile);
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
             out.flush();
             out.close();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
-
 
         // Tell the media scanner about the new file so that it is
         // immediately available to the user.

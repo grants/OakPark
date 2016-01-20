@@ -9,19 +9,25 @@ android {
         applicationId "me.laudoak.oakpark"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 4
-        versionName "0.4.0[beta]"
+        versionCode 5
+        versionName "0.5.0[beta]"
         multiDexEnabled true
     }
 
     buildTypes {
         release {
+
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            debuggable false
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
@@ -35,7 +41,6 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.umeng:fb:5.4.0'
     compile project(':picker')
-    compile project(':onekeyshare')
     compile files('libs/BmobSDK_V3.4.3_0828.jar')
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/open_sdk_r5509.jar')

@@ -13,16 +13,18 @@ public class LocalShare
 {
     public void share(String imgPath, String content, Context context)
     {
-        File f = new File(imgPath);
-        Uri uri = Uri.fromFile(f);
+        File file = new File(imgPath);
+        Uri uri = Uri.fromFile(file);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
         if (uri != null && !content.equals(""))
         {
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
             shareIntent.setType("image/jpeg");
             // 当用户选择短信时使用sms_body取得文字
             shareIntent.putExtra("sms_body", content);
-        } else {
+        } else
+        {
             shareIntent.setType("text/plain");
         }
         shareIntent.putExtra(Intent.EXTRA_TEXT, content);

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import cn.bmob.v3.Bmob;
-import cn.sharesdk.framework.ShareSDK;
 import me.laudoak.oakpark.OP;
 
 
@@ -23,13 +22,10 @@ public abstract class XBaseActivity extends AppCompatActivity {
         /*Bmob initialize*/
         Bmob.initialize(XBaseActivity.this, OP.BMOB_APP_ID);
 
-        /*Mob ShareSDK initialize*/
-        ShareSDK.initSDK(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ShareSDK.stopSDK(this);
     }
 }

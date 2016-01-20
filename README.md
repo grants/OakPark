@@ -52,7 +52,6 @@ width="480" height="750"/>
 ####服务
 *   [Bmob](http://www.bmob.cn/)
 *   [友盟](http://www.umeng.com/)
-*   [Mob](http://www.mob.com/)
 
 ##其他
 *   欢迎对代码提意见

@@ -16,7 +16,6 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.sharesdk.framework.ShareSDK;
 import me.laudoak.oakpark.R;
 import me.laudoak.oakpark.adapter.ViewPagerAdapter;
 import me.laudoak.oakpark.fragment.LoginFragment;

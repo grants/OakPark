@@ -52,11 +52,6 @@ public abstract class AbSupCommentFragment extends XBaseFragment implements
     protected boolean isFirstLoad;
 
     /**Lifecycle */
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState)
